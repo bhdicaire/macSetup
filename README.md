@@ -29,7 +29,8 @@ The fastest way to find {command options|code pieces} you need :)
 
 <details>
 <summary>Unix Package Installation</summary>
-This is being accomplish with the use of [homebrew](https://github.com/Homebrew/homebrew).
+
+ This is being accomplish with the use of [homebrew](https://github.com/Homebrew/homebrew).
 </details>
 <details>
 <summary>Desktop Application Installation</summary>
@@ -105,13 +106,10 @@ https://groups.google.com/forum/#!forum/ansible-devel - for strategy, future pla
 
 ## Install
 
-Download, *review*, then execute the script:
 
-It is strongly suggested that you reboot your Mac after the first run
-of this tool.
 
 ### Step 0: Prepare your computer
-Refer to my [guide](https://github.com/bhdicaire/macSetup/prepare.md) for this important step.
+Refer to my [guide](https://github.com/bhdicaire/macSetup/blob/master/prepare.md) for this important step.
 
 #### Software Deactivation
 
@@ -120,26 +118,28 @@ The following software should be deactivated before re-installing macOS:
 ### Step 1: Fetch the bootstrap script
 
 [https://github.com/bhdicaire/macSetup/](https://github.com/bhdicaire/macSetup/)
-    ~$ git clone https://github.com/
-
-## Step 2: Run the bootstrap
 
     ~$ git clone https://github.com/
 
-## Step 3: Reboot your computer
+### Step 2: Run the bootstrap
+Download, *review*, then execute the script:
+    ~$ git clone https://github.com/
+
+### Step 3: Reboot your computer
+
+It is strongly suggested that you reboot your Mac after the first run
+of this tool.
 
 Answer a couple of questions ...
 
 Run the playbook a second time, to get the configurations.
 
-## Step 4: Go get a cup of coffee because you're DONE.
+### Step 4: Go get a cup of coffee because you're NOT done
 
 I prefer an espresso myself. Vodka is also fine.
 
-## Manual Tasks
-
 The following tasks must be performed manually as I have yet to find a way to
-automate them.
+automate them:
 - [ ] Microsoft Office 2016
 - [ ] App Store - restore In-App Purchases for Marked2
 
