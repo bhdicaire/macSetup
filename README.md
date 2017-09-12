@@ -3,47 +3,22 @@ Ansible code to build my Mac from scratch
 
 ## Introduction
 
-|CII Best Practices|
-
-.. |CII Best Practices| image:: https://bestpractices.coreinfrastructure.org/projects/237/badge
-   :target: https://bestpractices.coreinfrastructure.org/projects/237
-
-> This is a quote
-
-   Here are a few services that are available
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-https://raw.githubusercontent.com/drybjed/debops-playbooks/master/README.rst
-**Fully loaded ready to go applications**
-
-+---------+-----------+-----------+-----------+-----------+----------+----------+
-| GitLab_ | GitLabCI_ | Etherpad_ | DokuWiki_ | ownCloud_ | phpIPAM_ | Mailman_ |
-+---------+-----------+-----------+-----------+-----------+----------+----------+
-
-**Databases**
-
-+-------------+----------+--------+------------+----------------+
-| PostgreSQL_ | MariaDB_ | Redis_ | Memcached_ | Elasticsearch_ |
-+-------------+----------+--------+------------+----------------+
 My objective is to fully automate macOS installation and configuration using Ansible. Lots of stuff in here you probably don't need/ want, and some that needs personalization for your system.
 
 Some fun stuff, though, feel free to fork, fix, enhance, and send pull requests.
 
- mostly personal taste config. feel free to take what you like.
 ## Requirements
-The various configuration files are tested on OS X Sierra (10.12). Older operating system versions may work — your mileage may vary.
+The various configuration files are tested on OS X Sierra (10.12). Older operating system versions may work — your mileage may vary  ;)
 
+Setting up a new computer can be an ad-hoc, manual, and time-consuming process.
+This repo aims to simplify the process with easy-to-understand instructions and dotfiles/scripts thatautomate the setup of:
 These are a series of scripts. Many are derived from prior works of open source, but some original URLs have been lost. Please point out any original art URLs and they will be added. I always strive to give credit to prior art authors.
 
-This was my first real foray into automation with Ansible, hope it’s useful to others.
 
-add .aws // https://github.com/donnemartin/dev-setup/tree/master/.aws
-
-Setting up a new developer machine can be an ad-hoc, manual, and time-consuming process. This repo aims to simplify the process with easy-to-understand instructions and dotfiles/scripts thatautomate the setup of:
-
-I have currently implemented the following:
-What problem does it solve and why is it useful?
-
-I wasn't happy with any of the nginx roles that I came across. They were either overly complex or were missing features that I really wanted.
+### What problem does it solve and why is it useful?
+I wasn't happy with any of the automated setup that I came across. They were either overly complex or were missing features that I really wanted.
+## Modules
+I have currently implemented the following modules.
 
 Here's what you get with this role:
 <details>
