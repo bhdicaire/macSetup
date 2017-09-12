@@ -1,0 +1,17 @@
+---
+
+ prepareGIT:
+  - src: "{{ macSetupGIT }}"
+    dest: "{{ macSetupPath }}"
+  - src: "{{ dotFilesGIT }}"
+    dest: "{{ dotFilesPath }}"
+
+ prepareBrew:
+    - bash
+    - dockutil
+    - duti
+    - git
+    - m-cli
+    - mas
+    - python2
+    - rsync

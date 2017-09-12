@@ -1,0 +1,79 @@
+---
+ msOfficeSudo:
+ 
+#    - "defaults write /Library/Preferences/com.microsoft.autoupdate2 HowToCheck AutomaticDownload"
+
+ msOfficeItems:
+ - "/tmp/macTools/MS-GalleryViewPoke/GalleryViewPoke --Disable"
+ 
+ msOfficePref:
+# sets the Open and Save options in Office 2016 apps to default to On My Mac instead of Online
+    - "/Library/Preferences/com.microsoft.office DefaultsToLocalOpenSave -bool true"
+
+#  enable the automated download and install option
+    - "com.microsoft.autoupdate2 HowToCheck AutomaticDownload"
+
+# Suppress the Office 365 AutoDiscover redirect warning
+#   - "com.microsoft.Outlook TrustO365AutodiscoverRedirect -bool TRUE"
+
+# Sets the VisualBasic Macro security level
+# Valid values DisabledWithoutWarnings, DisabledWithWarnings, EnabledWithWarnings
+    - "com.microsoft.office VisualBasicMacroExecutionState -string EnabledWithWarnings"
+
+# Disable attaching the file that caused the crash in the crash report. If you are working in a sensitive business it is recommended to set this to false.
+    - "defaults write com.microsoft.errorreporting IsAttachedEnabled -bool FALSE"
+
+# Will store the last crash report in the following path which can be helpful for debugging. 
+# ~/Library/Group Containers/UBF8T346G9.ms/MerpTempItems
+    - "com.microsoft.errorreporting IsStoreLastCrashEnabled -bool TRUE"
+
+# This key when set to false will deactivate the ability for users to use the "Smile" feature.
+    - "com.microsoft.Excel SendASmileEnabled -bool FALSE"
+    - "com.microsoft.OneDrive SendASmileEnabled -bool FALSE"
+    - "com.microsoft.onenote.mac SendASmileEnabled -bool FALSE" 
+    - "com.microsoft.Outlook SendASmileEnabled -bool FALSE"
+    - "com.microsoft.Powerpoint SendASmileEnabled -bool FALSE"
+    - "com.microsoft.Word SendASmileEnabled -bool FALSE"    
+
+# Set to false to send minimal heartbeat data, no application usage, and no environment details
+    - "com.microsoft.autoupdate2 SendAllTelemetryEnabled -bool FALSE"
+    - "com.microsoft.Office365ServiceV2 SendAllTelemetryEnabled -bool FALSE"
+    - "com.microsoft.autoupdate.fba SendAllTelemetryEnabled -bool FALSE"
+    - "com.microsoft.Excel SendAllTelemetryEnabled -bool FALSE"
+    - "com.microsoft.OneDrive SendAllTelemetryEnabled -bool FALSE"
+    - "com.microsoft.onenote.mac SendAllTelemetryEnabled -bool FALSE" 
+    - "com.microsoft.Outlook SendAllTelemetryEnabled -bool FALSE"
+    - "com.microsoft.Powerpoint SendAllTelemetryEnabled -bool FALSE"
+    - "com.microsoft.Word SendAllTelemetryEnabled -bool FALSE"
+    
+# This hides local "On My Computer" folders in Outlook
+    - "com.microsoft.Outlook HideFoldersOnMyComputerRootInFolderList -bool TRUE"
+
+# Show Whats New On Launch(false)
+    - "com.microsoft.office ShowWhatsNewOnLaunch -bool FALSE"
+    
+# Controls the original What's New dialog and Office 365 activation prompt on first launch
+    - "com.microsoft.Excel kSubUIAppCompletedFirstRunSetup1507 -bool FALSE"
+    - "com.microsoft.OneDrive kSubUIAppCompletedFirstRunSetup1507 -bool FALSE"
+    - "com.microsoft.onenote.mac kSubUIAppCompletedFirstRunSetup1507 -bool FALSE"
+    - "com.microsoft.Outlook kSubUIAppCompletedFirstRunSetup1507 -bool FALSE"
+    - "com.microsoft.Powerpoint kSubUIAppCompletedFirstRunSetup1507 -bool FALSE"
+    - "com.microsoft.Word kSubUIAppCompletedFirstRunSetup1507 -bool FALSE"
+
+# Controls the dynamic What's New dialog on first lauch after upgrades
+    - "com.microsoft.Excel OUIWhatsNewShownItemIds -array-add -int 1 -int 2"    
+    - "com.microsoft.OneDrive OUIWhatsNewShownItemIds -array-add -int 1 -int 2"    
+    - "com.microsoft.onenote.mac OUIWhatsNewShownItemIds -array-add -int 1 -int 2"    
+    - "com.microsoft.Outlook OUIWhatsNewShownItemIds -array-add -int 1 -int 2"
+    - "com.microsoft.Powerpoint OUIWhatsNewShownItemIds -array-add -int 1 -int 2"
+    - "com.microsoft.Word OUIWhatsNewShownItemIds -array-add -int 1 -int 2"
+
+# This parameter determines the percentage of local upload bandwidth that 
+# the sync client can use. Accepted values are from 1 through 99.
+    - "com.microsoft.OneDrive AutomaticUploadBandwidthPercentage -int 90"
+
+# When set to true, this parameter hides the OneDrive dock icon even when the application is running.
+    - "com.microsoft.OneDrive HideDockIcon -bool FALSE"
+
+# Default to OneDrive Business instead of OneDrive Personal
+    - "com.microsoft.OneDrive DefaultToBusinessFRE -bool TRUE"

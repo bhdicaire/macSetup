@@ -1,0 +1,35 @@
+---
+# ------------------------------------------------------------
+# macSetup according to my opinionated standards
+# Modified by: Benoît H. Dicaire
+# https://GitHub.com/bhdicaire/macSetup
+# ------------------------------------------------------------
+
+- hosts: localhost
+  connection: local
+  vars_prompt:
+    - name: "ansible_become_pass"
+      prompt: "Sudo password"
+      private: yes
+
+  pre_tasks:
+    - name: pre_task dummy action
+      command: echo -e "Hello" 
+    
+  roles:
+    - { role: deployMac, when: macSetup }
+#    - { role: deployDev, when: macDevSetup }
+#    - { role: deployServer, when: macServerSetup }
+
+  post_tasks:
+
+   - name: Create required Dropbox subdirectories and then create symbolic links
+     file: path='{{ item.src }}' state=directory owner={{ localUser }} group=staff mode=0751
+     with_items:
+       - "{{ dotDirectories }}"
+     tags: ['dotFiles']
+    
+   - file: src='{{ item.src }}' dest='{{ item.dest }}' state=link
+     with_items:
+       - "{{ dotDirectories }}"
+     tags: ['dotFiles']

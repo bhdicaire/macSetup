@@ -1,0 +1,33 @@
+---
+
+# ------------------------------------------------------------
+# addGroup
+# ------------------------------------------------------------
+
+ - debug:
+     msg: "** Create one or several groups **"
+     verbosity: 2
+ - debug:
+     msg: "name: {{ dGroupName }}"
+     verbosity: 2
+ - debug:
+     msg: "GID: {{ dGroupGID | default(omit)}} or omit"
+     verbosity: 2
+ - debug:
+     msg: "Sytem: {{ dGroupSystem | default(omit)}} or omit"
+     verbosity: 2
+
+ - name: Create one or several groups
+   group:
+    name: "{{ dGroupName }}"
+    
+#   If yes, indicates that the group is a system group
+    gid: "{{ dGroupGID | default(omit)}}"
+
+    system: "{{ dGroupSystem | default(omit)}}"
+    state: present
+   become: yes
+
+# ------------------------------------------------------------
+# validate result with ...
+# dscl . -read /groups/"{{ dGroupName }}" GroupMembership

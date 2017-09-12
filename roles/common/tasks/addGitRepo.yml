@@ -1,0 +1,28 @@
+---
+
+# ------------------------------------------------------------
+# add one or several GIT Repositories
+# ------------------------------------------------------------
+
+ - debug: 
+     msg: "** macSetup — addGitRepo module }} **"
+     verbosity: 2
+
+ - name: Execute mkDir module
+   include: "{{ playbookPath }}/roles/common/tasks/mkDir.yml"
+   vars:
+     dDirPath: "{{ dMakeDestDirectory }}"
+   with_items:
+    - "{{ dGITDest }}"
+   loop_control:
+     loop_var: dMakeDestDirectory
+
+ - name: Clone or update local GIT repositories
+   git:
+    repo: "{{ dGITRepo }}"
+    dest: "{{ dGITDest | default( gitPath )}}"
+    force: "{{ dGITForce | default('yes')}}"
+    umask: "{{ dGITumask | default('002')}}"
+    update: "{{ dGITupdate | default('yes')}}"
+    recursive: "{{ dGITrecursive | default(omit)}}"
+    verify_commit: "{{ dGITverify_commit | default(omit)}}"

@@ -1,0 +1,115 @@
+---
+
+   - name: Ensure target directory exists
+     file:
+       path: "{{ item.dest }}"
+       state: directory
+       owner: "{{ localUser }}"
+       group: "{{ localGroup }}" 
+       mode: 0750
+     with_items:
+       - "{{ toolsPath }}"
+
+ - name: Copy packages not available via Brew, Cask or the AppleStore
+   get_url: url="{{ item.src }}" dest="{{ item.dest }}"
+   with_items:
+     - "{{ macSoftwareDev }}"
+
+ - name: Copy packages not available via Brew, Cask or the AppleStore
+   get_url: url="{{ item.src }}" dest="{{ item.dest }}"
+   with_items:
+     - "{{ macSoftware }}"
+   tags: ['software']
+
+   - name: Copy configuration files
+     synchronize:
+       src: "{{ item.dest }}{{ item.suffix }}"
+       dest: "{{ item.src }}"
+       compress: no
+       rsync_opts:
+         - "-aW"
+         - "--ignore-missing-args"
+     with_items:
+       - "{{ macSoftwareConfigDev }}" 
+
+   
+#
+# Node, Python & Ruby
+#
+
+ - debug: msg="** macSetup DEV module **"
+   tags: ['node', 'python', 'ruby', 'dev']
+    
+ - name: Display all variables/facts known for a host
+   debug: var=hostvars[inventory_hostname] verbosity=1
+   tags: ['node', 'python', 'ruby', 'dev']
+
+ - homebrew_tap: name="{{ item }}" state=present
+   with_items:
+   - "{{ brewTaps }}"
+   tags: ['dev']
+
+ - name: Install applications with homebrew
+   homebrew: update_homebrew=yes upgrade_all=yes
+   tags: ['dev']
+
+ - homebrew: name="{{ item }}" state=present
+   with_items:
+   - "{{ brewAppsDev }}"
+   tags: ['dev']
+
+ - shell: brew cleanup
+   tags: ['dev']
+   
+ - homebrew_cask: name="{{ item }}" path="{{ brew_cask_appdir }}" state=present
+   with_items:
+   - "{{ brewAppsCaskDev }}"
+   tags: ['dev'] 
+
+ - shell: brew cask cleanup
+   tags: ['dev']
+
+ - name: Install RVM
+   shell: "curl -sSL https://get.rvm.io | bash -s stable --user-install"
+
+ - name: Load RVM into a shell session *as a function*
+   shell: source "$HOME/.rvm/scripts/rvm"
+ - shell: export PATH="$PATH:$HOME/.rvm/bin"
+
+ - name: Install current stable ruby version
+   command: ~/.rvm/bin/rvm install 2.4.1
+ - name: Select current stable ruby version as the default
+
+   command: rvm --default use 2.4.1 
+
+ - name: Install documentation
+   command: rvm docs generate all 
+
+ - name: Delete extracted sources for all currently installed Rubies 
+   command: rvm cleanup all
+
+ - npm:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+    version: "{{ item.version | default(omit) }}"
+    global: yes
+    executable: "{{ item.executable | default(omit) }}"
+   with_items: "{{ npm_packages }}"
+   tags: ['node', 'dev']
+   
+ - pip:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+    version: "{{ item.version | default(omit) }}"
+    executable: "{{ item.executable | default(omit) }}"
+   with_items: "{{ pip_packages }}"
+   tags: ['python', 'dev']
+
+ - gem:
+    name: "{{ item.name | default(item) }}"
+    state: "{{ item.state | default('present') }}"
+    version: "{{ item.version | default(omit) }}"
+    user_install: yes
+    executable: "{{ item.executable | default(omit) }}"
+   with_items: "{{ gem_packages }}"
+   tags: ['ruby', 'dev']

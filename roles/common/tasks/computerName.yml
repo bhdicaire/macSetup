@@ -1,0 +1,22 @@
+---
+
+# ------------------------------------------------------------
+# Review or change current computer name
+# ------------------------------------------------------------
+
+ - debug: 
+     msg: "** Review or change current computer name **"
+     verbosity: 2
+     
+ - name: "Computer Name: identify current name"
+   command: "/usr/sbin/scutil --get ComputerName"
+   register: dComputerNameCurrent
+
+ - name: "Computer Name: change computer name & hostname"
+   command: "{{ item }}"
+   with_items:
+    - "/usr/sbin/scutil --set ComputerName {{ dComputerName | default('{{ dComputerNameCurrent }}')}}"
+    - "/usr/sbin/scutil --set HostName {{ dComputerName | default('{{ dComputerNameCurrent }}')}}"
+    - "/usr/sbin/scutil --set LocalHostName {{ dComputerName  | default('{{ dComputerNameCurrent }}')}}"
+    - "defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string {{ dComputerName  | default('{{ dComputerNameCurrent }}')}}"
+   become: yes

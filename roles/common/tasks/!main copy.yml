@@ -1,0 +1,119 @@
+---
+# ------------------------------------------------------------
+# Prepare the setup according to my opinionated standards
+# Modified by: Benoît H. Dicaire
+# https://GitHub.com/bhdicaire/macSetup
+# ------------------------------------------------------------
+
+ - debug: 
+     msg: "** macSetup - Prepare installation }} **"
+     verbosity: 2
+     
+ - name: Setup module marker 
+   file: path="~/.macSetup-Prepare" state=touch owner="{{ localUser }}"
+
+ - name: "Load variables and dictionaries"   
+   include_vars: dir="{{ playbookPath }}/roles/{{ item }}/vars"
+   with_items:
+     - common
+     - deployDev
+     - deployMac
+#    - deployServer/vars
+   tags: now  
+# ------------------------------------------------------------
+# Setup the computer name and basic items
+# ------------------------------------------------------------
+
+# - name: Inventory
+#   include: "{{ playbookPath }}/roles/common/tasks/inventory.yml"
+#   when: inventory is not defined
+
+ - name: Computer Name Module
+   include: "{{ playbookPath }}/roles/common/tasks/computerName.yml"
+   vars:
+     dComputerName: "{{ computerName }}"
+   when: computerName is defined
+
+ - name: Bash v4
+   include: "{{ playbookPath }}/roles/common/tasks/homeBrew.yml"
+   vars:
+     dHomeBrewType: "brew"
+     dHomeBrewApplication:
+       - name: "bash"
+
+ - name: Enable bash4 in /etc/shells
+   command: "echo /usr/local/bin/bash >> /etc/shells"
+   become: yes
+   run_once: true
+
+ - name: Modify the shell for the current local user
+   include: "{{ playbookPath }}/roles/common/tasks/addUser.yml"
+   vars:
+     dUserName: "{{ localUser }}"
+     dUserComment: "{{ localUserComment | default(omit)}}"
+     dUserGroup: "{{ localGroup | default(omit)}}"
+     dUserGroups: "{{ localGroups | default(omit)}}"
+     dUserShell: "{{ localShell | default(omit)}}"
+   when: localUser is defined
+
+ - name: Install required tools
+   include: "{{ playbookPath }}/roles/common/tasks/homeBrew.yml"
+   vars:
+     dHomeBrewType: "brew"
+     dHomeBrewApplication:
+       - name: "{{ prepareBrew }}"
+
+ - name: Add groups
+   include: "{{ playbookPath }}/roles/common/tasks/addGroup.yml"
+   vars:
+     dGroupName: "{{ dAddGroup.name }}"
+     dGroupGID: "{{ dAddGroup.gid }}"
+   with_items:
+     -   "{{ moreGroups }}"
+   loop_control:
+     loop_var: dAddGroup
+   
+ - name: Add users
+   include: "{{ playbookPath }}/roles/common/tasks/addUser.yml"
+   vars:
+     dUserName: "{{ dAddUser.name }}"
+     dUserComment: "{{ dAddUser.comment | default(omit)}}"
+     dUserGroup: "{{ dAddUser.group | default(omit)}}"
+     dUserGroups: "{{ dAddUser.groups | default(omit)}}"
+     dUserShell: "{{ dAddUser.shell | default(omit)}}"
+   with_items:
+     -   "{{ moreUsers }}"
+   loop_control:
+     loop_var: dAddUser
+     
+ - name: ensure github.com is a known host
+   lineinfile:
+    dest: ~/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"
+
+######################################################################
+###
+### Copy prerequisites items
+###
+######################################################################
+
+ - name: Clone or update required GIT repositories
+   include: "{{ playbookPath }}/roles/common/tasks/addGitRepo.yml"
+   vars:
+     dGITRepo: "{{ dRequiredGitRepo.src }}"
+     dGITDest: "{{ dRequiredGitRepo.dest }}"
+   with_items:
+    - "{{ prepareGIT }}"
+   loop_control:
+     loop_var: dRequiredGitRepo
+
+#    - name: Copy opiniated bash files
+#      copy: src='{{ dotFilesPath }}dot/{{ item }}' dest='{{ home }}/.{{ item }}' mode=651
+#      with_items:
+#       - "{{ dotFiles }}"
+    
+ - name: Remove marker 
+   file: path="~/.macSetup-Common" state=absent owner="{{ localUser }}"       

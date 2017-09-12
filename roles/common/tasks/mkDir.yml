@@ -1,0 +1,34 @@
+---
+
+# ------------------------------------------------------------
+# Ensure local directory exist
+# ------------------------------------------------------------
+
+ - debug: 
+     msg: "** Ensure local directory exist **"
+     verbosity: 2
+ - debug: 
+     msg: "path: {{ dDirPath }}"
+     verbosity: 2
+ - debug: 
+     msg: "state: {{ dDirState | default('directory')}}"
+     verbosity: 2
+ - debug: 
+     msg: "owner: {{ dDirOwner | default(omit)}} or {{ localUser }}"
+     verbosity: 2
+ - debug: 
+     msg: "group: {{ dDirGroup | default(omit)}} or {{ localGroup}}"
+     verbosity: 2
+ - debug: 
+     msg: "mode: {{ dDirMode | default(omit)}} or 0750"
+     verbosity: 2
+
+ - name: "Ensure local directory exist --> {{ dDirPath }}"
+   file:
+     path: "{{ dDirPath }}"
+     state: "{{ dDirState | default('directory') }}" 
+     owner: "{{ dDirOwner | default( localUser )}}"
+     group: "{{ dDirGroup | default( localGroup ) }}" 
+     mode: "{{ dDirMode | default('0750')}}" 
+     recurse: "{{ dDirRecurse | default(omit)}}"
+  

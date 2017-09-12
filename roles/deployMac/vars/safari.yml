@@ -1,0 +1,89 @@
+---
+
+ safariPref:
+# Privacy: don’t send search queries to Apple
+    - "com.apple.Safari UniversalSearchEnabled -bool false"
+    - "com.apple.Safari SuppressSearchSuggestions -bool true"
+
+# Press Tab to highlight each item on a web page
+    - "com.apple.Safari WebKitTabToLinksPreferenceKey -bool true"
+    - "com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks -bool true"
+
+# Show the full URL in the address bar (note: this still hides the scheme)
+    - "com.apple.Safari ShowFullURLInSmartSearchField -bool true"
+
+# Set Safari’s home page to `about:blank` for faster loading
+    - "com.apple.Safari HomePage -string 'about:blank'"
+
+# Prevent Safari from opening ‘safe’ files automatically after downloading
+    - "com.apple.Safari AutoOpenSafeDownloads -bool false"
+
+# Allow hitting the Backspace key to go to the previous page in history
+    - "com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true"
+
+# Hide Safari’s bookmarks bar by default
+    - "com.apple.Safari ShowFavoritesBar -bool false"
+
+# Hide Safari’s sidebar in Top Sites
+    - "com.apple.Safari ShowSidebarInTopSites -bool false"
+
+# Disable Safari’s thumbnail cache for History and Top Sites
+    - "com.apple.Safari DebugSnapshotsUpdatePolicy -int 2"
+
+# Enable Safari’s debug menu
+    - "com.apple.Safari IncludeInternalDebugMenu -bool true"
+
+# Make Safari’s search banners default to Contains instead of Starts With
+    - "com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false"
+
+# Remove useless icons from Safari’s bookmarks bar
+    - "com.apple.Safari ProxiesInBookmarksBar '()'"
+
+# Enable the Develop menu and the Web Inspector in Safari
+    - "com.apple.Safari IncludeDevelopMenu -bool true"
+    - "com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true"
+    - "com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true"
+
+# Add a context menu item for showing the Web Inspector in web views
+    - "NSGlobalDomain WebKitDeveloperExtras -bool true"
+
+# Enable continuous spellchecking
+    - "com.apple.Safari WebContinuousSpellCheckingEnabled -bool true"
+# Disable auto-correct
+    - "com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false"
+
+# Disable AutoFill
+    - "com.apple.Safari AutoFillFromAddressBook -bool false"
+    - "com.apple.Safari AutoFillPasswords -bool false"
+    - "com.apple.Safari AutoFillCreditCardData -bool false"
+    - "com.apple.Safari AutoFillMiscellaneousForms -bool false"
+
+# Warn about fraudulent websites
+    - "com.apple.Safari WarnAboutFraudulentWebsites -bool true"
+
+# Disable plug-ins
+    - "com.apple.Safari WebKitPluginsEnabled -bool false"
+    - "com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled -bool false"
+
+# Disable Java
+    - "com.apple.Safari WebKitJavaEnabled -bool false"
+    - "com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled -bool false"
+
+# Block pop-up windows
+    - "com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -bool false"
+    - "com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false"
+
+# Disable auto-playing video
+#    - "com.apple.Safari WebKitMediaPlaybackAllowsInline -bool false
+#    - "com.apple.SafariTechnologyPreview WebKitMediaPlaybackAllowsInline -bool false
+#    - "com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
+#    - "com.apple.SafariTechnologyPreview com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback -bool false
+
+# Enable Do Not Track
+    - "com.apple.Safari SendDoNotTrackHTTPHeader -bool true"
+
+# Update extensions automatically
+    - "com.apple.Safari InstallExtensionUpdatesAutomatically -bool true"
+
+# Use Backspace/Delete to Go Back a Page
+    - "com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool YES"

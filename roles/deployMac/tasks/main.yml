@@ -1,0 +1,91 @@
+---
+# ------------------------------------------------------------
+# deployMac according to my opinionated standards
+# Modified by: Benoît H. Dicaire
+# https://GitHub.com/bhdicaire/macSetup
+# ----------------------------------------------------------
+
+ - debug: 
+     msg: "** macSetup - MacDeploy }} **"
+     verbosity: 2
+     
+ - name: Setup module marker 
+   file: path="~/.macSetup-Deploy" state=touch owner="{{ localUser }}"
+
+# ------------------------------------------------------------
+# Install softwares
+# ------------------------------------------------------------
+
+ - name: Ensure target directory exists
+   include: "{{ playbookPath }}/roles/common/tasks/mkDir.yml"
+   vars:
+     dDirPath: "{{ dMakeTargetDirectory }}"
+   with_items:
+     - prefix: src
+       info: "{{ appStoreConfig.src}}"
+     - "{{ brewCaskConfigL.dest }}"
+#     - "{{ macSoftwareConfig.src }}"
+#     - "{{ macSoftwareURL.dest }}"
+#     - "{{ toolsPath }}"
+#     - "~/BCK/BusyCal/"
+#     - "~/BCK/BusyContact/"
+   loop_control:
+     loop_var: dMakeTargetDirectory
+
+ - name: Clone or update required GIT repositories
+   include: "{{ playbookPath }}/roles/common/tasks/addGitRepo.yml"
+   vars:
+     dGITRepo: "{{ dRequiredGitRepo.src }}"
+     dGITDest: "{{ dRequiredGitRepo.dest }}"
+   with_items:
+    - "{{ macSoftwareGIT }}"
+   loop_control:
+     loop_var: dRequiredGitRepo
+
+ - name: Copy packages not available via Brew, Cask or the AppleStore
+   get_url: url="{{ item.src }}" dest="{{ item.dest }}"
+   with_items:
+     - "{{ macSoftwareURL }}"
+
+ - name: Copy configuration files
+   include: "{{ playbookPath }}/roles/common/tasks/cpItems.yml"
+   vars:
+     dMkDir: False
+     dCopyItems:
+       src: "{{ macSoftwareConfig.dest }}{{ macSoftwareConfig.suffix }}"
+       dest: "{{ macSoftwareConfig.src }}"
+#
+# - name: user's preferences configuration
+#   shell: defaults write {{ item }}
+#   with_items:
+#    - "{{ msOfficePref }}"
+#
+# - name: user's preferences items
+#   command: "{{ item }}"
+#   with_items:
+#    - "{{ msOfficeItems }}"      
+#
+# - name: user's preferences sudo items 
+#   command: "{{ item }}"
+#   with_items:
+#    - "{{ msOfficeSudo }}"
+#   become: yes
+#
+## - name: Install applications with homebrew
+##   include: tasks/homeBrew.yml
+##
+## 
+## - name: Install Mac App Store's Applications
+##   include: tasks/appStore.yml
+#
+# - name: Insert items that will open automaticaly at login
+#   shell: ~/bin/loginitems.sh -a {{ item }}
+#   with_items:
+#     - "{{ loginComponents }}"
+#
+# -  name: Reboot
+#    command: "echo -e reboot"
+#    become: no
+#
+#     
+#     

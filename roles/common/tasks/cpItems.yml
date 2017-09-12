@@ -1,0 +1,40 @@
+---
+
+# ------------------------------------------------------------
+# Ensure local directory exist
+# ------------------------------------------------------------
+
+ - debug: 
+     msg: "** macSetup - MacDeploy }} **"
+     verbosity: 2
+ 
+  - name: Execute mkDir module
+   include: "{{ playbookPath }}/roles/common/tasks/mkDir.yml"
+   vars:
+     dDirPath: "{{ dMake.dest }}"
+   with_items:
+     - "{{ dCopyItems }}"
+   loop_control:
+     loop_var: dMake
+   when: dMkDir == True  
+
+ - name: "Copy files"
+   synchronize:
+    src: "{{ dCopy.src }}"
+    dest: "{{ dCopy.dest }}"
+    compress: "{{ dCopy.compress | default('no')}}"
+    rsync_opts:: "{{ dCopy.options | default('-aW --ignore-missing-args')}}"
+   with_items:
+     - "{{ dCopyItems }}"
+   loop_control:
+     loop_var: dCopy
+
+
+
+# ---------------------------------------------------------------------------------------
+# RSync options:
+#
+#  -a is for archive, which preserves ownership & permissions
+#  -W is for copying whole files only, without delta-xfer algorithm to reduce CPU load
+# --noCompress on local host, bandwith is not an issue
+# ---------------------------------------------------------------------------------------

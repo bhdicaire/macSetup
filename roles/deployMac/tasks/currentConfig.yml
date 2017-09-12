@@ -1,0 +1,150 @@
+---
+# ------------------------------------------------------------
+# Backup current environment AND packages configurations
+# Modified by: Benoît H. Dicaire
+# https://GitHub.com/bhdicaire/macSetup
+# ------------------------------------------------------------
+
+   - name: Setup marker 
+     file: path="~/.macSetup-Backup" state=touch owner="{{ localUser }}"
+
+   - debug:
+       msg: "{{ item }}"
+     with_items:
+       - "{{ groups['all'] }}"
+
+   - debug:
+       msg: "{{ hostvars[inventory_hostname] }}"
+
+# ------------------------------------------------------------
+# Define specific environment variables
+# ------------------------------------------------------------
+
+   - name: Generate target path
+     set_fact:
+      fullSecretBackupPath: "{{ secretBackupPath + secretConfigurationItems.0.dest }}"
+   - set_fact:
+      fullBackupDotFilesPath : "{{ backupPath + dotFilesItems.0.dest }}"
+   - set_fact:
+      fullBackupBinPath: "{{ backupPath + binItems.0.dest }}"
+
+   - name: Identify BashRC components
+     shell: "find ~ -maxdepth 1 -name '.bashrc_*'| grep -v original"
+     register: bashRCComponents
+     
+   - debug: 
+      var: bashRCComponents.stdout_lines
+
+# ------------------------------------------------------------
+# Update my local backup
+# ------------------------------------------------------------
+
+   - name: Ensure target directory exists
+     file:
+       path: "{{ item.dest }}"
+       state: directory
+       owner: "{{ localUser }}"
+       group: "{{ localGroup }}" 
+       mode: 0750
+     with_items:
+       - { dest: "{{ macSetupLocalGIT }}" }
+       - { dest: "{{ dotFilesLocalGIT }}" }
+       - { dest: "{{ fullSecretBackupPath }}" }
+       - { dest: "{{ fullBackupDotFilesPath }}" }
+       - { dest: "{{ fullBackupBinPath }}" }
+       - { dest: "/tmp/papa" }
+#       - "{{ systemRelatedItems }}"
+#       - "{{ utilitiesRelated }}"
+#       - "{{ applicationsRelated }}"
+#       - { dest: "git/tmp/" }
+
+   - name: dotFiles — Copy current configuration files
+     copy:
+       src: "{{ item.}}"
+       dest: "{{ fullBackupDotFilesPath }}"
+       owner: "{{ localUser }}"
+       group: "{{ localGroup }}" 
+       mode: 0750       
+      with_fileglob:
+        - "'~/.bashrc_*'"
+        
+   - name: dotFiles — Copy current configuration files
+     copy:
+       src: "{{ item.src }}"
+       dest: "{{ item.dest }}"
+       owner: "{{ localUser }}"
+       group: "{{ localGroup }}" 
+       mode: 0750       
+     with_subelements:
+      - { src: "{{bashRCComponents.stdout_lines }}" }
+      - { dest: "{{ fullSecretBackupPath }}" }
+      - { suffix: ""}
+#     with_items:
+#       - { src: "{{secretConfigurationItems }}", , suffix: "{{secretConfigurationItems }}" }
+#        - { src: '{{bashRCComponents.stdout_lines }}', dest: '{{ fullBackupDotFilesPath }}', suffix: 'secretConfigurationItems.0.suffix' }
+#       - { src: "{{bashRCComponents.stdout_lines }}", dest: "{{ dotFilesLocalGIT }}", suffix: "" }
+#       - { src: "{{dotFilesItems }}", dest: "{{ fullBackupDotFilesPath }}", suffix: "{{dotFilesItems }}" }
+#       - { src: "{{dotFilesItems }}", dest: "{{ dotFilesLocalGIT }}", suffix: "{{dotFilesItems }}" }
+#       - { src: "{{ binItems }}", dest: "{{ fullBackupBinPath }}", suffix: "{{ binItems }}" }
+#      - { src: "{{ binItems }}", dest: "{{ dotFilesLocalGIT }}", suffix: "{{ binItems }}" }
+
+   - name: MacSetup — Copy current configuration files
+     synchronize:
+       src: "{{ item.src }}{{ item.suffix }}"
+       dest: "{{ item.dest }}"
+       compress: no
+       rsync_opts:
+         - "-aW"
+         - "--relative"
+         - "--ignore-missing-args"
+     with_items:
+       - "{{ systemRelatedItems }}"
+       - "{{ utilitiesRelated }}"
+       - "{{ applicationsRelated }}"
+
+# 
+#   - synchronize:
+#       src: "{{ item.src }}{{ item.suffix }}"
+#       dest: "{{ item.dest }}"
+#       compress: no
+#       rsync_opts:
+#         - "-aW"
+#         - "--exclude=.git"
+#         - "--ignore-missing-args"
+#     with_items:
+##       - "{{ dotFilesItems }}"
+##       - "{{ secretConfigurationItems }}"
+##       - "{{ systemRelatedItems }}"
+##       - "{{ utilitiesRelated }}"
+##       - "{{ applicationsRelated }}"
+#     when: macDevSetup
+# 
+#   - synchronize:
+#       src: "{{ item.src }}{{ item.suffix }}"
+#       dest: "{{ item.dest }}"
+#       compress: no
+#       rsync_opts:
+#         - "-aW"
+#         - "--exclude=.git"
+#         - "--ignore-missing-args"
+#     with_items:
+##       - "{{ dotFilesItems }}"
+##       - "{{ secretConfigurationItems }}"
+##       - "{{ systemRelatedItems }}"
+##      - "{{ utilitiesRelated }}"
+##       - "{{ applicationsRelated }}"
+#     when: macServerSetup
+# 
+ 
+
+ # ------------------------------------------------------------
+   - name: Remove marker 
+     file: path="~/.macSetup-Backup" state=absent owner="{{ localUser }}" 
+
+# ---------------------------------------------------------------------------------------
+# RSync options:
+#
+#  -a is for archive, which preserves ownership & permissions
+#  -W is for copying whole files only, without delta-xfer algorithm to reduce CPU load
+# --noCompress on local host, bandwith is not an issue
+# ---------------------------------------------------------------------------------------

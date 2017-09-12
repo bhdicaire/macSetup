@@ -1,0 +1,66 @@
+---
+ bbeditItems:
+    - "cp {{ dropboxPath }}apps/BCK/BBEdit/com.barebones.bbedit.plist ~/Library/Preferences/"
+
+ bbeditPref:
+
+    - "com.barebones.bbedit 'EnableFontLigatures_Fira Code'-bool YES"
+    - "com.barebones.bbedit 'EnableFontLigatures_Fira Code Medium'-bool YES"
+    - "com.barebones.bbedit UseEditorFontForLineBar -bool NO"
+    - "com.barebones.bbedit DropboxRoot -string '$(dropboxPath)apps/BBEdit'"
+    - "com.barebones.bbedit EnableSettingsScan -bool YES"
+    
+# Live Search bar to be visible in each new document that you create or open
+    - "com.barebones.bbedit Editor_AlwaysOpenQuickFind -bool YES"
+    - "com.barebones.bbedit FindDialog_UsesFindScrap -bool NO"
+
+# Windows management
+    - "com.barebones.bbedit ZoomWindowsInPlace -bool NO"
+    - "com.barebones.bbedit CloseOFBNWindowAfterOpeningSelection -bool YES"
+    - "com.barebones.bbedit ModelessWindowsStickToActiveSpace -bool YES"
+
+   
+# remember the five most recent documents
+    - "com.barebones.bbedit NSRecentDocumentsLimit:Projects -int 3"
+    - "com.barebones.bbedit NSRecentDocumentsLimit:Folders -int 5"
+    - "com.barebones.bbedit 'NSRecentDocumentsLimit:Shell Worksheets' -int 3"
+    - "com.barebones.bbedit NSRecentDocumentsLimit:Images -int 0"
+    - "com.barebones.bbedit MostRecentItemsGroupLimit -int 10"
+    
+# Balance command or double-clicking on a delimiter to balance include the delimiters in the resulting selection
+    - "com.barebones.bbedit BalanceIncludesDelimiters -bool YES"
+
+    - "com.barebones.bbedit MinimumLinesForBlockFold_Markdown 8"
+    - "com.barebones.bbedit MinimumLinesForBlockFold_JavaScript 8"
+    - "com.barebones.bbedit MinimumLinesForBlockFold_YAML 8"
+
+# Markdown
+    - "com.barebones.bbedit DefaultLanguageNameForNewDocuments -string 'Markdown'"
+    - "com.barebones.bbedit PreferredFilenameExtension_Markdown -string 'md'"
+    - "com.barebones.bbedit PreferredFilenameExtension_YAML -string 'yml'"
+
+#Tab key to trigger text completion
+    - "com.barebones.bbedit UseTabKeyAsCompletionTrigger -bool YES"
+
+# When doing Check Syntax, Check Links, Update, or Update Images on a folder (including a web site), BBEdit will include XML files 
+    - "com.barebones.bbedit MarkupToolsMisc_SkipXMLFilesWhenScanningFolders -bool YES"
+
+# Projects
+    - "com.barebones.bbedit ProjectsListCanAcquireKeyboardFocus -bool YES"
+    - "com.barebones.bbedit AutoRevealSelectedDocumentInProjectList -bool YES"
+    
+# BBEdit warns you when opening a malformed UTF-8 file:
+
+    - "com.barebones.bbedit WarnMalformedUTF8 -bool YES"
+
+# save any titled (i.e. opened from an existing file) documents to disk before sleeping, 
+    - "com.barebones.bbedit SaveTitledDocumentsBeforeSleeping -bool YES"
+
+# Scanning folders for various purposes (multi-file search, Find differences, and others), SCM administrative directories include: CVS, .svn, .git, .hg, .bzr
+#   - "com.barebones.bbedit SkipSCMAdminDirsWhenScanningFolders -bool NO"defaults write 
+
+
+    
+#    SelectedColorScheme =     {
+#        name = "Daring BHD";
+#        path = "/Volumes/Data/Dropbox/apps/BBEdit/Application Support/BBEdit/Color Schemes/Daring BHD.bbColorScheme";    

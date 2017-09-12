@@ -1,0 +1,163 @@
+---
+
+# ------------------------------------------------------------
+#  Mac Software — Download DMG, ISO & PKG
+# ------------------------------------------------------------
+
+ macSoftwareDev:
+ 
+  - src: "http://s3.amazonaws.com/mailsteward/mailsteward.dmg"
+    dest: "{{ toolsPath }}"
+
+  - src: "http://www.voilabits.com/download/voilabits-videoconverter.dmg"
+    dest: "{{ toolsPath }}"
+
+  - src: "https://newyork.kapeli.com/downloads/v4/Dash.zip"
+    dest: "{{ toolsPath }}"
+
+# ------------------------------------------------------------
+#  Ruby — gem packages
+# ------------------------------------------------------------
+
+ gemPackages:
+    - "bundler"
+    - "rmagick"
+    - "kaminari"
+    - "brakeman"
+    - "rubocop"
+
+# ------------------------------------------------------------
+#  Node — NPM packages
+# ------------------------------------------------------------
+
+ npmPackages:
+    - "gulp"
+    - "gulp-svg2png"
+    - "write-good"
+    - "open-color"
+    - "align-yaml"
+
+# ------------------------------------------------------------
+#  Python — PIP packages
+# ------------------------------------------------------------
+
+ pipPackages: 
+    - "ansible-lint"
+    - "beautysh"
+    - "boto"
+    - "saws"
+    - "yamllint"
+
+# ------------------------------------------------------------
+#  Brew — CLI Applications
+# ------------------------------------------------------------
+
+ brewDev:
+    - ack
+    - awscli
+    - azure-cli
+    - bash
+    - blueutil
+    - exiftool
+    - ffmpeg
+    - findutils
+    - gawk
+    - gnu-sed
+    - iproute2mac
+    - gnupg2
+    - go
+    - gs
+    - graphicsmagick
+    - handbrake
+    - hugo
+    - imagemagick
+    - jpeg
+    - lame
+    - moreutils
+    - pandoc
+    - pandoc-citeproc
+    - pandoc-crossref
+    - pkg-config
+    - python
+    - readline
+    - sqlite
+    - tidy-html5
+    - webkit2png
+    - wellington
+    - wget
+    - x264
+    - xvid
+
+# ------------------------------------------------------------
+#  Brew Cask — GUI Applications
+# ------------------------------------------------------------
+
+ brewCaskDev:
+    - brave
+    - calibre
+    - charles
+    - clarify
+    - choosy
+    - chronosync
+    - cleanmymac
+    - default-folder-x
+    - docker
+    - dupeguru
+    - expandrive
+    - fing
+    - firefox
+    - fontforge
+    - force-paste
+    - handbrake
+    - hazel
+    - imageoptim
+    - inkscape
+    - kaleidoscope
+    - keka
+    - keyboard-maestro
+    - little-snitch
+    - makemkv
+    - mountain
+    - neofinder
+    - parallels-desktop
+    - slack
+    - snagit
+    - sqlitebrowser
+    - suspicious-package 
+    - textexpander
+    - tower
+    - transmit
+    - trickster
+    - xquartz
+
+# ------------------------------------------------------------
+#  Mac Apps Store —  MAS Applications
+# ------------------------------------------------------------
+
+ appStoreDev:
+    - id: "1090488118"
+      name: "Gemini 2 (2.3.6)"
+    - id: "1199660222"
+      name: "Interact Scratchpad (1.0.4)"
+    - id: "404167677"
+      name: "IP Scanner Pro (3.58)"
+    - id: "409907375"
+      name: "Remote Desktop (3.9)"
+    - id: "411643860"
+      name: "DaisyDisk (4.4)"
+    - id: "442168834"
+      name: "SiteSucker (2.10.4)"
+    - id: "446107677"
+      name: "Screens (3.8.7)"
+    - id: "509641724"
+      name: "Trickster (2.6)"
+    - id: "557168941"
+      name: "Tweetbot (2.5.1)"
+    - id: "603637384"
+      name: "Name Mangler 3 (3.4)"
+    - id: "655527594"
+      name: "Oyster (1.4)"
+    - id: "890031187"
+      name: "Marked 2 (2.5.10"
+    - id: "924726344"
+      name: "Deliveries (3.0.3)"

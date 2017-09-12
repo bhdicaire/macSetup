@@ -1,0 +1,143 @@
+---
+
+# ------------------------------------------------------------
+#  Mac Software — Download DMG, GIT, ISO & PKG
+# ------------------------------------------------------------
+
+ macSoftwareURL:
+ 
+  - name: "ParallelsToolbox"
+    app: "Parallels Toolbox.app"
+    src: "http://www.parallels.com/ca/try/toolbox"
+    dest: "{{ toolsPath }}"
+    installer_type: app
+    install_method: dmg
+
+### TODO: Copy antidote via RSync :(
+### TODO: find hemingway editor
+
+#  Microsoft Office 2016  —  Mac O365/Retail 
+#                            https://macadmins.software
+
+# Word,Excel, PowerPoint, Outlook, OneNote & MS AutoUpdate (MAU)
+  - src: "https://go.microsoft.com/fwlink/?linkid=525133"
+    dest: "{{ toolsPath }}"
+# Skype for Business 2016 — https://macadmins.software
+  - src: "https://go.microsoft.com/fwlink/?linkid=832978"
+    dest: "{{ toolsPath }}"
+
+
+ macSoftwareGIT:
+  - name: GalleryViewPoke
+    src: "https://github.com/pbowden-msft/GalleryViewPoke"
+    dest: "{{ toolsPath }}MS-GalleryViewPoke"
+    installer_type: app
+    install_method: git    
+  - name: O365SharedActivator
+    src: "https://github.com/pbowden-msft/O365SharedActivator"
+    dest: "{{ toolsPath }}O365SharedActivator"
+    installer_type: app
+    install_method: git    
+  - name: NukeOffKeychain
+    src: "https://github.com/pbowden-msft/NukeOffKeychain"
+    dest: "{{ toolsPath }}MS-NukeOffKeychain"
+    installer_type: app
+    install_method: git
+    
+# ------------------------------------------------------------
+#  Brew — CLI Applications
+# ------------------------------------------------------------
+
+ brew:
+    - rename
+    - tree
+
+# ------------------------------------------------------------
+#  Brew Cask — GUI Applications
+# ------------------------------------------------------------
+
+ brewCask:
+    - 1password
+    - bartender
+    - bbedit
+    - busycal
+    - dropbox
+    - evernote
+    - fantastical
+    - google-chrome
+    - houdahspot
+    - istat-menus
+    - karabiner-elements
+    - neofinder
+    - omnifocus
+    - omnigraffle
+    - omnioutliner
+    - omnipresence
+    - path-finder
+    - pdfpenpro
+    - scansnap-manager-ix500
+    - sonos
+    - superduper
+    - switchresx
+    - terminology
+    - vlc
+ 
+# ------------------------------------------------------------
+#  Brew Cask — Quicklook modules
+# ------------------------------------------------------------
+
+    - betterzipql 
+    - epubquicklook
+    - qlcolorcode 
+    - qldds
+    - qlimagesize
+    - qlmarkdown 
+    - qlprettypatch 
+    - qlstephen
+    - qlvideo
+    - quicklook-csv 
+    - quicklook-json
+    - quicklook-pat
+    - quicklook-pfm
+    - quicklookase
+    - receiptquicklook
+    - ttscoff-mmd-quicklook
+    - webpquicklook
+ 
+# ------------------------------------------------------------
+#  Mac Apps Store —  MAS Applications
+# ------------------------------------------------------------
+
+ appStore:
+    - id: "1055511498"
+      name: "Day One (2.3.4)"
+    - id: "1124077199"
+      name: "Paws for Trello (2.2.2)"
+    - id: "409183694"
+      name: "Keynote (7.2)"
+    - id: "413857545"
+      name: "Divvy (1.5.1)"
+    - id: "413965349"
+      name: "Soulver (2.6.2)"
+    - id: "588726889"
+      name: "ReadKit (2.5.2)"
+    - id: "639764244"
+      name: "Xee³ (3.5.2)"
+    - id: "715394237"
+      name: "Condense (1.61)"
+    - id: "736189492"
+      name: "Notability (2.5.1)"
+    - id: "823766827"
+      name: "OneDrive (17.3.6919)"
+    - id: "824171161"
+      name: "Affinity Designer (1.5.5)"
+    - id: "918858936"
+      name: "Airmail 3 (3.3.2)"
+    - id: "944654199"
+      name: "Tree 2 (2.0.3)"
+    - id: "964258399"
+      name: "BusyContacts (1.1.9)"
+    - id: "979561272"
+      name: "Just Press Record (1.4.3)"
+    - id: "823766827"
+      name: "OneDrive (17.3.6919)"

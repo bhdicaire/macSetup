@@ -1,0 +1,34 @@
+---
+
+ - debug: msg="** macSetup homeBrew module **"
+
+ - block:
+     - homebrew: update_homebrew=yes upgrade_all=yes
+     - homebrew: update_homebrew=yes upgrade_all=yes
+   rescue:
+     - debug: msg='I caught an error in the Brew initialization'
+   always:
+     - shell: brew cleanup
+   run_once: true
+
+ - homebrew_tap: name="{{ item }}" state=present
+   with_items:
+     - "{{ brewTaps }}"
+   run_once: true
+   
+ - homebrew: name= "{{ dFrameworkApps }}" state=present
+   when: dFrameworkType == "brew"
+
+ - homebrew_cask: name= "{{ dFrameworkApps }}" state=present
+   when: dFrameworkType == "cask"
+   
+# - name: Update Brew access right for all group members
+#   file: 
+#    path: '{{ item }}'
+#    group: staff
+#    state: directory
+#    recurse: yes
+#    mode: 0775
+#   with_items: 
+#    - brewDir
+#    - brew_cask_appdir

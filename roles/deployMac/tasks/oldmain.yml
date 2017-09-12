@@ -1,0 +1,68 @@
+---
+
+   - name: Ensure target directory exists
+     file:
+       path: "{{ item.dest }}"
+       state: directory
+       owner: "{{ localUser }}"
+       group: "{{ localGroup }}" 
+       mode: 0750
+     with_items:
+       - "{{ macSoftware }}"
+       - "{{ macSoftwareConfig }}"
+       - "{{ brewCaskConfig }}"
+       - "{{ appStoreConfig }}"
+       - "{{ toolsPath }}"
+
+    - include: ../install/$install_method.yaml
+    
+ - name: Copy packages not available via Brew, Cask or the AppleStore
+   get_url: url="{{ item.src }}" dest="{{ item.dest }}"
+   with_items:
+     - "{{ macSoftwareURL }}"
+
+
+    - include: ../install/$install_method.yaml
+
+   - name: Copy configuration files
+     synchronize:
+       src: "{{ item.dest }}{{ item.suffix }}"
+       dest: "{{ item.src }}"
+       compress: no
+       rsync_opts:
+         - "-aW"
+         - "--ignore-missing-args"
+     with_items:
+       - "{{ macSoftwareConfig }}" 
+
+   - name: user's preferences configuration
+     shell: defaults write {{ item }}
+     with_items:
+      - "{{ msOfficePref }}"
+
+   - name: user's preferences items
+     command: "{{ item }}"
+     with_items:
+      - "{{ msOfficeItems }}"      
+
+   - name: user's preferences sudo items 
+     command: "{{ item }}"
+     with_items:
+      - "{{ msOfficeSudo }}"
+     become: yes
+
+ - name: Install applications with homebrew
+   include: tasks/homeBrew.yml
+
+ 
+ - name: Install Mac App Store's Applications
+   include: tasks/appStore.yml
+
+ - name: Insert items that will open autonaticaly at login
+   shell: ~/bin/loginitems.sh -a {{ item }}
+   with_items:
+     - "{{ loginComponents }}"
+
+ -  name: Reboot
+    command: "echo -e reboot"
+    become: no

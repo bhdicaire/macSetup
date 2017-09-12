@@ -1,0 +1,6 @@
+ brewTaps:
+    - homebrew/core
+    - homebrew/dupes
+    - caskroom/cask
+    - caskroom/drivers
+    - fgimian/fgimian

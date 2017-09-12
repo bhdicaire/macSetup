@@ -1,0 +1,26 @@
+---
+# ------------------------------------------------------------
+# Prepare the setup according to my opinionated standards
+# Modified by: Benoît H. Dicaire
+# https://GitHub.com/bhdicaire/macSetup
+# ------------------------------------------------------------
+
+ - debug: 
+     msg: "** macSetup - Prepare installation }} **"
+     verbosity: 2
+     
+ - name: Setup module marker 
+   file: path="~/.macSetup-Prepare" state=touch owner="{{ localUser }}"
+
+ - name: "Load variables and dictionaries"   
+   include_vars: dir="{{ playbookPath }}/roles/{{ item }}/vars"
+   with_items:
+     - common
+     - deployDev
+     - deployMac
+#    - deployServer/vars
+   tags: now  
+
+    
+ - name: Remove marker 
+   file: path="~/.macSetup-Common" state=absent owner="{{ localUser }}"       

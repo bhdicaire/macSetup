@@ -1,0 +1,17 @@
+---
+
+ timeMachinePref:
+
+# Prevent Time Machine from prompting to use new hard drives as backup volume
+    - "com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true"
+
+ timeMachineSudo:
+
+# Changes the backup interval to 30 minutes. The integer value is the time in seconds.
+#    - "/System/Library/LaunchDaemons/com.apple.backupd-auto StartInterval -int 1800"
+
+# Time Machine performs local backups while the Time Machine backup volume is not available.
+    - "tmutil disablelocal"
+
+# Verify Backup - Time Machine records checksums of files copied into snapshots
+#    - "tmutil verifychecksums /path/to/backup"

@@ -1,0 +1,290 @@
+---
+
+
+#  Mac Software — Download DMG, ISO & PKG
+# ------------------------------------------------------------
+
+ macSoftwareConfig:
+ 
+# ToolBox
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}ToolBox" 
+    suffix: "4C6364ACXT.com.parallels.toolbox.license.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}ToolBox" 
+    suffix: "/com.parallels.toolb**.plist"
+  - src: "/Users/bhdicaire/Library/Application Support/com.parallels.toolbox"
+    dest: "{{ backupPath }}ToolBox/AS/"
+    suffix: ""
+
+# Antidote
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Antidote"
+    suffix: "/ConfigurationMenuAntidote9"
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Antidote"
+    suffix: "/com.druide.AgentAntidote.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Antidote"
+    suffix: "/com.druide.Antidote.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Antidote"
+    suffix: "/com.druide.Integrateur.plist"
+
+# ------------------------------------------------------------
+#  Microsoft Office 2016  —  Mac O365/Retail 
+#                            https://macadmins.software
+# ------------------------------------------------------------
+
+# Microsoft Office 2016
+  - src: "/Library/Preferences"
+    dest: "{{ backupPath }}msOffice"
+    suffix: "/com.microsoft.office.licensingV2.plist"
+
+# ------------------------------------------------------------
+#  Brew Cask — GUI Applications
+# ------------------------------------------------------------
+
+ brewCaskConfig:
+
+# 1Password
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}OnePassword"
+    suffix: "/com.agilebits.onepassword4.plist"
+
+# Bartender
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Bartender"
+    suffix: "/com.surteesstudios.Bartender.plist"
+
+# BBEdit
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}BBEdit"
+    suffix: "/com.barebones.bbedit.plist"
+  - src: "~/Library/Application Support/BBEdit/" 
+    dest: "{{ backupPath }}BBEdit/AS/"
+    suffix: ""
+
+# BusyCal
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}busyCal"
+    suffix: "/com.busymac.busycal3.plist"
+  - src: "~/Library/Containers/com.busymac.busycal3/Data/Library/Application\ Support/BusyCal"
+    dest: "{{ backupPath }}busyCal"
+    suffix: "/AQReceipt"
+  - src: "~/BCK/BusyCal/"
+    dest: "{{ backupPath }}busyCal/BCK/"
+    suffix: ""
+
+# BusyContact
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}BusyContact"
+    suffix: "/com.busymac.busycontacts.plist"
+  - src: "~/BCK/BusyContact/"
+    dest: "{{ backupPath }}busyContact/BCK/"
+    suffix: ""
+
+# Dropbox
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Dropbox"
+    suffix: "/com.dropbox.DropboxMacUpdate.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Dropbox"
+    suffix: "/com.dropbox.DropboxMonitor.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Dropbox"
+    suffix: "/com.dropbox.tungsten.helper.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Dropbox"
+    suffix: "/com.getdropbox.dropbox.plist"
+
+# EverNote
+  - src: "~/Library/Application\ Support/com.evernote.Evernote/" 
+    dest: "{{ backupPath }}Evernote/AS/"
+    suffix: ""
+  - src: "/Library/Preferences"
+    dest: "{{ backupPath }}Evernote"
+    suffix: "/com.evernote.ENAttachmentToPDFHelper.plist"
+  - src: "/Library/Preferences"
+    dest: "{{ backupPath }}Evernote"
+    suffix: "/com.evernote.Evernote.plist"
+  - src: "/Library/Preferences"
+    dest: "{{ backupPath }}Evernote"
+    suffix: "/com.evernote.EvernoteHelper.plist"
+
+# Fantastical
+  - src: "~/Library/Containers"
+    dest: "{{ backupPath }}Fantastical"
+    suffix: "/com.flexibits.fantastical2.mac/Container.plist"
+    
+# Hemingway Editor
+  - src: "~/Library/Application\ Support/Hemingway Editor/"
+    dest: "{{ backupPath }}HemingwayEditor/AS/"
+    suffix: ""
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}HemingwayEditor"
+    suffix: "/com.hemingwayapp.editor3.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}HemingwayEditor"
+    suffix: "/com.hemingwayapp.editor3.helper.plist"
+
+# houdahSpot
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}HoudahSpot"
+    suffix: "/com.houdah.HoudahSpot4.plist"
+  - src: "~/Library/Application\ Support/com.houdah.HoudahSpot4/"
+    dest: "{{ backupPath }}HoudahSpot/AS/"
+    suffix: ""
+
+# iStat Menus
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}iStatMenu/"  
+    suffix: "/com.bjango.istatmenus.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}iStatMenu/"
+    suffix: "/com.bjango.istatmenus5.extras.plist"
+  - src: "~/Library/Application\ Support/iStat Menus/"
+    dest: "{{ backupPath }}iStatMenu/AS/"  
+    suffix: ""
+
+# Karabiner Elements
+#   - src: "~/.config/karabiner"
+#     dest: "{{ backupPath }}Karabiner"  
+#     suffix: "/karabiner.json"
+
+# OmniFocus
+  - src: "~/Library/Containers/com.omnigroup.OmniFocus2/Data/Library/Application\ Support/Omni\ Group/Software\ Licenses/"
+    dest: "{{ backupPath }}OmniFocus/"
+    suffix: ""
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}OmniFocus"
+    suffix: "/com.omnigroup.OmniFocus2.plist"
+  - src: "~/Library/Application\ Support/OmniFocus/"
+    dest: "{{ backupPath }}OmniFocus/AS/"
+    suffix: ""
+
+# Omnigraffle !!!
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}OmniFocus"
+    suffix: "/com.omnigroup.OmniGraffle7.plist"
+  - src: "~/Library/Application\ Support/The Omni Group/OmniGraffle"
+    dest: "{{ backupPath }}OmniGraffle/AS/"  
+    suffix: ""    
+
+# OmniPresence
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}OmniPresence"
+    suffix: "/com.omnigroup.OmniPresence.plist"
+    
+# pathFinder:
+  - src: "~/Library/Preferences" 
+    dest: "{{ backupPath }}PathFinder"
+    suffix: "/com.cocoatech.PathFinder.plist"
+  - src: "/Users/bhdicaire/Library/Application Support/Path Finder"
+    dest: "{{ backupPath }}PathFinder/AS/"
+    suffix: ""
+
+# PDFpenPro
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}PDFpenPro"
+    suffix: "/com.smileonmymac.PDFpenPro.plist"
+
+# ScanSnap
+  - src: "~/Library/Application\ Support/PFU"
+    dest: "{{ backupPath }}FujitsuScanSnap/AS/"
+    suffix: ""
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}FujitsuScanSnap"
+    suffix: !unsafe 'unsafe element "/jp.co.pfu.ScanSna**.plist' 
+
+# Sonos
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Sonos"  
+    suffix: "/com.sonos.macController.plist"
+  - src: "~/Library/Application\ Support/Sonos/"
+    dest: "{{ backupPath }}Sonos/AS/"  
+    suffix: ""    
+
+#  SuperDuper!
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}SuperDuper"
+    suffix: "/com.blacey.SuperDuper!.plist"
+  - src: "~/Library/Application\ Support/SuperDuper!"
+    dest: "{{ backupPath }}SuperDuper/AS/"
+    suffix: ""    
+    
+# SwitchResX
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}SwitchResX"
+    suffix: "/fr.madrau.switchres.desktop-layout.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}SwitchResX"
+    suffix: "/fr.madrau.switchresx.app.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}SwitchResX"
+    suffix: "/fr.madrau.switchresx.daemon.plist"
+
+# VLC
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}VLC/" 
+    suffix: "/org.videolan.vlc"
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}VLC/"
+    suffix: "/org.videolan.vlc.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}VLC/"
+    suffix: "/org.videolan.vlc.LSSharedFileList.plist"
+  - src: "~/Library/Application\ Support/org.videolan.vlc/"
+    dest: "{{ backupPath }}org.videolan.vlc/AS/"  
+    suffix: ""    
+ 
+# ------------------------------------------------------------
+#  Brew Cask — Quicklook modules
+# ------------------------------------------------------------
+
+# Quicklook plugin
+  - src: "~/Library/Quicklook/"
+    dest: "{{ backupPath }}QuickLook/"
+    suffix: ""
+ 
+# ------------------------------------------------------------
+#  Mac Apps Store —  MAS Applications
+# ------------------------------------------------------------
+
+ appStoreConfig:
+
+# Divvy
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Divvy"  
+    suffix: "/com.mizage.direct.Divvy.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Divvy/"
+    suffix: "/com.mizage.Divvy.plist"
+
+# Soulver
+  - src: "~/Library/Application\ Support/Soulver/"
+    dest: "{{ backupPath }}Soulver/AS/"
+    suffix: ""
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Soulver"
+    suffix: "/com.acqualia.soulver.plist"
+
+# Notability    
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Notability"
+    suffix: "/com.gingerlabs.NotabilityMac.plist"    
+
+# Affinity Designer
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}affinitydesigner"
+    suffix: "/com.seriflabs.affinitydesigner.plist"
+
+# AirMail
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}AirMail"
+    suffix: "/it.bloop.airmail2.plist"
+
+# Tree 2
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Tree"
+    suffix: "/jp.topoftree.tree2.plist"

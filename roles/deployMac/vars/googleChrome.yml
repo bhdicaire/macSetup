@@ -1,0 +1,11 @@
+---
+
+ googleChromePref:
+
+# Disable the all too sensitive backswipe on trackpads and Magic Mouse
+    - "com.google.Chrome AppleEnableSwipeNavigateWithScrolls -bool false"
+    - "com.google.Chrome AppleEnableMouseSwipeNavigateWithScrolls -bool false"
+
+# Expand the print dialog by default
+    - "com.google.Chrome PMPrintingExpandedStateForPrint2 -bool true"
+    - "com.google.Chrome DisablePrintPreview -bool true"

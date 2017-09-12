@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BuildMachineOSBuild</key>
+	<string>15A284</string>
+	<key>CFBundleDevelopmentRegion</key>
+	<string>English</string>
+	<key>CFBundleDocumentTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>MDImporter</string>
+			<key>LSItemContentTypes</key>
+			<array>
+				<string>public.c-header</string>
+				<string>public.c-plus-plus-header</string>
+				<string>public.c-source</string>
+				<string>public.objective-c-source</string>
+				<string>public.c-plus-plus-source</string>
+				<string>public.objective-c-plus-plus-source</string>
+				<string>com.sun.java-source</string>
+				<string>public.perl-script</string>
+				<string>public.python-script</string>
+				<string>public.csh-script</string>
+				<string>public.shell-script</string>
+				<string>public.ruby-script</string>
+				<string>public.php-script</string>
+				<string>com.netscape.javascript-source</string>
+			</array>
+		</dict>
+	</array>
+	<key>CFBundleExecutable</key>
+	<string>RichText</string>
+	<key>CFBundleGetInfoString</key>
+	<string>1.0, Copyright (c) 2004-2010 Apple Inc.</string>
+	<key>CFBundleIdentifier</key>
+	<string>com.apple.MDImporter.SourceCode</string>
+	<key>CFBundleInfoDictionaryVersion</key>
+	<string>6.0</string>
+	<key>CFBundleName</key>
+	<string>SourceCode Sniffer</string>
+	<key>CFBundleShortVersionString</key>
+	<string>6.9</string>
+	<key>CFBundleSupportedPlatforms</key>
+	<array>
+		<string>MacOSX</string>
+	</array>
+	<key>CFBundleVersion</key>
+	<string>294.10</string>
+	<key>CFPlugInDynamicRegisterFunction</key>
+	<string></string>
+	<key>CFPlugInDynamicRegistration</key>
+	<false/>
+	<key>CFPlugInFactories</key>
+	<dict>
+		<key>502B7F32-60DD-11D8-87A4-000393CC3466</key>
+		<string>RichTextSnifferPluginFactory</string>
+	</dict>
+	<key>CFPlugInTypes</key>
+	<dict>
+		<key>8B08C4BF-415B-11D8-B3F9-0003936726FC</key>
+		<array>
+			<string>502B7F32-60DD-11D8-87A4-000393CC3466</string>
+		</array>
+	</dict>
+	<key>CFPlugInUnloadFunction</key>
+	<string></string>
+	<key>DTCompiler</key>
+	<string>com.apple.compilers.llvm.clang.1_0</string>
+	<key>DTPlatformBuild</key>
+	<string>8V109d</string>
+	<key>DTPlatformVersion</key>
+	<string>GM</string>
+	<key>DTSDKBuild</key>
+	<string>16F8a</string>
+	<key>DTSDKName</key>
+	<string>macosx10.12internal</string>
+	<key>DTXcode</key>
+	<string>0830</string>
+	<key>DTXcodeBuild</key>
+	<string>8V109d</string>
+</dict>
+</plist>
