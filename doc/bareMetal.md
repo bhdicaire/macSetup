@@ -1,24 +1,22 @@
 # A Fresh Start with your Macintosh
 
+Your data really isn't safe unless you're backing up properly and with lots of redundancy. You can't go wrong with Scott Hanselman's [computer backup rules](http://www.hanselman.com/blog/TheComputerBackupRuleOfThree.aspx): 
+
+1. **Three copies of anything you care about** — Two isn't enough if it's important.
+2. **Two different formats** — Example: Dropbox and DVDs, or hard drive and usb key, or CD + online backup solution, ...
+3. **One off-site backup** — If the house burns down, how will you get your memories back?
+
+Refer to [configuration management](https://github.com/bhdicaire/macSetup/doc/configMan agement.md) to create a backup of the configuration items.
+
 ## Getting ready
-
-OS X updates and Xcode Command Line Tools</summary>
-
-The fastest way to find {command options|code pieces} you need :)
-
-
-As we will be formatting the hard drive which will wipe all information, it’s prudent to backup any important files along with your current profile.
-
-For example, I’m using make backup to copy a few important files to a git folder on my Dropbox folder and pushing the update to my (GitHub repository)[https://github.com/bhdicaire/macSetup]. We can’t be to cautious.
-
-### Creating a Mac OSX install disk
 
 Let’s create a bootable USB drive with the OSX installer. Please use a USB drive without any important information as the drive will be erased by following steps.
 
-Download El Capitan installer from the App store
-Insert a 8GB or larger USB drive
-Create Bootable OSX disk shell # Assumes disk is mounted as /Volumes/Untitled - update path if required sudo /Applications/Install\ OS\ X\ El\ Capitan.app/Contents/Resources/createinstallmedia --volume /Volumes/Untitled --applicationpath /Applications/Install\ OS\ X\ El\ Capitan.app --nointeraction
-
+1. Download the High Sierra installer from the App store
+2. Insert a 8GB or larger USB drive
+3. Create a bootable macOS disk shell # Assumes disk is mounted as /Volumes/Untitled - update path if required sudo /Applications/Install\ OS\ X\ El\ Capitan.app/Contents/Resources/createinstallmedia --volume /Volumes/Untitled --applicationpath /Applications/Install\ OS\ X\ El\ Capitan.app --nointeraction
+4. Eject the USB key and test it :grin:
+ 
 ## Installing the operating system
 
 1. Connect an ethernet adapter to accelerate the installation thus no wifi credential is on the computer
@@ -73,6 +71,15 @@ For your information ...
 	* deletes the firmware password. You'll need the current one to delete it, of course.
 		sudo firmwarepasswd -delete
 
+
+OS X updates and Xcode Command Line Tools</summary>
+
+The fastest way to find {command options|code pieces} you need :)
+
+
+As we will be formatting the hard drive which will wipe all information, it’s prudent to backup any important files along with your current profile.
+
+For example, I’m using make backup to copy a few important files to a git folder on my Dropbox folder and pushing the update to my (GitHub repository)[https://github.com/bhdicaire/macSetup]. We can’t be to cautious.
 ## Author
 
 Benoît H. Dicaire, http://github.com/BHDicaire, @BHDicaire, BH@Dicaire.com, http://BHDicaire.com/

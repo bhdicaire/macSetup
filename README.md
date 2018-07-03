@@ -8,7 +8,7 @@ My objective is to fully automate macOS installation and configuration using Ans
 
 ## What problem does it solve and why is it useful?
 
-Setup a Mac up with everything configured properly with easy-to-understand instructions that automate the installation and configuration from the bare metal.
+Setup a Mac up with everything configured properly with easy-to-understand instructions that automate the installation and configuration from the [bare metal](https://github.com/bhdicaire/macSetup/doc/bareMetal.md).
 
 
 ### Modules
@@ -18,8 +18,8 @@ I have currently implemented the following modules.
 <details>
 <summary>Software installation</summary>
 
- This is being accomplish with the use of [homebrew](https://github.com/Homebrew/homebrew), [homebrew-cask](https://github.com/caskroom/homebrew-cask), and the Mac Apple Store[(MAS)](https://github.com/).
- **You need to login in the app**
+ This is being accomplish with the use of [homebrew](https://github.com/Homebrew/homebrew), [homebrew-cask](https://github.com/caskroom/homebrew-cask), and the Mac Apple Store CLI [(MAS)](https://github.com/mas-cli/mas).
+
 </details>
 
 <details>
@@ -72,6 +72,8 @@ Azure
 
 The various configuration files are tested on OS X High Sierra (10.13). Older operating system versions may work — your mileage may vary, so download, review, and then execute the scripts.
 
+[bare metal](https://github.com/bhdicaire/macSetup/doc/bareMetal.md
+
 Open the terminal window:
 
 Install git
@@ -93,6 +95,7 @@ $ version=1.9.1 && cd /tmp \
 
 ### Step 0: Prepare your computer
 Refer to my [guide](https://github.com/bhdicaire/macSetup/blob/master/prepare.md) for this important step.
+ **You need to login in the app**
 
 #### Software Deactivation
 
