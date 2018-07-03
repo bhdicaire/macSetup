@@ -1,36 +1,35 @@
-# A Fresh Start with your Macintosh
+# Bare metal installation — A Fresh Start with your Macintosh 
 
-Your data really isn't safe unless you're backing up properly and with lots of redundancy. You can't go wrong with Scott Hanselman's [computer backup rules](http://www.hanselman.com/blog/TheComputerBackupRuleOfThree.aspx): 
-
-1. **Three copies of anything you care about** — Two isn't enough if it's important.
-2. **Two different formats** — a Dropbox account & some DVDs, an external hard drive and an online backup solution, etc.
-3. **One off-site backup** — If the house burns down, how will you get your memories back?
-
-Ensure that all your configuration items are stored according to the [configuration management](https://github.com/bhdicaire/macSetup/doc/configManagement.md) to automate the installation and configuration process.
-
-## Getting ready
-
-Let’s create a bootable USB drive with the OSX installer. If you prefer to install the operating system via *internet rescue*, skip the section.
+Let’s create a bootable USB drive with the OSX installer. If you prefer to install the operating system via *internet rescue*, you may skip the section.
 
 Please use a 8GB or larger USB drive without any important information as the drive will be erased by following steps.
 
 1. Download the High Sierra installer from the App store
 2. Insert the USB drive
-3. Validate the volume name and either rename the drive as ``Untitled``` or customize  step 4
+3. Validate the volume name and either rename the drive as ``Untitled``` or customize  step #4
 4. Create a bootable macOS disk shell # Assumes disk is mounted as /Volumes/Untitled - update path if required sudo /Applications/Install\ OS\ X\ El\ Capitan.app/Contents/Resources/createinstallmedia --volume /Volumes/Untitled --applicationpath /Applications/Install\ OS\ X\ El\ Capitan.app --nointeraction
 5. Eject the USB key
 6. test it :grin:
- 
+
+## Getting ready 
+> "There are two kinds in the world, those who have lost data, and those who will." —  Mike Epstein
+Your data really isn't safe unless you're backing it up with lots of redundancy. You can't go wrong with Scott Hanselman's [computer backup rules](http://www.hanselman.com/blog/TheComputerBackupRuleOfThree.aspx): 
+
+1. **Three copies of anything you care about** — Two isn't enough if it's important.
+2. **Two different formats** — a Dropbox account & some DVDs, an external hard drive and an online backup solution, etc.
+3. **One off-site backup** — If the house burns down, how will you get your memories back?
+
+Ensure that all your configuration items are stored according to the [configuration management](https://github.com/bhdicaire/macSetup/doc/configManagement.md) to automate the installation and configuration process. 
 ## Installing the operating system
 
 1. Connect an ethernet adapter to accelerate the installation thus no wifi credential is on the computer
 2. Install the current macOS version via cmd option r (internet rescue) or via a usb key.
-   a. Enable location service
-   b. Disable analytics and Siri
-   c. Skip AppleID
-   d, Create an admin user, in my case BHD
-   e. Open the App Store and update all softwares
-   f. Restart
+   i. Enable location service
+   ii. Disable analytics and Siri
+   iii. Skip AppleID
+   iv, Create an admin user, in my case BHD
+   v. Open the App Store and update all softwares
+   vi. Restart
 
 ## Hardening the operating system (e.g. a little) 
 As you may know. the installation process use the primary account name, for example Benoît H. Dicaire's MacPro) as the computer's name and hostname. It's a good privacy practice to change it.

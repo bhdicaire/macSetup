@@ -8,7 +8,7 @@ My objective is to fully automate macOS installation and configuration using Ans
 
 ## What problem does it solve and why is it useful?
 
-Setup a Mac up with everything configured properly with easy-to-understand instructions that automate the installation and configuration from the [bare metal](https://github.com/bhdicaire/macSetup/raw/master/doc/bareMetal.md).
+Setup a Mac up with everything configured properly with easy-to-understand instructions that automate the installation and configuration from the [bare metal](https://github.com/bhdicaire/macSetup/blob/master/doc/bareMetal.md).
 
 ### Modules
 I have currently implemented the following modules.
