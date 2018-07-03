@@ -105,31 +105,31 @@
  brewCaskDevConfig:
 
 # Charles
-  - src: "~/Library/Application\ Support/Charles/"
-    dest: "{{ backupPath }}Charles/AS/"  
-    suffix: ""
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}Charles"
     suffix: "/com.xk72.charles.config"
+  - src: "~/Library/Application\ Support/Charles/"
+    dest: "{{ backupPath }}Charles/AS/"  
+    suffix: ""
 
 # Clarify
-  - src: "~/Library/Application\ Support/Clarify/"
-    dest: "{{ backupPath }}Clarify/AS/"  
-    suffix: ""
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}Clarify"
     suffix: "/com.bluemangolearningsystems.clarify-osx.plist" 
+  - src: "~/Library/Application\ Support/Clarify/"
+    dest: "{{ backupPath }}Clarify/AS/"  
+    suffix: ""
 
 # ChronoSync
-  - src: "~/Library/Application\ Support/ChronoSync/"
-    dest: "{{ backupPath }}/ChronoSync/AS/"  
-    suffix: ""
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}ChronoSync"
     suffix: "/com.econtechnologies.backgrounder.chronosync.plist"
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}ChronoSync"
     suffix: "/com.econtechnologies.chronosync.plist"
+  - src: "~/Library/Application\ Support/ChronoSync/"
+    dest: "{{ backupPath }}/ChronoSync/AS/"  
+    suffix: ""
 
 # Default Folder X
   - src: "~/Library/Preferences"
@@ -146,16 +146,16 @@
     suffix: ""
 
 # ExpanDrive
-  - src: "~/Library/Application\ Support/ExpanDrive/"
-    dest: "{{ backupPath }}ExpanDrive/AS/"  
-    suffix: ""
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}ExpanDrive"
     suffix: "/com.expandrive.ExpanDrive2.plist"
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}ExpanDrive"  
     suffix: "/com.expandrive.ExpanDrive3.plist"
-
+  - src: "~/Library/Application\ Support/ExpanDrive/"
+    dest: "{{ backupPath }}ExpanDrive/AS/"  
+    suffix: ""
+    
 # HandBrake
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}HandBrake"  
@@ -174,7 +174,7 @@
 
 # imageoptim
   - src: "~/Library/Preferences"
-    dest: "{{ backupPath }}Hazel"
+    dest: "{{ backupPath }}ImageOptim"
     suffix: "/net.pornel.ImageOptim.plist"
 
 # Kaleidoscope
@@ -191,9 +191,6 @@
     suffix: "/com.aone.keka.plist"
 
 # Keyboard Maestro
-  - src: "~/Library/Application\ Support/Keyboard Maestro/"
-    dest: "{{ backupPath }}keyMaestro/AS/"  
-    suffix: ""
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}keyMaestro"  
     suffix: "/com.stairways.keyboardmaestro.plist"
@@ -203,7 +200,10 @@
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}keyMaestro"  
     suffix: "/com.stairways.keyboardmaestro.editor.plist"
-
+  - src: "~/Library/Application\ Support/Keyboard Maestro/"
+    dest: "{{ backupPath }}keyMaestro/AS/"  
+    suffix: ""
+    
 # Montain
   - src: "~/Library/Application\ Support/Mountain/"
     dest: "{{ backupPath }}Mountain/AS/"  
@@ -217,16 +217,16 @@
 # parallels-desktop 
 
 # Slack
-  - src: "~/Library/Application\ Support/Slack"
-    dest: "{{ backupPath }}Slack/AS/"
-    suffix: ""
+
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}Slack"
     suffix: "/com.tinyspeck.slackmacgap.plist" 
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}Slack"
     suffix: "/com.tinyspeck.slackmacgap.helper.plist" 
-    
+  - src: "~/Library/Application\ Support/Slack"
+    dest: "{{ backupPath }}Slack/AS/"
+    suffix: ""    
 
 # Snagit
   - src: "~/Library/Preferences"
@@ -235,28 +235,29 @@
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}Snagit"
     suffix: "/com.techsmith.snagit.capturehelper.plist"
+  - src: "/Users/Shared/TechSmith/Snagit/"
+    dest: "{{ backupPath }}Snagit"
+    suffix: "SnagitRegistrationKey"
   - src: "/Users/bhdicaire/Library/Application Support/TechSmith"
     dest: "{{ backupPath }}Snagit/AS/"
     suffix: ""
 
 # textExpander
-  - src: "~/Library/Application\ Support/TextExpander"
-    dest: "{{ backupPath }}TextExpander/AS/"
-    suffix: ""
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}TextExpander"
     suffix: "/com.smileonmymac.textexpander.plist"
-
-
+  - src: "~/Library/Application\ Support/TextExpander"
+    dest: "{{ backupPath }}TextExpander/AS/"
+    suffix: ""
 
 # Tower 2
-  - src: "~/Library/Application/com.fournova.Tower2"
-    dest: "{{ backupPath }}Tower/AS/"
-    suffix: ""
   - src: "~/Preferences/Preferences" 
     dest: "{{ backupPath }}Tower"
     suffix: "/com.fournova.Tower2.plist"
-
+  - src: "~/Library/Application/com.fournova.Tower2"
+    dest: "{{ backupPath }}Tower/AS/"
+    suffix: ""
+    
 # Transmit
 #   - src: "~/Library/Preferences"
 #     dest: "{{ backupPath }}Transmit"
@@ -268,7 +269,6 @@
 #     dest: "{{ backupPath }}Transmit/AS/"  
 #     suffix: ""
 
-    
 # Trickster
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}Trickster" 

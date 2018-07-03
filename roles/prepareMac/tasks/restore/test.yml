@@ -1,0 +1,7 @@
+---
+- hosts: localhost
+
+  tasks:
+    - debug: var=inventory_hostname
+    - debug:
+        msg: "System {{ inventory_hostname }}"

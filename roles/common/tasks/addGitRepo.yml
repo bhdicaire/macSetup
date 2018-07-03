@@ -5,24 +5,37 @@
 # ------------------------------------------------------------
 
  - debug: 
-     msg: "** macSetup — addGitRepo module }} **"
+     msg: "** dLibrary addGITRepo version 1.0 **"
      verbosity: 2
+# - debug:
+#     msg: "Source repository: {{ dGitItem.src }}"
+#     verbosity: 2
+# - debug:
+#     msg: "Destination: {{ dGitItem.dest }}"
+#     verbosity: 2     
+# - debug:
+#     msg: "Create target directory? {{ dMkDir | default(No)}}"
+#     verbosity: 2
 
- - name: Execute mkDir module
-   include: "{{ playbookPath }}/roles/common/tasks/mkDir.yml"
+
+ - name: Ensure target directory exist
+   include_tasks: "{{ playbookPath }}/roles/common/tasks/mkDir.yml"
    vars:
-     dDirPath: "{{ dMakeDestDirectory }}"
+     dDirPath: "{{ dMake.dest }}"
    with_items:
-    - "{{ dGITDest }}"
+     - "{{ dGITItem }}"
    loop_control:
-     loop_var: dMakeDestDirectory
-
+     loop_var: dMake
+   when: dMkDir == True  
+  
  - name: Clone or update local GIT repositories
    git:
-    repo: "{{ dGITRepo }}"
-    dest: "{{ dGITDest | default( gitPath )}}"
-    force: "{{ dGITForce | default('yes')}}"
-    umask: "{{ dGITumask | default('002')}}"
-    update: "{{ dGITupdate | default('yes')}}"
-    recursive: "{{ dGITrecursive | default(omit)}}"
-    verify_commit: "{{ dGITverify_commit | default(omit)}}"
+    repo: "{{ item.src }}"
+    dest: "{{ item.dest | default( gitPath )}}"
+    force: "{{ item.force | default( true )}}"
+    umask: "{{ item.umask | default('002')}}"
+#    update: "{{ item.update | default( true )}}"
+    recursive: "{{ item.recursive | default(omit)}}"
+    verify_commit: "{{ item.verifyCommit | default(omit)}}"
+   with_items:
+     - "{{ dGITItem }}"

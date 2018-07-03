@@ -44,30 +44,27 @@
    debug: var=hostvars[inventory_hostname] verbosity=1
    tags: ['node', 'python', 'ruby', 'dev']
 
- - homebrew_tap: name="{{ item }}" state=present
-   with_items:
-   - "{{ brewTaps }}"
-   tags: ['dev']
-
- - name: Install applications with homebrew
-   homebrew: update_homebrew=yes upgrade_all=yes
-   tags: ['dev']
-
- - homebrew: name="{{ item }}" state=present
+ - name: Install required tools
+   include_tasks: "{{ playbookPath }}/roles/common/homeBrew.yml"
+   vars:
+     dTap:              "{{ brewTaps }}"
+     dApplication:      "{{ dItemApp }}"
+     dInstallationType: "brew"
    with_items:
    - "{{ brewAppsDev }}"
-   tags: ['dev']
+   loop_control:
+    loop_var: dItemApp  
 
- - shell: brew cleanup
-   tags: ['dev']
-   
- - homebrew_cask: name="{{ item }}" path="{{ brew_cask_appdir }}" state=present
+ - name: Install required tools
+   include_tasks: "{{ playbookPath }}/roles/common/homeBrew.yml"
+   vars:
+     dTap:              "{{ brewTaps }}"
+     dApplication:      "{{ dItemApp }}"
+     dInstallationType: "cask"
    with_items:
    - "{{ brewAppsCaskDev }}"
-   tags: ['dev'] 
-
- - shell: brew cask cleanup
-   tags: ['dev']
+   loop_control:
+    loop_var: dItemApp  
 
  - name: Install RVM
    shell: "curl -sSL https://get.rvm.io | bash -s stable --user-install"

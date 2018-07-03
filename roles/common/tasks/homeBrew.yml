@@ -1,34 +1,47 @@
 ---
 
- - debug: msg="** macSetup homeBrew module **"
-
  - block:
-     - homebrew: update_homebrew=yes upgrade_all=yes
+     - name: "** macSetup homeBrew module **"
      - homebrew: update_homebrew=yes upgrade_all=yes
    rescue:
-     - debug: msg='I caught an error in the Brew initialization'
+     - debug: 
+         msg: 'I caught an error in the Brew initialization'
    always:
+     - shell: brew doctor
      - shell: brew cleanup
    run_once: true
 
  - homebrew_tap: name="{{ item }}" state=present
    with_items:
-     - "{{ brewTaps }}"
+   - "{{ brewTaps }}"
    run_once: true
    
- - homebrew: name= "{{ dFrameworkApps }}" state=present
-   when: dFrameworkType == "brew"
+ - name: "Brew: ensure the application is present"
+   homebrew: name= "{{ item }}" state=present
+   with_items:
+     - "{{ dApplication }}"
+   ignore_errors: yes      
+   when: dInstallationType == "brew"
 
- - homebrew_cask: name= "{{ dFrameworkApps }}" state=present
-   when: dFrameworkType == "cask"
-   
-# - name: Update Brew access right for all group members
-#   file: 
-#    path: '{{ item }}'
-#    group: staff
-#    state: directory
-#    recurse: yes
-#    mode: 0775
-#   with_items: 
-#    - brewDir
-#    - brew_cask_appdir
+ - name: "Brew Cask: ensure the application is present"
+   homebrew_cask: 
+     name= "{{ item }}" 
+     state: present
+     path: "{{ brew_cask_appdir }}"
+   with_items:
+     - "{{ dApplication }}"
+   ignore_errors: yes   
+   when: dInstallationType == "cask"
+      
+ - name: "Brew & Brew Cask: all staff (e.g. group member) can manage applications"
+   file: 
+     path: '{{ item }}'
+     group: staff
+     state: directory
+     recurse: yes
+     mode: 0775
+   with_items: 
+     - brewDir
+     - brew_cask_appdir
+   become: yes
+   run_once: true

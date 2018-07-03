@@ -13,6 +13,15 @@
     installer_type: app
     install_method: dmg
 
+  - name: "SetApp"
+    app: "Install Setapp.app"
+    src: "https://dl.devmate.com/com.setapp.InstallSetapp/InstallSetapp.zip"
+    dest: "{{ toolsPath }}"
+    installer_type: app
+    install_method: zip
+# move app dans /Applications    
+
+
 ### TODO: Copy antidote via RSync :(
 ### TODO: find hemingway editor
 
@@ -28,11 +37,7 @@
 
 
  macSoftwareGIT:
-  - name: GalleryViewPoke
-    src: "https://github.com/pbowden-msft/GalleryViewPoke"
-    dest: "{{ toolsPath }}MS-GalleryViewPoke"
-    installer_type: app
-    install_method: git    
+  
   - name: O365SharedActivator
     src: "https://github.com/pbowden-msft/O365SharedActivator"
     dest: "{{ toolsPath }}O365SharedActivator"
@@ -68,6 +73,7 @@
     - houdahspot
     - istat-menus
     - karabiner-elements
+    - keybase
     - neofinder
     - omnifocus
     - omnigraffle
@@ -75,7 +81,7 @@
     - omnipresence
     - path-finder
     - pdfpenpro
-    - scansnap-manager-ix500
+    - fujitsu-scansnap-manager-ix500
     - sonos
     - superduper
     - switchresx

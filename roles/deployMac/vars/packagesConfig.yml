@@ -9,11 +9,11 @@
 # ToolBox
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}ToolBox" 
-    suffix: "4C6364ACXT.com.parallels.toolbox.license.plist"
+    suffix: "/4C6364ACXT.com.parallels.toolbox.license.plist"
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}ToolBox" 
     suffix: "/com.parallels.toolb**.plist"
-  - src: "/Users/bhdicaire/Library/Application Support/com.parallels.toolbox"
+  - src: "/Users/bhdicaire/Library/Application\ Support/com.parallels.toolbox"
     dest: "{{ backupPath }}ToolBox/AS/"
     suffix: ""
 
@@ -40,6 +40,9 @@
   - src: "/Library/Preferences"
     dest: "{{ backupPath }}msOffice"
     suffix: "/com.microsoft.office.licensingV2.plist"
+  - src: "~/Library/Group\ Containers/UBF8T346G9.Office/User\ Content.localized/"
+    dest: "{{ backupPath }}msOffice/Templates/"
+    suffix: ""
 
 # ------------------------------------------------------------
 #  Brew Cask — GUI Applications
@@ -136,6 +139,17 @@
     dest: "{{ backupPath }}HoudahSpot/AS/"
     suffix: ""
 
+# Keybase
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Keybase/"  
+    suffix: "/keybase.Electron.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ backupPath }}Keybase/"  
+    suffix: "/keybase.ElectronHelper.plist"
+  - src: "~/Library/Application\ Support/Keybase/"
+    dest: "{{ backupPath }}Keybase/AS/"  
+    suffix: ""
+    
 # iStat Menus
   - src: "~/Library/Preferences"
     dest: "{{ backupPath }}iStatMenu/"  

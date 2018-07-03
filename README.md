@@ -1,23 +1,17 @@
-# macSetup
-Ansible code to build my Mac from scratch
+![macSetup logo](https://github.com/bhdicaire/macSetup/raw/master/img/logo.png)
 
-## Introduction
+You’ve been there too — setting up a new computer can be an ad-hoc, manual, and time-consuming process.
 
-My objective is to fully automate macOS installation and configuration using Ansible. Lots of stuff in here you probably don't need/ want, and some that needs personalization for your system.
-
-Some fun stuff, though, feel free to fork, fix, enhance, and send pull requests.
-
-## Requirements
-The various configuration files are tested on OS X Sierra (10.12). Older operating system versions may work — your mileage may vary  ;)
-
-Setting up a new computer can be an ad-hoc, manual, and time-consuming process.
-This repo aims to simplify the process with easy-to-understand instructions and dotfiles/scripts thatautomate the setup of:
-These are a series of scripts. Many are derived from prior works of open source, but some original URLs have been lost. Please point out any original art URLs and they will be added. I always strive to give credit to prior art authors.
-
-
-### What problem does it solve and why is it useful?
 I wasn't happy with any of the automated setup that I came across. They were either overly complex or were missing features that I really wanted.
-## Modules
+
+My objective is to fully automate macOS installation and configuration using Ansible. Lots of stuff in here you probably don't need, and some that needs personalization for your system ... So feel free to fork, and customize.
+
+The various configuration files are tested on OS X High Sierra (10.13). Older operating system versions may work — your mileage may vary  ;)
+
+## What problem does it solve and why is it useful?
+
+Setup a Mac up with everything configured properly with easy-to-understand instructions that automate the installation and configuration from the bare metal.
+
 I have currently implemented the following modules.
 
 <details>
@@ -62,11 +56,6 @@ Ensures that the required items start on startup using [loginitems](https://gith
 Setting up the Terminal using JXA.
 </details>
 <details>
-<summary>H</summary>
-H
-</details>
-
-<details>
 <summary>OS X default</summary>
 
 [Apple Defaults](https://developer.apple.com/documentation/corefoundation/preferences_utilities)
@@ -89,23 +78,29 @@ Node.js, JSHint, and Less
 
 Amazon Web Services (Boto, AWS CLI, S3cmd,
 Azure
-
 </details>
-:
-<details>
-<summary>H</summary>
-</details>
-https://groups.google.com/forum/#!forum/ansible-project - for user questions, tips, and tricks
-https://groups.google.com/forum/#!forum/ansible-devel - for strategy, future planning, and questions about writing code
-
-- [x] this is a complete item
-- [ ] this is an incomplete item
-- [x] @mentions, #refs, [links](),
 
 ---
 
 ## Install
 
+Open the terminal window:
+
+Install git
+
+$ sudo apt-get update
+$ sudo apt-get install -y git
+Install virtualbox (>=5.1):
+
+$ sudo sh -c "echo 'deb http://download.virtualbox.org/virtualbox/debian '$(lsb_release -cs)' contrib non-free' > /etc/apt/sources.list.d/virtualbox.list" \
+&& wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc -O- | sudo apt-key add - \
+&& wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add - \
+&& sudo apt-get update && sudo apt-get install virtualbox-5.1 -y
+Install vagrant (>=1.8.7, >=1.9.1):
+
+$ version=1.9.1 && cd /tmp \
+&& wget $(if [ `uname -m` == "x86_64" ]; then echo "https://releases.hashicorp.com/vagrant/$version/vagrant_${version}_x86_64.deb"; else echo "https://releases.hashicorp.com/vagrant/$version/vagrant_${version}_i686.deb"; fi;) \
+&& sudo dpkg -i vagrant_${version}* && rm vagrant_${version}* && cd --
 
 
 ### Step 0: Prepare your computer
@@ -146,7 +141,7 @@ automate them:
 ## Author
 
 Benoît H. Dicaire, http://github.com/BHDicaire, @BHDicaire, BH@Dicaire.com, http://BHDicaire.com/
-
+These are a series of scripts. Many are derived from prior works of open source, but some original URLs have been lost. Please point out any original art URLs and they will be added. I always strive to give credit to prior art authors.
 
 ### About
 

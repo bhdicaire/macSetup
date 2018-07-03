@@ -5,7 +5,7 @@
 # ------------------------------------------------------------
 
  macSoftwareDev:
- 
+
   - src: "http://s3.amazonaws.com/mailsteward/mailsteward.dmg"
     dest: "{{ toolsPath }}"
 
@@ -20,10 +20,11 @@
 # ------------------------------------------------------------
 
  gemPackages:
-    - "bundler"
-    - "rmagick"
-    - "kaminari"
     - "brakeman"
+    - "bundler"
+    - "kaminari"
+    - "raingrams"
+    - "rmagick"
     - "rubocop"
 
 # ------------------------------------------------------------
@@ -41,12 +42,27 @@
 #  Python — PIP packages
 # ------------------------------------------------------------
 
- pipPackages: 
+ pipPackages:
     - "ansible-lint"
     - "beautysh"
     - "boto"
+    - "brotli"
+    - "cryptography"
+    - "fonttools"
+    - "jsonpickle"
+# Python bindings for GTK  2.x (only works with Python 2)
+    - "PyGTK"
+# Python bindings for GTK 3.x and gobject-introspection libraries (also compatible with Python 3).
+#    - "PyGObject"
     - "saws"
+    - "scipy"
+    - "sympy"
+    - "xattr"
     - "yamllint"
+    - "zopfli"
+# unicodedata backport for Python 2.7 and 3.5 updated to the latest Unicode version 9.0
+# this is not necessary if you use Python 3.6 as the latter already comes with an up-to-date unicodedata
+    - "unicodedata2"
 
 # ------------------------------------------------------------
 #  Brew — CLI Applications
@@ -64,6 +80,7 @@
     - gawk
     - gnu-sed
     - iproute2mac
+    - bash-git-prompt
     - gnupg2
     - go
     - gs
@@ -123,7 +140,7 @@
     - slack
     - snagit
     - sqlitebrowser
-    - suspicious-package 
+    - suspicious-package
     - textexpander
     - tower
     - transmit

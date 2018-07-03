@@ -1,0 +1,9 @@
+---
+
+ - name:  "** Ansible module: Load all variables **"
+   include_vars: dir="{{ playbookPath }}/group_vars/all/"
+
+ - name: "Load roles's variables and dictionaries"
+   include_vars: dir="{{ playbookPath }}/roles/{{ item }}/vars"
+   with_items:
+     - "{{ macSetupRoles }}"

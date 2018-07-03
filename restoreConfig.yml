@@ -1,0 +1,33 @@
+---
+# ------------------------------------------------------------
+# Restore my environment and package configurations
+# Modified by: Benoît H. Dicaire
+# https://GitHub.com/bhdicaire/macSetup
+# ------------------------------------------------------------
+
+- hosts:      localhost
+  connection: local
+  vars:
+    macBackupConfig: false
+    macBackupRestore: true
+
+  pre_tasks:
+   - name: Load all variables and dictionaries
+     include_tasks: "roles/prepareMac/tasks/loadAllVariables.yml"  
+
+   - name: Dump all variables and dictionaries
+     include_tasks: "roles/common/tasks/dumpAllVariables.yml"  
+     vars: 
+       dDumpFile:   "/tmp/dumpAllVariables(before).txt" 
+     when: debugAnsible
+
+  Tasks:  
+   - name: Execute restore related tasks
+     include_tasks: "roles/prepareMac/tasks/manageEnv.yml" 
+
+  post_tasks:
+   - name: Dump all variables and dictionaries
+     include_tasks: "roles/common/tasks/dumpAllVariables.yml"    
+     vars: 
+       dDumpFile: "/tmp/dumpAllVariables(after).txt" 
+     when: debugAnsible

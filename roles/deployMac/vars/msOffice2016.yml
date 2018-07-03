@@ -1,17 +1,16 @@
 ---
  msOfficeSudo:
  
-#    - "defaults write /Library/Preferences/com.microsoft.autoupdate2 HowToCheck AutomaticDownload"
+    - "defaults write /Library/Preferences/com.microsoft.autoupdate2 HowToCheck AutomaticDownload"
 
- msOfficeItems:
- - "/tmp/macTools/MS-GalleryViewPoke/GalleryViewPoke --Disable"
- 
  msOfficePref:
 # sets the Open and Save options in Office 2016 apps to default to On My Mac instead of Online
-    - "/Library/Preferences/com.microsoft.office DefaultsToLocalOpenSave -bool true"
+#    - "/Library/Preferences/com.microsoft.office DefaultsToLocalOpenSave -bool true"
 
 #  enable the automated download and install option
     - "com.microsoft.autoupdate2 HowToCheck AutomaticDownload"
+# Enables and disables the default gallery view in Office 2016 for Mac applications (Word, Excel, PowerPoint)
+    - "com.microsoft.office ShowDocStageOnLaunch -bool FALSE"
 
 # Suppress the Office 365 AutoDiscover redirect warning
 #   - "com.microsoft.Outlook TrustO365AutodiscoverRedirect -bool TRUE"
@@ -21,7 +20,7 @@
     - "com.microsoft.office VisualBasicMacroExecutionState -string EnabledWithWarnings"
 
 # Disable attaching the file that caused the crash in the crash report. If you are working in a sensitive business it is recommended to set this to false.
-    - "defaults write com.microsoft.errorreporting IsAttachedEnabled -bool FALSE"
+#    - "defaults write com.microsoft.errorreporting IsAttachedEnabled -bool FALSE"
 
 # Will store the last crash report in the following path which can be helpful for debugging. 
 # ~/Library/Group Containers/UBF8T346G9.ms/MerpTempItems

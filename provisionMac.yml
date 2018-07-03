@@ -1,0 +1,49 @@
+---
+# ------------------------------------------------------------
+# macSetup according to my opinionated standards
+# Modified by: Benoît H. Dicaire
+# https://GitHub.com/bhdicaire/macSetup
+# ------------------------------------------------------------
+
+- hosts:      localhost
+  connection: local
+  vars_prompt:
+   - name: "ansible_become_pass"
+     prompt: "Sudo password"
+     private: yes
+
+  pre_tasks:
+  
+   - name: Remove lockfiles
+     file: 
+       path: "{{ item }}"
+       state: absent
+     with_items:
+       - "~/macSetup-PrepareMac.lck"
+       - "~/macSetup-ManageEnv.lck"
+       - "~/.macSetup-DeployMac.lck"
+       - "~/.macSetup-DeployDev.lck"
+       - "~/.macSetup-DeployServer.lck"              
+        
+   - name: provisionMac - dump all variables and dictionaries
+     include_tasks: "roles/common/tasks/dumpAllVariables.yml"  
+     vars: 
+       dDumpFile:   "/tmp/dumpAllVariables(provisionMac).txt" 
+     when: debugAnsible 
+    
+   - name: identify installation phase (e.g. prepare vs deploy)
+     stat: path="~/macSetup-PrepareMac (completed)"
+     register: prepareMac
+         
+  roles:
+   - { role: prepareMac, when: prepareMac.stat.exists == false }
+   - { role: deployMac,  when: prepareMac.stat.exists == true }
+#   - { role: deployDev, when: macDevSetup }
+#   - { role: deployServer, when: macServerSetup }
+
+  post_tasks:
+   - name: Dump all variables and dictionaries
+     include_tasks: "roles/common/tasks/dumpAllVariables.yml"    
+     vars: 
+       dDumpFile: "/tmp/dumpAllVariables(provisionMac completed).txt" 
+     when: debugAnsible

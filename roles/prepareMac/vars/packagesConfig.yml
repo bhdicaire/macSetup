@@ -1,0 +1,232 @@
+---
+
+# ------------------------------------------------------------
+# Secret configuration files
+# ------------------------------------------------------------
+
+ secretConfigurationItems:
+ 
+# SSH Configuration
+  - src: "~/.ssh/"
+    dest: "{{ secretBackupPath }}SSH/"
+    suffix: ""
+
+# bash variables
+  - src: "~"
+    dest: "{{ secretBackupPath }}dotFiles"
+    suffix: "/.bashrc-bhd"
+
+# Git Configuration
+  - src: "~"
+    dest: "{{ secretBackupPath }}dotFiles"
+    suffix: "/.gitconfig"
+
+# s3cmd
+  - src: "~"
+    dest: "{{ secretBackupPath }}S3/"
+    suffix: "/.s3cfg"
+
+# GPG & GNUPG
+  - src: "~/Library/Preferences"
+    dest: "{{ secretBackupPath }}GPG" 
+    suffix: "/org.sparkle-project.Sparkle.GPGTools.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ secretBackupPath }}GPG" 
+    suffix: "/org.gpgtools.gpgkeychain.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ secretBackupPath }}GPG"
+    suffix: "/org.gpgtools.updater.plist"
+  - src: "~/.gnupg/"
+    dest: "{{ secretBackupPath }}gnuPG"
+    suffix: ""
+
+# LittleSnitch
+  - src: "~/Library/Preferences"
+    dest: "{{ secretBackupPath }}LittleSnitch"
+    suffix: "/at.obdev.LittleSnitchNetworkMonitor.plist"
+
+# Messages
+  - src: "~/Library/Preferences"
+    dest: "{{ secretBackupPath }}Messages"  
+    suffix: "/com.apple.iChat.AIM.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ secretBackupPath }}Messages"
+    suffix: "/com.apple.iChat.Jabber.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ secretBackupPath }}Messages"
+    suffix: "/com.apple.iChat.StatusMessages.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ secretBackupPath }}Messages"  
+    suffix: "/com.apple.iChat.Yahoo.plist"
+
+# Microsoft Remote Desktop
+  - src: "~/Library/Preferences"
+    dest: "{{ secretBackupPath }}RDP" 
+    suffix: "/com.microsoft.rdc.mac.plist"
+
+# Keybase
+  - src: "~/Library/Preferences"
+    dest: "{{ secretBackupPath }}Keybase" 
+    suffix: "/keybase.Electron.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ secretBackupPath }}Keybase" 
+    suffix: "/keybase.ElectronHelper.plist"
+
+# ------------------------------------------------------------
+# Dot files
+# ------------------------------------------------------------
+
+ dotFilesItems:
+
+  - src: "~"
+    dest: "{{ dotFilesPath }}"
+    suffix: "/.bash_profile"
+  - src: "~"
+    dest: "{{ dotFilesPath }}"
+    suffix: "/.profile"
+  - src: "~"
+    dest: "{{ dotFilesPath }}"
+    suffix: "/.curlrc"
+  - src: "~"
+    dest: "{{ dotFilesPath }}"
+    suffix: "/.gitconfig"
+  - src: "~"
+    dest: "{{ dotFilesPath }}"
+    suffix: "/.gitignore"
+  - src: "~"
+    dest: "{{ dotFilesPath }}"
+    suffix: "/.inputrc"
+  - src: "~"
+    dest: "{{ dotFilesPath }}"
+    suffix: "/.vimrc"
+  - src: "~"
+    dest: "{{ dotFilesPath }}"
+    suffix: "/.wgetrc" 
+
+
+# ------------------------------------------------------------
+ dotLinksItems:   
+    - src: "{{ dropboxPath }}/@Inbox"
+      dest: "{{ home }}/@Inbox"
+    - src: "{{ dropboxPath }}/@Medium"
+      dest: "{{ home }}/@Medium"
+    - src: "{{ dropboxPath }}/@Tarmac"
+      dest: "{{ home }}/@Tarmac"
+    - src: "{{ dropboxPath }}/GIT"
+      dest: "{{ home }}/GIT"
+    - src: "{{ dropboxPath }}/Code"
+      dest: "{{ home }}/Code"
+    - src: "{{ dropboxPath }}/@W3"
+      dest: "{{ home }}/@W3"
+
+
+# ------------------------------------------------------------
+# System related
+# ------------------------------------------------------------
+
+
+ systemRelatedItems:
+
+# Karabiner Element, Inkscape, etc
+  - src: "~/.config/"
+    dest: "{{ dotFilesPath }}config/" 
+    suffix: ""
+
+  - src: "~/bin/"
+    dest: "{{ dotFilesPath }}bin/" 
+    suffix: ""
+    
+# colors
+  - src: "~/Library/Colors/"
+    dest: "{{ dotFilesPath }}Colors/"
+    suffix: ""
+  - src: "{{ playbookPath }}/roles/prepareMac/files/colors/"
+    dest: "{{ dotFilesPath }}Colors/"
+    suffix: ""
+
+# fonts
+  - src: "~/Library/Fonts/"
+    dest: "{{ dotFilesPath }}Fonts/"
+    suffix: ""
+  - src: "{{ playbookPath }}/roles/prepareMac/files/fonts/"
+    dest: "{{ dotFilesPath }}Fonts/"
+    suffix: ""
+    
+# Services
+  - src: "~/Library/Services/"
+    dest: "Services/"
+    suffix: ""
+  - src: "{{ playbookPath }}/roles/prepareMac/files/services/"
+    dest: "Services/"
+    suffix: ""
+
+# Terminal
+  - src: "~/Library/Preferences"
+    dest: "{{ dotFilesPath }}Terminal"
+    suffix: "/com.apple.Terminal.plist"
+  - src: "{{ playbookPath }}/roles/prepareMac/files/terminal/"
+    dest: "{{ dotFilesPath }}Terminal/"
+    suffix: ""
+
+# Spotlight
+  - src: "{{ spotlightPath }}"
+    dest: "{{ dotFilesPath }}Spotlight/"
+    suffix: ""
+  - src: "{{ playbookPath }}/roles/prepareMac/files/spotlight/"
+    dest: "{{ dotFilesPath }}Spotlight/"
+    suffix: ""
+
+# Quicklook plugin
+  - src: "~/Library/Quicklook/"
+    dest: "{{ dotFilesPath }}QuickLook/"
+    suffix: ""
+
+  - src: "~/Library/Preferences"
+    dest: "{{ dotFilesPath }}macOS"
+    suffix: "/com.apple.HIToolbox.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ dotFilesPath }}macOS"
+    suffix: "/com.apple.print.custompresets.forprinter.HP_LaserJet.plist"
+  - src: "~/Library/Preferences"
+    dest: "{{ dotFilesPath }}macOS"
+    suffix: "/com.apple.Preview.plist"
+
+
+ systemRelatedGITItems:
+
+# Karabiner Element, Inkscape, etc
+  - src: "~/.config/"
+    dest: "{{ dotFilesLocalGIT }}dot/config/"
+    suffix: ""
+
+  - src: "~/bin/"
+    dest: "{{ dotFilesLocalGIT }}bin"
+    suffix: ""
+    
+# colors
+  - src: "~/Library/Colors/"
+    dest: "{{ macSetupLocalGIT }}roles/prepareMac/files/colors/"
+    suffix: ""
+
+# fonts
+  - src: "~/Library/Fonts/"
+    dest: "{{ macSetupLocalGIT }}roles/prepareMac/files/fonts/"
+    suffix: ""
+    
+# Services
+  - src: "~/Library/Services/"
+    dest: "{{ macSetupLocalGIT }}roles/prepareMac/files/services/"
+    suffix: ""
+
+# Spotlight
+  - src: "~/Library/Spotlight/"
+    dest: "{{ macSetupLocalGIT }}roles/prepareMac/files/spotlight/"
+    suffix: ""
+    
+# Terminal
+  - src: "~/Library/Preferences"
+    dest: "{{ macSetupLocalGIT }}roles/prepareMac/files/terminal/"
+    suffix: "/com.apple.Terminal.plist"
+
+
+

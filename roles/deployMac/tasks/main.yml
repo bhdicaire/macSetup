@@ -5,87 +5,96 @@
 # https://GitHub.com/bhdicaire/macSetup
 # ----------------------------------------------------------
 
- - debug: 
-     msg: "** macSetup - MacDeploy }} **"
-     verbosity: 2
-     
- - name: Setup module marker 
-   file: path="~/.macSetup-Deploy" state=touch owner="{{ localUser }}"
+ - name: "deployMac: dump all variables and dictionaries"
+   include_tasks: "roles/common/tasks/dumpAllVariables.yml"  
+   vars: 
+     dDumpFile:   "/tmp/dumpAllVariables (deployMac).txt" 
+   when: debugAnsible 
+    
+ - name: "deployMac: activities initialization"
+   file: path="~/.macSetup-DeployMac.lck" state=touch owner="{{ localUser }}"
 
 # ------------------------------------------------------------
 # Install softwares
 # ------------------------------------------------------------
 
- - name: Ensure target directory exists
-   include: "{{ playbookPath }}/roles/common/tasks/mkDir.yml"
-   vars:
-     dDirPath: "{{ dMakeTargetDirectory }}"
-   with_items:
-     - prefix: src
-       info: "{{ appStoreConfig.src}}"
-     - "{{ brewCaskConfigL.dest }}"
-#     - "{{ macSoftwareConfig.src }}"
-#     - "{{ macSoftwareURL.dest }}"
-#     - "{{ toolsPath }}"
-#     - "~/BCK/BusyCal/"
-#     - "~/BCK/BusyContact/"
-   loop_control:
-     loop_var: dMakeTargetDirectory
-
  - name: Clone or update required GIT repositories
-   include: "{{ playbookPath }}/roles/common/tasks/addGitRepo.yml"
+   include_tasks: "{{ playbookPath }}/roles/common/tasks/addGitRepo.yml"
    vars:
-     dGITRepo: "{{ dRequiredGitRepo.src }}"
-     dGITDest: "{{ dRequiredGitRepo.dest }}"
+     dGITItem: 
+       src:  "{{ dRequiredGitRepo.src }}"
+       dest: "{{ dRequiredGitRepo.dest }}"
+     dMkDir: false
    with_items:
-    - "{{ macSoftwareGIT }}"
+     - "{{ macSoftwareGIT }}"
    loop_control:
      loop_var: dRequiredGitRepo
+          
+ - name: Install required tools
+   include_tasks: "{{ playbookPath }}/roles/common/homeBrew.yml"
+   vars:
+     dTap:              "{{ brewTaps }}"
+     dApplication:      "{{ dItemApp }}"
+     dInstallationType: "brew"
+   with_items:
+   - "{{ brew }}"
+   loop_control:
+    loop_var: dItemApp  
 
- - name: Copy packages not available via Brew, Cask or the AppleStore
+ - name: Install required tools
+   include_tasks: "{{ playbookPath }}/roles/common/homeBrew.yml"
+   vars:
+     dTap:              "{{ brewTaps }}"
+     dApplication:      "{{ dItemApp }}"
+     dInstallationType: "cask"
+   with_items:
+   - "{{ brewCask }}"
+   loop_control:
+    loop_var: dItemApp      
+
+ - name: Install Mac App Store's Applications
+   include_tasks: "appStore.yml"
+
+ - name: Download packages not available via Brew, Cask or the AppleStore
    get_url: url="{{ item.src }}" dest="{{ item.dest }}"
    with_items:
      - "{{ macSoftwareURL }}"
+   ignore_errors: yes 
+       
+ - name: Insert items that will open automaticaly at login
+   shell: ~/bin/loginItems -a {{ item }}
+   with_items:
+     - "{{ loginComponents }}"
 
- - name: Copy configuration files
-   include: "{{ playbookPath }}/roles/common/tasks/cpItems.yml"
+ - name: "Customize user's preferences items"
+   shell: defaults write {{ item }}
+   with_items:
+    - "{{ msOfficePref }}"  
+    - "{{ bbeditPref }}"
+    - "{{ googleChromePref }}"    
+    - "{{ macSoftwareConfigPref }}"
+    
+ - name: "Customize user's preferences items #2"
+   command: "{{ item }}"
+   with_items:
+    - "{{ bbeditItems }}"       
+ 
+ - name: "Customize user's preferences sudo items"
+   command: "{{ item }}"
+   with_items:
+    - "{{ msOfficeSudo }}"
+   become: yes
+   
+ - name: Restore environment and package config
+   include_tasks: "manageEnv.yml"
    vars:
-     dMkDir: False
-     dCopyItems:
-       src: "{{ macSoftwareConfig.dest }}{{ macSoftwareConfig.suffix }}"
-       dest: "{{ macSoftwareConfig.src }}"
-#
-# - name: user's preferences configuration
-#   shell: defaults write {{ item }}
-#   with_items:
-#    - "{{ msOfficePref }}"
-#
-# - name: user's preferences items
-#   command: "{{ item }}"
-#   with_items:
-#    - "{{ msOfficeItems }}"      
-#
-# - name: user's preferences sudo items 
-#   command: "{{ item }}"
-#   with_items:
-#    - "{{ msOfficeSudo }}"
-#   become: yes
-#
-## - name: Install applications with homebrew
-##   include: tasks/homeBrew.yml
-##
-## 
-## - name: Install Mac App Store's Applications
-##   include: tasks/appStore.yml
-#
-# - name: Insert items that will open automaticaly at login
-#   shell: ~/bin/loginitems.sh -a {{ item }}
-#   with_items:
-#     - "{{ loginComponents }}"
-#
-# -  name: Reboot
-#    command: "echo -e reboot"
-#    become: no
-#
-#     
-#     
+     macBackupConfig: false
+     macRestoreConfig: true
+   when: gougou is defined 
+  
+ - name: Remove module marker 
+   file: path="~/.macSetup-DeployMac.lck" state=touch owner="{{ localUser }}"
+    
+ -  name: Reboot
+    command: "echo -e reboot"
+    become: no

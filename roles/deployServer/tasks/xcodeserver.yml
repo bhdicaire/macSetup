@@ -1,0 +1,89 @@
+---
+- hosts: xcode_server
+  vars:
+    path_to_tmp_server_pkg: /tmp/install_osx_server.pkg
+    path_to_tmp_xcode_pkg: /tmp/xcode.pkg
+    path_to_auto_setup_script: auto_setup_server.sh
+
+  vars_files:
+    - pkgvars.yml
+
+  tasks:
+
+    - stat:
+        path: /Applications/Server.app/
+      register: server_installed
+
+    - block:
+       - name: Copy installer
+         copy:
+           src: "{{ item.src }}"
+           dest: "{{ item.dest }}"
+         with_items:
+           - { src: '{{ server_pkg }}' , dest: '{{ path_to_tmp_server_pkg }}' }
+           - { src: '{{ xcode_pkg }}', dest: '{{ path_to_tmp_xcode_pkg }}' }
+         register: copy_installer_output
+
+       - debug: 
+           var: copy_installer_output
+   
+       - name: Install OSX Server and XCode
+         command: sudo installer -pkg '{{ item }}' -target /
+         with_items:
+           - '{{ path_to_tmp_server_pkg }}'
+           - '{{ path_to_tmp_xcode_pkg }}'
+         register: install_output
+
+       - debug:
+           var: install_output
+
+       - name: Cleanup Installers (.pkg)
+         file:
+           path: "{{ item }}"
+           state: absent
+         with_items:
+           - '{{ path_to_tmp_server_pkg }}'
+           - '{{ path_to_tmp_xcode_pkg }}'
+
+      when: server_installed.stat.exists == false
+      become: true
+
+    - name: Accept License Agreement
+      script: accept_license.sh
+      become: true
+
+    - name: Check if CommandLineTools are installed
+      stat:
+        path: /Library/Developer/CommandLineTools/
+      register: clt
+
+    - block:
+       - name: Touch file to start softwareupdate
+         file:
+           path: /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+           state: touch
+   
+       - name: Get Name of CLT Update
+         command: bash -c "softwareupdate -l | grep '\*.*Command Line' | head -n 1 | awk -F'*' '{print $2}' | sed -e 's/^ *//' | tr -d '\n'"
+         register: updatename
+   
+       - name: Install XCode Command Line Tools
+         command: softwareupdate -i "{{ updatename.stdout }}" -v
+         register: installtools
+
+       - debug:
+           var: installtools
+
+      when: clt.stat.exists == false
+
+    - name: Accept Xcode License
+      command: /Applications/Xcode.app/Contents/Developer/usr/bin/xcodebuild -license accept
+      become: true
+
+    - name: Initialize XCode Server From XCode
+      command: /Applications/Xcode.app/Contents/Developer/usr/bin/xcscontrol --initialize
+      become: true
+
+    - name: Start Xcode Service in Server.app
+      command: /Applications/Server.app/Contents/ServerRoot/usr/sbin/serveradmin start xcode
+      become: true

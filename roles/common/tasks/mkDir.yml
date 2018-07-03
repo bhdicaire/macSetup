@@ -4,31 +4,37 @@
 # Ensure local directory exist
 # ------------------------------------------------------------
 
- - debug: 
-     msg: "** Ensure local directory exist **"
-     verbosity: 2
- - debug: 
-     msg: "path: {{ dDirPath }}"
-     verbosity: 2
- - debug: 
-     msg: "state: {{ dDirState | default('directory')}}"
-     verbosity: 2
- - debug: 
-     msg: "owner: {{ dDirOwner | default(omit)}} or {{ localUser }}"
-     verbosity: 2
- - debug: 
-     msg: "group: {{ dDirGroup | default(omit)}} or {{ localGroup}}"
-     verbosity: 2
- - debug: 
-     msg: "mode: {{ dDirMode | default(omit)}} or 0750"
-     verbosity: 2
+ - block:
+     - name: "** Ansible module: mkDir v1.0 **"
+       command: /usr/bin/false
+   rescue:
+     - debug: 
+         msg: 'I caught an error in the module initialization'
+     - debug: 
+         msg: "path: {{ dDirPath }}"
+         verbosity: 4
+     - debug: 
+         msg: "state: {{ dDirState | default('directory')}}"
+         verbosity: 4
+     - debug: 
+         msg: "owner: {{ dDirOwner | default(omit)}} or {{ localUser }}"
+         verbosity: 4
+     - debug: 
+         msg: "group: {{ dDirGroup | default(omit)}} or {{ localGroup}}"
+         verbosity: 4
+     - debug: 
+         msg: "mode: {{ dDirMode | default(omit)}} or 0750"
+         verbosity: 4          
+     - fail:
+         msg: "Input variable dDirPath is not defined" 
+   when: dDirPath is not defined
 
- - name: "Ensure local directory exist --> {{ dDirPath }}"
+ - name: "mkDir: {{ dDirPath }}"
    file:
      path: "{{ dDirPath }}"
      state: "{{ dDirState | default('directory') }}" 
      owner: "{{ dDirOwner | default( localUser )}}"
-     group: "{{ dDirGroup | default( localGroup ) }}" 
+     group: "{{ dDirGroup | default( localGroup )}}" 
      mode: "{{ dDirMode | default('0750')}}" 
      recurse: "{{ dDirRecurse | default(omit)}}"
   

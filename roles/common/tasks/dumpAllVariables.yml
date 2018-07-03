@@ -1,0 +1,24 @@
+---
+
+ - name:  "** Ansible module: Dump all variables **"
+   command: /usr/local/bin/ansible --version
+   register: dAnsibleVersion
+
+ - name: Validate tools presence
+   stat:
+     path: ~/bin/loginItems
+   register: toolLoginItems
+    
+ - name: "Dump current local user's login items"
+   command: ~/bin/loginItems -l
+   register: dLoginItems
+   ignore_errors: yes
+   when: toolLoginItems.stat.exists == true
+
+ - name: "Dump all variables and dictionaries"
+   template:
+     src:   "../templates/dumpAllVariables.j2"
+     dest:  "{{ dDumpFile | default('/tmp/dumpAllVariables.json') }}" 
+     owner: "{{ dDumpFileOwner | default( localUser )}}"
+     group: "{{ dDumpFileGroup | default( localGroup )}}" 
+     mode:  "{{ dDumpFileMode | default('0666')}}" 

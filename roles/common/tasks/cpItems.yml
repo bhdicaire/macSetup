@@ -1,35 +1,60 @@
 ---
 
 # ------------------------------------------------------------
-# Ensure local directory exist
+# dLibrary cpItems v1.0
 # ------------------------------------------------------------
 
- - debug: 
-     msg: "** macSetup - MacDeploy }} **"
-     verbosity: 2
- 
-  - name: Execute mkDir module
-   include: "{{ playbookPath }}/roles/common/tasks/mkDir.yml"
+ - block:
+     - name: "** dLibrary cpItems version 1.0 **"
+       command: /usr/bin/false
+   rescue:
+     - debug: 
+         msg: 'I caught an error in the module initialization'
+     - debug: 
+         msg: "Source: {{ dCopyItem.src }}"
+     - debug: 
+         msg: "Destination: {{ dCopyItem.dest }}"
+     - debug: 
+         msg: "owner: {{ dDirOwner | default(omit)}} or {{ localUser }}"
+     - debug: 
+         msg: "group: {{ dDirGroup | default(omit)}} or {{ localGroup}}"
+     - debug: 
+         msg: "mode: {{ dDirMode | default(omit)}} or 0750"
+     - debug:
+         msg: "Create target directory? {{ dMkDir | default(No)}}"
+     - debug:
+         msg: "Compress files? {{ dCopyItem.compress | default('No')}}"     
+     - debug:
+         msg: "RSync options: {{ dCopyItem.options | default('-aW --ignore-missing-args')}}"                 
+     - fail:
+         msg: "Input variable dDirPath is not defined" 
+   when: dCopyItem is not defined
+
+
+ - name: Ensure target directory exist
+   include_tasks: "{{ playbookPath }}/roles/common/tasks/mkDir.yml"
    vars:
      dDirPath: "{{ dMake.dest }}"
    with_items:
-     - "{{ dCopyItems }}"
+     - "{{ dCopyItem }}"
    loop_control:
      loop_var: dMake
    when: dMkDir == True  
 
- - name: "Copy files"
+ - name: Copy files
    synchronize:
-    src: "{{ dCopy.src }}"
-    dest: "{{ dCopy.dest }}"
-    compress: "{{ dCopy.compress | default('no')}}"
-    rsync_opts:: "{{ dCopy.options | default('-aW --ignore-missing-args')}}"
+    src: "{{ dItem.src }}"
+    dest: "{{ dItem.dest }}"
+    compress: "{{ dItem.compress | default('no')}}"
+#    rsync_opts:: 
+#      - "--no-motd"
+#      - "-aW"
+#      - "--ignore-missing-args"
    with_items:
-     - "{{ dCopyItems }}"
+     - "{{ dCopyItem }}"
    loop_control:
-     loop_var: dCopy
-
-
+     loop_var: dItem
+   ignore_errors: yes
 
 # ---------------------------------------------------------------------------------------
 # RSync options:

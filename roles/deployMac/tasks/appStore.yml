@@ -1,38 +1,28 @@
 ---
 
-    - name: Get MAS account status
-      shell: 'mas account'
-      register: mas_account_result
-      tags: ['setup']
+ - homebrew: 
+     name: mas
+     state: latest
+   ignore_errors: yes
+
+ - name: Get MAS account status
+   shell: 'mas account'
+   register: mas_account_result
    
-    - name: List installed MAS apps.
-      command: mas list
-      register: mas_list
-      tags: ['setup'] 
-      
-    - name: Ensure configured MAS apps are installed.
-      command: mas install "{{ item.id }}"
-      with_items: "{{ appStore }}"
-      tags: ['setup'] 
-      
-    - name: Upgrade all apps (if configured).
-      command: mas upgrade
-      tags: ['setup'] 
+ - name: List installed MAS apps.
+   command: mas list
+   register: mas_list
+   ignore_errors: yes
 
-   - name: Copy configuration files
-     synchronize:
-       src: "{{ item.dest }}{{ item.suffix }}"
-       dest: "{{ item.src }}"
-       compress: no
-       rsync_opts:
-         - "-aW"
-         - "--ignore-missing-args"
-     with_items:
-       - "{{ appStoreConfig }}"
+ - name: Ensure configured MAS apps are installed.
+   command: mas install "{{ item.id }}"
+   with_items: "{{ appStore }}"
+   ignore_errors: yes
+ 
+ - name: Upgrade all apps (if configured).
+   command: mas upgrade
 
-    - name: app store's preferences
-      shell: defaults write {{ item }}
-      with_items:
-      -  "{{ appStorePref }}"
-      tags: ['setup'] 
-
+ - name: app store's preferences
+   shell: defaults write {{ item }}
+   with_items:
+     -  "{{ appStorePref }}"
