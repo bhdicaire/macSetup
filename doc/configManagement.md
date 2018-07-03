@@ -1,4 +1,23 @@
-# A Fresh Start with your Macintosh
+# Configuration management
+
+
+Your user's configuration items are be stored in the ~/userName directory, however it's not a good practice to copy everything to another computer running the latest version of everything.  You will either lose some configurations if you copy before completing the reinstallation or you'll break something writing over the default configuration.  Even worse, you'll not able to identify all the issues right away.
+
+You should use ``backup config``and ``restore config``to manage those items.
+
+<details>
+<summary>Homebrew</summary>
+
+[Homebrew](https://github.com/Homebrew/homebrew) is my preferred package manager. The configuration manager identify and stored the following items:
+* brew taps --> ./roles/prepareMac/vars/brewTaps.yml
+* brew applications --> ./roles/prepareMac/vars/packages.yml, ./roles/deployMac/vars/packages.yml, and ./roles/deployDev/vars/packages.yml
+</details>
+<summary>Package configurations</summary>
+
+[Homebrew](https://github.com/Homebrew/homebrew) is my preferred package manager. The configuration manager identify and stored the following items:
+* brew taps --> ./roles/prepareMac/vars/brewTaps.yml
+* brew applications --> ./roles/prepareMac/vars/packages.yml, ./roles/deployMac/vars/packages.yml, and ./roles/deployDev/vars/packages.yml
+</details>
 
 ## Overview
 This repository is meant to store ansible roles for managing the macOS computers in my lab.
@@ -7,6 +26,7 @@ This repository is meant to store ansible roles for managing the macOS computers
     ├── deployDev
     ├── deployMac
     └── deployServer
+
 ### Inventory
 As this repository only contains roles, I have defined *some* variables in ``group_vars/all``. There is no Ansible inventory or any associated group_vars or host_vars.
 As you may know, Ansible depend on these things existing in a separate repository or otherwise accesible by these roles when they are NOT executed on the local host.

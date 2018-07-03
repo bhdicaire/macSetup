@@ -1,4 +1,4 @@
-![macSetup logo](https://github.com/bhdicaire/macSetup/raw/master/img/logo.png)
+![macSetup logo](https://github.com/bhdicaire/macSetup/raw/master/doc/logo.png)
 
 You’ve been there too — setting up a new computer can be an ad-hoc, manual, and time-consuming process.
 
@@ -6,35 +6,22 @@ I wasn't happy with any of the automated setup that I came across. They were eit
 
 My objective is to fully automate macOS installation and configuration using Ansible. Lots of stuff in here you probably don't need, and some that needs personalization for your system ... So feel free to fork, and customize.
 
-The various configuration files are tested on OS X High Sierra (10.13). Older operating system versions may work — your mileage may vary  ;)
-
 ## What problem does it solve and why is it useful?
 
 Setup a Mac up with everything configured properly with easy-to-understand instructions that automate the installation and configuration from the bare metal.
 
+
+### Modules
 I have currently implemented the following modules.
 
-<details>
-<summary>OS X updates and Xcode Command Line Tools</summary>
-
-The fastest way to find {command options|code pieces} you need :)
-
-</details>
 
 <details>
-<summary>Unix Package Installation</summary>
+<summary>Software installation</summary>
 
- This is being accomplish with the use of [homebrew](https://github.com/Homebrew/homebrew).
+ This is being accomplish with the use of [homebrew](https://github.com/Homebrew/homebrew), [homebrew-cask](https://github.com/caskroom/homebrew-cask), and the Mac Apple Store[(MAS)](https://github.com/).
+ **You need to login in the app**
 </details>
-<details>
-<summary>Desktop Application Installation</summary>
-This is being performed with the use of [homebrew-cask](https://github.com/caskroom/homebrew-cask).
-</details>
-<details>
-<summary>Appstore Application Installation</summary>
-This is being performed with the use of [MAS](https://github.com/).
-**You need to login in the app**
-</details>
+
 <details>
 <summary>Configuration Files & Symlinks</summary>
 Any files and folders that are to be copied or symlinked, including app settings, licenses and dotfiles.
@@ -81,8 +68,9 @@ Azure
 </details>
 
 ---
-
 ## Install
+
+The various configuration files are tested on OS X High Sierra (10.13). Older operating system versions may work — your mileage may vary, so download, review, and then execute the scripts.
 
 Open the terminal window:
 

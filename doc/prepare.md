@@ -1,11 +1,11 @@
 # A Fresh Start with your Macintosh
 
-## Requirements
-The various configuration files are tested on OS X Sierra (10.12). Older operating system versions may work — your mileage may vary.
-
-Download, *review*, then execute the scripts.
-
 ## Getting ready
+
+OS X updates and Xcode Command Line Tools</summary>
+
+The fastest way to find {command options|code pieces} you need :)
+
 
 As we will be formatting the hard drive which will wipe all information, it’s prudent to backup any important files along with your current profile.
 
