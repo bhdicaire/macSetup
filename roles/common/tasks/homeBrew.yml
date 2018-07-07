@@ -13,7 +13,7 @@
 
  - homebrew_tap: name="{{ item }}" state=present
    with_items:
-   - "{{ brewTaps }}"
+     - "{{ brewTaps }}"
    run_once: true
    
  - name: "Brew: ensure the application is present"
