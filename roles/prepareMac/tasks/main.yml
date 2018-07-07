@@ -35,13 +35,13 @@
    when: computerName is defined
    run_once: true
 
- - name: Bash v4
-   include_tasks:  "{{ playbookPath }}/roles/common/tasks/homeBrew.yml"
-   vars:
-     dHomeBrewType: "brew"
-     dHomeBrewApplication:
-       - name: "bash"
-   run_once: true
+ #- name: Bash v4
+ #  include_tasks:  "{{ playbookPath }}/roles/common/tasks/homeBrew.yml"
+ #  vars:
+ #    dHomeBrewType: "brew"
+ #    dHomeBrewApplication:
+ #      - name: "bash"
+ #  run_once: true
 
  - name: Enable bash4 in /etc/shells
    command: "echo /usr/local/bin/bash >> /etc/shells"
