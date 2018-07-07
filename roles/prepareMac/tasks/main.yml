@@ -83,7 +83,7 @@
     loop_var: dAddUser
 
  - name: Install required tools
-   include_tasks: "{{ playbookPath }}/roles/common/homeBrew.yml"
+   include_tasks: "{{ playbookPath }}/roles/common/tasks/homeBrew.yml"
    vars:
      dTap:              "{{ brewTaps }}"
      dApplication:      "{{ dItemApp }}"
