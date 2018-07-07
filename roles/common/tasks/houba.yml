@@ -1,0 +1,14 @@
+  - name: Add parameters into virtualHost block
+    blockinfile:
+      path: /etc/apache2/sites-available/geonode.conf
+      insertbefore: '^\s*\</VirtualHost'
+      block:
+         SSLEngine on
+         SSLCertificateFile    /etc/ssl/certs/geonode.crt
+         SSLCertificateKeyFile /etc/ssl/private/geonode.key
+         BrowserMatch "MSIE [2-6]" \
+           nokeepalive ssl-unclean-shutdown \
+           downgrade-1.0 force-response-1.0
+         # MSIE 7 and newer should be able to use keepalive
+         #BrowserMatch "MSIE [17-9]" ssl-unclean-shutdown
+    become: true
