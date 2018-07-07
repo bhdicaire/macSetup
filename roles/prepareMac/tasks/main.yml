@@ -36,7 +36,7 @@
    run_once: true
 
  - name: Bash v4
-   include_tasks: "homeBrew.yml"
+   include_tasks:  "{{ playbookPath }}/roles/common/tasks/homeBrew.yml"
    vars:
      dHomeBrewType: "brew"
      dHomeBrewApplication:
