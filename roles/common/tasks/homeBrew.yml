@@ -1,9 +1,8 @@
 ---
 
-- name: step1a
+- name: "** macSetup homeBrew module **"
   block:
-    - name: "** macSetup homeBrew module **"
-    - homebrew: update_homebrew=yes upgrade_all=yes
+  - homebrew: update_homebrew=yes upgrade_all=yes
   rescue:
     - debug:
         msg: 'I caught an error in the Brew initialization'
