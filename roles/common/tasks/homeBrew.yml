@@ -13,5 +13,39 @@
    always:
      - name: Brew maintenance
        shell: brew doctor
-       shell: brew cleanup
+   run_once: true
+   
+ - homebrew_tap: name="{{ item }}" state=present
+   with_items:
+     - "{{ brewTaps }}"
+   run_once: true
+   
+ - name: "Brew: ensure the application is present"
+   homebrew: name= "{{ item }}" state=present
+   with_items:
+     - "{{ dApplication }}"
+   ignore_errors: yes      
+   when: dInstallationType == "brew"
+
+ - name: "Brew Cask: ensure the application is present"
+   homebrew_cask: 
+    name: "{{ item }}" 
+    state: present
+    path: "{{ brew_cask_appdir }}"
+   with_items:
+     - "{{ dApplication }}"
+   ignore_errors: yes   
+   when: dInstallationType == "cask"
+      
+ - name: "Brew & Brew Cask: all staff (e.g. group member) can manage applications"
+   file: 
+    path: '{{ item }}'
+    group: staff
+    state: directory
+    recurse: yes
+    mode: 0775
+   with_items: 
+     - brewDir
+     - brew_cask_appdir
+   become: yes
    run_once: true
