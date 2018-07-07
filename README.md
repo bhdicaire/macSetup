@@ -72,9 +72,11 @@ Azure
 The various configuration files are tested on OS X High Sierra (10.13). Older operating system versions may work — your mileage may vary, so download, review, and then execute the scripts.
 
 [bare metal](https://github.com/bhdicaire/macSetup/doc/bareMetal.md
+ansible-playbook --verbose --check provisionMac.yml
+
 
 Open the terminal window:
-
+Pythin 2,7
 Install git
 
 $ sudo apt-get update
