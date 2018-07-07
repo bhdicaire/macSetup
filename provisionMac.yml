@@ -28,7 +28,7 @@
    - name: provisionMac - dump all variables and dictionaries
      include_tasks: "roles/common/tasks/dumpAllVariables.yml"  
      vars: 
-       dDumpFile:   "/tmp/dumpAllVariables(provisionMac).txt" 
+       dDumpFile:   "/tmp/dumpAllVariables (provisionMac).txt" 
      when: debugAnsible 
     
    - name: identify installation phase (e.g. prepare vs deploy)
@@ -45,5 +45,5 @@
    - name: Dump all variables and dictionaries
      include_tasks: "roles/common/tasks/dumpAllVariables.yml"    
      vars: 
-       dDumpFile: "/tmp/dumpAllVariables(provisionMac completed).txt" 
+       dDumpFile: "/tmp/dumpAllVariables (provisionMac completed).txt" 
      when: debugAnsible

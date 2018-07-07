@@ -25,7 +25,7 @@
 
  - name: "Brew Cask: ensure the application is present"
    homebrew_cask: 
-     name= "{{ item }}" 
+     name: "{{ item }}" 
      state: present
      path: "{{ brew_cask_appdir }}"
    with_items:
