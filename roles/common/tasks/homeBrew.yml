@@ -1,6 +1,4 @@
 ---
-
-tasks:
   - block:
       - name: "** macSetup homeBrew module **"
       - homebrew: update_homebrew=yes upgrade_all=yes
@@ -30,7 +28,7 @@ tasks:
       state: present
       path: "{{ brew_cask_appdir }}"
     with_items:
-      - "{{ dApplication }}"
+       - "{{ dApplication }}"
     ignore_errors: yes   
     when: dInstallationType == "cask"
       
@@ -42,7 +40,7 @@ tasks:
       recurse: yes
       mode: 0775
     with_items: 
-      - brewDir
-      - brew_cask_appdir
+       - brewDir
+       - brew_cask_appdir
     become: yes
     run_once: true
