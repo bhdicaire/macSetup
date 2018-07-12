@@ -1,6 +1,6 @@
  brewTaps:
     - homebrew/core
-    - homebrew/dupes
+    - homebrew/cask-drivers
+    - homebrew/command-not-found
     - caskroom/cask
-    - caskroom/drivers
     - fgimian/fgimian

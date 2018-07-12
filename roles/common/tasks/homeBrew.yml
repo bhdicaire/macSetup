@@ -19,6 +19,9 @@
    with_items:
      - "{{ brewTaps }}"
    run_once: true
+
+ - name: "Brew: install services"
+   command: brew services
    
  - name: "Brew: ensure the application is present"
    homebrew: name= "{{ item }}" state=present
