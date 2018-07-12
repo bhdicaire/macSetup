@@ -71,14 +71,14 @@ Azure
 
 The various configuration files are tested on OS X High Sierra (10.13). Older operating system versions may work — your mileage may vary, so download, review, and then execute the scripts.
 
-[bare metal](https://github.com/bhdicaire/macSetup/doc/bareMetal.md
+[bare metal](https://github.com/bhdicaire/macSetup/blob/master/doc/bareMetal.md)
 ansible-playbook --verbose --check provisionMac.yml
 
 
 Open the terminal window:
 Pythin 2,7
 Install git
-
+```sh -c "$(curl -fsSL https://raw.githubusercontent.com/bhdicaire/macSetup/master/install.sh)"```
 $ sudo apt-get update
 $ sudo apt-get install -y git
 Install virtualbox (>=5.1):
