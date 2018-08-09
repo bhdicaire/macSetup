@@ -71,16 +71,6 @@ Azure
 
 The various configuration files are tested on OS X High Sierra (10.13). Older operating system versions may work — your mileage may vary, so download, review, and then execute the scripts.
 
-[bare metal](https://github.com/bhdicaire/macSetup/blob/master/doc/bareMetal.md)
-ansible-playbook --verbose --check provisionMac.yml
-
-
-Open the terminal window:
-Install git
-```sh -c "$(curl -fsSL https://raw.githubusercontent.com/bhdicaire/macSetup/master/install.sh)"```
-
-[bare metal](https://github.com/bhdicaire/macSetup/raw/master/doc/bareMetal.md).
-
 ### Step 0: Prepare your computer
 Refer to my [guide](https://github.com/bhdicaire/macSetup/blob/master/prepare.md) for this important step.
  **You need to login in the app**
@@ -90,14 +80,14 @@ Refer to my [guide](https://github.com/bhdicaire/macSetup/blob/master/prepare.md
 The following software should be deactivated before re-installing macOS:
 * TBD
 ### Step 1: Fetch the bootstrap script
-
-[https://github.com/bhdicaire/macSetup/](https://github.com/bhdicaire/macSetup/)
-
-    ~$ git clone https://github.com/
+Open the terminal window:
+Install git
+```
+$ git clone https://github.com/
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/bhdicaire/macSetup/master/install.sh)"```
 
 ### Step 2: Run the bootstrap
 Download, *review*, then execute the script:
-    ~$ git clone https://github.com/
 
 ### Step 3: Reboot your computer
 
