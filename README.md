@@ -76,22 +76,9 @@ ansible-playbook --verbose --check provisionMac.yml
 
 
 Open the terminal window:
-Pythin 2,7
 Install git
 ```sh -c "$(curl -fsSL https://raw.githubusercontent.com/bhdicaire/macSetup/master/install.sh)"```
-$ sudo apt-get update
-$ sudo apt-get install -y git
-Install virtualbox (>=5.1):
 
-$ sudo sh -c "echo 'deb http://download.virtualbox.org/virtualbox/debian '$(lsb_release -cs)' contrib non-free' > /etc/apt/sources.list.d/virtualbox.list" \
-&& wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox_2016.asc -O- | sudo apt-key add - \
-&& wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | sudo apt-key add - \
-&& sudo apt-get update && sudo apt-get install virtualbox-5.1 -y
-Install vagrant (>=1.8.7, >=1.9.1):
-
-$ version=1.9.1 && cd /tmp \
-&& wget $(if [ `uname -m` == "x86_64" ]; then echo "https://releases.hashicorp.com/vagrant/$version/vagrant_${version}_x86_64.deb"; else echo "https://releases.hashicorp.com/vagrant/$version/vagrant_${version}_i686.deb"; fi;) \
-&& sudo dpkg -i vagrant_${version}* && rm vagrant_${version}* && cd --
 [bare metal](https://github.com/bhdicaire/macSetup/raw/master/doc/bareMetal.md).
 
 ### Step 0: Prepare your computer
@@ -129,16 +116,3 @@ The following tasks must be performed manually as I have yet to find a way to
 automate them:
 - [ ] Microsoft Office 2016
 - [ ] App Store - restore In-App Purchases for Marked2
-
-## Author
-
-Benoît H. Dicaire, http://github.com/BHDicaire, @BHDicaire, BH@Dicaire.com, http://BHDicaire.com/
-These are a series of scripts. Many are derived from prior works of open source, but some original URLs have been lost. Please point out any original art URLs and they will be added. I always strive to give credit to prior art authors.
-
-### About
-
-I help organizations facing difficult strategic decision-making.
-
-I am a freelance security expert and a keynote speaker in French and English. Over the last 25 years, I have led consulting engagements for well-known companies throughout North America.
-
-I'm [available for hire](http://dicaire.com/).  I’d be pleased to discuss your requirements.
