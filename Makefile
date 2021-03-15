@@ -18,6 +18,10 @@ restore: ## Restore mac configuration
 clean:
 	rm -rf /tmp ## Delete temporary files
 
+ssh: ## Adding key to the ssh-agent
+	eval "$(ssh-agent -s)"
+	ssh-add -K ~/.ssh/githubCom
+
 install: ## Initial setup
 	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	brew analytics off
