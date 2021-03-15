@@ -2,5 +2,4 @@
     - homebrew/core
     - homebrew/cask-drivers
     - homebrew/command-not-found
-    - caskroom/cask
-    - fgimian/fgimian
+    - homebrew/cask

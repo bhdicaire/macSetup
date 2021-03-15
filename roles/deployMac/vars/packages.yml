@@ -56,6 +56,17 @@
  brew:
     - rename
     - tree
+    - bep/tap/s3deploy
+    - awscli
+    - azure-cli
+    - minio/stable/mc
+    - hugo
+    - ack
+    - exiftool
+    - gnupg2
+    - go
+    - handbrake
+    - wget
 
 # ------------------------------------------------------------
 #  Brew Cask — GUI Applications
@@ -87,6 +98,16 @@
     - switchresx
     - terminology
     - vlc
+    - calibre
+    - choosy
+    - chronosync
+    - default-folder-x
+    - force-paste
+    - hazel
+    - makemkv
+    - snagit
+    - sqlitebrowser
+    - suspicious-package
  
 # ------------------------------------------------------------
 #  Brew Cask — Quicklook modules
@@ -115,8 +136,6 @@
 # ------------------------------------------------------------
 
  appStore:
-    - id: "1055511498"
-      name: "Day One (2.3.4)"
     - id: "1124077199"
       name: "Paws for Trello (2.2.2)"
     - id: "409183694"
@@ -131,19 +150,28 @@
       name: "Xee³ (3.5.2)"
     - id: "715394237"
       name: "Condense (1.61)"
-    - id: "736189492"
-      name: "Notability (2.5.1)"
-    - id: "823766827"
-      name: "OneDrive (17.3.6919)"
     - id: "824171161"
       name: "Affinity Designer (1.5.5)"
     - id: "918858936"
       name: "Airmail 3 (3.3.2)"
-    - id: "944654199"
-      name: "Tree 2 (2.0.3)"
     - id: "964258399"
       name: "BusyContacts (1.1.9)"
     - id: "979561272"
       name: "Just Press Record (1.4.3)"
-    - id: "823766827"
-      name: "OneDrive (17.3.6919)"
+    - id: "603637384"
+      name: "Name Mangler 3 (3.4)"
+    - id: "655527594"
+      name: "Oyster (1.4)"
+    - id: "890031187"
+      name: "Marked 2 (2.5.10"
+    - id: "924726344"
+      name: "Deliveries (3.0.3)"
+    - id: "409907375"
+      name: "Remote Desktop (3.9)"
+    - id: "411643860"
+      name: "DaisyDisk (4.4)"
+    - id: "442168834"
+      name: "SiteSucker (2.10.4)"
+    - id: "446107677"
+    - id: "1090488118"
+      name: "Gemini 2 (2.3.6)"
