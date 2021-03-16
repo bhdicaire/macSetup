@@ -1,14 +1,14 @@
----
+m---
   - name: Ensure target directory exists ** TEMP **
     file:
       path: "{{ item }}"
       state: directory
       owner: "{{ localUser }}"
-      group: "{{ localGroup }}" 
+      group: "{{ localGroup }}"
       mode: 0750
     with_items:
       - "{{ /tmp/root }}"
-      - "{{ spotlightDirectories }}"      
+      - "{{ spotlightDirectories }}"
 
    - name: Copy configuration files
      synchronize:
@@ -33,7 +33,7 @@
       - "{{ activityMonitorPref }}"
       - "{{ dockPref }}"
       - "{{ finderPref }}"
-      - "{{ safariPref }}"            
+      - "{{ safariPref }}"
       - "{{ spotlightPref }}"
       - "{{ terminalPref }}"
       - "{{ timeMachinePref }}"
@@ -42,10 +42,10 @@
    - name: user's preferences items
      command: "{{ item }}"
      with_items:
-      - "{{ dockItems }}"      
-      - "{{ FinderItems }}"      
-      - "{{ photosItems }}"      
-      - "{{ spotlightItems }}"      
+      - "{{ dockItems }}"
+      - "{{ FinderItems }}"
+      - "{{ photosItems }}"
+      - "{{ spotlightItems }}"
       - "{{ userPreferencesItems }}"
 
    - name: user's preferences setting
@@ -54,10 +54,10 @@
       - "{{ finderSettings }}"
      tags: ['preferences']
 
-   - name: user's preferences sudo items 
+   - name: user's preferences sudo items
      command: "{{ item }}"
      with_items:
-      - "{{ spotlightSudo }}"      
+      - "{{ spotlightSudo }}"
       - "{{ timeMachineSudo }}"
       - "{{ userPreferencesSudo }}"
      become: yes
@@ -79,7 +79,7 @@
 
 #   - name: spotlight preferences
 ##     command: "{{ spotlightIndex }} enabled=1 name=APPLICATIONS enabled=1 name=DIRECTORIES enabled=1 name=PDF enabled=1 name=IMAGES enabled=1 #name=PRESENTATIONS  enabled=1 name=SPREADSHEETS enabled=1 name=DOCUMENTS {{ spotlightIndexDisabled }}"
-#     tags: ['configure', 'now'] 
+#     tags: ['configure', 'now']
 
    - name: preferences are cached thus some processes needs to be killed
      command: killall {{ item }}
@@ -103,4 +103,4 @@
   #  command: "duti -s {{ item.item.0.bundle_id }} {{ item.item.1 }} all"
   #  with_items: "{{ duti_output.results | list }}"
   #  when: item.stdout != item.item.0.bundle_id.lower()
-  #     
+  #
