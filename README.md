@@ -78,7 +78,7 @@ Refer to my [guide](https://github.com/bhdicaire/macSetup/blob/master/prepare.md
 #### Software Deactivation
 
 The following software should be deactivated before re-installing macOS:
-* TBD
+* TBD !
 ### Step 1: Fetch the bootstrap script
 Open the terminal window:
 Install git
