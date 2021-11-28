@@ -60,4 +60,49 @@ $ git add *
 $ git commit -M "Updated configuration for a new machine"
 # git push
 ```
+
+
+<details>
+<summary>2. Install the operating system on a new machine</summary>
+Install them on a new, empty machine with:
+```
+brew install chezmoi
+brew install 1password-cli
+chezmoi —init —apply https://github.com/bhdicaire/dotFiles.git
+```
+# delete unused fonts
+Make backup copies of all System and Library fonts, first.
+Boot to the Recovery partition and turn off System Integrity Protection. In Recovery mode, launch Terminal from the menu bar. Then enter:
+csrutil disable
+You should get a return message that SIP has been disabled. Then enter:
+reboot
+The Mac will restart. Once back at the normal desktop, you’ll be able to put any fonts in the trash you want to get rid of and empty the trash.
+Return to Recovery mode and repeat as above, except turn SIP back on by entering:
+csrutil enable
+</details>
+
+<details>
+<summary>3. Manual activities</summary>
+
+iCloud credential
+
+make install
+	
+brew install chezmoi
+brew install 1password-cli
+chezmoi —init —apply https://github.com/bhdicaire/dotFiles.git
+
+restore bbedit config	
+	
+</details>	
+
+<summary>3. Ansible Playbook</summary>
+make build
+reboot
+make build	
+</details>
+
+<details>
+<summary>3. Ansible Playbook</summary>
+make build	
 </details>
