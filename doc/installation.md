@@ -6,23 +6,19 @@ This is being accomplish with the use of [homebrew](https://github.com/Homebrew/
 <details>
 <summary>1. Prepare</summary>
 1. Prepare your future operating system
-
-	1. Download it via the Mac Apple Store
-	2. Create a bootable USB key
+ 1. Download it via the Mac Apple Store
+ 2. Create a bootable USB key
 2. Backup your current configuration
-	
-	1. Update your dotFiles on [GitHub](https://github.com/bhdicaire/dotFiles) with [Chezmoi](https://github.com/twpayne/chezmoi)
+ 1. Update your dotFiles on [GitHub](https://github.com/bhdicaire/dotFiles) with [Chezmoi](https://github.com/twpayne/chezmoi)
 ```console
 $ chezmoi update
 ```
-	
-	2. Update your BBEdit configuration on [GitHub](https://github.com/bhdicaire/bbeditSetup) with a Makefile
+2. Update your BBEdit configuration on [GitHub](https://github.com/bhdicaire/bbeditSetup) with a Makefile
 ```console
 $ cd ~/Library/Application Support/BBEdit
 $ make
 ```
-	
-	3. Copy other configuration settings on an external drive with an Ansible playbook
+3. Copy other configuration settings on an external drive with an Ansible playbook
 ```console
 $ cd ~/macSetup
 $ make backup
@@ -54,13 +50,20 @@ $ vi ~/macSetup/roles/prepareMac/packagesConfig.yml
 ```console
 $ vi ~/macSetup/roles/prepareMac/packages.yml
 ```
-	5. Push the modifications to GitHub	
+	5. Update ADR if required
+```console
+$ vi ~/macSetup/roles/prepareMac/brewTaps.yml
+$ vi ~/macSetup/roles/prepareMac/macAppStoreConfig.yml
+$ vi ~/macSetup/roles/prepareMac/packages.yml
+$ vi ~/macSetup/roles/prepareMac/packagesConfig.yml
+```	
+	6. Push the modifications to GitHub	
 ```console
 $ git add *
 $ git commit -M "Updated configuration for a new machine"
 # git push
 ```
-
+</details>
 
 <details>
 <summary>2. Install the operating system on a new machine</summary>
@@ -96,13 +99,14 @@ restore bbedit config
 	
 </details>	
 
-<summary>3. Ansible Playbook</summary>
+<summary>4. Ansible Playbook</summary>
 make build
 reboot
 make build	
 </details>
 
 <details>
-<summary>3. Ansible Playbook</summary>
-make build	
+<summary>5. Quality Assurance</summary>
+Check items, update configurations as required and update the playbook and the documentation.
+	
 </details>
