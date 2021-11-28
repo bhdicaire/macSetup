@@ -6,24 +6,29 @@ This is being accomplish with the use of [homebrew](https://github.com/Homebrew/
 <details>
 <summary>1. Prepare</summary>
 1. Prepare your future operating system
+
 	1. Download it via the Mac Apple Store
 	2. Create a bootable USB key
 2. Backup your current configuration
+	
 	1. Update your dotFiles on [GitHub](https://github.com/bhdicaire/dotFiles) with [Chezmoi](https://github.com/twpayne/chezmoi)
 ```console
 $ chezmoi update
 ```
+	
 	2. Update your BBEdit configuration on [GitHub](https://github.com/bhdicaire/bbeditSetup) with a Makefile
 ```console
 $ cd ~/Library/Application Support/BBEdit
 $ make
 ```
+	
 	3. Copy other configuration settings on an external drive with an Ansible playbook
 ```console
 $ cd ~/macSetup
 $ make backup
 ```
 3. Clone your local hard drive (e.g., better be safe than sorry)
+
 	1. Download SuperDuper
 	2. Clone your local hard drive
 4. Stop services and free licenses as required
