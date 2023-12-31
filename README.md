@@ -2,9 +2,7 @@
 
 [![GitHub license](https://img.shields.io/github/license/bhdicaire/macSetup)](https://github.com/bhdicaire/macSetup/blob/main/LICENSE) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md) [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?color=ee8449&style=flat-square)](#contributors)
 
-macSetup is an ansible playbook to automate macOS installation & configuration.
-
-Features:
+macSetup is an ansible playbook to automate macOS installation & configuration:
   * Add users, groups, and shell based on variables defined in [defaults.yml](group_vars_/all/defaults.yml), [host.yml](group_vars_/all/host.yml) and [secrets.yml](group_vars_/secrets.yml)
    * Install all [packages](group_vars_/all/packages.yml) via [homebrew](https://brew.sh), [Mac App Store command-line interface](https://github.com/mas-cli/mas) and downloaded installation files
  * Add printers
@@ -20,7 +18,7 @@ Features:
     * terminal
     * timeMachine
 
-My objective is to work at the command line and automate so I don't have to document it extensively. So feel free to fork, and customize.
+My objective is to work at the command line and automate so I don't have to document extensively.
 
 ## What problem does it solve and why is it useful?
 
@@ -37,7 +35,7 @@ Refer to the [documentation folder](doc/how.md) and the code for more informatio
 3. Copy all your user preferences and settings using the backup playbook
  * backup.yml and restore.yml
    * Copy ...
-# Installation
+## Installation
 
 I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macOS versions may work.
 
@@ -51,10 +49,10 @@ I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macO
 4. Install the developer tools (xcode) by opening terminal and typing `git`, the user interface will prompt you to download and install the command line developer tools
 5. Clone the macSetup git repository on your Mac `git clone https://github.com/bhdicaire/macSetup` via terminal
 6. Install homebrew and the required software components
-  A `cd macSetup`
-  B `make install`
+  1. `cd macSetup`
+  2. `make install`
 7. Modify the configuration files with your preferred built-in text editor such as `vi`, don't worry the playbook will install [BBEdit](https://www.barebones.com/products/bbedit/) later
-  * ./group_vars_/all/defaults.yml
+    * ./group_vars_/all/defaults.yml
     * ./(group_vars_/all/host.yml
     * ./group_vars_/secrets.yml
     * ./group_vars_/all/packages.yml
