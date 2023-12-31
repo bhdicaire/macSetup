@@ -3,8 +3,8 @@
 [![GitHub license](https://img.shields.io/github/license/bhdicaire/macSetup)](https://github.com/bhdicaire/macSetup/blob/main/LICENSE) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md) [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?color=ee8449&style=flat-square)](#contributors)
 
 macSetup is an ansible playbook to automate macOS installation & configuration:
-  * Add users, groups, and shell based on variables defined in [defaults.yml](group_vars_/all/defaults.yml), [host.yml](group_vars_/all/host.yml) and [secrets.yml](group_vars_/secrets.yml)
-   * Install all [packages](group_vars_/all/packages.yml) via [homebrew](https://brew.sh), [Mac App Store CLI](https://github.com/mas-cli/mas) and downloaded DMG
+  * Add users, groups, and shell based on variables defined in [defaults.yml](group_vars/all/defaults.yml), [host.yml](group_vars/all/host.yml) and [secrets.yml](group_vars/secrets.yml)
+   * Install all [packages](group_vars/all/packages.yml) via [homebrew](https://brew.sh), [Mac App Store CLI](https://github.com/mas-cli/mas) and downloaded DMG
  * Add printers
  * user preferences
     * activity Monitor
@@ -24,27 +24,25 @@ My objective is to work at the command line and automate so I don't have to docu
 
 You’ve been there too — setting up a new computer can be an ad-hoc, manual, and time-consuming process. Especially if you have a *regular* MacBook, a developper workstation and a Mac Mini acting as your local file server.
 
-I'm not a fan of upgrade or the migration assistant as too much scruff from previously tested applications get carry over. I prefer a clean slate, complexity is the enemy of security.
-
 I wasn't happy with any of the automated setup that I came across. They were either overly complex or were missing features that I really wanted.
 
-## Pre requisites
-
-Ensure that you have identified _all_ the applications on your current Mac:
- * sources such as [homebrew](https://brew.sh), [Mac App Store](https://github.com/mas-cli/mas) or a downloaded installation file
- * licensed file and key – some applications require that you uninstall them or deallocate the licence first
- * Backup  your user preferences and settings using the backup playbook
+I'm not a fan of upgrade or the migration assistant as too much scruff from previously tested applications get carry over. I prefer a clean slate, complexity is the enemy of security.
 
 ## Installation
 
 I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macOS versions may work.
 
+Ensure that you have identified _all_ the applications on your current Mac:
+ * Download page or source such as [homebrew](https://brew.sh) or the [Mac App Store](https://github.com/mas-cli/mas)
+ * License key or file – some applications require that you uninstall them or deallocate the licence first
+ * Backup your user preferences and settings using the backup playbook
+
 1. Connect an ethernet adapter to accelerate the files transfer
 2. Boot the new Mac and answer a few questions:
-    A. Language: English
-    B. Country: Canada
-    C. Accessibility: _not now_
-    D. Migration Assistant: _not now_
+    1. Language: English
+    1. Country: Canada
+    1. Accessibility: _not now_
+    1. Migration Assistant: _not now_
 3. Sign-in with your apple ID and accept the iCloud Terms & Conditions
 4. Create a computer account
 5. Install the developer tools (xcode) by opening terminal and typing `git`, the user interface will prompt you to download and install the command line developer tools
