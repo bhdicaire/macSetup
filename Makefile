@@ -23,7 +23,7 @@ ssh: ## Adding key to the ssh-agent
 	ssh-add -K ~/.ssh/githubCom
 
 install: ## Initial setup
-	export PATH=/opt/homebrew/bin:$PATH 
+	export PATH=/opt/homebrew/bin:$PATH
 	sudo scutil --set ComputerName "Hal9000"
 	sudo scutil --set LocalHostName Hal9000
 	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh > brew.sh
@@ -33,9 +33,10 @@ install: ## Initial setup
 	brew install cowsay
 	brew install bash
 	brew install zsh
-        brew install gnu-tar
+	brew install gnu-tar
 	# Disable “natural” (Lion-style) scrolling
- 	defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+	defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
+	sudo /System/Library/CoreServices/RemoteManagement/ARDAgent.app/Contents/Resources/kickstart -deactivate -stop
 	echo "Update Git"
 	brew install git
 	echo "Install Ansible and prerequisites"

@@ -4,7 +4,7 @@
 
 macSetup is an ansible playbook to automate macOS installation & configuration:
   * Add users, groups, and shell based on variables defined in [defaults.yml](group_vars_/all/defaults.yml), [host.yml](group_vars_/all/host.yml) and [secrets.yml](group_vars_/secrets.yml)
-   * Install all [packages](group_vars_/all/packages.yml) via [homebrew](https://brew.sh), [Mac App Store command-line interface](https://github.com/mas-cli/mas) and downloaded installation files
+   * Install all [packages](group_vars_/all/packages.yml) via [homebrew](https://brew.sh), [Mac App Store CLI](https://github.com/mas-cli/mas) and downloaded DMG
  * Add printers
  * user preferences
     * activity Monitor
@@ -22,11 +22,11 @@ My objective is to work at the command line and automate so I don't have to docu
 
 ## What problem does it solve and why is it useful?
 
-You’ve been there too — setting up a new computer can be an ad-hoc, manual, and time-consuming process.
+You’ve been there too — setting up a new computer can be an ad-hoc, manual, and time-consuming process. Especially if you have a **regular** MacBook, a developper workstations and a Mac Mini Server.
+
+I'm not a fan of upgrading or the migration assistant as too much scruff from previously tested applications get carry over. I prefer a clean slate, complexity is the enemy of security.
 
 I wasn't happy with any of the automated setup that I came across. They were either overly complex or were missing features that I really wanted.
-
-Refer to the [documentation folder](doc/how.md) and the code for more information. I'm not a fan of upgrading or the migration assistant as too much scruff from previously tested applications get carry over. I prefer a clean slate, complexity is the enemy of security.
 
 ## Pre requisites
 
@@ -78,6 +78,9 @@ I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macO
       * [Permute](https://setapp.com/apps/permute)
       * [Pulltube](https://setapp.com/apps/pulltube)
       * [Souver](https://setapp.com/apps/soulver)
+
+
+Refer to the [documentation folder](doc/how.md) and the code for more information.
 
 ## Contributions
 
