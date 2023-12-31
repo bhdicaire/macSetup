@@ -35,19 +35,20 @@ Ensure that you have identified _all_ the applications on your current Mac:
  * License key or file – some applications require that you uninstall them or deallocate the licence first
  * Backup your user preferences and settings using the backup playbook
 
-I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macOS versions _may_ work.
+I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macOS versions _may_ work:
 
-1. Connect an ethernet adapter to accelerate the files transfer
+1. Connect an ethernet adapter to accelerate files transfer
 2. Boot the new Mac and answer a few questions:
     1. Language: English
     1. Country: Canada
     1. Accessibility: _not now_
     1. Migration Assistant: _not now_
-3. Sign-in with your apple ID and accept the iCloud Terms & Conditions
+3. Sign-in with your apple ID and accept the Terms & Conditions
 4. Create a computer account
 5. Install the developer tools (xcode) by opening terminal and typing `git`, the user interface will prompt you and then download and install the command line developer tools
-6. Clone the macSetup git repository on your Mac `git clone https://github.com/bhdicaire/macSetup` via terminal
-7. Install homebrew and the required software components
+6. Clone the macSetup git repository on your Mac via terminal
+    1. `git clone https://github.com/bhdicaire/macSetup`
+7. Install the required software components run the Ansible playbook
     1. `cd macSetup`
     2. `make install`
 8. Modify the configuration files with a built-in text editor such as `vi`, don't worry the playbook will install [BBEdit](https://www.barebones.com/products/bbedit/)
@@ -55,10 +56,11 @@ I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macO
     * ./(group_vars/all/host.yml
     * ./group_vars/secrets.yml
     * ./group_vars/all/packages.yml
-11. Go get a cup of coffee because you're NOT done, Vodka is also fine
-
-12. Add and commit your macSetup configuration to a Git repository
-13. The following tasks must be performed manually as I have yet to find a way to automate them:
+9. Run the Ansible playbook provision.yml
+    1. `make build`
+    1. Go get a cup of coffee because you're NOT done, Vodka is also fine
+10. Add and commit your macSetup configuration to a Git repository
+11. The following tasks must be performed manually as I have yet to find a way to automate them:
     - [ ] Microsoft Office 2016
     - [ ] App Store - restore In-App Purchases for Marked2
     - [ ] [SetApp](https://setapp.com) applications
