@@ -1,0 +1,26 @@
+{
+  "projectName": "macSetup",
+  "projectOwner": "bhdicaire",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "contributorsSortAlphabetically": false,
+  "contributorsPerLine": 6,
+  "imageSize": 100,
+  "contributors": [
+    {
+      "login": "bhdicaire",
+      "name": "Benoît H. Dicaire",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1316765?v=4",
+      "profile": "https://github.com/bhdicaire",
+      "contributions": [
+        "code",
+        "doc"
+      ]
+    }
+  ],
+  "commitType": "docs",
+  "commitConvention": "angular"
+}

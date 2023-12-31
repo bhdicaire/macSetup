@@ -23,18 +23,44 @@ ssh: ## Adding key to the ssh-agent
 	ssh-add -K ~/.ssh/githubCom
 
 install: ## Initial setup
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	export PATH=/opt/homebrew/bin:$PATH 
+	sudo scutil --set ComputerName "Hal9000"
+	sudo scutil --set LocalHostName Hal9000
+	curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh > brew.sh
+	chmod +x brew.sh
+	/bin/bash -c ./brew.sh
 	brew analytics off
+	brew install cowsay
+	brew install bash
+	brew install zsh
+        brew install gnu-tar
+	# Disable “natural” (Lion-style) scrolling
+ 	defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 	echo "Update Git"
 	brew install git
 	echo "Install Ansible and prerequisites"
 	brew install ansible
+	ansible-galaxy install -r requirements.yml
+        echo "Install prefered tools"
 	brew install chezmoi
-	rew install 1password-cli
-	echo "**********************************************"
-	echo "Installation complete"
-	echo "**********************************************"
+	brew install 1password-cli
+	brew install 1password
+	@osascript -e 'tell application "Finder" to empty the trash' 2> '/dev/null' || true
+	@echo "**********************************************"
+	cowsay "Installation complete"
+	@echo "**********************************************"
 	@brew list
+	@echo "**********************************************"
+	@echo "user-friendly name for the system";scutil --get ComputerName
+	@echo ""
+	@echo "local (Bonjour) host name";scutil --get LocalHostName
+	@echo ""
+#	@echo "name associated with hostname(1) and gethostname(3)";scutil --get HostName;@echo ""
+	@scutil --dns
+	@ansible-galaxy role list
+	@echo ""
+	@ansible-galaxy collection list
+	@echo "**********************************************"
 
 chezmoi: ## Chezmoi initial setup
 	chezmoi init https://github.com/bhdicaire/dotFiles.git

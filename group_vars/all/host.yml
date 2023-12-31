@@ -1,0 +1,49 @@
+# ------------------------------------------------------------
+# macSetup according to my opinionated standards
+# Modified by: Benoît H. Dicaire
+# https://GitHub.com/bhdicaire/macSetup
+# ------------------------------------------------------------
+
+    localUserComment: "Benoît H. Dicaire"
+    localGroup: "staff"
+    localGroups: "admin,staff,DST"
+    localShell: "/opt/homebrew/bin/zsh"
+
+    pathPrefix: "/tmp/"
+    dropboxPath: "~/Dropbox/"
+
+    toolsPath: "{{ pathPrefix }}macTools/"
+    backupPath: "{{ pathPrefix }}BCK/"
+    secretBackupPath: "{{ pathPrefix }}SecretBCK/"
+
+    gitPath: "{{ pathPrefix }}GIT/"
+    macSetupLocalGIT: "{{ gitPath }}{{ macSetupPathSuffix }}"
+    dotFilesLocalGIT: "{{ gitPath }}{{ dotFilesPathSuffix }}"
+
+    macSetupGIT: "https://github.com/bhdicaire/macSetup.git"
+    macSetupPath: "{{ pathPrefix }}{{ macSetupPathSuffix }}"
+    dotFilesGIT: "https://github.com/bhdicaire/dotFiles.git"
+    dotFilesPath: "{{ pathPrefix }}{{ dotFilesPathSuffix }}"
+
+    macSetupRoles:
+      - prepareMac
+      - deployMac
+      - deployDev
+      - deployServer
+
+    moreGroups:
+      - name: "Friends"
+        gid: "999"
+      - name: "DST"
+        gid: "888"
+
+    moreUsers:
+      - name: “bob”
+        comment: "bob (admin)"
+        group: "staff"
+        groups: "admin,DST,Friends"
+        shell: "/usr/local/bin/bash"
+      - name: “rob”
+        comment: "rob (admin)"
+        groups: "admin,staff,Friends"
+        shell: "/usr/local/bin/bash"

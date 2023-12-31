@@ -1,0 +1,211 @@
+---
+
+# ------------------------------------------------------------
+#  Mac Software — Download DMG, GIT, ISO & PKG
+# ------------------------------------------------------------
+
+ macSoftwareURL:
+
+  - name: "ParallelsToolbox"
+    app: "Parallels Toolbox.app"
+    src: "http://www.parallels.com/ca/try/toolbox"
+    dest: "{{ toolsPath }}"
+    installer_type: app
+    install_method: dmg
+
+  - name: "SetApp"
+    app: "Install Setapp.app"
+    src: "https://dl.devmate.com/com.setapp.InstallSetapp/InstallSetapp.zip"
+    dest: "{{ toolsPath }}"
+    installer_type: app
+    install_method: zip
+# move app dans /Applications
+
+
+### TODO: Copy antidote via RSync :(
+### TODO: find hemingway editor
+
+#  Microsoft Office 2016  —  Mac O365/Retail
+#                            https://macadmins.software
+
+# Word,Excel, PowerPoint, Outlook, OneNote & MS AutoUpdate (MAU)
+  - src: "https://go.microsoft.com/fwlink/?linkid=525133"
+    dest: "{{ toolsPath }}"
+# Skype for Business 2016 — https://macadmins.software
+  - src: "https://go.microsoft.com/fwlink/?linkid=832978"
+    dest: "{{ toolsPath }}"
+
+
+ macSoftwareGIT:
+
+  - name: O365SharedActivator
+    src: "https://github.com/pbowden-msft/O365SharedActivator"
+    dest: "{{ toolsPath }}O365SharedActivator"
+    installer_type: app
+    install_method: git
+  - name: NukeOffKeychain
+    src: "https://github.com/pbowden-msft/NukeOffKeychain"
+    dest: "{{ toolsPath }}MS-NukeOffKeychain"
+    installer_type: app
+    install_method: git
+
+# ------------------------------------------------------------
+#  Brew — CLI Applications
+# ------------------------------------------------------------
+
+ brew:
+    - ack
+    - ansible
+    - ansible-lint
+    - awscli
+    - azure-cli
+    - chezmoi
+    - dnscontrol
+    - exiftool
+    - findutils
+    - gh
+    - gickup
+    - gnupg2
+    - go
+    - hugo
+    - loginitems
+    - mdless
+    - minio/stable/mc
+    - nmap
+    - rename
+    - ssh-copy-id
+    - tree
+    - wget
+    - zsh
+
+# ------------------------------------------------------------
+#  Brew Cask — GUI Applications
+# ------------------------------------------------------------
+
+ brewCask:
+    - 1password
+    - 1password-cli
+    - affinity-designer
+    - affinity-photo
+    - affinity-publisher
+    - audacity
+    - balenaetcher
+    - banktivity
+    - bbedit
+    - bookmacster
+    - calibre
+    - carbon-copy-cloner
+    - chronosync
+    - deepl
+    - devonthink
+    - discord
+    - drawio
+    - elgato-camera-hub
+    - elgato-control-center
+    - elgato-stream-deck
+    - elgato-wave-link
+    - fantastical
+    - firefox
+    - font-libre-franklin
+    - font-roboto
+    - font-roboto-mono
+    - font-roboto-serif
+    - font-roboto-slab
+    - font-source-code-pro
+    - font-source-sans-pro
+    - font-source-serif-pro
+    - force-paste
+    - fujitsu-scansnap-home
+    - fujitsu-scansnap-manager-ix500
+    - google-chrome
+    - google-drive
+    - handbrake
+    - hazel
+    - karabiner-elements
+    - keka
+    - kextviewr
+    - keybase
+    - keyboard-maestro
+    - little-snitch
+    - macfuse
+    - makemkv
+    - makemkv
+    - micro-snitch
+    - microsoft-auto-update
+    - microsoft-azure-storage-explorer
+    - microsoft-edge
+    - microsoft-office
+    - microsoft-remote-desktop
+    - microsoft-teams
+    - mindjet-mindmanager
+    - neofinder
+    - nitro-pdf-pro
+    - obs
+    - omnigraffle
+    - parallels
+    - parallels-toolbox
+    - pdfpenpro
+    - philips-hue-sync
+    - pocket-casts
+    - raindropio
+    - roon
+    - setapp
+    - signal
+    - slack
+    - sonos
+    - sqlitebrowser
+    - superduper
+    - suspicious-package
+    - vlc
+    - webex
+    - yubico-yubikey-manager
+    - zoom
+    - zoom-outlook-plugin
+
+# ------------------------------------------------------------
+#  Mac Apps Store —  MAS Applications
+# ------------------------------------------------------------
+
+ appStore:
+    - id: "409183694"
+      name: "Keynote"
+    - id: "413965349"
+      name: "Xee³"
+    - id: "603637384"
+      name: "Name Mangler"
+    - id: "409907375"
+      name: "Remote Desktop"
+    - id: "442168834"
+      name: "SiteSucker"
+    - id: "1044484672"
+      name: "ApolloOne"
+    - id: "402569179"
+      name: "Find Any File (2.2.1)"
+    - id: "409203825"
+      name: "Numbers"
+    - id: "1091189122"
+      name: "Bear"
+    - id: "904280696"
+      name: "Things"
+    - id: "1529448980"
+      name: "Reeder"
+    - id: "1569813296"
+      name: "1Password for Safari"
+    - id: "617440773"
+      name: "DFind "
+    - id: "457503727"
+      name: "PST Bridge"
+    - id: "404167677"
+      name: "IP Scanner Ultra"
+    - id: "510620098"
+      name: "MediaInfo"
+    - id: "1474335294"
+      name: "GoodLinks"
+    - id: "409201541"
+      name: "Pages"
+    - id: "639968404"
+      name: "Parcel"
+    - id: "408981434"
+      name: "iMovie"
+    - id: "1482630322"
+      name: "Internet Access Policy Viewer"
