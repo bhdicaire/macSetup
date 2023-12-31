@@ -51,7 +51,7 @@ I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macO
 7. Install the required software components run the Ansible playbook
     1. `cd macSetup`
     2. `make install`
-8. Modify the configuration files with a built-in text editor such as `vi`, don't worry the playbook will install [BBEdit](https://www.barebones.com/products/bbedit/)
+8. Modify the configuration files with a built-in text editor such as `vi`:
     * ./group_vars/all/defaults.yml
     * ./(group_vars/all/host.yml
     * ./group_vars/secrets.yml
