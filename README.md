@@ -2,7 +2,7 @@
 
 [![GitHub license](https://img.shields.io/github/license/bhdicaire/macSetup)](https://github.com/bhdicaire/macSetup/blob/main/LICENSE) [![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](code_of_conduct.md) [![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?color=ee8449&style=flat-square)](#contributors)
 
-macSetup is an ansible playbook to automate macOS installation & configuration:
+macSetup is an opinionated playbook to automate macOS installation & configuration:
   * Add users, groups, and shell based on variables defined in [defaults.yml](group_vars/all/defaults.yml), [host.yml](group_vars/all/host.yml) and [secrets.yml](group_vars/secrets.yml)
    * Install all [packages](group_vars/all/packages.yml) via [homebrew](https://brew.sh), [Mac App Store CLI](https://github.com/mas-cli/mas) and downloaded DMG
  * Add printers
@@ -34,6 +34,7 @@ Ensure that you have identified _all_ the applications on your current Mac:
  * Download page or source such as [homebrew](https://brew.sh) or the [Mac App Store](https://github.com/mas-cli/mas)
  * License key or file – some applications require that you uninstall them or deallocate the licence first
  * Backup your user preferences and settings using the backup playbook
+
 I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macOS versions _may_ work.
 
 1. Connect an ethernet adapter to accelerate the files transfer
@@ -44,16 +45,16 @@ I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macO
     1. Migration Assistant: _not now_
 3. Sign-in with your apple ID and accept the iCloud Terms & Conditions
 4. Create a computer account
-5. Install the developer tools (xcode) by opening terminal and typing `git`, the user interface will prompt you to download and install the command line developer tools
+5. Install the developer tools (xcode) by opening terminal and typing `git`, the user interface will prompt you and then download and install the command line developer tools
 6. Clone the macSetup git repository on your Mac `git clone https://github.com/bhdicaire/macSetup` via terminal
 7. Install homebrew and the required software components
     1. `cd macSetup`
     2. `make install`
 8. Modify the configuration files with a built-in text editor such as `vi`, don't worry the playbook will install [BBEdit](https://www.barebones.com/products/bbedit/)
-    * ./group_vars_/all/defaults.yml
-    * ./(group_vars_/all/host.yml
-    * ./group_vars_/secrets.yml
-    * ./group_vars_/all/packages.yml
+    * ./group_vars/all/defaults.yml
+    * ./(group_vars/all/host.yml
+    * ./group_vars/secrets.yml
+    * ./group_vars/all/packages.yml
 11. Go get a cup of coffee because you're NOT done, Vodka is also fine
 
 12. Add and commit your macSetup configuration to a Git repository
