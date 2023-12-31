@@ -22,41 +22,43 @@ My objective is to work at the command line and automate so I don't have to docu
 
 ## What problem does it solve and why is it useful?
 
-You’ve been there too — setting up a new computer can be an ad-hoc, manual, and time-consuming process. Especially if you have a **regular** MacBook, a developper workstations and a Mac Mini Server.
+You’ve been there too — setting up a new computer can be an ad-hoc, manual, and time-consuming process. Especially if you have a *regular* MacBook, a developper workstation and a Mac Mini acting as your local file server.
 
-I'm not a fan of upgrading or the migration assistant as too much scruff from previously tested applications get carry over. I prefer a clean slate, complexity is the enemy of security.
+I'm not a fan of upgrade or the migration assistant as too much scruff from previously tested applications get carry over. I prefer a clean slate, complexity is the enemy of security.
 
 I wasn't happy with any of the automated setup that I came across. They were either overly complex or were missing features that I really wanted.
 
 ## Pre requisites
 
-1. Ensure that you have identified _all_ the applications on your current Mac and their sources such as [homebrew](https://brew.sh), [Mac App Store](https://github.com/mas-cli/mas) and downloaded installation files
-2. Make sure that you have a copy of all the licensed files and keys required before you wipe it clean. Furthermore some applications require that you uninstall them or deallocate the licence.
-3. Copy all your user preferences and settings using the backup playbook
- * backup.yml and restore.yml
-   * Copy ...
+Ensure that you have identified _all_ the applications on your current Mac:
+ * sources such as [homebrew](https://brew.sh), [Mac App Store](https://github.com/mas-cli/mas) or a downloaded installation file
+ * licensed file and key – some applications require that you uninstall them or deallocate the licence first
+ * Backup  your user preferences and settings using the backup playbook
+
 ## Installation
 
 I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macOS versions may work.
 
-1. Boot the new Mac and answer a few questions:
+1. Connect an ethernet adapter to accelerate the files transfer
+2. Boot the new Mac and answer a few questions:
     A. Language: English
     B. Country: Canada
     C. Accessibility: _not now_
     D. Migration Assistant: _not now_
-2. Sign-in with your apple ID and accept the iCloud Terms & Conditions
-3. Create a computer account
-4. Install the developer tools (xcode) by opening terminal and typing `git`, the user interface will prompt you to download and install the command line developer tools
-5. Clone the macSetup git repository on your Mac `git clone https://github.com/bhdicaire/macSetup` via terminal
-6. Install homebrew and the required software components
-  1. `cd macSetup`
-  2. `make install`
-7. Modify the configuration files with your preferred built-in text editor such as `vi`, don't worry the playbook will install [BBEdit](https://www.barebones.com/products/bbedit/) later
+3. Sign-in with your apple ID and accept the iCloud Terms & Conditions
+4. Create a computer account
+5. Install the developer tools (xcode) by opening terminal and typing `git`, the user interface will prompt you to download and install the command line developer tools
+6. Clone the macSetup git repository on your Mac `git clone https://github.com/bhdicaire/macSetup` via terminal
+7. Install homebrew and the required software components
+    1. `cd macSetup`
+    2. `make install`
+8. Modify the configuration files with a built-in text editor such as `vi`, don't worry the playbook will install [BBEdit](https://www.barebones.com/products/bbedit/)
     * ./group_vars_/all/defaults.yml
     * ./(group_vars_/all/host.yml
     * ./group_vars_/secrets.yml
     * ./group_vars_/all/packages.yml
 11. Go get a cup of coffee because you're NOT done, Vodka is also fine
+
 12. Add and commit your macSetup configuration to a Git repository
 13. The following tasks must be performed manually as I have yet to find a way to automate them:
     - [ ] Microsoft Office 2016
