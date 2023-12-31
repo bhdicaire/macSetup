@@ -5,13 +5,7 @@
 macSetup is an ansible playbook to automate macOS installation & configuration.
 
 Features:
- * Makefile
-   * Setup computer name
-   * Install brew including [Ansible](https://www.ansible.com/), [chezmoi](https://www.chezmoi.io/), and 1password
- * backup.yml and restore.yml
-   * Copy ...
- * provision.yml
-   * Add users, groups, and shell based on variables defined in [defaults.yml](group_vars_/all/defaults.yml), [host.yml](group_vars_/all/host.yml) and [secrets.yml](group_vars_/secrets.yml)
+  * Add users, groups, and shell based on variables defined in [defaults.yml](group_vars_/all/defaults.yml), [host.yml](group_vars_/all/host.yml) and [secrets.yml](group_vars_/secrets.yml)
    * Install all [packages](group_vars_/all/packages.yml) via [homebrew](https://brew.sh), [Mac App Store command-line interface](https://github.com/mas-cli/mas) and downloaded installation files
  * Add printers
  * user preferences
@@ -41,25 +35,26 @@ Refer to the [documentation folder](doc/how.md) and the code for more informatio
 1. Ensure that you have identified _all_ the applications on your current Mac and their sources such as [homebrew](https://brew.sh), [Mac App Store](https://github.com/mas-cli/mas) and downloaded installation files
 2. Make sure that you have a copy of all the licensed files and keys required before you wipe it clean. Furthermore some applications require that you uninstall them or deallocate the licence.
 3. Copy all your user preferences and settings using the backup playbook
-
+ * backup.yml and restore.yml
+   * Copy ...
 # Installation
 
 I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macOS versions may work.
 
 1. Boot the new Mac and answer a few questions:
     A. Language: English
-  B. Country: Canada
-  C. Accessibility: _not now_
-  D. Migration Assistant: _not now_
+    B. Country: Canada
+    C. Accessibility: _not now_
+    D. Migration Assistant: _not now_
 2. Sign-in with your apple ID and accept the iCloud Terms & Conditions
 3. Create a computer account
 4. Install the developer tools (xcode) by opening terminal and typing `git`, the user interface will prompt you to download and install the command line developer tools
 5. Clone the macSetup git repository on your Mac `git clone https://github.com/bhdicaire/macSetup` via terminal
 6. Install homebrew and the required software components
-  A. `cd macSetup`
-  B. `make install`
-7. Modify the configuration files with your preferred built-in text editor such as `vi`, don't worry the palybook will install [BBEdit](https://www.barebones.com/products/bbedit/) later
-    * ./group_vars_/all/defaults.yml
+  A `cd macSetup`
+  B `make install`
+7. Modify the configuration files with your preferred built-in text editor such as `vi`, don't worry the playbook will install [BBEdit](https://www.barebones.com/products/bbedit/) later
+  * ./group_vars_/all/defaults.yml
     * ./(group_vars_/all/host.yml
     * ./group_vars_/secrets.yml
     * ./group_vars_/all/packages.yml
@@ -88,7 +83,9 @@ I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macO
 
 ## Contributions
 
-[Contributions](doc/CONTRIBUTING.md) are welcome! We recognize [all types](https://allcontributors.org/docs/en/emoji-key) based on the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Please note that this project is released with a [Contributor Code of Conduct](doc/CODE-OF-CONDUCT.md). By participating in this project you agree to abide by its terms.
+I'm really glad you're reading this, because I need help to *fully* automate macOS installation and configuration using Ansible. Please fork, fix, enhance, and send pull requests.
+
+[Contributions](doc/CONTRIBUTING.md) are welcome! I recognize [all types](https://allcontributors.org/docs/en/emoji-key) based on the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Please note that this project is released with a [Contributor Code of Conduct](doc/CODE-OF-CONDUCT.md). By participating in this project you agree to abide by its terms.
 
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
