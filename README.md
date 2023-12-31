@@ -30,12 +30,11 @@ I'm not a fan of upgrade or the migration assistant as too much scruff from prev
 
 ## Installation
 
-I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macOS versions may work.
-
 Ensure that you have identified _all_ the applications on your current Mac:
  * Download page or source such as [homebrew](https://brew.sh) or the [Mac App Store](https://github.com/mas-cli/mas)
  * License key or file – some applications require that you uninstall them or deallocate the licence first
  * Backup your user preferences and settings using the backup playbook
+I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macOS versions _may_ work.
 
 1. Connect an ethernet adapter to accelerate the files transfer
 2. Boot the new Mac and answer a few questions:
