@@ -13,7 +13,6 @@ Features:
  * provision.yml
    * Add users, groups, and shell based on variables defined in [defaults.yml](group_vars_/all/defaults.yml), [host.yml](group_vars_/all/host.yml) and [secrets.yml](group_vars_/secrets.yml)
    * Install all [packages](group_vars_/all/packages.yml) via [homebrew](https://brew.sh), [Mac App Store command-line interface](https://github.com/mas-cli/mas) and downloaded installation files
-   * There is no API for [SetApp](https://setapp.com) applications,.please let me know if you find a way
  * Add printers
  * user preferences
     * activity Monitor
@@ -48,35 +47,44 @@ Refer to the [documentation folder](doc/how.md) and the code for more informatio
 I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macOS versions may work.
 
 1. Boot the new Mac and answer a few questions:
-  A. Language: English
+    A. Language: English
   B. Country: Canada
   C. Accessibility: _not now_
   D. Migration Assistant: _not now_
-2. Sign-in with your apple ID and accept iCloud Terms & Conditions
+2. Sign-in with your apple ID and accept the iCloud Terms & Conditions
 3. Create a computer account
-4. Install the developer tools (xcode) by opening `terminal` and typing `git`, the user interface will prompt you to install the command line developer tools
+4. Install the developer tools (xcode) by opening terminal and typing `git`, the user interface will prompt you to download and install the command line developer tools
 5. Clone the macSetup git repository on your Mac `git clone https://github.com/bhdicaire/macSetup` via terminal
 6. Install homebrew and the required software components
   A. `cd macSetup`
   B. `make install`
-7. Modify the configuration files with your preferred built-in text editor, I use `vi` and will install [BBEdit](https://www.barebones.com/products/bbedit/) later with the ansible playbook
-  * ./group_vars_/all/defaults.yml
-  * ./(group_vars_/all/host.yml
-  * ./group_vars_/secrets.yml
-  * ./group_vars_/all/packages.yml
-
-
-
+7. Modify the configuration files with your preferred built-in text editor such as `vi`, don't worry the palybook will install [BBEdit](https://www.barebones.com/products/bbedit/) later
+    * ./group_vars_/all/defaults.yml
+    * ./(group_vars_/all/host.yml
+    * ./group_vars_/secrets.yml
+    * ./group_vars_/all/packages.yml
 11. Go get a cup of coffee because you're NOT done, Vodka is also fine
 12. Add and commit your macSetup configuration to a Git repository
-
-
 13. The following tasks must be performed manually as I have yet to find a way to automate them:
-  - [ ] Microsoft Office 2016
-  - [ ] App Store - restore In-App Purchases for Marked2
-
-
-
+    - [ ] Microsoft Office 2016
+    - [ ] App Store - restore In-App Purchases for Marked2
+    - [ ] [SetApp](https://setapp.com) applications
+      * [Bartender](https://setapp.com/apps/bartender)
+      * [Bike](https://setapp.com/apps/bike-outliner)
+      * [BusyContact](https://setapp.com/apps/busycontacts)
+      * [CleanShot X](https://setapp.com/apps/cleanshot)
+      * [Forklift](https://setapp.com/apps/forklift)
+      * [Gemini](https://setapp.com/apps/gemini)
+      * [Hookmark](https://setapp.com/apps/hookmark)
+      * [HoudahSpot](https://setapp.com/apps/houdahspot)
+      * [iStat Menus](https://setapp.com/apps/istat-menus)
+      * [Marked](https://setapp.com/apps/marked)
+      * [Merlin Project Express](https://setapp.com/apps/merlin-project-express)
+      * [OpenIN](https://setapp.com/apps/openin)
+      * [PDF Squeezer](https://setapp.com/apps/pdf-squeezer)
+      * [Permute](https://setapp.com/apps/permute)
+      * [Pulltube](https://setapp.com/apps/pulltube)
+      * [Souver](https://setapp.com/apps/soulver)
 
 ## Contributions
 
@@ -99,7 +107,7 @@ I'm currently using [Sonoma](https://www.apple.com/ca/macos/sonoma/), older macO
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## Related
- * [mac tools ](https://github.com/bhdicaire/macTools) – Ansible roles for macOS automation
+ * [mac tools](https://github.com/bhdicaire/macTools) – Ansible roles for macOS automation
 
 ## Licence
-**vanityURLs** is Copyright 2023 Benoît H. Dicaire and [licensed under the MIT licence](https://github.com/bhdicaire/vanityURLs/blob/master/LICENCE).
+**macSetup** is Copyright 2018 Benoît H. Dicaire and [licensed under the MIT licence](LICENCE).
