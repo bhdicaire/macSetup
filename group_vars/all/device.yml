@@ -1,0 +1,69 @@
+# ------------------------------------------------------------
+# macSetup according to my opinionated standards
+# Modified by: Benoît H. Dicaire
+# https://GitHub.com/bhdicaire/macSetup
+# ------------------------------------------------------------
+
+    macSetupPathSuffix: "macSetup/"
+    dotFilesPathSuffix: "dotFiles/"
+
+    debugAnsible : false
+
+# ------------------------------------------------------------
+# Secret items
+# ------------------------------------------------------------
+
+    aws_cli_user: "{{ lookup('env','aws_cli_user') }}"
+    aws_cli_group: "{{ lookup('env','aws_cli_group') }}"
+    aws_region: "{{ lookup('env','aws_region') }}"
+    aws_access_key_id: "{{ lookup('env','aws_access_key_id') }}"
+    aws_secret_access_key: "{{ lookup('env','aws_secret_access_key') }}"
+
+# ------------------------------------------------------------
+# Users & Groups
+# ------------------------------------------------------------
+
+    localUserComment: "Benoît H. Dicaire"
+    localGroup: "staff"
+    localGroups: "admin,staff,DST"
+    localShell: "/opt/homebrew/bin/zsh"
+
+    pathPrefix: "/tmp/"
+    dropboxPath: "~/Dropbox/"
+
+    toolsPath: "{{ pathPrefix }}macTools/"
+    backupPath: "{{ pathPrefix }}BCK/"
+    secretBackupPath: "{{ pathPrefix }}SecretBCK/"
+
+    gitPath: "{{ pathPrefix }}GIT/"
+    macSetupLocalGIT: "{{ gitPath }}{{ macSetupPathSuffix }}"
+    dotFilesLocalGIT: "{{ gitPath }}{{ dotFilesPathSuffix }}"
+
+    macSetupGIT: "https://github.com/bhdicaire/macSetup.git"
+    macSetupPath: "{{ pathPrefix }}{{ macSetupPathSuffix }}"
+    dotFilesGIT: "https://github.com/bhdicaire/dotFiles.git"
+    dotFilesPath: "{{ pathPrefix }}{{ dotFilesPathSuffix }}"
+
+    moreGroups:
+      - name: "Friends"
+        gid: "999"
+      - name: "DST"
+        gid: "888"
+
+    moreUsers:
+      - name: bob
+        comment: "bob (admin)"
+        group: "staff"
+        groups: "admin,DST,Friends"
+        shell: "{{ brewDir }}/bash"
+      - name: rob
+        comment: "rob (admin)"
+        groups: "admin,staff,Friends"
+        shell: "{{ brewDir }}/bash"
+
+
+#     loginComponents:
+#       - name:  Application that will open autonaticaly at login
+#         value: bobApp.app
+#       - value:  billApp.app
+

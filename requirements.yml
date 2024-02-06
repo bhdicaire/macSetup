@@ -1,0 +1,6 @@
+---
+collections:
+
+  - name: bhdicaire.macTools
+    source: ../macTools
+    type: dir

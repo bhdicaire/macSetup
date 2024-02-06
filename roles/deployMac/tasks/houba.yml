@@ -1,6 +1,0 @@
----
- - name: user's preferences configuration
-   shell: defaults write {{ item }}
-   with_items:
-    - "{{ msOfficePref }}"
-  

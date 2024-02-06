@@ -1,3 +1,6 @@
 .Ds_Store
-Varia/
 brew.sh
+*.retry
+/.cache
+wip
+ansible.log

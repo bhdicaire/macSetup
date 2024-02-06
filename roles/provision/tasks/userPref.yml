@@ -1,0 +1,122 @@
+---
+
+# ------------------------------------------------------------
+# Review or change current computer name
+# ------------------------------------------------------------
+
+##
+## userPref Security.yml and region.yml not completed nor defined
+
+ - name: 'Set MacOS defaults: USER0'
+   community.general.osx_defaults:
+     domain: "{{ item.domain }}"
+     key: "{{ item.key }}"
+     type: "{{ item.type }}"
+     value: "{{ item.value }}"
+   with_items:
+     -  "{{ userPreferences.timeMachine }}"
+
+ - name: 'Set MacOS defaults: USER'
+   community.general.osx_defaults:
+     domain: "{{ item.domain }}"
+     key: "{{ item.key }}"
+     type: "{{ item.type }}"
+     value: "{{ item.value }}"
+   with_items:
+     -  "{{ userPreferences.activityMonitor }}"
+     -  "{{ userPreferences.appStore }}"
+     -  "{{ userPreferences.bbedit }}"
+     -  "{{ userPreferences.finder }}"
+     -  "{{ userPreferences.googleChrome }}"
+     -  "{{ userPreferences.mail }}"
+     -  "{{ userPreferences.msOffice }}"
+     -  "{{ userPreferences.safari }}"
+     -  "{{ userPreferences.siri }}"
+#     -  "{{ userPreferences.spotlight }}"
+     -  "{{ userPreferences.timeMachine }}"
+     -  "{{ userPreferences.ux }}"
+
+
+ - name: "Finder - Expand the following File Info panes: General, Open With, Sharing & Permissions"
+   ansible.builtin.shell: >
+     defaults write com.apple.finder FXInfoPanesExpanded -dict \
+       MetaData -bool true \
+       General -bool true \
+       OpenWith -bool true \
+       Privileges -bool true
+
+ - name: 'Set MacOS defaults: SYSTEM'
+   community.general.osx_defaults:
+     domain: "{{ item.domain }}"
+     key: "{{ item.key }}"
+     type: "{{ item.type }}"
+     value: "{{ item.value }}"
+   become: true
+   with_items:
+     -  "{{ userPreferences.timeMachineSystem }}"
+     -  "{{ userPreferences.photoSystem }}"
+     -  "{{ userPreferences.uxSystem }}"
+   when: doudou is defined
+
+ - name: "Miscellaneous preferences: USER"
+   command: "{{ item.value }}"
+   with_items:
+    - "{{ userPreferences.finderCmd }}"
+#    - "{{ userPreferences.spotlightCmd }}"
+   when: doudou is defined
+
+ - name: "Miscellaneous preferences: SYSTEM"
+   command: "{{ item }}"
+   become: true
+   with_items:
+#    - "{{ userPreferences.spotlightCmdSystem }}"
+    - "{{ userPreferences.finderCmdSystem }}"
+    - "{{ userPreferences.uxCmdSystem }}"
+   when: doudou is defined
+
+ - name: Dock items
+   command: "{{ brewDir }}/dockutil {{ item }}"
+   with_items:
+    - "{{ userPreferences.uxDockComponents }}"
+
+#  M-CLI Utility --> https://github.com/rgcr/m-cli
+ - name: "Dock at left"
+   command: "{{ brewDir }}/m dock position LEFT"
+
+ - name: Insert items that will open autonaticaly at login
+   shell: ~/bin/loginitems.sh -a {{ item }}
+   with_items:
+     - "{{ loginComponents }}"
+   when: loginComponents is defined
+
+ - name: Finder - Change default applications per document types
+#  Use BBedit over default TextEdit for plain text files
+   ansible.builtin.shell: >
+     duti -s com.barebones.bbedit public.data all; \
+     duti -s com.barebones.bbedit public.plain-text all
+
+ - name: "Set desktop preferences"
+   shell:  "/usr/libexec/PlistBuddy -c {{ item.value }}"
+   with_items:
+    - "{{ userPreferences.plistBuddy }}"
+
+ - name: Create directories
+   ansible.builtin.file:
+     path: "{{ item }}"
+     state: directory
+     mode: 0755
+   loop: "{{ userPreferences.newDirectories }}"
+   when: userPreferences.newDirectories is defined
+
+ - name: Load new configuration for Finder and Dock
+   shell: 'killall {{ item }} > /dev/null 2>&1'
+   with_items:
+     - Dock
+     - Finder
+     - Safari
+     - SystemUIServer
+
+ - debug:
+     msg: "** Please log out and log back in to make all settings take effect **"
+     verbosity: 2
+

@@ -1,0 +1,57 @@
+---
+# ------------------------------------------------------------
+# Apple Store, Homebrew: install applications
+# ------------------------------------------------------------
+
+# Install Rosetta 2 on Apple Silicon machines
+
+- name: Install Rosetta 2 on ARM computer
+  command:
+    cmd: 'softwareupdate --install-rosetta --agree-to-license'
+    creates: "/Library/Apple/System/Library/Receipts/com.apple.pkg.RosettaUpdateAuto.plist"
+  become: yes
+#  become_user: root
+  when: ansible_machine == "arm64"
+
+- name: Ensure configured MAS apps are installed.
+  command: "{{ brewDir }}/mas install {{ item.id }}"
+  with_items: "{{ appStore }}"
+  ignore_errors: yes
+
+- name: Define Apple store's preferences
+  shell: defaults write {{ item }}
+  with_items:
+    -  "{{ appStorePref }}"
+
+## Reference: https://docs.ansible.com/ansible/latest/collections/community/general/homebrew_tap_module.html#ansible-collections-community-general-homebrew-tap-module
+- name: Tap Homebrew repository
+  community.general.homebrew_tap:
+    name: '{{ brewTaps }}'
+  run_once: true
+
+- name: Install CLI applications (e.g., formula)
+  community.general.homebrew:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - '{{ brew }}'
+
+## Reference: https://docs.ansible.com/ansible/latest/collections/community/general/homebrew_cask_module.html#ansible-collections-community-general-homebrew-cask-module
+- name: Install graphical applications (e.g., cask)
+  community.general.homebrew_cask:
+    name: '{{ item }}'
+    state: present
+   with_items:
+    - '{{ brewCask }}'
+
+- name: Using sudo password for installing cask
+  community.general.homebrew_cask:
+    name: wireshark
+    state: present
+    sudo_password: "{{ ansible_become_pass }}"
+
+# - name: Upgrade given cask with force option
+#   community.general.homebrew_cask:
+#     name: alfred
+#     state: upgraded
+#     install_options: force

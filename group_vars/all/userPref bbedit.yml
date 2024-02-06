@@ -1,0 +1,138 @@
+---
+
+userPreferences:
+  bbedit:
+    - name: bbeditPref
+      domain: com.barebones.bbedit
+      key: 'EnableFontLigatures_Fira Code'
+      type: bool
+      value: true
+    - domain: com.barebones.bbedit
+      key: 'EnableFontLigatures_Fira Code Medium'
+      type: bool
+      value: true
+    - domain: com.barebones.bbedit
+      key: UseEditorFontForLineBar
+      type: bool
+      value: false
+    - domain: com.barebones.bbedit
+      key: DropboxRoot
+      type: string
+      value: '$(dropboxPath)apps/BBEdit'
+    - domain: com.barebones.bbedit
+      key: EnableSettingsScan
+      type: bool
+      value: true
+    - name: Live Search bar to be visible in each new document that you create or open
+      domain: com.barebones.bbedit
+      key: Editor_AlwaysOpenQuickFind
+      type: bool
+      value: true
+    - domain: com.barebones.bbedit
+      key: FindDialog_UsesFindScrap
+      type: bool
+      value: false
+    - name: Windows management
+      domain: com.barebones.bbedit
+      key: ZoomWindowsInPlace
+      type: bool
+      value: false
+    - domain: com.barebones.bbedit
+      key: CloseOFBNWindowAfterOpeningSelection
+      type: bool
+      value: true
+    - domain: com.barebones.bbedit
+      key: ModelessWindowsStickToActiveSpace
+      type: bool
+      value: true
+    - name: Remember the five most recent documents
+      domain: com.barebones.bbedit
+      key: 'NSRecentDocumentsLimit:Projects'
+      type: int
+      value: 3
+    - domain: com.barebones.bbedit
+      key: 'NSRecentDocumentsLimit:Folders'
+      type: int
+      value: 5
+    - domain: com.barebones.bbedit
+      key: 'NSRecentDocumentsLimit:Shell Worksheets'
+      type: int
+      value: 3
+    - domain: com.barebones.bbedit
+      key: 'NSRecentDocumentsLimit:Images'
+      type: int
+      value: 0
+    - domain: com.barebones.bbedit
+      key: MostRecentItemsGroupLimit
+      type: int
+      value: 10
+    - name: Balance command or double-clicking on a delimiter to balance include the delimiters in the resulting selection
+      domain: com.barebones.bbedit
+      key: 'BalanceIncludesDelimiters'
+      type: bool
+      value: true
+    - domain: com.barebones.bbedit
+      key: MinimumLinesForBlockFold_JavaScript
+      type: int
+      value: 8
+    - domain: com.barebones.bbedit
+      key: MinimumLinesForBlockFold_Markdown
+      type: int
+      value: 8
+    - domain: com.barebones.bbedit
+      key: MinimumLinesForBlockFold_YAML
+      type: int
+      value: 8
+    - name: Markdown
+      domain: com.barebones.bbedit
+      key: DefaultLanguageNameForNewDocuments
+      type: string
+      value: Markdown
+    - domain: com.barebones.bbedit
+      key: PreferredFilenameExtension_Markdown
+      type: string
+      value: md
+    - domain: com.barebones.bbedit
+      key: PreferredFilenameExtension_YAML
+      type: string
+      value: yml
+    - name: Tab key to trigger text completion
+      domain: com.barebones.bbedit
+      key: UseTabKeyAsCompletionTrigger
+      type: bool
+      value: true
+    - name: When doing Check Syntax, Check Links, Update, or Update Images on a folder (including a web site), BBEdit will include XML files
+      domain: com.barebones.bbedit
+      key: MarkupToolsMisc_SkipXMLFilesWhenScanningFolders
+      type: bool
+      value: true
+    - name: Projects
+      domain: com.barebones.bbedit
+      key: ProjectsListCanAcquireKeyboardFocus
+      type: bool
+      value: true
+    - domain: com.barebones.bbedit
+      key: AutoRevealSelectedDocumentInProjectList
+      type: bool
+      value: true
+    - name: BBEdit warns you when opening a malformed UTF-8 file
+      domain: com.barebones.bbedit
+      key: WarnMalformedUTF8
+      type: bool
+      value: true
+    - name: save any titled (i.e. opened from an existing file) documents to disk before sleeping
+      domain: com.barebones.bbedit
+      key: SaveTitledDocumentsBeforeSleeping
+      type: bool
+      value: true
+    - name:' Scanning folders for various purposes (multi-file search, Find differences, and others), SCM administrative directories include: CVS, .svn, .git, .hg, .bzr
+      domain: com.barebones.bbedit'
+      key: SkipSCMAdminDirsWhenScanningFolders
+      type: bool
+      value: true
+
+
+bbeditItems:
+    - "cp apps/BCK/BBEdit/com.barebones.bbedit.plist ~/Library/Preferences/"
+
+

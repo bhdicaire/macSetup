@@ -1,0 +1,46 @@
+---
+
+# --------------------------------------------------------------------------
+# add one or several users
+# --------------------------------------------------------------------------
+
+ - debug:
+     msg: "** add one or several users **"
+     verbosity: 2
+ - debug:
+     msg: "name: {{ dUserName }}"
+     verbosity: 2
+ - debug:
+     msg: "comment: {{ dUserComment }} or omit"
+     verbosity: 2
+ - debug:
+     msg: "group: {{ dUserGroup }} or {{ localGroup }}"
+     verbosity: 2
+ - debug:
+     msg: "groups: {{ dUserGroups }} or {{ localGroups}}"
+     verbosity: 2
+ - debug:
+     msg: " shell: {{ dUserShell}} or {{ localShell}}"
+     verbosity: 2
+
+ - name: add local users
+   user:
+    name: "{{ dUserName }}"
+    comment: "{{ dUserComment | default(omit)}}"
+    group: "{{ dUserGroup | default('{{ localGroup }}') }}"
+    groups: "{{ dUserGroups | default(omit)}}"
+    shell: "{{ dUserShell | default('{{ localShell }}') }}"
+    append: yes
+    createhome: yes
+    state: present
+   become: yes
+
+# --------------------------------------------------------------------------
+# Location for user accounts on OS X is the DirectoryService
+# The /etc/passwd file is only consulted when the OS is in single-user mode
+#
+# Validate results with `dscl . -read /users/bhdicaire`
+# Refer to `man DirectoryService` for more information
+#
+# Usually, you change your shell with  chsh -s $(which fish)
+# --------------------------------------------------------------------------

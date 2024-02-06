@@ -1,0 +1,266 @@
+# Restart automatically if the computer freezes
+if [[ "$RUN_AS_ROOT" = true ]]; then
+  systemsetup -setrestartfreeze on
+fi
+
+- name: Upgrade all casks
+  community.general.homebrew_cask:
+    upgrade_all: true
+
+ - name: Update homebrew and upgrade all packages
+   community.general.homebrew:
+    update_homebrew: true
+    upgrade_all: true
+
+
+    {{ brewDir }}
+#  - name: Upgrade all apps (if configured).
+#    command: mas upgrade
+
+
+- name: Update homebrew and upgrade all packages
+  community.general.homebrew:
+    update_homebrew: true
+    upgrade_all: true
+
+
+######################################################################
+###
+### Copy prerequisites items
+###
+######################################################################
+
+# - name: Clone or update required GIT repositories
+#   include_tasks: "{{ playbookPath }}/roles/common/tasks/addGitRepo.yml"
+#   vars:
+#     dGITItem:
+#       src:  "https://github.com/bhdicaire/macSetup.git"
+#       dest: "{{ pathPrefix }}{{ macSetupPathSuffix }}"
+#     dMkDir: false
+#
+# - name: Clone or update required GIT repositories
+#   include_tasks: "{{ playbookPath }}/roles/common/tasks/addGitRepo.yml"
+#   vars:
+#     dGITItem:
+#       src:  "https://github.com/bhdicaire/macSetup.git"
+#       dest: "{{ pathPrefix }}{{ macSetupPathSuffix }}"
+#     dMkDir: false
+ - name: ensure github.com is a known host
+   lineinfile:
+    dest: ~/.ssh/known_hosts
+    create: yes
+    state: present
+    line: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+    regexp: "^github\\.com"
+   run_once: true
+
+ - name: Clone or update required GIT repositories
+   include_tasks: "{{ playbookPath }}/roles/common/tasks/addGitRepo.yml"
+   vars:
+     dGITItem:
+       src:  "{{ dRequiredGitRepo.src }}"
+       dest: "{{ dRequiredGitRepo.dest }}"
+     dMkDir: false
+   with_items:
+     - "{{ prepareGIT }}"
+   loop_control:
+     loop_var: dRequiredGitRepo
+
+ - copy:
+     src: "{{ item }}"
+     dest: ~/bin
+     mode: 0744
+   with_fileglob:
+     - "{{ playbookPath }}/roles/prepareMac/files/loginItems/loginItem*"
+
+
+ - name: Remove module marker
+   file: path="~/macSetup-PrepareMac.lck" state=absent
+
+ - name: Installation phase 1 is now completed
+   file: path="~/macSetup-PrepareMac (completed)" state=touch owner="{{ localUser }}"
+
+https://docs.ansible.com/ansible/latest/collections/community/general/onepassword_info_module.html#ansible-collections-community-general-onepassword-info-module
+
+
+   # Gather secrets from 1Password, assuming there is a 'password' field:
+- name: Get a password
+  community.general.onepassword_info:
+    search_terms: My 1Password item
+  delegate_to: localhost
+  register: my_1password_item
+  no_log: true         # Don't want to log the secrets to the console!
+
+# Gather secrets from 1Password, with more advanced search terms:
+- name: Get a password
+  community.general.onepassword_info:
+    search_terms:
+      - name:    My 1Password item
+        field:   Custom field name       # optional, defaults to 'password'
+        section: Custom section name     # optional, defaults to 'None'
+        vault:   Name of the vault       # optional, only necessary if there is more than 1 Vault available
+  delegate_to: localhost
+  register: my_1password_item
+  no_log: true                           # Don't want to log the secrets to the console!
+
+# Gather secrets combining simple and advanced search terms to retrieve two items, one of which we fetch two
+# fields. In the first 'password' is fetched, as a field name is not specified (default behaviour) and in the
+# second, 'Custom field name' is fetched, as that is specified explicitly.
+- name: Get a password
+  community.general.onepassword_info:
+    search_terms:
+      - My 1Password item                # 'name' is optional when passing a simple string...
+      - name: My Other 1Password item    # ...but it can also be set for consistency
+      - name:    My 1Password item
+        field:   Custom field name       # optional, defaults to 'password'
+        section: Custom section name     # optional, defaults to 'None'
+        vault:   Name of the vault       # optional, only necessary if there is more than 1 Vault available
+      - name: A 1Password item with document attachment
+  delegate_to: localhost
+  register: my_1password_item
+  no_log: true                           # Don't want to log the secrets to the console!
+
+- name: Debug a password (for example)
+  ansible.builtin.debug:
+    msg: "{{ my_1password_item['onepassword']['My 1Password item'] }}"
+
+
+
+
+ -  name: Reboot
+    command: "echo -e reboot"
+    become: no
+
+
+https://docs.ansible.com/ansible/latest/collections/community/general/onepassword_lookup.html#ansible-collections-community-general-onepassword-lookup
+
+# These examples only work when already signed in to 1Password
+- name: Retrieve password for KITT when already signed in to 1Password
+  ansible.builtin.debug:
+    var: lookup('community.general.onepassword', 'KITT')
+
+- name: Retrieve password for Wintermute when already signed in to 1Password
+  ansible.builtin.debug:
+    var: lookup('community.general.onepassword', 'Tessier-Ashpool', section='Wintermute')
+
+- name: Retrieve username for HAL when already signed in to 1Password
+  ansible.builtin.debug:
+    var: lookup('community.general.onepassword', 'HAL 9000', field='username', vault='Discovery')
+
+- name: Retrieve password for HAL when not signed in to 1Password
+  ansible.builtin.debug:
+    var: lookup('community.general.onepassword',
+                'HAL 9000',
+                subdomain='Discovery',
+                master_password=vault_master_password)
+
+- name: Retrieve password for HAL when never signed in to 1Password
+  ansible.builtin.debug:
+    var: lookup('community.general.onepassword',
+                'HAL 9000',
+                subdomain='Discovery',
+                master_password=vault_master_password,
+                username='tweety@acme.com',
+                secret_key=vault_secret_key)
+
+- name: Retrieve password from specific account
+  ansible.builtin.debug:
+    var: lookup('community.general.onepassword',
+                'HAL 9000',
+                account_id='abc123')
+
+
+    - name: Set up oh-my-zsh
+      ansible.builtin.git:
+        repo: https://github.com/robbyrussell/oh-my-zsh
+        dest: ~/.oh-my-zsh
+
+
+acos_defaults:
+  system:
+    - name: App Store Auto-update
+      domain: com.apple.commerce
+      key: AutoUpdate
+      type: bool
+      value: true
+    - name: App Store auto restart
+      domain: com.apple.commerce
+      key: AutoUpdateRestartRequired
+      type: bool
+      value: true
+    - name: App Store Auto check
+      domain: com.apple.SoftwareUpdate
+      key: AutomaticCheckEnabled
+      type: bool
+      value: true
+    - name: Set lock screen message
+      domain: /Library/Preferences/com.apple.loginwindow.plist
+      key: LoginwindowText
+      value: "Found this computer? Please contact Ben Balter at ben@balter.com."
+      type: string
+    - name: Enable firewall
+      domain: /Library/Preferences/com.apple.alf
+      key: globalstate
+      value: 1
+      type: integer
+  user:
+    - name: Hot corner
+      domain: com.apple.dock
+      key: wvous-br-corne
+      type: integer
+      value: 5
+    - name: Auto hide dock
+      domain: com.apple.dock
+      key: autohide
+      type: bool
+      value: true
+    - name: Screensaver ask for password
+      domain: com.apple.dock
+      key: askForPassword
+      type: bool
+      value: true
+    - name: Screensaver delay
+      domain: com.apple.dock
+      key: askForPasswordDelay
+      type: integer
+      value: 0
+    - name: Screenshot location
+      domain: com.apple.screencapture
+      key: location
+      type: string
+      value: ~/Desktop
+    - name: Screenshot format
+      domain: com.apple.screencapture
+      key: type
+      type: string
+      value: png
+    - name: Safari disable Java
+      domain: com.apple.Safari
+      key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled
+      type: bool
+      value: false
+    - name: Safari disable Java for local
+      domain: com.apple.Safari
+      key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabledForLocalFiles
+      type: bool
+      value: false
+    - name: Schedule auto update
+      domain: com.apple.SoftwareUpdate
+      key: ScheduleFrequency
+      type: integer
+      value: 1
+    - name: Safari Do not track
+      domain: com.apple.Safari
+      key: ScheduleFreSendDoNotTrackHTTPHeaderquency
+      type: bool
+      value: true
+    - name: Safari update extensions
+      domain: com.apple.Safari
+      key: InstallExtensionUpdatesAutomatically
+      type: bool
+      value: true
+    - name: Safari enable developer tools
+      domain: com.apple.Safari
+      key: WebKitDeveloperExtrasEnabledPreferenceKey
+      type: bool
+      value: true

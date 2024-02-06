@@ -1,0 +1,96 @@
+---
+# ------------------------------------------------------------
+# Prepare Mac according to my opinionated standards
+# Modified by: Benoît H. Dicaire
+# https://GitHub.com/bhdicaire/macSetup
+# ------------------------------------------------------------
+
+
+#  - name: Sallut
+#    ansible.builtin.shell: "echo {{ item.name }}"
+#    with_items:
+#      -  "{{ userPreferences.timeMachine }}"
+
+ - name: user pref
+   import_tasks: "userPref.yml"
+   tags: ['userPref']
+
+ - name: "Block #1"
+   block:
+   - name: "Update computer name"
+     include_tasks: "computerName.yml"
+     vars:
+       dComputerName: "{{ computerName }}"
+     when: computerName is defined
+
+   - name: Add Bash4 and ZSH
+     include_tasks: "shell.yml"
+
+   - name: Modify the shell for the current local user
+     include_tasks: "addUser.yml"
+     vars:
+       dUserName: "{{ localUser }}"
+       dUserComment: "{{ localUserComment | default(omit)}}"
+       dUserGroup: "{{ localGroup | default(omit)}}"
+       dUserGroups: "{{ localGroups | default(omit)}}"
+       dUserShell: "{{ localShell | default(omit)}}"
+     when: localUser is defined
+   run_once: true
+   when: houba23 is defined
+
+ - name: "Block #2"
+   block:
+   - name: Add groups
+     include_tasks: "addGroup.yml"
+     vars:
+      dGroupName: "{{ dAddGroup.name }}"
+      dGroupGID: "{{ dAddGroup.gid }}"
+     with_items:
+      -   "{{ moreGroups }}"
+     loop_control:
+      loop_var: dAddGroup
+     when: moreGroups is defined
+
+   - name: Add users
+     include_tasks: "addUser.yml"
+     vars:
+      dUserName: "{{ dAddUser.name }}"
+      dUserComment: "{{ dAddUser.comment | default(omit)}}"
+      dUserGroup: "{{ dAddUser.group | default(omit)}}"
+      dUserGroups: "{{ dAddUser.groups | default(omit)}}"
+      dUserShell: "{{ dAddUser.shell | default(omit)}}"
+     with_items:
+       -   "{{ moreUsers }}"
+     loop_control:
+      loop_var: dAddUser
+     when: moreUsers is defined
+   run_once: true
+   when: houba23 is defined
+
+ - name: "Install applications"
+   include_tasks: "application.yml"
+   when: houba23 is defined
+
+
+
+# - name: Ensure ~/Developer directory exists
+#   file:
+#     path: ~/Developer
+#     state: directory
+#     follow: true
+#
+# - name: Clone projects repos
+#   git:
+#     repo: "{{ item.repo_https }}"
+#     dest: ~/Developer/{{ item.dest }}
+#     accept_hostkey: true
+#     version: "{{ item.version | default(main) }}"
+#     update: false
+#   with_items: "{{ projects }}"
+#
+# #projects:
+#   - dest: "macOS-ansible"
+#     repo_https: "https://github.com/gperdomor/macOS-ansible.git"
+#     repo_ssh: "git@github.com:gperdomor/macOS-ansible.git"
+#     version: main
+#

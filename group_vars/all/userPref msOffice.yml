@@ -1,0 +1,167 @@
+---
+
+userPreferences:
+  msOffice:
+    - name: "sets the Open and Save options in Office 2016 apps to default to On My Mac instead of Online"
+      domain: com.microsoft.office
+      key: DefaultsToLocalOpenSave
+      type: bool
+      value: true
+
+    - name: "Enables and disables the default gallery view in Office 2016 for Mac applications (Word, Excel, PowerPoint)"
+      domain: com.microsoft.office
+      key: ShowDocStageOnLaunch
+      type: bool
+      value: false
+
+#     - name: enable the automated download and install option
+#       domain: com.microsoft.autoupdate2
+#       key: HowToCheck AutomaticDownload
+#       type: bool
+#       value: no type or valeu defined in my documents
+
+    - name: Suppress the Office 365 AutoDiscover redirect warning
+      domain: com.microsoft.Outlook
+      key: TrustO365AutodiscoverRedirect
+      type: bool
+      value: true
+
+    - name: 'Sets the VisualBasic Macro security level Valid values DisabledWithoutWarnings, DisabledWithWarnings, EnabledWithWarnings'
+      domain: com.microsoft.office
+      key: VisualBasicMacroExecutionState
+      type: string
+      value: EnabledWithWarnings
+
+    - name: Disable attaching the file that caused the crash in the crash report. If you are working in a sensitive business it is recommended to set this to false.
+      domain: com.microsoft.errorreporting
+      key: IsAttachedEnabled
+      type: bool
+      value: false
+
+    - name: 'Will store the last crash report in the following path which can be helpful for debugging: ~/Library/Group Containers/UBF8T346G9.ms/MerpTempItems'
+      domain: com.microsoft.errorreporting
+      key: IsStoreLastCrashEnabled
+      type: bool
+      value: TRUE
+
+    - name: Disable the ability for users to use the Smile feature.
+      domain: com.microsoft.Excel
+      key: SendASmileEnabled
+      type: bool
+      value: false
+    - domain: com.microsoft.OneDrive
+      key: SendASmileEnabled
+      type: bool
+      value: false
+    - domain: com.microsoft.onenote.mac
+      key: SendASmileEnabled
+      type: bool
+      value: false
+    - domain: com.microsoft.Outlook
+      key: SendASmileEnabled
+      type: bool
+      value: false
+    - domain: om.microsoft.Powerpoint
+      key: SendASmileEnabled
+      type: bool
+      value: false
+    - domain: com.microsoft.Word
+      key: SendASmileEnabled
+      type: bool
+      value: false
+
+
+    - name: Send minimal heartbeat data, no application usage, and no environment details
+      domain: com.microsoft.autoupdate2
+      key: SendAllTelemetryEnabled
+      type: bool
+      value: false
+    - domain: com.microsoft.Office365ServiceV2
+      key: SendAllTelemetryEnabled
+      type: bool
+      value: false
+    - domain: com.microsoft.autoupdate.fba
+      key: SendAllTelemetryEnabled
+      type: bool
+      value: false
+    - domain: com.microsoft.Excel
+      key: SendAllTelemetryEnabled
+      type: bool
+      value: false
+    - domain: com.microsoft.OneDrive
+      key: SendAllTelemetryEnabled
+      type: bool
+      value: false
+    - domain: com.microsoft.onenote.mac
+      key: SendAllTelemetryEnabled
+      type: bool
+      value: false
+    - domain: com.microsoft.Outlook
+      key: SendAllTelemetryEnabled
+      type: bool
+      value: false
+    - domain: com.microsoft.Powerpoint
+      key: SendAllTelemetryEnabled
+      type: bool
+      value: false
+    - domain: com.microsoft.Word
+      key: SendAllTelemetryEnabled
+      type: bool
+      value: false
+
+    - name:  This hides local "On My Computer" folders in Outlook
+      domain: com.microsoft.Outlook
+      key: HideFoldersOnMyComputerRootInFolderList
+      type: bool
+      value: true
+
+    - name:  Show Whats New On Launch(false)
+      domain: com.microsoft.office
+      key: ShowWhatsNewOnLaunch
+      type: bool
+      value: FALSE
+
+    - name: "Controls the original What's New dialog and Office 365 activation prompt on first launch"
+      domain: com.microsoft.Excel
+      key: kSubUIAppCompletedFirstRunSetup1507
+      type: bool
+      value: false
+    - domain: com.microsoft.OneDrive
+      key: kSubUIAppCompletedFirstRunSetup1507
+      type: bool
+      value: false
+    - domain: com.microsoft.onenote.mac
+      key: kSubUIAppCompletedFirstRunSetup1507
+      type: bool
+      value: false
+    - domain: com.microsoft.Outlook
+      key: kSubUIAppCompletedFirstRunSetup1507
+      type: bool
+      value: false
+    - domain: com.microsoft.Powerpoint
+      key: kSubUIAppCompletedFirstRunSetup1507
+      type: bool
+      value: false
+    - domain: com.microsoft.Word
+      key: kSubUIAppCompletedFirstRunSetup1507
+      type: bool
+      value: false
+
+    - name: 'percentage of local upload bandwidth that the sync client can use. Accepted values are from 1 through 99.'
+      domain: com.microsoft.OneDrive
+      key: AutomaticUploadBandwidthPercentage
+      type: int
+      value: 90
+
+    - name:  When set to true, hides the OneDrive dock icon even when the application is running
+      domain: com.microsoft.OneDrive
+      key: HideDockIcon
+      type: bool
+      value: false
+
+    - name: Default to OneDrive Business instead of OneDrive Personal
+      domain: com.microsoft.OneDrive
+      key: DefaultToBusinessFRE
+      type: bool
+      value: true
+

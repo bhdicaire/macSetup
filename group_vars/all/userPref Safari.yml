@@ -1,0 +1,213 @@
+---
+
+userPreferences:
+  safari:
+    - name: 'Privacy: don’t send search queries to Apple'
+      domain: com.apple.Safari
+      key: UniversalSearchEnabled
+      type: bool
+      value: false
+    - domain: com.apple.Safari
+      key: SuppressSearchSuggestions
+      type: bool
+      value: true
+
+    - name: 'Status bar'
+      domain: com.apple.Safari
+      key: ShowOverlayStatusBar
+      type: bool
+      value: true
+
+    - name: 'Press Tab to highlight each item on a web page'
+      domain: com.apple.Safari
+      key: WebKitTabToLinksPreferenceKey
+      type: bool
+      value: true
+    - domain: com.apple.Safari
+      key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2TabsToLinks
+      type: bool
+      value: true
+
+    - name: 'Show the full URL in the address bar (note: this still hides the scheme)'
+      domain: com.apple.Safari
+      key: ShowFullURLInSmartSearchField
+      type: bool
+      value: true
+
+    - name: "Set Safari’s home page to `about:blank` for faster loading"
+      domain: com.apple.Safari
+      key: HomePage
+      type: string
+      value: 'about:blank'
+
+    - name: "Prevent Safari from opening ‘safe’ files automatically after downloading"
+      domain: com.apple.Safari
+      key: AutoOpenSafeDownloads
+      type: bool
+      value: false
+
+
+
+    - name: Allow hitting the Backspace key to go to the previous page in history
+      domain: com.apple.Safari
+      key:  com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled
+      type: bool
+      value: true
+
+    - name: "Hide Safari’s bookmarks bar by default"
+      domain: com.apple.Safari
+      key: ShowFavoritesBar
+      type: bool
+      value: false
+
+    - name: "Hide Safari’s sidebar in Top Sites"
+      domain: com.apple.Safari
+      key: ShowSidebarInTopSites
+      type: bool
+      value: false
+
+    - name: "Disable Safari’s thumbnail cache for History and Top Sites"
+      domain: com.apple.Safari
+      key: DebugSnapshotsUpdatePolicy
+      type: int
+      value: 2
+
+    - name: "Enable Safari’s debug menu"
+      domain: com.apple.Safari
+      key: IncludeInternalDebugMenu
+      type: bool
+      value: true
+
+    - name: "Make Safari’s search banners default to Contains instead of Starts With"
+      domain: com.apple.Safari
+      key: FindOnPageMatchesWordStartsOnly
+      type: bool
+      value: false
+
+    - name: "Remove useless icons from Safari’s bookmarks bar"
+      domain: com.apple.Safari
+      key: ProxiesInBookmarksBar
+      type: string
+      value: '()'
+
+    - name:  Enable the Develop menu and the Web Inspector in Safari
+      domain: com.apple.Safari
+      key: IncludeDevelopMenu
+      type: bool
+      value: true
+    - domain: com.apple.Safari
+      key: WebKitDeveloperExtrasEnabledPreferenceKey
+      type: bool
+      value: true
+    - domain: com.apple.Safari
+      key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled
+      type: bool
+      value: true
+
+    - name: Add a context menu item for showing the Web Inspector in web views
+      domain: NSGlobalDomain
+      key: WebKitDeveloperExtras
+      type: bool
+      value: true
+
+    - name:  Enable continuous spellchecking
+      domain: com.apple.Safari
+      key: WebContinuousSpellCheckingEnabled
+      type: bool
+      value: true
+
+    - name: Disable auto-correct
+      domain: com.apple.Safari
+      key: WebAutomaticSpellingCorrectionEnabled
+      type: bool
+      value: false
+
+    - name: Disable AutoFill
+      domain: com.apple.Safari
+      key: AutoFillFromAddressBook
+      type: bool
+      value: false
+    - domain: com.apple.Safari
+      key: AutoFillPasswords
+      type: bool
+      value: false
+    - domain: com.apple.Safari
+      key: AutoFillCreditCardData
+      type: bool
+      value: false
+    - domain: com.apple.Safari
+      key: AutoFillMiscellaneousForms
+      type: bool
+      value: false
+
+    - name: Warn about fraudulent websites
+      domain: com.apple.Safari
+      key: WarnAboutFraudulentWebsites
+      type: bool
+      value: true
+
+    - name:  Disable plug-ins
+      domain: com.apple.Safari
+      key: WebKitPluginsEnabled
+      type: bool
+      value: false
+    - domain: com.apple.Safari
+      key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2PluginsEnabled
+      type: bool
+      value: false
+
+    - name:  Disable Java
+      domain: com.apple.Safari
+      key: WebKitJavaEnabled
+      type: bool
+      value: false
+    - domain: com.apple.Safari
+      key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled
+      type: bool
+      value: false
+
+    - name:  Block pop-up windows
+      domain: com.apple.Safari
+      key: WebKitJavaScriptCanOpenWindowsAutomatically
+      type: bool
+      value: false
+    - domain: com.apple.Safari
+      key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically
+      type: bool
+      value: false
+
+    - name: Disable auto-playing video
+      domain: com.apple.Safari
+      key: WebKitMediaPlaybackAllowsInline
+      type: bool
+      value: false
+    - domain: com.apple.SafariTechnologyPreview
+      key: WebKitMediaPlaybackAllowsInline
+      type: bool
+      value: false
+    - domain: com.apple.Safari
+      key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback
+      type: bool
+      value: false
+    - domain: com.apple.SafariTechnologyPreview
+      key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2AllowsInlineMediaPlayback
+      type: bool
+      value: false
+
+    - name: Enable Do Not Track
+      domain: com.apple.Safari
+      key: SendDoNotTrackHTTPHeader
+      type: bool
+      value: true
+
+    - name:  Update extensions automatically
+      domain: com.apple.Safari
+      key: InstallExtensionUpdatesAutomatically
+      type: bool
+      value: true
+
+    - name: 'Use Backspace/Delete to Go Back a Page'
+      domain: com.apple.Safari
+      key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled
+      type: bool
+      value: true

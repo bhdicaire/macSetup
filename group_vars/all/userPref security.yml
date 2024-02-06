@@ -1,0 +1,106 @@
+---
+#
+# userPreferences:
+#
+# ### Firewall
+#
+# # Alternative way
+# # https://github.com/rgcr/m-cli - utility allow to restart firewall without
+# # unloading/loading plist
+# # $ m firewall status; m firewall [enable|disable]
+# #
+# - name: Security - Firewall - Setting to run in {{ maccfg_firewall_mode }} mode
+#   community.general.osx_defaults:
+#     domain: /Library/Preferences/com.apple.alf
+#     key: globalstate
+#     type: int
+#     value: "{{ maccfg_firewall_mode }}"
+#     state: present
+#   become: true
+#   become_user: root
+#
+# ### Software Updates
+#
+# - name: Security - Software Updates - Check for updates each {{ maccfg_updates_delay_days }} days
+#   community.general.osx_defaults:
+#     domain: com.apple.SoftwareUpdate
+#     key: ScheduleFrequency
+#     type: int
+#     value: "{{ maccfg_updates_delay_days }}"
+#     state: present
+#
+# ### Filevault
+#
+# - name: Security - Ensure Filevault is enabled
+#   filevault:
+#     enabled: "{{ maccfg_filevault_enabled }}"
+#   when: maccfg_filevault_enabled
+#
+#     - name: Screen - Require password when screen awakes
+#       domain: com.apple.screensaver
+#       key: askForPassword
+#       type: int
+#       value:
+#
+#     - name:  Screen - Require password immediately after sleep or screen saver begins
+#       domain: com.apple.screensaver
+#       key: askForPasswordDelay
+#       type: int
+#       value:
+#
+# # Gatekeeper
+# #
+#
+# - name: Allow installing apps from anywhere
+#   shell: spctl --master-disable
+#   become: yes
+#
+# - name: Disable the "Are you sure you want to open this application?"" dialog
+#   community.general.osx_defaults:
+#     domain: com.apple.LaunchServices
+#     key: LSQuarantine
+#     type: bool
+#     value: false
+#
+# - name: (System Preferences) Disable Personalized Ads
+#   osx_defaults:
+#     domain: com.apple.AdLib
+#     type: int
+#     state: present
+#     key: allowApplePersonalizedAdvertising
+#     value: 0
+#
+# ########################################################################################
+# ### Security
+# ########################################################################################
+#
+# # Require password when screen awakes.
+# maccfg_security_require_pass_after_awake: true
+#
+# # Require password immediately after sleep or screen saver begins
+# # 0 is for immediate password require
+# maccfg_security_require_pass_delay: 0
+#
+# # Turn off Feedback Assistant data auto-gathering.
+# maccfg_privacy_apple_feedback_assistant: false
+#
+# # Turn off personalized ads, a little less tracking from apple side...
+# maccfg_privacy_disable_personalized_ads: true
+#
+# # Turn on system firewall.
+# # Turned off by default.
+# # If this role is used with dev-env-osx playbook, then lulu firewall is used instead.
+# # Modes:
+# # https://discussions.apple.com/thread/3148672
+# # 0 - disabled
+# # 1 - enabled in "open" mode
+# # 2 - enabled in "strict" mode
+# maccfg_firewall_mode: 0
+#
+# # Check for software updates once per week
+# # Default: 7 (in days)
+# maccfg_updates_delay_days: 7
+#
+# # FileVault full-disk encryption with a 256-bit key to help prevent unauthorized access to the information on startup disk.
+# # Can be risky to enable it on remote machines
+# maccfg_filevault_enabled: true

@@ -1,0 +1,58 @@
+---
+
+userPreferences:
+  mail:
+    - name: 'Copy email addresses as foo@example.com instead of Foo Bar <foo@example.com> in Mail.app'
+      domain: com.apple.mail
+      key: AddressesIncludeNameOnPasteboard
+      type: bool
+      value: false
+
+    - name: 'Disable inline attachments (just show the icons)'
+      domain: com.apple.mail
+      key: DisableInlineAttachmentViewing
+      type: bool
+      value: false
+
+    - name: 'Disable reply animations in Mail.app'
+      domain: com.apple.mail
+      key: DisableReplyAnimations
+      type: bool
+      value: true
+
+    - name: 'Disable send animations in Mail.app'
+      domain: com.apple.mail
+      key: DisableSendAnimations
+      type: bool
+      value: true
+
+    - name: 'Sort conversations in Mail by most recent on top'
+      domain: com.apple.mail
+      key: ConversationViewSortDescending
+      type: int
+      value: 1
+
+#    defaults write com.apple.mail NSUserKeyEquivalents -dict-add "Send" "@\U21a9"
+#     - name: 'Add the keyboard shortcut ⌘ + Enter to send an email in Mail.app'
+#       domain: com.apple.mail
+#       key: NSUserKeyEquivalents
+#       type: string
+#       value: "@\U21a9"
+
+
+# defaults write com.apple.mail DraftsViewerAttributes -dict-add "DisplayInThreadedMode" -string "yes"
+# defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortedDescending" -string "yes"
+# defaults write com.apple.mail DraftsViewerAttributes -dict-add "SortOrder" -string "received-date"
+#     - name: Display emails in threaded mode, sorted by date (oldest at the top
+#       domain: com.apple.mail
+#       key:  DraftsViewerAttributes
+#       type: string
+#       value: "yes"
+#    -  domain: com.apple.mail
+#       key:  DraftsViewerAttributes
+#       type: string
+#       value: "yes"
+#    -  domain: com.apple.mail
+#       key:  DraftsViewerAttributes
+#       type: string
+#       value: "received-date"

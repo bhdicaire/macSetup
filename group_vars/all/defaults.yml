@@ -1,12 +1,3 @@
-# ------------------------------------------------------------
-# macSetup according to my opinionated standards
-# Modified by: Benoît H. Dicaire
-# https://GitHub.com/bhdicaire/macSetup
-# ------------------------------------------------------------
-
-    macSetup: true
-    macDevSetup: false
-    macServerSetup: false
 
 # ------------------------------------------------------------
 # Generic items
@@ -20,20 +11,9 @@
     computerCPU : "{{ ansible_processor }}"
     computerCPUArchitecture: "{{ ansible_userspace_architecture }}"
     computerCores: "{{ ansible_processor_cores }}"
-
-    brewDir: "/opt/homebrew/"
-#    brew_cask_appdir: "/Applications"
+    brewPrefixes:
+      x86_64: /usr/local
+      arm64: /opt/homebrew
+    brewPrefix: "{{ brewPrefixes[ansible_machine] }}"
+    brewDir:    "{{ brewPrefix }}/bin"
     spotlightPath: "~/Library/Spotlight/"
-
-    macSetupPathSuffix: "macSetup/"
-    dotFilesPathSuffix: "dotFiles/"
-
-# ------------------------------------------------------------
-# Secret items
-# ------------------------------------------------------------
-
-    aws_cli_user: "{{ lookup('env','aws_cli_user') }}"
-    aws_cli_group: "{{ lookup('env','aws_cli_group') }}"
-    aws_region: "{{ lookup('env','aws_region') }}"
-    aws_access_key_id: "{{ lookup('env','aws_access_key_id') }}"
-    aws_secret_access_key: "{{ lookup('env','aws_secret_access_key') }}"

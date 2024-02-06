@@ -1,0 +1,16 @@
+---
+
+# --------------------------------------------------------------------------
+# Archive files https://docs.ansible.com/ansible/latest/collections/community/general/archive_module.html#ansible-collections-community-general-archive-module
+
+# ----------------
+
+- name: Compress regular file /path/to/foo into /path/to/foo.gz and remove it
+  community.general.archive:
+    path: /path/to/foo
+    remove: true
+
+- name: Create a zip archive of /path/to/foo
+  community.general.archive:
+    path: /path/to/foo
+    format: zip

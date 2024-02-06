@@ -1,3 +1,0 @@
----
-server_pkg: ./serverapp.pkg 
-xcode_pkg: ./xcode.pkg

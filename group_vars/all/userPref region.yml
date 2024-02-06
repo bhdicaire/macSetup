@@ -1,0 +1,195 @@
+---
+#
+# # Language & Region
+#
+# - name: Language & Region - Set timezone to {{ maccfg_lang_timezone }}
+#   community.general.timezone:
+#     name: "{{ maccfg_lang_timezone }}"
+#   become: true
+#   become_user: root
+#
+#
+# - name: Language & Region - Set main languages
+#   community.general.osx_defaults:
+#     domain: NSGlobalDomain
+#     key: AppleLanguages
+#     type: array
+#     value: "{{ maccfg_lang_languages }}"
+#     state: present
+#
+#
+# - name: Language & Region - Set system locale - US English with EUR as main currency
+#   community.general.osx_defaults:
+#     domain: NSGlobalDomain
+#     key: AppleLocale
+#     type: string
+#     value: "{{ maccfg_lang_locale }}"
+#     state: present
+#
+#
+# - name: Language & Region - Set metric measurement units
+#   community.general.osx_defaults:
+#     domain: NSGlobalDomain
+#     key: AppleMetricUnits
+#     type: bool
+#     value: "{{ maccfg_lang_metric_units }}"
+#     state: present
+#
+#
+# - name: Language & Region - Measurements in centimeters
+#   community.general.osx_defaults:
+#     domain: NSGlobalDomain
+#     key: AppleMeasurementUnits
+#     type: string
+#     value: "{{ maccfg_lang_apple_units }}"
+#     state: present
+#
+#
+# - name: Language & Region - Enables the input menu in the menu bar
+#   community.general.osx_defaults:
+#     domain: com.apple.TextInputMenu
+#     key: visible
+#     type: bool
+#     value: "{{ maccfg_lang_inputs_in_status_bar }}"
+#     state: present
+#
+#
+# - name: Language & Region - Get current list of sources
+#   ansible.builtin.shell: >
+#     defaults read com.apple.HIToolbox AppleEnabledInputSources
+#   register: input_sources_current
+#   changed_when: false
+#   check_mode: false
+#
+#
+# - name: Language & Region - Printing list of sources before modification
+#   ansible.builtin.debug:
+#     var: input_sources_current.stdout
+#
+#
+# - name: Language & Region - Build a list of input sources
+#   ansible.builtin.set_fact:
+#     input_sources: "{{ input_sources + [lookup('template', '../templates/input-source.j2')] }}"
+#   with_items: "{{ maccfg_lang_input_sources }}"
+#
+#
+# - name: Language & Region - Print result of built input sources list
+#   ansible.builtin.debug:
+#     var: input_sources
+#
+#
+# - name: Language & Region - Add input sources
+#   community.general.osx_defaults:
+#     domain: com.apple.HIToolbox
+#     key: AppleEnabledInputSources
+#     type: array
+#     value: "{{ input_sources }}"
+#   changed_when: false
+#
+#
+# - name: Language & Region - Add input source history
+#   community.general.osx_defaults:
+#     domain: com.apple.HIToolbox
+#     key: AppleInputSourceHistory
+#     type: array
+#     value: "{{ input_sources }}"
+#   changed_when: false
+#
+#
+# # OMG Metric!
+# - name: (System Preferences) Set measurement to metric
+#   osx_defaults:
+#     domain: NSGlobalDomain
+#     type: bool
+#     state: present
+#     key: AppleMetricUnits
+#     value: true
+#
+# - name: (System Preferences) Set measurement unit to Centimeters
+#   osx_defaults:
+#     domain: NSGlobalDomain
+#     type: string
+#     state: present
+#     key: AppleMeasurementUnits
+#     value: Centimeters
+#
+# - name: (System Preferences) Set temperature to Celsius
+#   osx_defaults:
+#     domain: NSGlobalDomain
+#     type: string
+#     state: present
+#     key: AppleTemperatureUnit
+#     value: 'Celsius'
+#
+# - name: (System Preferences) Don't save .DS_Store files to network drives
+#   osx_defaults:
+#     domain: com.apple.desktopservices
+#     type: bool
+#     state: present
+#     key: DSDontWriteNetworkStores
+#     value: true
+#
+#
+# ########################################################################################
+# ### Language & Region
+# ########################################################################################
+#
+# # Set the timezone; see `sudo systemsetup -listtimezones` for other values
+# maccfg_lang_timezone: "Europe/Riga"
+#
+# # Set main languages - English US, Latvian - LV, Latvian - RU.
+# maccfg_lang_languages:
+#   - en-US
+#   - lv-LV
+#   - ru-LV
+#
+# maccfg_lang_locale: "en_US@currency=EUR"
+#
+# # Use metric measurement units.
+# maccfg_lang_metric_units: true
+#
+# # Set "AppleMeasurementUnits" setting to centimeters.
+# maccfg_lang_apple_units: Centimeters
+#
+# # Enables the input menu in the menu bar.
+# maccfg_lang_inputs_in_status_bar: true
+#
+# # List of input sources.
+# maccfg_lang_input_sources:
+#   # Default input sources.
+#   - name: "ABC"
+#     id: 252
+#   - name: "Latvian"
+#     id: 30765
+#   - name: "Russian - Phonetic"
+#     id: 19457
+#
+# - name: Set languages
+#   community.general.osx_defaults:
+#     domain: NSGlobalDomain
+#     key: AppleLanguages
+#     type: array
+#     value:
+#       - en
+#       - nl
+#
+# - name: Set locale
+#   community.general.osx_defaults:
+#     domain: NSGlobalDomain
+#     key: AppleLocale
+#     type: string
+#     value: en_NL@currency=EUR
+#
+# - name: Set measurement units
+#   community.general.osx_defaults:
+#     domain: NSGlobalDomain
+#     key: AppleMeasurementUnits
+#     type: string
+#     value: Centimeters
+#
+# - name: Use metric
+#   community.general.osx_defaults:
+#     domain: NSGlobalDomain
+#     key: AppleMetricUnits
+#     type: bool
+#     value: true

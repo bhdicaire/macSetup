@@ -1,0 +1,44 @@
+---
+
+userPreferences:
+#   spotlight:
+#     - name: Change indexing order and disable some search results
+#       domain: com.apple.spotlight
+#       key: orderedItems
+#       type: array
+#      value: 1 <- not sure of the required value
+  spotlightCmd:
+# Markdown type not defined yet, how ??
+#     - name: Change indexing order and disable some search results
+#       value: "/usr/bin/mdimport -r ~/Library/Spotlight/Markdown.mdimporter"
+
+
+
+  spotlightCmdSystem:
+#    - name: Change indexing order and disable some search results
+#      value: "rm -r /private/var/tmp/mds"
+    - value: "mdutil -a -d -i off"
+    - name: "Use sudo mdutil -i off '/Volumes/foo' to stop indexing any volume"
+      value: "defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array '/Volumes'"
+    - value: "rm -rf /.Spotlight*"
+    - name: Load new settings before rebuilding the index
+      value: "killall mds > /dev/null 2>&1"
+    - name: Make sure indexing is enabled for the main volume
+      value: "mdutil -i on / > /dev/null"
+    - name: Rebuild the index from scratch, To see if this is working, runmdimport -L
+      value: "mdutil -E / > /dev/null"
+
+    #  Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
+    - name: Disable Spotlight indexing for any volume that gets mounted and has not yet been indexed before
+      value: 'defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"'
+    - name: Restart spotlight
+      value: 'killall mds > /dev/null 2>&1'
+
+
+    - name: Index network storage with Spotlight
+      domain: /Library/Preferences/com.apple.SpotlightServer.plist
+      key: ExternalVolumesIgnore
+      type: bool
+      value: false
+#  spotlightIndexItemsDisabled:
+#    - "enabled=0 name=BOOKMARKS enabled=0 name=CONTACT enabled=0 name=EVENT_TODO enabled=0 name=MENU_CONVERSION enabled=0 name=MENU_DEFINITION enabled=0 name=MENU_EXPRESSION enabled=0 name=MENU_OTHER enabled=0 name=MENU_SPOTLIGHT_SUGGESTIONS enabled=0 name=MENU_WEBSEARCH enabled=0 name=MESSAGES enabled=0 name=MOVIES enabled=0 name=MUSIC enabled=0 name=SOURCE enabled=0 name=SYSTEM_PREFS"

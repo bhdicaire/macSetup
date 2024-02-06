@@ -1,0 +1,590 @@
+---
+
+userPreferences:
+
+  uxSystem:
+    - name: Reveal IP address, hostname, and OS version when clicking the clock in the login window
+      domain: /Library/Preferences/com.apple.loginwindow
+      key: AdminHostInfo
+      type: string
+      value: "HostName"
+
+  uxCmdSystem:
+    - name: Set the timezone; measurement unit and language
+      value: "systemsetup -setnetworktimeserver ca.pool.ntp.org"
+    - value: "systemsetup -settimezone 'America/Montreal'"
+    - value: "/usr/bin/defaults write -g AppleMeasurementUnits -string 'Centimeters'"
+
+  uxDockComponents:
+    - "--remove all --no-restart"
+#    - "--add /Applications/'Fork Lift.app'/ --no-restart"
+    - "--add /Applications/BBEdit.app/ --no-restart"
+#    - "--add /Applications/houdahSpot.app/ --no-restart"
+    - "--add /Applications/Preview.app/ --no-restart"
+    - "--add '' --type spacer --section apps"
+#    - "--add /Applications/BusyContacts.app/ --no-restart"
+ #   - "--add /Applications/Fantastical.app/ --no-restart"
+    - "--add /Applications/Terminal.app/ --no-restart"
+    - "--add '~/Downloads' --view grid --no-restart"
+#  - "--add '/Volumes/Tarmac' --view grid --no-restart"
+
+
+  ux:
+    - name:  Chime When Charging - Play iOS charging sound when MagSafe is connected
+      domain: com.apple.PowerChime
+      key: ChimeOnAllHardware
+      type: bool
+      value: true
+
+# defaults write -globalDomain "com.apple.sound.beep.feedback" -int 1
+#     - name: Play feedback when volume is changed
+#       domain: com.apple.sound.beep.feedback
+#       key: ChimeOnAllHardware
+#       type: int
+#       value: 1
+
+
+    - name: Show battery percentage
+      domain: com.apple.menuextra.battery
+      key: ShowPercent
+      type: bool
+      value: true
+
+    - name: Show volume in menu bar
+      domain: com.apple.systemuiserver
+      key: menuExtras
+      type: array
+      value:
+        - "/System/Library/CoreServices/Menu Extras/Clock.menu"
+        - "/System/Library/CoreServices/Menu Extras/Battery.menu"
+        - "/System/Library/CoreServices/Menu Extras/AirPort.menu"
+        - "/System/Library/CoreServices/Menu Extras/Volume.menu"
+
+    - name: Show volume indicator
+      domain: com.apple.systemuiserver
+      key: "NSStatusItem Visible com.apple.menuextra.volume"
+      type: bool
+      value: true
+
+    - name: 'Menu Bar: Bluetooth icon visibility'
+      domain: com.apple.controlcenter
+      key: "NSStatusItem Visible Bluetooth"
+      type: bool
+      value: false
+
+    - name: 'Menu Bar: Screen Mirroring icon visibility'
+      domain: com.apple.airplay
+      key: showInMenuBarIfPresent
+      type: bool
+      value: false
+
+    - name: 'Menu Bar: Sound icon visibility'
+      domain: com.apple.controlcenter
+      key: 'NSStatusItem Visible Sound'
+      type: bool
+      value: false
+
+    - name: 'Menu Bar: Now playing visibility'
+      domain: com.apple.airplay
+      key:  'NSStatusItem Visible NowPlaying'
+      type: bool
+      value: false
+
+    - name: 'Menu Bar: Clock – Show Date'
+      domain: com.apple.menuextra.clock
+      key:  ShowDate
+      type: int
+      value: 2
+
+    - name: 'Menu Bar: Clock – day of a week'
+      domain: com.apple.menuextra.clock
+      key:  ShowDayOfWeek
+      type: bool
+      value: false
+
+    - name: 'Menu Bar: Spotlight icon visibility'
+      domain: com.apple.Spotlight
+      key:  MenuItemHidden
+      type: int
+      value: 1
+
+    - name: Expand save panel by default
+      domain: NSGlobalDomain
+      key: NSNavPanelExpandedStateForSaveMode
+      type: bool
+      value: true
+
+    - name: Expand print panel by default
+      domain: NSGlobalDomain
+      key: PMPrintingExpandedStateForPrint
+      type: bool
+      value: true
+
+    - name: Save to disk (not to iCloud) by default
+      domain: NSGlobalDomain
+      key: NSDocumentSaveNewDocumentsToCloud
+      type: bool
+      value: false
+
+    - name: Automatically quit printer app once the print jobs complete
+      domain: com.apple.print.PrintingPrefs
+      key: "Quit When Finished"
+      type: bool
+      value: true
+
+    - name:  Disable the “Are you sure you want to open this application?” dialog
+      domain: com.apple.LaunchServices
+      key: LSQuarantine
+      type: bool
+      value: false
+
+    - name: Disable the crash reporter
+      domain: com.apple.CrashReporter
+      key: DialogType
+      type: string
+      value: 'none'
+
+    - name: Set Help Viewer windows to non-floating mode
+      domain: com.apple.helpviewer
+      key: DevMode
+      type: bool
+      value: true
+
+    - name: Disable Resume system-wide
+      domain: com.apple.systempreferences
+      key: NSQuitAlwaysKeepsWindows
+      type: bool
+      value: false
+
+    - name: Disable smart quotes as they’re annoying when typing code
+      domain: NSGlobalDomain
+      key: NSAutomaticQuoteSubstitutionEnabled
+      type: bool
+      value: false
+
+    - name: Disable smart dashes as they’re annoying when typing code
+      domain: NSGlobalDomain
+      key: NSAutomaticDashSubstitutionEnabled
+      type: bool
+      value: false
+
+    - name: Disable automatic capitalization as it’s annoying when typing code
+      domain: NSGlobalDomain
+      key: NSAutomaticCapitalizationEnabled
+      type: bool
+      value: false
+
+    - name: Disable automatic period substitution as it’s annoying when typing code
+      domain: NSGlobalDomain
+      key: NSAutomaticPeriodSubstitutionEnabled
+      type: bool
+      value: false
+
+    - name: Disable auto-correct
+      domain: NSGlobalDomain
+      key: NSAutomaticSpellingCorrectionEnabled
+      type: bool
+      value: false
+
+    - name: Trackpad Haptic feedback (light, silent clicking)
+      domain: com.apple.AppleMultitouchTrackpad
+      key: FirstClickThreshold
+      type: int
+      value: 0
+    - domain: com.apple.AppleMultitouchTrackpad
+      key: ActuationStrength
+      type: int
+      value: 0
+
+    - name: Trackpad map bottom right corner to right-click (requires restart!)
+      domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+      key: TrackpadRightClick
+      type: bool
+      value: true
+    - domain: com.apple.AppleMultitouchTrackpad
+      key: TrackpadRightClick
+      type: bool
+      value: true
+    - domain: com.apple.AppleMultitouchTrackpad
+      key: TrackpadCornerSecondaryClick
+      type: int
+      value: 2
+    - domain: NSGlobalDomain
+      key: ContextMenuGesture
+      type: int
+      value: 1
+
+    - name: Disable press-and-hold for keys in favor of key repeat
+      domain: NSGlobalDomain
+      key: ApplePressAndHoldEnabled
+      type: bool
+      value: false
+
+    - name: 'Set a blazingly fast keyboard repeat rate, and make it happen more quickly (The KeyRepeat option requires logging out and back in to take effect)'
+      domain: NSGlobalDomain
+      key: InitialKeyRepeat
+      type: int
+      value: 20
+    - domain: NSGlobalDomain
+      key: KeyRepeat
+      type: int
+      value: 2
+
+    - name:  Enable full keyboard access for all controls (e.g. enable Tab in modal dialogs)
+      domain: NSGlobalDomain
+      key: AppleKeyboardUIMode
+      type: int
+      value: 3
+
+    - name: Keyboard - Use F1, F2, etc. keys as standard function keys on external keyboards each key
+      domain: NSGlobalDomain
+      key: com.apple.keyboard.fnState
+      type: int
+      value: 1
+
+    - name: Disable auto-correct
+      domain: NSGlobalDomain
+      key: NSAutomaticSpellingCorrectionEnabled
+      type: bool
+      value: false
+
+    - name: 'Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)'
+      domain: com.apple.screencapture
+      key: type
+      type: string
+      value: "png"
+
+    - name: Disable shadow in screenshots
+      domain: com.apple.screencapture
+      key: disable-shadow
+      type: bool
+      value: true
+
+    - name: Save screenshots to the desktop
+      domain: com.apple.screencapture
+      key: location
+      type: string
+      value: '${HOME}/Desktop'
+
+    - name:  Enable subpixel font rendering on non-Apple LCDs https://github.com/kevinSuttle/macOS-Defaults/issues/17#issuecomment-266633501
+      domain: NSGlobalDomain
+      key: AppleFontSmoothing
+      type: int
+      value: 1
+
+    - name: Enable highlight hover effect for the grid view of a stack (Dock)
+      domain: com.apple.dock
+      key: mouse-over-hilite-stack
+      type: bool
+      value: true
+
+    - name: Change minimize/maximize window effect
+      domain: com.apple.dock
+      key: mineffect
+      type: string
+      value: 'scale'
+
+    - name: Minimize windows into their application’s icon
+      domain: com.apple.dock
+      key: minimize-to-application
+      type: bool
+      value: true
+
+    - name: "Scroll Gestures - Use your touchpad or mouse scroll wheel to interact with Dock items. Allows you to use an upward scrolling gesture to open stacks."
+      domain: com.apple.dock
+      key: scroll-to-open
+      type: bool
+      value: true
+
+    - name:  Always show scrollbars `WhenScrolling`, `Automatic` and `Always`
+      domain: NSGlobalDomain
+      key: AppleShowScrollBars
+      type: string
+      value: 'Always'
+
+    - name: Enable spring loading for all Dock items
+      domain: com.apple.dock
+      key: enable-spring-load-actions-on-all-items
+      type: bool
+      value: true
+
+    - name: "Don’t animate opening applications from the Dock"
+      domain: com.apple.dock
+      key: launchanim
+      type: bool
+      value: false
+
+    - name:  Show indicator lights for open applications in the Dock
+      domain: com.apple.dock
+      key: show-process-indicators
+      type: bool
+      value: true
+
+    - name: Show only open applications in the Dock
+      domain: com.apple.dock
+      key: static-only
+      type: bool
+      value: true
+
+    - name:  Disable Mission control & Dashboard
+      domain: com.apple.dock
+      key: mcx-expose-disabled
+      type: bool
+      value: TRUE
+    - domain: com.apple.dashboard
+      key: mcx-disabled
+      type: bool
+      value: true
+
+    - name:  Don’t show Dashboard as a Space
+      domain: com.apple.dock
+      key: dashboard-in-overlay
+      type: bool
+      value: true
+
+    - name:  Don’t automatically rearrange Spaces based on most recent use
+      domain: com.apple.dock
+      key: mru-spaces
+      type: bool
+      value: false
+
+    - name:  Remove the auto-hiding Dock delay
+      domain: com.apple.dock
+      key: autohide-delay
+      type: float
+      value: 0
+    - name:  Remove the animation when hiding/showing the Dock
+      domain: com.apple.dock
+      key: autohide-time-modifier
+      type: float
+      value: 0
+
+    - name:  Automatically hide and show the Dock
+      domain: com.apple.dock
+      key: autohide
+      type: bool
+      value: false
+
+    - name:  Disable the Launchpad gesture (pinch with thumb and three fingers)
+      domain: com.apple.dock
+      key: showLaunchpadGestureEnabled
+      type: int
+      value: 0
+
+    - name: Set the icon size of Dock items
+      domain: com.apple.dock
+      key: tilesize
+      type: int
+      value: 50
+
+    - name: Speed up Mission Control animations
+      domain: com.apple.dock
+      key: expose-animation-duration
+      type: float
+      value: 0.15
+
+    - name: Make Dock icons of hidden applications translucent
+      domain: com.apple.dock
+      key: showhidden
+      type: bool
+      value: true
+
+    - name: Disable the reduce transparency option. Might save GPU cycles but it's not an issue
+      domain: com.apple.universalaccess
+      key: showhidden
+      type: bool
+      value: false
+
+    - name: Screensaver - Show clock when screensaver is running
+      domain: com.apple.screensaver
+      key: showClock
+      type: bool
+      value: false
+
+# Show screen saver after (please choose these values, as OSX use dropdown in UI)
+# 0 - do not use screensaver
+# 60 - 1 minute
+# 120 - 2 minutes
+# 300 - 5 minutes
+# 600 - 10 minutes
+# 1200 - 20 minutes
+# 1800 - 30 minutes
+# 3600 - 1 hour
+
+    - name: Screensaver - Start after 600 seconds
+      domain: com.apple.screensaver
+      key: idleTime
+      type: int
+      value: 600
+
+# Dock: Screen Hot corners possible values:
+#  0: no-op
+#  2: Mission Control
+#  3: Show application windows
+#  4: Desktop
+#  5: Start screen saver
+#  6: Disable screen saver
+#  7: Dashboard
+# 10: Put display to sleep
+# 11: Launchpad
+# 12: Notification Center
+
+    - name: 'Top right screen corner → Notification Center'
+      domain: com.apple.dock
+      key: wvous-tr-corner
+      type: int
+      value: 12
+    - domain: com.apple.dock
+      key:  wvous-tr-modifier
+      type: int
+      value: 0
+
+#     - name: 'Bottom left screen corner → Desktop'
+#       domain: com.apple.dock
+#       key: wvous-bl-corner
+#       type: int
+#       value: 4
+#     - domain: com.apple.dock
+#       key:  wvous-bl-modifier
+#       type: int
+#       value: 0
+
+#     - name: 'Hot corners – Bottom right screen corner → Mission Control'
+#       domain: com.apple.dock
+#       key: wvous-br-corner
+#       type: int
+#       value: 2
+#     - domain: com.apple.dock
+#       key:  wvous-br-modifier
+#       type: int
+#       value: 0
+
+    - name:  Increase window resize speed for Cocoa applications
+      domain: NSGlobalDomain
+      key: NSWindowResizeTime
+      type: float
+      value: 0.001
+
+    - name:  Expand save panel by default
+      domain: NSGlobalDomain
+      key: NSNavPanelExpandedStateForSaveMode
+      type: bool
+      value: true
+    - domain: NSGlobalDomain
+      key: NSNavPanelExpandedStateForSaveMode2
+      type: bool
+      value: true
+
+    - name:  Expand print panel by default
+      domain: NSGlobalDomain
+      key: PMPrintingExpandedStateForPrint
+      type: bool
+      value: true
+    - domain: NSGlobalDomain
+      key: PMPrintingExpandedStateForPrint2
+      type: bool
+      value: true
+
+    - name:  Automatically quit printer app once the print jobs complete
+      domain: com.apple.print.PrintingPrefs
+      key: 'Quit When Finished'
+      type: bool
+      value: true
+
+    - name:  Enable the debug menu in Address Book
+      domain: com.apple.addressbook
+      key: ABShowDebugMenu
+      type: bool
+      value: true
+
+    - name:  Use plain text mode for new TextEdit documents
+      domain: com.apple.TextEdit
+      key: RichText
+      type: int
+      value: 0
+
+    - name:  Open and save files as UTF-8 in TextEdit
+      domain: com.apple.TextEdit
+      key: PlainTextEncoding
+      type: int
+      value: 4
+    - domain: com.apple.TextEdit
+      key: PlainTextEncodingForWrite
+      type: int
+      value: 4
+
+    - name:  Enable the debug menu in Disk Utility
+      domain: com.apple.DiskUtility
+      key: DUDebugMenuEnabled
+      type: bool
+      value: true
+    - domain: com.apple.DiskUtility
+      key: advanced-image-options
+      type: bool
+      value: true
+
+    - name:  Auto-play videos when opened with QuickTime Player
+      domain: com.apple.QuickTimePlayerX
+      key: MGPlayMovieOnOpen
+      type: bool
+      value: true
+
+    - name:  Trackpad enable tap to click for this user and for the login screen
+      domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+      key: Clicking
+      type: int
+      value: 1
+    - domain: NSGlobalDomain
+      key: com.apple.mouse.tapBehavior
+      type: int
+      value: 1
+
+    - name:  Disable “natural” (Lion-style) scrolling
+      domain: NSGlobalDomain
+      key: com.apple.swipescrolldirection
+      type: bool
+      value: false
+
+# To be tested if still pertinent
+# - name: Enable subpixel font rendering on non-Apple LCDs
+#   # Reference: https://github.com/kevinSuttle/macOS-Defaults/issues/17#issuecomment-266633501
+#   community.general.osx_defaults:
+#     domain: NSGlobalDomain
+#     key: AppleFontSmoothing
+#     type: int
+#     value: 1
+#
+# - name: Enable font smoothing
+#   community.general.osx_defaults:
+#     domain: NSGlobalDomain
+#     key: CGFontRenderingFontSmoothingDisabled
+#     type: bool
+#     value: false
+#
+# - name: Enable HiDPI display modes (requires restart)
+#   community.general.osx_defaults:
+#     domain: /Library/Preferences/com.apple.windowserver
+#     key: DisplayResolutionEnabled
+#     type: bool
+#     value: true
+#   become: yes
+# - name: Disable Dashboard
+#   community.general.osx_defaults:
+#     domain: com.apple.dashboard
+#     key: mcx-disabled
+#     type: bool
+#     value: true
+#
+# - name: Don't show Dashboard as a Space
+#   community.general.osx_defaults:
+#     domain: com.apple.dock
+#     key: dashboard-in-overlay
+#     type: bool
+#     value: true
+#
+# - name: Don't automatically rearrange Spaces based on most recent use
+#   community.general.osx_defaults:
+#     domain: com.apple.dock
+#     key: mru-spaces
+#     type: bool
+#     value: false

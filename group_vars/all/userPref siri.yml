@@ -1,0 +1,70 @@
+---
+
+userPreferences:
+
+  siri:
+    - name: 'Disable Siri'
+      domain: com.apple.assistant.support
+      type: int
+      state: present
+      key: "Assistant Enabled"
+      value: 1
+
+    - name: 'Siri: Disable voice feedback'
+      domain: com.apple.assistant.backedup
+      type: int
+      state: present
+      key: "Use device speaker for TTS"
+      value: 3
+
+    - name: 'Siri: Opt out of voice data sharing'
+      domain: com.apple.assistant.support
+      type: int
+      state: present
+      key: "Siri Data Sharing Opt-In Status"
+      value: 2
+
+    - name: 'Siri: No Siri on lockscreen'
+      domain: com.apple.Siri
+      type: int
+      state: present
+      key: LockscreenEnabled
+      value: 0
+
+    - name: 'Siri: Disable Type to Siri'
+      domain: com.apple.Siri
+      type: int
+      state: present
+      key: TypeToSiriEnabled
+      value: 0
+
+    - name:  'Menu Bar: Siri icon visibility'
+      domain: com.apple.Siri
+      key: StatusMenuVisible
+      type: int
+      value: 1
+    - domain: com.apple.Siri
+      key:  SiriPrefStashedStatusMenuVisible
+      type: bool
+      value: false
+
+    - name: 'Siri: Do not listen for Hey Siri'
+      domain: com.apple.voicetrigger
+      type: int
+      state: present
+      key: "VoiceTrigger Enabled"
+      value: 0
+    - domain: com.apple.Siri
+      key:  VoiceTriggerUserEnabled
+      type: bool
+      value: false
+
+    - name: 'Siri: Do not listen for Hey Siri on headphones'
+      domain: com.apple.voicetrigger
+      type: int
+      state: present
+      key: "VoiceTriggerUserEnabled"
+      value: 0
+
+
+

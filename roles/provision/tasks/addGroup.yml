@@ -1,0 +1,38 @@
+---
+
+# ------------------------------------------------------------
+# addGroup
+# ------------------------------------------------------------
+
+ - debug:
+     msg: "** Create one or several groups **"
+     verbosity: 2
+ - debug:
+     msg: "name: {{ dGroupName }}"
+     verbosity: 2
+ - debug:
+     msg: "GID: {{ dGroupGID | default(omit)}} or omit"
+     verbosity: 2
+ - debug:
+     msg: "Sytem: {{ dGroupSystem | default(omit)}} or omit"
+     verbosity: 2
+
+ - name: Create one or several groups
+   group:
+    name: "{{ dGroupName }}"
+
+#   If yes, indicates that the group is a system group
+    gid: "{{ dGroupGID | default(omit)}}"
+
+    system: "{{ dGroupSystem | default(omit)}}"
+    state: present
+   become: yes
+
+
+# --------------------------------------------------------------------------
+# Location for groups on OS X is the DirectoryService
+# The /etc/group file is only consulted when the OS is in single-user mode
+#
+# Validate results with `dscl . -read /groups/staff`
+# Refer to `man DirectoryService` for more information
+# --------------------------------------------------------------------------

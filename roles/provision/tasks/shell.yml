@@ -1,0 +1,29 @@
+---
+
+# ------------------------------------------------------------
+# Install/ update Bash and ZSH shells
+# ------------------------------------------------------------
+
+ - name: Ensure updated shells are present
+   community.general.homebrew:
+    name: '{{ item }}'
+    state: latest
+   with_items:
+    - bash
+    - zsh
+
+ - name: Enable bash4 in /etc/shells
+   command: sudo bash -c 'echo /opt/homebrew/bin/bash >> /etc/shells'
+   become: yes
+
+#  - name: Add shell to /etc/shells
+#    lineinfile:
+#      path: /etc/shells
+#      line: /opt/homebrew/bin/bash
+#      state: present
+#    become: yes
+
+
+ - name: Enable ZSH in /etc/shells
+   command: sudo bash -c 'echo /opt/homebrew/bin/zsh >> /etc/shells'
+   become: yes

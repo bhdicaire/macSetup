@@ -4,7 +4,7 @@
 
 macSetup is an opinionated playbook to automate macOS installation & configuration:
   * Add users, groups, and shell based on variables defined in [defaults.yml](group_vars/all/defaults.yml), [host.yml](group_vars/all/host.yml) and [secrets.yml](group_vars/secrets.yml)
-   * Install all [packages](group_vars/all/packages.yml) via [homebrew](https://brew.sh), [Mac App Store CLI](https://github.com/mas-cli/mas) and downloaded DMG
+   * Install all the listed apps in the [packages](group_vars/all/packages.yml) via [homebrew](https://brew.sh), [Mac App Store CLI](https://github.com/mas-cli/mas) and downloaded DMG
  * Add printers
  * user preferences
     * activity Monitor
@@ -17,6 +17,15 @@ macSetup is an opinionated playbook to automate macOS installation & configurati
     * spotlight
     * terminal
     * timeMachine
+ * remap keyboard
+    * twith [karabiner-elements]()
+    (* brett tersprra ttcsoff .keyboard ?? *)
+ * dotFiles
+    * chezmoi
+ * developer
+    * Go
+    Python
+
 
 My objective is to work at the command line and automate so I don't have to document extensively.
 

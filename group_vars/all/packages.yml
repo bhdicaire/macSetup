@@ -1,64 +1,23 @@
 ---
 
-# ------------------------------------------------------------
-#  Mac Software — Download DMG, GIT, ISO & PKG
-# ------------------------------------------------------------
-
- macSoftwareURL:
-
-  - name: "ParallelsToolbox"
-    app: "Parallels Toolbox.app"
-    src: "http://www.parallels.com/ca/try/toolbox"
-    dest: "{{ toolsPath }}"
-    installer_type: app
-    install_method: dmg
-
-  - name: "SetApp"
-    app: "Install Setapp.app"
-    src: "https://dl.devmate.com/com.setapp.InstallSetapp/InstallSetapp.zip"
-    dest: "{{ toolsPath }}"
-    installer_type: app
-    install_method: zip
-# move app dans /Applications
 
 
-### TODO: Copy antidote via RSync :(
-### TODO: find hemingway editor
-
-#  Microsoft Office 2016  —  Mac O365/Retail
-#                            https://macadmins.software
-
-# Word,Excel, PowerPoint, Outlook, OneNote & MS AutoUpdate (MAU)
-  - src: "https://go.microsoft.com/fwlink/?linkid=525133"
-    dest: "{{ toolsPath }}"
-# Skype for Business 2016 — https://macadmins.software
-  - src: "https://go.microsoft.com/fwlink/?linkid=832978"
-    dest: "{{ toolsPath }}"
-
-
- macSoftwareGIT:
-
-  - name: O365SharedActivator
-    src: "https://github.com/pbowden-msft/O365SharedActivator"
-    dest: "{{ toolsPath }}O365SharedActivator"
-    installer_type: app
-    install_method: git
-  - name: NukeOffKeychain
-    src: "https://github.com/pbowden-msft/NukeOffKeychain"
-    dest: "{{ toolsPath }}MS-NukeOffKeychain"
-    installer_type: app
-    install_method: git
 
 # ------------------------------------------------------------
 #  Brew — CLI Applications
 # ------------------------------------------------------------
 
+ brewTaps:
+    - homebrew/cask-fonts
+
  brew:
     - ack
-    - ansible
     - ansible-lint
     - awscli
     - azure-cli
+    - coreutils
+    - moreutils
+    - findutils
     - chezmoi
     - dnscontrol
     - exiftool
@@ -68,7 +27,9 @@
     - gnupg2
     - go
     - hugo
-    - loginitems
+    - jq
+#    - loginitems
+    - mackup
     - mdless
     - minio/stable/mc
     - nmap
@@ -76,11 +37,6 @@
     - ssh-copy-id
     - tree
     - wget
-    - zsh
-
-# ------------------------------------------------------------
-#  Brew Cask — GUI Applications
-# ------------------------------------------------------------
 
  brewCask:
     - 1password
@@ -94,7 +50,6 @@
     - bbedit
     - bookmacster
     - calibre
-    - carbon-copy-cloner
     - chronosync
     - deepl
     - devonthink
@@ -140,7 +95,7 @@
     - nitro-pdf-pro
     - obs
     - omnigraffle
-    - parallels
+#    - parallels <-- require sudo ? How do I know which one require IT ??
     - parallels-toolbox
     - philips-hue-sync
     - pocket-casts
@@ -157,7 +112,6 @@
     - webex
     - yubico-yubikey-manager
     - zoom
-    - zoom-outlook-plugin
 
 # ------------------------------------------------------------
 #  Mac Apps Store —  MAS Applications

@@ -1,5 +1,0 @@
- brewTaps:
-    - homebrew/core
-    - homebrew/cask-drivers
-    - homebrew/command-not-found
-    - homebrew/cask

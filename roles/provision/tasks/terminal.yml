@@ -1,0 +1,81 @@
+---
+
+# ------------------------------------------------------------
+# I spend a significant amount of the day in the terminal,
+# so I’ve tweaked the default Terminal settings a lot.
+# Be yourself a favor and export them: Shell > Export settings
+# ------------------------------------------------------------
+
+
+ - name:  "** Debug: dump all variables **"
+   command: '{{ brewDir}}/ansible --version'
+   register: dAnsibleVersion
+
+
+
+- name: Get current Terminal profile.
+  shell: defaults read com.apple.Terminal 'Default Window Settings'
+  register: terminal_theme
+  changed_when: false
+
+- name: Ensure custom Terminal profile is added.
+  shell: open files/Solarized-Dark.terminal
+  changed_when: false
+  when: "'Solarized-Dark' not in terminal_theme.stdout"
+
+- name: Ensure custom Terminal profile is set as default.
+  shell: "{{ item }}"
+  with_items:
+    - defaults write com.apple.Terminal 'Default Window Settings' -string 'Solarized-Dark'
+    - defaults write com.apple.Terminal 'Startup Window Settings' -string 'Solarized-Dark'
+  changed_when: false
+  when: "'Solarized Dark ansi' not in terminal_theme.stdout"
+
+- name: (Terminal) Copy Terminal script to tmp
+  copy:
+    src: files/TermProfile.scpt
+    dest: /tmp/TermProfile.scpt
+    owner: "{{ ansible_user_id }}"
+    group: staff
+    mode: 0755
+
+- name: (Terminal) Copy Terminal profile to opt
+  become: true
+  become_user: root
+  copy:
+    src: files/DevOps.terminal
+    dest: /opt/Devops.terminal
+    owner: "{{ ansible_user_id }}"
+    group: staff
+    mode: 0755
+
+- name: (Terminal) Remove com.apple.quarantine from Terminal profile
+  command: "/usr/bin/xattr -d com.apple.quarantine /opt/Devops.terminal"
+  args:
+    removes: /opt/Devops.terminal
+  ignore_errors: 1
+
+- name: Load custom Terminal profile to add it
+  shell:
+    cmd: "osascript /tmp/TermProfile.scpt && rm -rf /tmp/TermProfile.scpt"
+    removes: /tmp/TermProfile.scpt
+
+- name: (Terminal) Pause for 20 seconds to give the Terminal profile a chance to install before setting it as default
+  pause:
+    seconds: 20
+
+- name: (Terminal) Ensure custom Terminal profile is the default window
+  osx_defaults:
+    domain: com.apple.Terminal
+    type: string
+    state: present
+    key: 'Default Window Settings'
+    value: 'Devops'
+
+- name: (Terminal) Ensure custom Terminal profile is the default startup window
+  osx_defaults:
+    domain: com.apple.Terminal
+    type: string
+    state: present
+    key: 'Startup Window Settings'
+    value: 'Devops'

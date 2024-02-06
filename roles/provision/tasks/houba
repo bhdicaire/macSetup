@@ -1,0 +1,102 @@
+  - name: Ensure target directory exists ** TEMP **
+    file:
+      path: "{{ item }}"
+      state: directory
+      owner: "{{ localUser }}"
+      group: "{{ localGroup }}"
+      mode: 0750
+    with_items:
+      - "{{ /tmp/root }}"
+      - "{{ spotlightDirectories }}"
+
+   - name: Copy configuration files
+     synchronize:
+       src: "{{ item.dest }}{{ item.suffix }}"
+       dest: "{{ item.src }}"
+       compress: no
+       rsync_opts:
+         - "-aW"
+         - "--ignore-missing-args"
+     with_items:
+       - "{{ spotlightConfig }}"
+
+   - name: Copy user's configuration files
+     file: src='{{ item.src }}' dest='{{ item.dest }}' owner={{ localUser }} group=staff mode=0751
+     with_items:
+      - "{{ spotlightFiles }}"
+     tags: ['preferences']
+
+   - name: user's preferences configuration
+     shell: defaults write {{ item }}
+     with_items:
+      - "{{ activityMonitorPref }}"
+      - "{{ dockPref }}"
+      - "{{ finderPref }}"
+      - "{{ safariPref }}"
+      - "{{ spotlightPref }}"
+      - "{{ terminalPref }}"
+      - "{{ timeMachinePref }}"
+      - "{{ userPreferencesPref }}"
+
+   - name: user's preferences items
+     command: "{{ item }}"
+     with_items:
+      - "{{ dockItems }}"
+      - "{{ FinderItems }}"
+      - "{{ photosItems }}"
+      - "{{ spotlightItems }}"
+      - "{{ userPreferencesItems }}"
+
+   - name: user's preferences setting
+     shell: /usr/libexec/PlistBuddy -c '{{ item.id }}' {{ item.bundle }}
+     with_items:
+      - "{{ finderSettings }}"
+     tags: ['preferences']
+
+   - name: user's preferences sudo items
+     command: "{{ item }}"
+     with_items:
+      - "{{ spotlightSudo }}"
+      - "{{ timeMachineSudo }}"
+      - "{{ userPreferencesSudo }}"
+     become: yes
+     tags: ['preferences']
+
+# M-CLI Utility --> https://github.com/rgcr/m-cli
+# dockComponents
+
+
+
+ - name: Insert items that will open autonaticaly at login
+   shell: ~/bin/loginitems.sh -a {{ item }}
+   with_items:
+     - "{{ loginComponents }}"
+
+#   - name: spotlight preferences
+##     command: "{{ spotlightIndex }} enabled=1 name=APPLICATIONS enabled=1 name=DIRECTORIES enabled=1 name=PDF enabled=1 name=IMAGES enabled=1 #name=PRESENTATIONS  enabled=1 name=SPREADSHEETS enabled=1 name=DOCUMENTS {{ spotlightIndexDisabled }}"
+#     tags: ['configure', 'now']
+
+   - name: preferences are cached thus some processes needs to be killed
+     command: killall {{ item }}
+     with_items:
+      - "SystemUIServer"
+      - "PowerChime"
+      - "cfprefsd"
+      - "Finder"
+      - "Dock"
+     tags: ['preferences']
+
+  #- name: check file type association
+  #  command: "/usr/local/bin/duti -d {{ item.1 }}"
+  #  with_subelements:
+  #    - "{{ associations }}"
+  #    - utis
+  #  changed_when: false
+  #  register: duti_output
+  #
+  #- name: update file type association
+  #  command: "duti -s {{ item.item.0.bundle_id }} {{ item.item.1 }} all"
+  #  with_items: "{{ duti_output.results | list }}"
+  #  when: item.stdout != item.item.0.bundle_id.lower()
+  #
+2

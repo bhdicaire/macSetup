@@ -1,0 +1,207 @@
+---
+
+userPreferences:
+
+  plistBuddy:
+    - name: Enable snap-to-grid for icons on the desktop and in other icon views
+      value: '"Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist'
+    - value: '"Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist'
+    - value: '"Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist'
+    - name: Set the size of icons on the desktop and in other icon views
+      value: '"Set :DesktopViewSettings:IconViewSettings:iconSize 64" ~/Library/Preferences/com.apple.finder.plist'
+    - value: '"Set :FK_StandardViewSettings:IconViewSettings:iconSize 64" ~/Library/Preferences/com.apple.finder.plist'
+    - value: '"Set :StandardViewSettings:IconViewSettings:iconSize 64" ~/Library/Preferences/com.apple.finder.plist'
+
+  finderCmd:
+    - name: 'Show the ~/Library folder'
+      value: 'chflags nohidden ~/Library'
+    - value: 'xattr -c ~/Library'
+    - name: 'Show the /Volumes folder'
+      value: 'chflags nohidden /Volumes'
+
+  finderCmdSystem:
+    - name:  'Show the /Volumes folder'
+      value: 'chflags nohidden /Volumes'
+
+  finder:
+    - name: Show Drives on the Desktop
+      domain: com.apple.finder
+      key: ShowHardDrivesOnDesktop
+      type: bool
+      value: true
+
+    - name: Avoid creating .DS_Store files on network or USB volumes
+      domain: com.apple.desktopservices
+      key: DSDontWriteNetworkStores
+      type: bool
+      value: true
+    - domain: com.apple.desktopservices
+      key: DSDontWriteUSBStores
+      type: bool
+      value: true
+
+    - name: Disable all animations
+      domain: com.apple.finder
+      key: DisableAllAnimations
+      type: bool
+      value: true
+
+    - name: Search the current directory by default
+      domain: com.apple.finder
+      key: FXDefaultSearchScope
+      type: string
+      value: 'SCcf'
+
+    - name: Automatically open a new Finder window when a volume is mounted
+      domain: com.apple.frameworks.diskimages
+      key: auto-open-ro-root
+      type: bool
+      value: true
+    - domain: com.apple.frameworks.diskimages
+      key: auto-open-rw-root
+      type: bool
+      value: true
+    - domain: com.apple.finder
+      key: OpenWindowForNewRemovableDisk
+      type: bool
+      value: true
+
+    - name: "Set Desktop as the default location for new Finder windows For other paths, use `PfLo` and `file:///full/path/here/`"
+      domain: com.apple.finder
+      key: NewWindowTarget
+      type: string
+      value: 'PfDe'
+    - domain: com.apple.finder
+      key: NewWindowTargetPath
+      type: string
+      value: 'file://${HOME}/Desktop/'
+
+    - name: Show icons for hard drives, servers, and removable media on the desktop
+      domain: com.apple.finder
+      key: ShowExternalHardDrivesOnDesktop
+      type: bool
+      value: true
+    - domain: com.apple.finder
+      key: ShowHardDrivesOnDesktop
+      type: bool
+      value: true
+    - domain: com.apple.finder
+      key: ShowMountedServersOnDesktop
+      type: bool
+      value: true
+    - domain: com.apple.finder
+      key: ShowRemovableMediaOnDesktop
+      type: bool
+      value: true
+
+#     - name: Show Hidden Files
+#       domain: com.apple.finder
+#       key: AppleShowAllFiles
+#       type: bool
+#       value: true
+
+    - name: Show File Extensions
+      domain: NSGlobalDomain
+      key: AppleShowAllExtensions
+      type: bool
+      value: true
+
+    - name: Show the Status Bar in Finder
+      domain: com.apple.finder
+      key: ShowStatusBar
+      type: bool
+      value: true
+
+    - name: Show the Path Bar in Finder
+      domain: com.apple.finder
+      key: ShowPathbar
+      type: bool
+      value: true
+
+    - name: Finder - Keep folders on top when sorting by name
+      community.general.osx_defaults:
+      domain: com.apple.finder
+      key: _FXSortFoldersFirst
+      type: bool
+      value: true
+
+    - name: Increase Number of Recent Places
+      domain: -g
+      key: NSNavRecentPlacesLimit
+      type: int
+      value: 10
+
+    - name: 'Expand the following File Info panes: “General”, “Open with”, and “Sharing & Permissions”'
+      domain: com.apple.finder FXInfoPanesExpanded -dict General -bool true OpenWith -bool true
+      key: Privileges
+      type: bool
+      value: true
+
+    - name: Finder allow text selection in Quick Look
+      domain: com.apple.finder
+      key: QLEnableTextSelection
+      type: bool
+      value: true
+
+    - name: Display full POSIX path as Finder window title
+      domain: com.apple.finder
+      key: _FXShowPosixPathInTitle
+      type: bool
+      value: true
+
+    - name: "Use list view in all Finder windows by default, Four-letter codes for the other view modes: `icnv`, `clmv`, `Flwv`"
+      domain: com.apple.finder
+      key: FXPreferredViewStyle
+      type: string
+      value: 'Nlsv'
+
+    - name: Disabling the warning when changing a file extension
+      domain: com.apple.finder
+      key: FXEnableExtensionChangeWarning
+      type: bool
+      value: true
+
+    - name: Disable the warning before emptying the Trash
+      domain: com.apple.finder
+      key: WarnOnEmptyTrash
+      type: bool
+      value: true
+
+    - name: Empty Trash securely by default
+      domain: com.apple.finder
+      key: EmptyTrashSecurely
+      type: bool
+      value: true
+
+    - name: Enable spring loading for directories
+      domain: NSGlobalDomain
+      key: com.apple.springing.enabled
+      type: bool
+      value: true
+
+    - name: Empty Trash securely by default
+      domain: NSGlobalDomain
+      key: com.apple.springing.delay
+      type: float
+      value: 0.1
+
+# To be tested first
+# - name: Automatically open read-only volumes
+#   community.general.osx_defaults:
+#     domain: com.apple.frameworks.diskimages
+#     key: auto-open-ro-root
+#     type: bool
+#     value: true
+#
+# - name: Automatically open read-write volumes
+#   community.general.osx_defaults:
+#     domain: com.apple.frameworks.diskimages
+#     key: auto-open-rw-root
+#     type: bool
+#     value: true
+# - name: Enable AirDrop over Ethernet
+#   community.general.osx_defaults:
+#     domain: com.apple.NetworkBrowser
+#     key: BrowseAllInterfaces
+#     type: bool
+#     value: true

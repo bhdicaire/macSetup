@@ -1,0 +1,70 @@
+---
+
+userPreferences:
+
+  appStore:
+    - name: Enable the WebKit Developer Tools in the Mac App Store
+      domain: com.apple.appstore
+      key: WebKitDeveloperExtras
+      type: bool
+      value: true
+    - name: Enable Debug Menu in the Mac App Store
+      domain: com.apple.appstore
+      key: ShowDebugMenu
+      type: bool
+      value: true
+    - name: Enable the WebKit Developer Tools in the Mac App Store
+      domain: com.apple.appstore
+      key: AutomaticCheckEnabled
+      type: bool
+      value: true
+    - name: Check for software updates daily, not just once per week
+      domain: com.apple.SoftwareUpdate
+      key: ScheduleFrequency
+      type: int
+      value: 1
+    - name: Download newly available updates in background
+      domain: com.apple.SoftwareUpdate
+      key: AutomaticDownload
+      type: int
+      value: 1
+    - name: Install System data files & security updates
+      domain: com.apple.SoftwareUpdate
+      key: CriticalUpdateInstall
+      type: int
+      value: 1
+    - name: Automatically download apps purchased on other Macs
+      domain: com.apple.SoftwareUpdate
+      key: ConfigDataInstall
+      type: int
+      value: 1
+    - name: Turn on app auto-update
+      domain: com.apple.SoftwareUpdate
+      key: AutoUpdate
+      type: bool
+      value: true
+    - name: Allow the App Store to reboot machine on macOS updates
+      domain: com.apple.commerce
+      key: AutoUpdateRestartRequired
+      type: bool
+      value: true
+    - name: Disable in-app rating requests from apps downloaded from the App Store
+      domain: com.apple.appstore
+      key: InAppReviewEnabled
+      type: int
+      value: 0
+
+# macos_defaults:
+#   system:
+#     - name: App Store Auto-update
+#       domain: com.apple.commerce
+#       key: AutoUpdate
+#       type: bool
+#       value: true
+#   user:
+#     - name: Hot corner
+#       domain: com.apple.dock
+#       key: wvous-br-corne
+#       type: integer
+#       value: 5
+
