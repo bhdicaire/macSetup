@@ -1,0 +1,60 @@
+---
+
+ - name:  "** Debug: dump all variables **"
+   command: '{{ brewDir}}/ansible --version'
+   register: dAnsibleVersion
+
+ - name: Ensure target directory exist
+   include_tasks: "{{ playbookPath }}/roles/common/tasks/mkDir.yml"
+   vars:
+     dDirPath: "{{ dMake.dest }}"
+   with_items:
+     - "{{ dGITItem }}"
+   loop_control:
+     loop_var: dMake
+   when: dMkDir == True
+
+ - name: Clone or update local GIT repositories
+   git:
+    repo: "{{ item.src }}"
+    dest: "{{ item.dest | default( gitPath )}}"
+    force: "{{ item.force | default( true )}}"
+    umask: "{{ item.umask | default('002')}}"
+#    update: "{{ item.update | default( true )}}"
+    recursive: "{{ item.recursive | default(omit)}}"
+    verify_commit: "{{ item.verifyCommit | default(omit)}}"
+   with_items:
+     - "{{ dGITItem }}"
+
+ - name: Ensure target directory exist
+   include_tasks: "{{ playbookPath }}/roles/common/tasks/mkDir.yml"
+   vars:
+     dDirPath: "{{ dMake.dest }}"
+   with_items:
+     - "{{ dCopyItem }}"
+   loop_control:
+     loop_var: dMake
+   when: dMkDir == True
+
+ - name: Copy files
+   synchronize:
+    src: "{{ dItem.src }}"
+    dest: "{{ dItem.dest }}"
+    compress: "{{ dItem.compress | default('no')}}"
+#    rsync_opts::
+#      - "--no-motd"
+#      - "-aW"
+#      - "--ignore-missing-args"
+   with_items:
+     - "{{ dCopyItem }}"
+   loop_control:
+     loop_var: dItem
+   ignore_errors: yes
+
+# ---------------------------------------------------------------------------------------
+# RSync options:
+#
+#  -a is for archive, which preserves ownership & permissions
+#  -W is for copying whole files only, without delta-xfer algorithm to reduce CPU load
+# --noCompress on local host, bandwith is not an issue
+# ---------

@@ -13,29 +13,21 @@
      private: yes
 
   pre_tasks:
+   - name: "debug: dump all variables and dictionaries"
+     import_tasks: "roles/provision/tasks/debug.yml"
+     when: goougou is defined
+
+  roles:
+   - { role: provision}
+
+  post_tasks:
+   - name: "debug: dump all variables and dictionaries"
+     import_tasks: "roles/provision/tasks/debug.yml"
+     when: goougou is defined
+
 #    - name: "Load global variables and dictionaries"
 #      ansible.builtin.include_vars:
 #        dir: '{{ playbook_dir }}/config/'
 #        ignore_unknown_extensions: True
 #        extensions:
 #          - 'yml'
-
-   - name: "debug: dump all variables and dictionaries"
-     import_tasks: "roles/provision/tasks/debug.yml"
-     when: goougou is defined
-
-   - name: 'Helllo'
-     ansible.builtin.shell: "echo {{ item }}"
-     with_items:
-       -  "{{ userPreferences.uxDockComponents }}"
-     when: goougou is defined
-
-  roles:
-   - { role: provision}
-
-#   post_tasks:
-#    - name: Dump all variables and dictionaries
-#      include_tasks: "roles/common/tasks/dumpAllVariables.yml"
-#      vars:
-#        dDumpFile: "/tmp/dumpAllVariables (provisionMac completed).txt"
-#      when: debugAnsible is defined

@@ -21,4 +21,11 @@
     - "defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string {{ dComputerName  | default('{{ dComputerNameCurrent }}')}}"
    become: true
 
-
+ - name: add {{ host }} to /etc/hosts
+   lineinfile:
+     dest: "/etc/hosts"
+     regexp: '.*{{ dHost }}$'
+     line: "{{ ip }} {{ dHost | default(bingo)}}$}"
+     state: present
+   become: yes
+   when: IP is defined

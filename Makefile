@@ -1,7 +1,11 @@
+# ------------------------------------------------------------
+# Prepare Mac according to my opinionated standards
+# Modified by: Benoît H. Dicaire
+# https://GitHub.com/bhdicaire/macSetup
+# ------------------------------------------------------------
+
 CCRED=\033[0;31m
 CCEND=\033[0m
-
-echo :=  "/opt/homebrew/bin/cowsay"
 
 export ANSIBLE_FORCE_COLOR = 1
 export PY_COLORS = 1
@@ -13,26 +17,22 @@ export LANG = en_US.UTF-8
 # https://stackoverflow.com/questions/50009505/ansible-stdout-formatting
 export ANSIBLE_STDOUT_CALLBACK = unixy
 
+echo :=  "/opt/homebrew/bin/cowsay"
+
 .PHONY: build backup restore clean chezmoi help
-
-# leave empty to disable
-# -v - verbose;
-# -vv - more details
-# -vvv - enable connection debugging
-DEBUG_VERBOSITY ?= -vvv
-
-### Lint yaml files
-lint: later
-	$(xx) yamllint .
-	$(xx) ansible-lint . --force-color
-.PHONY: lint
-
 
 help: ## Show this help.
 	@awk 'BEGIN {FS = ":.*?## "} /^[a-zA-Z_-]+:.*?## / {sub("\\\\n",sprintf("\n%22c"," "), $$2);printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}' $(MAKEFILE_LIST)
 
-build: ## Build / update mac setup
-	 ansible-playbook -vv main.yml
+build: ## Build / update macSetup
+	 ansible-playbook -v macSetup.yml
+
+debug ## Build / update macSetup with debug
+	 ansible-playbook -vvvv macSetup.yml
+# -v - verbose;
+# -vv - more details
+# -vvv - enable connection debugging
+
 
 backup: ## Backup mac configuration
 	 ansible-playbook -vv backupConfig.yml
@@ -42,6 +42,10 @@ restore: ## Restore mac configuration
 
 clean:
 	rm -rf /tmp ## Delete temporary files
+
+lint: Linting is not working yet
+	$(xx) yamllint .
+	$(xx) ansible-lint . --force-color
 
 info: ## Current setup statistics
 	@clear
@@ -82,6 +86,14 @@ install: ## Initial setup
              using remote command line tools and SSH.  To turn remote login back on, you'll need to connect a monitor and keyboard to the server to administer it locally.  Use
              "setremotelogin -f off" to suppress prompting when turning remote login off.
 
+  # Enable local firewall
+	sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+	sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setloggingmode on
+	sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
+	sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsigned off
+	sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setallowsignedapp off
+	sudo pkill -HUP socketfilterfw
+
 	$(echo) "Install Ansible and prerequisites"
 	brew install ansible
 	@ansible-galaxy install -r requirements.yml
@@ -116,8 +128,11 @@ install: ## Initial setup
 	@ansible-galaxy collection list
 	@echo "**********************************************"
 
-chezmoi: ## Chezmoi initial setup
-	chezmoi init https://github.com/bhdicaire/dotFiles.git
+chezmoi: ## Chezmoi: Initialize with an existing repository
+	chezmoi  init --apply --verbose https://github.com/bhdicaire/dotFiles.git
 
-galaxy: ## Update galaxy roles and collections
+chezmoi-init: ## Chezmoi: Initialize with an empty repository
+	chezmoi init --verbose https://github.com/bhdicaire/dotFiles.git
+
+galaxy: ## Update Ansible galaxy's roles and collections
 	@ansible-galaxy install -r requirements.yml
