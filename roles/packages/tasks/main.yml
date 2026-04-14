@@ -1,0 +1,85 @@
+---
+# ============================================================
+# packages — Homebrew formulae, casks, and MAS apps
+# ============================================================
+
+# ── Taps ─────────────────────────────────────────────────────
+- name: Add Homebrew taps
+  community.general.homebrew_tap:
+    name: "{{ item }}"
+    state: present
+  loop: "{{ brew_taps }}"
+  when: brew_taps | length > 0
+  tags: [brew, taps]
+
+# ── Formulae ─────────────────────────────────────────────────
+- name: Install Homebrew formulae
+  community.general.homebrew:
+    name: "{{ item }}"
+    state: present
+    update_homebrew: false    # we updated in bootstrap
+  loop: "{{ brew }}"
+  tags: [brew, formulae]
+
+# ── Casks ─────────────────────────────────────────────────────
+- name: Install Homebrew casks
+  community.general.homebrew_cask:
+    name: "{{ item }}"
+    state: present
+    install_options: "appdir=/Applications"
+    accept_external_apps: true
+  loop: "{{ brew_cask }}"
+  tags: [brew, cask]
+
+- name: Install Wireshark (requires sudo)
+  community.general.homebrew_cask:
+    name: wireshark
+    state: present
+    sudo_password: "{{ lookup('community.general.onepassword', 'macOS sudo', field='password') }}"
+  tags: [brew, cask]
+
+# ── Mac App Store ─────────────────────────────────────────────
+- name: Ensure mas is installed
+  community.general.homebrew:
+    name: mas
+    state: present
+  tags: [mas]
+
+- name: Sign in to MAS (no-op if already signed in)
+  ansible.builtin.command:
+    cmd: "{{ brew_bin }}/mas account"
+  register: mas_account
+  changed_when: false
+  failed_when: false
+  tags: [mas]
+
+- name: Warn if not signed in to App Store
+  ansible.builtin.debug:
+    msg: "WARNING: Not signed in to the App Store. MAS installs will be skipped."
+  when: mas_account.rc != 0
+  tags: [mas]
+
+- name: Install Mac App Store applications
+  ansible.builtin.command:
+    cmd: "{{ brew_bin }}/mas install {{ item.id }}"
+  loop: "{{ mas_apps }}"
+  when: mas_account.rc == 0
+  ignore_errors: true        # some apps may already be installed or unavailable
+  tags: [mas]
+
+# ── Post-install ──────────────────────────────────────────────
+- name: Upgrade all Homebrew packages
+  community.general.homebrew:
+    upgrade_all: true
+  tags: [brew, upgrade]
+
+- name: Run Homebrew cleanup
+  ansible.builtin.command:
+    cmd: "{{ brew_bin }}/brew cleanup --prune=7"
+  changed_when: false
+  tags: [brew, cleanup]
+
+# ── VSCode extensions ──────────────────────────────────────────
+- name: Install VSCode extensions
+  ansible.builtin.import_tasks: vscode.yml
+  tags: [vscode]

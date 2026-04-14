@@ -1,0 +1,13 @@
+---
+profile: moderate
+
+exclude_paths:
+  - collections/
+  - roles/provision/files/
+
+warn_list:
+  - yaml[line-length]
+  - experimental
+
+skip_list:
+  - fqcn[action-core]    # allow short names for built-in modules

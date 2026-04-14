@@ -1,0 +1,2136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AMApplicationBuild</key>
+	<string>409.2</string>
+	<key>AMApplicationVersion</key>
+	<string>2.5</string>
+	<key>AMDocumentVersion</key>
+	<string>2</string>
+	<key>actions</key>
+	<array>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMActionVersion</key>
+				<string>1.2.1</string>
+				<key>AMApplication</key>
+				<array>
+					<string>TextEdit</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>enteredRTFDData</key>
+					<dict/>
+					<key>enteredRTFDText</key>
+					<dict/>
+					<key>enteredText</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>Single</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.attributed-string</string>
+					</array>
+				</dict>
+				<key>AMRequiredResources</key>
+				<array/>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Get Specified Text.action</string>
+				<key>ActionName</key>
+				<string>Get Specified Text</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>enteredRTFDData</key>
+					<data>
+					cnRmZAAAAAADAAAAAgAAAAcAAABUWFQucnRm
+					AQAAAC6FAQAAKwAAAAEAAAB9AQAAe1xydGYx
+					XGFuc2lcYW5zaWNwZzEyNTJcY29jb2FydGYx
+					MzQ3XGNvY29hc3VicnRmMjMwCntcZm9udHRi
+					bFxmMFxmc3dpc3NcZmNoYXJzZXQwIEhlbHZl
+					dGljYTt9CntcY29sb3J0Ymw7XHJlZDI1NVxn
+					cmVlbjI1NVxibHVlMjU1O30KXHBhcmRcdHg1
+					NjBcdHgxMTIwXHR4MTY4MFx0eDIyNDBcdHgy
+					ODAwXHR4MzM2MFx0eDM5MjBcdHg0NDgwXHR4
+					NTA0MFx0eDU2MDBcdHg2MTYwXHR4NjcyMFxw
+					YXJkaXJuYXR1cmFsCgpcZjBcZnMyNCBcY2Yw
+					IFwKaHR0cDovL3d3dy5tYXJjby5vcmcvMjAx
+					NS8wMi8xNi9nb29nbGUtYW5kLWJsb2dzLXNo
+					aXRcClwKaHR0cDovL3d3dy5jbm4uY29tLzIw
+					MTUvMDIvMTcvYXNpYS9jaGluYS1zb3V0aC1j
+					aGluYS1zZWEtcmVjbGFtYXRpb24vXAp9AQAA
+					ACMAAAABAAAABwAAAFRYVC5ydGYQAAAA+y7u
+					VLYBAAAAAAAAAAAAAA==
+					</data>
+					<key>enteredRTFDText</key>
+					<string></string>
+					<key>enteredText</key>
+					<string>
+http://www.marco.org/2015/02/16/google-and-blogs-shit
+
+http://www.cnn.com/2015/02/17/asia/china-south-china-sea-reclamation/
+</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.GetSpecifiedText</string>
+				<key>CFBundleVersion</key>
+				<string>1.2.1</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryText</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMGetSpecifiedTextAction</string>
+				<key>Disabled</key>
+				<true/>
+				<key>Keywords</key>
+				<array>
+					<string>Get</string>
+					<string>Text</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>7C4ACE35-0227-4AEB-831D-704B67727B21</string>
+				<key>UUID</key>
+				<string>C871CEC9-B5B6-4E01-AD92-26B70E6EE0B5</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>TextEdit</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>enteredRTFDText</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>enteredText</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<false/>
+				<key>location</key>
+				<string>369.000000:112.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Get Specified Text.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<false/>
+					<key>Types</key>
+					<array>
+						<string>*</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>v.1.0.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>variableUUID</key>
+					<dict>
+						<key>isPathPopUp</key>
+						<false/>
+						<key>selectedVariableUUID</key>
+						<string>C6C566C4-3C9D-44D5-AB54-96DFB711F350</string>
+						<key>variableUUIDsInMenu</key>
+						<array/>
+					</dict>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>*</string>
+					</array>
+				</dict>
+				<key>AMRequiredResources</key>
+				<array/>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Set Value of Variable.action</string>
+				<key>ActionName</key>
+				<string>Set Value of Variable</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>variableUUID</key>
+					<string>C6C566C4-3C9D-44D5-AB54-96DFB711F350</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.Set_Value_of_Variable</string>
+				<key>CFBundleVersion</key>
+				<string>1.0.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<true/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>Set_Value_of_Variable</string>
+				<key>InputUUID</key>
+				<string>7DA764FC-2BCB-4FC1-B047-43155B991D83</string>
+				<key>Keywords</key>
+				<array>
+					<string>variable</string>
+					<string>binding</string>
+					<string>input</string>
+					<string>output</string>
+					<string>storage</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>103AF799-E84C-4562-83A7-ECB125A0A16F</string>
+				<key>UUID</key>
+				<string>837D5B7B-AF2F-4ADA-9894-A01852A46DC2</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>variableUUID</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>369.000000:218.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Set Value of Variable.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMActionVersion</key>
+				<string>1.2.1</string>
+				<key>AMApplication</key>
+				<array>
+					<string>TextEdit</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>enteredRTFDData</key>
+					<dict/>
+					<key>enteredRTFDText</key>
+					<dict/>
+					<key>enteredText</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>Single</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.attributed-string</string>
+					</array>
+				</dict>
+				<key>AMRequiredResources</key>
+				<array/>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Get Specified Text.action</string>
+				<key>ActionName</key>
+				<string>Get Specified Text</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>enteredRTFDData</key>
+					<data>
+					cnRmZAAAAAADAAAAAgAAAAcAAABUWFQucnRm
+					AQAAAC4GAQAAKwAAAAEAAAD+AAAAe1xydGYx
+					XGFuc2lcYW5zaWNwZzEyNTJcY29jb2FydGYx
+					MzQ3XGNvY29hc3VicnRmMTMwCntcZm9udHRi
+					bFxmMFxmc3dpc3NcZmNoYXJzZXQwIEhlbHZl
+					dGljYTt9CntcY29sb3J0Ymw7XHJlZDI1NVxn
+					cmVlbjI1NVxibHVlMjU1O30KXHBhcmRcdHg1
+					NjBcdHgxMTIwXHR4MTY4MFx0eDIyNDBcdHgy
+					ODAwXHR4MzM2MFx0eDM5MjBcdHg0NDgwXHR4
+					NTA0MFx0eDU2MDBcdHg2MTYwXHR4NjcyMFxw
+					YXJkaXJuYXR1cmFsCgpcZjBcZnMyNCBcY2Yw
+					IGMgbH0BAAAAIwAAAAEAAAAHAAAAVFhULnJ0
+					ZhAAAABzPOlUtgEAAAAAAAAAAAAA
+					</data>
+					<key>enteredRTFDText</key>
+					<string></string>
+					<key>enteredText</key>
+					<string>c l</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.GetSpecifiedText</string>
+				<key>CFBundleVersion</key>
+				<string>1.2.1</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryText</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMGetSpecifiedTextAction</string>
+				<key>Keywords</key>
+				<array>
+					<string>Get</string>
+					<string>Text</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>4193E95D-6AFC-416A-BF9C-B2CA3BF12E17</string>
+				<key>UUID</key>
+				<string>83A2BE94-F7A6-44BC-A545-9B9457D0BFB3</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>TextEdit</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>enteredRTFDText</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>enteredText</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>369.000000:385.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Get Specified Text.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.string</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.1.1</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+					<string>TextEdit</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>buttonAffirmative</key>
+					<dict/>
+					<key>buttonNegative</key>
+					<dict/>
+					<key>defaultAnswer</key>
+					<dict>
+						<key>tokenizedValue</key>
+						<array/>
+					</dict>
+					<key>defaultMessage</key>
+					<dict>
+						<key>tokenizedValue</key>
+						<array>
+							<string>Arguments (l, a, c, d, [0-9])</string>
+						</array>
+					</dict>
+					<key>requireInput</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.string</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Ask for Text.action</string>
+				<key>ActionName</key>
+				<string>Ask for Text</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>buttonAffirmative</key>
+					<string>OK</string>
+					<key>buttonNegative</key>
+					<string>Cancel</string>
+					<key>defaultAnswer</key>
+					<string></string>
+					<key>defaultMessage</key>
+					<string>Arguments (l, a, c, d, [0-9])</string>
+					<key>requireInput</key>
+					<false/>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.TextInputDialog</string>
+				<key>CFBundleVersion</key>
+				<string>1.1.1</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<true/>
+				<key>CanShowWhenRun</key>
+				<false/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryText</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMAskForTextAction</string>
+				<key>Disabled</key>
+				<true/>
+				<key>InputUUID</key>
+				<string>EB16323C-5675-4BD6-BF76-9B3CF6C4CD49</string>
+				<key>Keywords</key>
+				<array>
+					<string>Text</string>
+					<string>Ask</string>
+					<string>Prompt</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>DABFE3E8-A038-4FDF-93FC-F5533AA4AF8A</string>
+				<key>UUID</key>
+				<string>B577E849-A456-4534-AC7D-479C4A3C9AD3</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+					<string>TextEdit</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>defaultAnswer</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<string>OK</string>
+						<key>name</key>
+						<string>buttonAffirmative</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+					<key>2</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>defaultMessage</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>2</string>
+					</dict>
+					<key>3</key>
+					<dict>
+						<key>default value</key>
+						<string>Cancel</string>
+						<key>name</key>
+						<string>buttonNegative</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>3</string>
+					</dict>
+					<key>4</key>
+					<dict>
+						<key>default value</key>
+						<false/>
+						<key>name</key>
+						<string>requireInput</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>4</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<false/>
+				<key>location</key>
+				<string>369.000000:427.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Ask for Text.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.string</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>2.0.3</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>COMMAND_STRING</key>
+					<dict/>
+					<key>CheckedForUserDefaultShell</key>
+					<dict/>
+					<key>inputMethod</key>
+					<dict/>
+					<key>shell</key>
+					<dict/>
+					<key>source</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.string</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Run Shell Script.action</string>
+				<key>ActionName</key>
+				<string>Run Shell Script</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>COMMAND_STRING</key>
+					<string>printf ":: "
+printf "%s " $@
+printf "\n"
+					</string>
+					<key>CheckedForUserDefaultShell</key>
+					<true/>
+					<key>inputMethod</key>
+					<integer>1</integer>
+					<key>shell</key>
+					<string>/bin/bash</string>
+					<key>source</key>
+					<string></string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.RunShellScript</string>
+				<key>CFBundleVersion</key>
+				<string>2.0.3</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>RunShellScriptAction</string>
+				<key>InputUUID</key>
+				<string>355ECFA1-AE6B-4C50-A8E0-60D0AE0AD0FF</string>
+				<key>Keywords</key>
+				<array>
+					<string>Shell</string>
+					<string>Script</string>
+					<string>Command</string>
+					<string>Run</string>
+					<string>Unix</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>BA7B6EFD-4E95-4C4A-8337-C121860591EF</string>
+				<key>UUID</key>
+				<string>047B70F8-B6E0-4DD9-BDDE-91D342689AAF</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>inputMethod</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>source</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+					<key>2</key>
+					<dict>
+						<key>default value</key>
+						<false/>
+						<key>name</key>
+						<string>CheckedForUserDefaultShell</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>2</string>
+					</dict>
+					<key>3</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>COMMAND_STRING</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>3</string>
+					</dict>
+					<key>4</key>
+					<dict>
+						<key>default value</key>
+						<string>/bin/sh</string>
+						<key>name</key>
+						<string>shell</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>4</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>369.000000:610.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/English.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<false/>
+					<key>Types</key>
+					<array>
+						<string>*</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>v.1.0.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>variableUUID</key>
+					<dict>
+						<key>isPathPopUp</key>
+						<false/>
+						<key>selectedVariableUUID</key>
+						<string>53ED852E-4D86-4B74-BE08-6EE7B17D7F53</string>
+						<key>variableUUIDsInMenu</key>
+						<array/>
+					</dict>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>*</string>
+					</array>
+				</dict>
+				<key>AMRequiredResources</key>
+				<array/>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Set Value of Variable.action</string>
+				<key>ActionName</key>
+				<string>Set Value of Variable</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>variableUUID</key>
+					<string>53ED852E-4D86-4B74-BE08-6EE7B17D7F53</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.Set_Value_of_Variable</string>
+				<key>CFBundleVersion</key>
+				<string>1.0.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<true/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>Set_Value_of_Variable</string>
+				<key>InputUUID</key>
+				<string>119219C7-370D-4B87-9D85-828640FB34A9</string>
+				<key>Keywords</key>
+				<array>
+					<string>variable</string>
+					<string>binding</string>
+					<string>input</string>
+					<string>output</string>
+					<string>storage</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>B9FA6D76-605E-4CC6-AD13-07B49E32BBA3</string>
+				<key>UUID</key>
+				<string>C3C03563-B9C0-450C-99C0-0BC56C1103B3</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>variableUUID</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>369.000000:716.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Set Value of Variable.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>*</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>v.1.0.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>variableUUID</key>
+					<dict>
+						<key>isPathPopUp</key>
+						<false/>
+						<key>selectedVariableUUID</key>
+						<string>53ED852E-4D86-4B74-BE08-6EE7B17D7F53</string>
+						<key>variableUUIDsInMenu</key>
+						<array/>
+					</dict>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>*</string>
+					</array>
+				</dict>
+				<key>AMRequiredResources</key>
+				<array/>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Get Value of Variable.action</string>
+				<key>ActionName</key>
+				<string>Get Value of Variable</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>variableUUID</key>
+					<string>53ED852E-4D86-4B74-BE08-6EE7B17D7F53</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.Get_Value_of_Variable</string>
+				<key>CFBundleVersion</key>
+				<string>1.0.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>Get_Value_of_Variable</string>
+				<key>IgnoresInput</key>
+				<true/>
+				<key>InputUUID</key>
+				<string>00CF12AB-77C0-4E8C-8175-91A8F7C43ACA</string>
+				<key>Keywords</key>
+				<array>
+					<string>variable</string>
+					<string>binding</string>
+					<string>input</string>
+					<string>output</string>
+					<string>storage</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>BAE62B1A-6224-446B-B468-1C115A4CC236</string>
+				<key>UUID</key>
+				<string>104EC456-816E-41B1-A2B7-436940FFEAD5</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>variableUUID</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>369.000000:819.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Get Value of Variable.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>*</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>v.1.0.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>variableUUID</key>
+					<dict>
+						<key>isPathPopUp</key>
+						<false/>
+						<key>selectedVariableUUID</key>
+						<string>C6C566C4-3C9D-44D5-AB54-96DFB711F350</string>
+						<key>variableUUIDsInMenu</key>
+						<array/>
+					</dict>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>*</string>
+					</array>
+				</dict>
+				<key>AMRequiredResources</key>
+				<array/>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Get Value of Variable.action</string>
+				<key>ActionName</key>
+				<string>Get Value of Variable</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>variableUUID</key>
+					<string>C6C566C4-3C9D-44D5-AB54-96DFB711F350</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.Get_Value_of_Variable</string>
+				<key>CFBundleVersion</key>
+				<string>1.0.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>Get_Value_of_Variable</string>
+				<key>IgnoresInput</key>
+				<false/>
+				<key>InputUUID</key>
+				<string>B0479EE6-D822-4BFC-8806-52748884ED21</string>
+				<key>Keywords</key>
+				<array>
+					<string>variable</string>
+					<string>binding</string>
+					<string>input</string>
+					<string>output</string>
+					<string>storage</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>47C3A786-7944-4C0F-9045-2658B86F398D</string>
+				<key>UUID</key>
+				<string>EA39FD4A-A2AF-4F97-9DA1-637E1F726968</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>variableUUID</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>369.000000:922.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Get Value of Variable.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.string</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>2.0.3</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>COMMAND_STRING</key>
+					<dict/>
+					<key>CheckedForUserDefaultShell</key>
+					<dict/>
+					<key>inputMethod</key>
+					<dict/>
+					<key>shell</key>
+					<dict/>
+					<key>source</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.cocoa.string</string>
+					</array>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Run Shell Script.action</string>
+				<key>ActionName</key>
+				<string>Run Shell Script</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>COMMAND_STRING</key>
+					<string>#!/usr/bin/env ruby
+# encoding: utf-8
+require 'yaml'
+require 'shellwords'
+require 'uri'
+=begin
+## titler
+
+Brett Terpstra 2015 &lt;http://brettterpstra.com&gt;
+MIT License
+
+Takes input on STDIN and converts all recognized urls to Markdown with
+titles and affiliate info. If 'links' is specified as an argument, it
+will output just a Markdown list of found links with titles.
+
+Existing inline Markdown links will have their text replaced ([&lt;replaced&gt;](url)
+and reference links will have the title appended ([id]: url "&lt;title&gt;"),
+with the urls "affiliatized".
+
+If any number is passed as an argument, titles will be truncated at that length.
+
+If 'a' or 'aff' is passed as an argument, all links will be "affiliatized" in place,
+but no titles will be gathered.
+
+## Dependencies
+
+Requires the nokogiri gem (`gem install nokogiri`)
+
+## Configuration
+
+After the first run of the script, a config file will be created at ~/.titler.
+Edit this file to change options.
+
+Edit max_title_length to define a truncation length for all titles. 0 will
+never truncate.
+
+Edit the Amazon and iTunes affiliate information:
+
+To create Amazon affiliate links, set amazon_partner to:
+
+   [tag, camp, creative]
+
+Use the amazon link tool to create any affiliate link and examine
+to find the needed parts. Set to false to return regular amazon links.
+
+Example:
+
+  amazon_partner: ["bretttercom-20","1789","390957"]
+
+iTunes affiliate info is simply the string containing the `at` and
+optionally `ct` query parameters. Do not include a leading "?" or "&amp;"
+
+Example:
+
+  itunes_affiliate = "at=10l4tL&amp;ct=afi"
+
+## Usage
+
+To convert urls in place and return the modified input,
+
+  cat notes.markdown | titler.rb
+
+To output just a list of links with titles truncated to 40 characters
+
+  cat notes.markdown | titler.rb links 40
+
+=end
+unless File.exists? File.expand_path("~/.titler")
+  default_config =&lt;&lt;ENDCONFIG
+# Configuration for Titler
+# Brett Terpstra 2015
+# MIT License
+
+# Assign an integer defining the length to truncate titles at.
+# 0 for none.
+max_title_length: 0
+
+# If truncated, include the original title as a title attribute on the link
+full_title_as_title: true
+
+# Perform a buest-guess removal of site name and tagline from a title
+# This: Emma Watson finally dates a world-famous dude named Harry. Maybe. | Celebrities | Happy Place
+# Becomes: Emma Watson finally dates a world-famous dude named Harry. Maybe.
+# Default is true, set to false to disable
+clean_seo_titles: true
+
+# append affiliate link info to iTunes urls, empty quotes for none
+# example:
+# itunes_affiliate = "&amp;at=10l4tL&amp;ct=titler"
+itunes_affiliate: "&amp;at=10l4tL&amp;ct=titler"
+
+# to create Amazon affiliate links, set amazon_partner to:
+# [tag, camp, creative]
+# Use the amazon link tool to create any affiliate link and examine
+# to find the needed parts. Set to false to return regular amazon links
+# example:
+#    amazon_partner: ["bretttercom-20","1789","390957"]
+amazon_partner: ["brettterpstra-20", "1789", "9325"]
+
+debug: false
+
+ENDCONFIG
+  File.open(File.expand_path("~/.titler"), 'w') do |f|
+    f.puts default_config
+  end
+end
+
+$cfg = YAML.load_file(File.expand_path("~/.titler"))
+
+$cfg['amazon_partner'] ||= ["brettterpstra-20", "1789", "9325"]
+$cfg['itunes_affiliate'] ||= "at=10l4tL&amp;ct=titler"
+$cfg['max_title_length'] ||= 0
+$cfg['full_title_as_title'] ||= false
+$cfg['clean_seo_titles'] ||= false
+$cfg['debug'] ||= false
+
+$fake_data ||= false # Only for debugging
+
+if $fake_data
+  input = DATA.read.force_encoding('utf-8')
+else
+  $stderr.puts "Reading from STDIN" if $cfg['debug']
+
+  unless STDIN.stat.size &gt; 0
+    exit if $cfg['clipboard_service']
+    puts "Error: #{File.basename(__FILE__)} requires input on STDIN"
+    puts
+    usage 1
+  end
+
+  input = STDIN.read
+  if input.respond_to? 'force_encoding'
+    input = input.force_encoding('utf-8')
+  end
+end
+
+arguments = []
+
+if ARGV.length &gt; 0
+  arguments.concat(ARGV)
+end
+
+lines = input.strip.split(/\n/)
+
+if lines[0] =~ /^::(.*?)$/
+  arguments.concat($1.strip.split(/\s+/))
+  input = lines[1..-1].join("\n")
+end
+
+arguments.each {|a|
+  usage 0 if a =~ /^(-?-)?h(elp)?$/
+
+  case a
+  when /^c(lipboard)?$/i
+    $cfg['clipboard_service'] = true
+  when /^l(inks)?$/i
+    $cfg['links_only'] = true
+  when /^a(ff(illiate)?)?$/i
+    $cfg['affiliate_only'] = true
+  when /^d(ebug)$/i
+    $cfg['debug'] = true
+  when /^\d+$/
+    $cfg['max_title_length'] = a.to_i
+  end
+}
+
+$cfg['clipboard_service'] ||= false
+$cfg['links_only'] ||= false
+$cfg['affiliate_only'] ||= false
+$cfg['max_title_length'] ||= 0
+
+def class_exists?(class_name)
+  klass = Module.const_get(class_name)
+  return klass.is_a?(Class)
+rescue NameError
+  return false
+end
+
+if class_exists? 'Encoding'
+  Encoding.default_external = Encoding::UTF_8 if Encoding.respond_to?('default_external')
+  Encoding.default_internal = Encoding::UTF_8 if Encoding.respond_to?('default_internal')
+end
+
+
+class Array
+  def longest_element
+    group_by(&amp;:size).max.last[0]
+  end
+end
+
+class String
+  def clean!
+    self.replace(clean)
+  end
+  
+  def clean
+    self.gsub(/(^\s*|(\s*|%EF|%BB|%BF)+$)/,'').gsub(/[\?&amp;]utm_.*/,'')
+  end
+  
+  def url?
+    self =~ /(?mi)(?:https?:\/\/)(?:[\da-z\.-]+)\.(?:[a-z\.]{2,6})(?:[\/\w\d\.\-\(\)_\/\+=\?\+&amp;%#:]*)/
+  end
+
+  def path_elements
+    path = URI.parse(self).path
+    path.sub!(/\/?$/,'/')
+    path.sub!(/\/[^\/]+[\.\-][^\/]+\/$/,'')
+    path.gsub!(/(^\/|\/$)/,'')
+    path.split(/\//).delete_if {|section| section =~ /^\d+$/ || section.length &lt; 5 }
+  end
+  
+  def close_punctuation!
+    self.replace close_punctuation
+  end
+  
+  def close_punctuation
+    return self unless self =~ /[“‘\[\(&lt;]/
+    
+    words = self.split(/\s+/)
+    
+    punct_chars = {
+      '“' =&gt; '”',
+      '‘' =&gt; '’',
+      '[' =&gt; ']',
+      '(' =&gt; ')',
+      '&lt;' =&gt; '&gt;'
+    }
+    left_punct = []
+
+    words.each {|w|
+    
+      punct_chars.each {|k,v|
+
+        if w =~ /#{Regexp.escape(k)}/
+            left_punct.push(k)
+        end
+
+        if w =~ /#{Regexp.escape(v)}/
+          left_punct.delete_at(left_punct.rindex(k))
+        end
+      }
+    }
+    tail = ""
+    left_punct.reverse.each {|c|
+      tail += punct_chars[c]
+    }
+
+    self.gsub(/[^a-z\)\]’”\.…]+$/i,"...").strip + tail
+
+  end
+  
+  def remove_seo!(url)
+    self.replace remove_seo(url)
+  end
+  
+  def remove_seo(url)
+    title = self.dup
+    url = URI.parse(url)
+    host = url.hostname
+    path = url.path
+    root_page = path =~ /^\/?$/ ? true : false
+
+    title.gsub!(/\s*(&amp;ndash;|&amp;mdash;)\s*/,' - ')
+    title.gsub!(/&amp;[lr]dquo;/,'"')
+    title.gsub!(/&amp;[lr]dquo;/,"'")
+
+    seo_title_separators = [ '|', '«', '-', '–', '·', ':' ]
+
+    begin
+      re_parts = []
+
+      host_parts = host.sub(/(?:www\.)?(.*?)\.[^\.]+$/,'\1').split(/\./).delete_if {|p| p.length &lt; 3 }
+      h_re = host_parts.length &gt; 0 ? host_parts.map{|seg| seg.downcase.split(//).join('.?') }.join('|') : ''
+      re_parts.push(h_re) if h_re.length &gt; 0
+
+      p_re = path.path_elements.map{|seg| seg.downcase.split(//).join('.?') }.join('|')
+      re_parts.push(p_re) if p_re.length &gt; 0
+
+      site_re = "(#{re_parts.join('|')})"
+
+      dead_switch = 0
+
+      while title.downcase.gsub(/[^a-z]/i,'') =~ /#{site_re}/i
+
+        break if dead_switch &gt; 5
+
+        seo_title_separators.each_with_index do |sep, i|
+          parts = title.split(/ ?#{Regexp.escape(sep)} +/)
+
+          next if parts.length == 1
+          remaining_separators = seo_title_separators[i..-1].map {|s| Regexp.escape(s)}.join('')
+          seps = Regexp.new("^[^#{remaining_separators}]+$")
+
+          longest = parts.longest_element.strip
+
+          parts.delete_if {|p|
+            compressed = p.strip.downcase.gsub(/[^a-z]/i,'')
+            compressed =~ /#{site_re}/ &amp;&amp; p =~ seps ? !root_page : false
+          } if parts.length &gt; 1
+
+          if parts.length == 0
+            title = longest
+          elsif parts.length &lt; 2
+            title = parts.join(sep)
+          elsif parts.length &gt; 2
+            title = parts.longest_element.strip
+          else
+            title = parts.join(sep)
+          end
+
+        end
+        dead_switch += 1
+      end
+    rescue Exception =&gt; e
+      return self unless $cfg['debug']
+      $stderr.puts "Error processing title"
+      p e
+      raise e
+      # return self
+    end
+    title &amp;&amp; title.length &gt; 5 ? title.gsub(/\s+/,' ') : self
+  end
+  
+  def truncate!(max)
+    self.replace truncate(max)
+  end
+
+  def truncate(max)
+    return self if self.length &lt; max
+    
+    max -= 3
+    counter = 0
+    trunc_title = ""
+    
+    words = self.split(/\s+/)
+    while trunc_title.length &lt; max &amp;&amp; counter &lt; words.length
+      trunc_title += " " + words[counter]
+      break if trunc_title.length + 1 &gt; max
+      counter += 1
+    end
+
+    
+
+    trunc_title = words[0] if trunc_title.nil? || trunc_title.length == 0
+    
+    trunc_title
+  end
+  
+end
+
+def usage(code=0)
+  puts "#{File.basename(__FILE__)} by Brett Terpstra, 2015"
+  puts "Takes input on STDIN and converts all urls to Markdown with titles and affiliate info."
+  puts "Use 'links' in arguments to output only the links"
+  puts "Include an integer in the arguments to truncate titles to that length"
+  puts "Example: cat notes.markdown | titler.rb links 40"
+  Process.exit code
+end
+
+
+
+def affiliatize(url)
+  # TODO: deal with Bitly shortened amazon links
+  # Would require either bitly API or redirect handler
+  tail = url =~ /\)$/ ? ')' : ''
+  if url =~ /https?:\/\/\w+\.amazon\.com\/(?:.*?\/)?(?:dp|gp\/product)\/([^\?\/]+)/
+    "http://www.amazon.com/gp/product/#{$1}/ref=as_li_ss_tl?ie=UTF8&amp;camp=#{$cfg['amazon_partner'][1]}&amp;creative=#{$cfg['amazon_partner'][2]}&amp;creativeASIN=#{$1}&amp;linkCode=as2&amp;tag=#{$cfg['amazon_partner'][0]}"
+  elsif url =~ /\/\/itunes.apple.com/
+    url.gsub(/[\?&amp;](at|ct)=[^\?&amp;]+/,'') + (url =~ /\?/ ? '&amp;' : '?') + $cfg['itunes_affiliate'].sub(/^[\?&amp;]/,'') + tail
+  else
+    url
+  end
+end
+
+def titleize(url)
+
+  whitespace = url.match(/(\s*$)/)[0] || ''
+  title = nil
+  begin
+    source = %x{/usr/bin/curl -sSL '#{url.strip}'}
+    title = source.match(/&lt;title&gt;(.*)&lt;\/title&gt;/im)
+    
+    title = title.nil? ? nil : title[1].strip
+    
+    orig_title = false
+    new_url = affiliatize(url.strip) rescue url.strip
+
+    if title.nil? || title =~ /^\s*$/
+      $stderr.puts "Warning: missing title for #{url.strip}" if $cfg['debug']
+      title = url.gsub(/(^https?:\/\/|\/.*$)/,'').strip
+    else
+      title = title.gsub(/\n/, ' ').gsub(/\s+/,' ').strip # .sub(/[^a-z]*$/i,'')
+    end
+
+    [title, new_url, whitespace]
+  rescue Exception =&gt; e
+    return ['',affiliatize(url),''] unless $cfg['debug']
+    $stderr.puts e.backtrace if $cfg['debug']
+    $stderr.puts "Error retrieving title for #{url.strip}"
+    raise e
+  end
+end
+
+
+link_counter = 0
+regex = /(?mi)((?:\[(.*?)\])?(?:\(|: +))?((?:https?:\/\/)(?:[\da-z\.-]+)\.(?:[a-z\.]{2,6})(?:[\/\w\d\.\-\(\)_\/\+=\?\+&amp;%#:]*?))( ".*?")?(\))?([\s\n]|$)/
+url_only_regex = /(?mi)(?:https?:\/\/)(?:[\da-z\.-]+)\.(?:[a-z\.]{2,6})(?:[\/\w\d\.\-\(\)_\/\+=\?\+&amp;%#:]*)/
+
+if $cfg['links_only']
+  $stderr.puts "Processing links" if $cfg['debug']
+  urls = input.scan(regex)
+  links = []
+  urls.each {|match|
+    begin
+      next if match.nil? || match[2].nil?
+      url = match[2].clean
+      url = "http://#{url}" unless url =~ /^\s*http/
+      head = match[0].nil? ? '' : match[0]
+      tail = match[3].nil? ? '' : match[3]
+
+      orig_title = false
+      title, url, whitespace = titleize(url)
+
+      title = title.remove_seo(url) if $cfg['clean_seo_titles']
+      if $cfg['max_title_length'] &gt; 0 &amp;&amp; title.length &gt; $cfg['max_title_length']
+        orig_title = title.dup
+        title.truncate!($cfg['max_title_length'])
+      end
+      
+      title = orig_title ? orig_title : "UNKNOWN" if title == ""
+      title.close_punctuation!
+      
+      link_string = "[#{title}](#{url}" + (orig_title ? %Q{ "#{orig_title}")} : ")")
+      links.push(link_string)
+
+    rescue Exception =&gt; e
+      next unless $cfg['debug']
+      $stderr.puts e
+      $stderr.puts e.backtrace  if $cfg['debug']
+      raise e
+    end
+  }
+  link_counter = links.length
+
+  output = links.map {|o|
+    "- #{o}"
+  }.join("\n")
+elsif $cfg['affiliate_only']
+  $stderr.puts "Affiliatizing links" if $cfg['debug']
+  output = input.gsub(url_only_regex) { |url|
+    link_counter += 1
+    affiliatize(url.clean)
+  }
+else
+  $stderr.puts "Replacing links" if $cfg['debug']
+  checked_links = {}
+  output = input.gsub(regex) { |url|
+    match = Regexp.last_match
+
+    if match.nil? || match[3].nil?
+      url
+    else
+      link_counter += 1
+      url          = match[3].clean
+      url          = "http://#{url}" unless url =~ /^http/
+      head         = match[1].nil? ? '' : match[1]
+      md_title     = match[2].nil? ? '' : match[2]
+      alt          = match[4].nil? ? '' : match[4]
+      tail         = match[5].nil? ? '' : match[5]
+      tail        += match[6].nil? ? '' : match[6]
+
+      is_ref = !(head =~ /^\[.*?\]:/).nil?
+
+      if checked_links.has_key? url
+        title, url = checked_links[url], affiliatize(url)
+      else
+        title, url, whitespace = titleize(url)
+        title = title.remove_seo(url) if $cfg['clean_seo_titles']
+        checked_links[url] = title
+      end
+
+      orig_title = false
+      if $cfg['max_title_length'] &gt; 0 &amp;&amp; title.length &gt; $cfg['max_title_length']
+        orig_title = title.dup
+        title.truncate!($cfg['max_title_length'])
+      end
+
+      if title == ""
+        title = orig_title ? orig_title : md_title ? md_title : "UNKNOWN"
+      end
+      
+      title.close_punctuation!
+
+      if $cfg['full_title_as_title'] &amp;&amp; alt == '' &amp;&amp; orig_title
+        alt = %Q{ "#{orig_title}"}
+      end
+
+      if is_ref # reference link, preserve id
+        "#{head}#{url} \"#{title}\"#{tail}"
+      elsif head =~ /\(?$/ || head == '' # inline link or plain url
+        "[#{title}](#{url}#{alt})#{tail.sub(/\)(\s*)/,'\1')}"
+      elsif match[2].nil?
+        "#{head}[#{title}](#{url}#{alt})#{tail}"
+      else
+        "#{head}#{url}#{tail}"
+      end
+    end
+  }
+end
+
+if output.length &gt; 0
+  if $cfg['clipboard_service']
+    if link_counter == 0
+      puts "No links found"
+    else
+      %x{echo #{Shellwords.escape(output)}|pbcopy}
+      puts "#{link_counter} links updated"
+    end
+  else
+    $stderr.puts "#{link_counter} links found" if $cfg['debug']
+    puts output
+  end
+else
+  if $cfg['clipboard_service']
+    puts "No results"
+  else
+    print input
+  end
+end
+
+
+
+
+__END__
+
+http://www.vox.com/2015/2/9/8006121/obama-filibuster-elimination
+http://support.markedapp.com/discussions/problems/96767-not-updatng
+http://nuzzel.com/sharedstory/02192015/firstlook/the_great_sim_heist_how_spies_stole_the_keys_to_the_encryption
+http://nuzzel.com/story/02202015/medium/were_shutting_down_tiiny
+http://nuzzel.com/sharedstory/02202015/blogs.wsj/how_latest_snowden_leak_is_headache_for_white_house
+http://nuzzel.com/sharedstory/02202015/homebrewvc.tumblr/announcing_homebrew_ii_now_back_to_work
+http://deals.macupdate.com/promo-install/1277018759
+http://www.marco.org/2015/02/16/google-and-blogs-shit
+http://blitiri.com.ar/p/git-arr/
+https://github.com/maxweis/specy
+http://www.cnn.com/2015/02/17/asia/china-south-china-sea-reclamation/</string>
+					<key>CheckedForUserDefaultShell</key>
+					<true/>
+					<key>inputMethod</key>
+					<integer>0</integer>
+					<key>shell</key>
+					<string>/usr/bin/ruby</string>
+					<key>source</key>
+					<string></string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.RunShellScript</string>
+				<key>CFBundleVersion</key>
+				<string>2.0.3</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<false/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>RunShellScriptAction</string>
+				<key>InputUUID</key>
+				<string>3A547635-08C3-4FCF-884F-B6C8311A2596</string>
+				<key>Keywords</key>
+				<array>
+					<string>Shell</string>
+					<string>Script</string>
+					<string>Command</string>
+					<string>Run</string>
+					<string>Unix</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>E9D5386A-A586-4C68-909B-E49DC5C37179</string>
+				<key>UUID</key>
+				<string>C7F2A1D1-726C-47C2-92F0-64D1F48D1542</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<integer>0</integer>
+						<key>name</key>
+						<string>inputMethod</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>source</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+					<key>2</key>
+					<dict>
+						<key>default value</key>
+						<false/>
+						<key>name</key>
+						<string>CheckedForUserDefaultShell</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>2</string>
+					</dict>
+					<key>3</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>COMMAND_STRING</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>3</string>
+					</dict>
+					<key>4</key>
+					<dict>
+						<key>default value</key>
+						<string>/bin/sh</string>
+						<key>name</key>
+						<string>shell</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>4</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>369.000000:1105.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Run Shell Script.action/Contents/Resources/English.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<false/>
+					<key>Types</key>
+					<array>
+						<string>*</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>v.1.0.2</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>variableUUID</key>
+					<dict>
+						<key>isPathPopUp</key>
+						<false/>
+						<key>selectedVariableUUID</key>
+						<string>48685661-8B80-47DF-AF17-39D9F87C2619</string>
+						<key>variableUUIDsInMenu</key>
+						<array/>
+					</dict>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>*</string>
+					</array>
+				</dict>
+				<key>AMRequiredResources</key>
+				<array/>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Set Value of Variable.action</string>
+				<key>ActionName</key>
+				<string>Set Value of Variable</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>variableUUID</key>
+					<string>48685661-8B80-47DF-AF17-39D9F87C2619</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.Set_Value_of_Variable</string>
+				<key>CFBundleVersion</key>
+				<string>1.0.2</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<true/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>Set_Value_of_Variable</string>
+				<key>InputUUID</key>
+				<string>B95BC8A5-28E6-437E-A647-84755E3D749E</string>
+				<key>Keywords</key>
+				<array>
+					<string>variable</string>
+					<string>binding</string>
+					<string>input</string>
+					<string>output</string>
+					<string>storage</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>B01204E1-A60A-431C-8D9E-DC4A6D936216</string>
+				<key>UUID</key>
+				<string>9B8FCDCC-A559-4E4E-B3B6-FCF50A2B7617</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>variableUUID</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>369.000000:1211.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Set Value of Variable.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array/>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>1.0</string>
+				<key>AMApplication</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>message</key>
+					<dict>
+						<key>tokenizedValue</key>
+						<array/>
+					</dict>
+					<key>subtitle</key>
+					<dict>
+						<key>tokenizedValue</key>
+						<array/>
+					</dict>
+					<key>title</key>
+					<dict>
+						<key>tokenizedValue</key>
+						<array>
+							<string>Titler finished</string>
+						</array>
+					</dict>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array/>
+				</dict>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Display Notification.action</string>
+				<key>ActionName</key>
+				<string>Display Notification</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>message</key>
+					<string></string>
+					<key>subtitle</key>
+					<string></string>
+					<key>title</key>
+					<string>Titler finished</string>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.Automator.Display-Notification</string>
+				<key>CFBundleVersion</key>
+				<string>1.0</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<true/>
+				<key>CanShowWhenRun</key>
+				<false/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryUtilities</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMDisplayNotificationAction</string>
+				<key>IgnoresInput</key>
+				<true/>
+				<key>InputUUID</key>
+				<string>33DBAF2E-DA48-4CBD-A26F-6906524118A8</string>
+				<key>Keywords</key>
+				<array/>
+				<key>OutputUUID</key>
+				<string>4FDBD092-DC13-4291-9B44-A0F8422B0A19</string>
+				<key>UUID</key>
+				<string>87DA273B-1617-48A8-97FF-510DDAC15BB5</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>Automator</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>subtitle</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+					<key>1</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>title</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>1</string>
+					</dict>
+					<key>2</key>
+					<dict>
+						<key>default value</key>
+						<string></string>
+						<key>name</key>
+						<string>message</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>2</string>
+					</dict>
+				</dict>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>369.000000:1401.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Display Notification.action/Contents/Resources/Base.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+	</array>
+	<key>connectors</key>
+	<dict>
+		<key>09172C97-8371-438C-A661-9FA1D6352CFD</key>
+		<dict>
+			<key>from</key>
+			<string>C7F2A1D1-726C-47C2-92F0-64D1F48D1542 - C7F2A1D1-726C-47C2-92F0-64D1F48D1542</string>
+			<key>to</key>
+			<string>9B8FCDCC-A559-4E4E-B3B6-FCF50A2B7617 - 9B8FCDCC-A559-4E4E-B3B6-FCF50A2B7617</string>
+		</dict>
+		<key>2201FA76-8864-41DD-B3D4-948E28B3DCCE</key>
+		<dict>
+			<key>from</key>
+			<string>047B70F8-B6E0-4DD9-BDDE-91D342689AAF - 047B70F8-B6E0-4DD9-BDDE-91D342689AAF</string>
+			<key>to</key>
+			<string>C3C03563-B9C0-450C-99C0-0BC56C1103B3 - C3C03563-B9C0-450C-99C0-0BC56C1103B3</string>
+		</dict>
+		<key>262AF27E-5141-4706-8F19-224A0B92A71D</key>
+		<dict>
+			<key>from</key>
+			<string>104EC456-816E-41B1-A2B7-436940FFEAD5 - 104EC456-816E-41B1-A2B7-436940FFEAD5</string>
+			<key>to</key>
+			<string>EA39FD4A-A2AF-4F97-9DA1-637E1F726968 - EA39FD4A-A2AF-4F97-9DA1-637E1F726968</string>
+		</dict>
+		<key>49022854-9ED7-4D96-BCA8-E46CA495F020</key>
+		<dict>
+			<key>from</key>
+			<string>C3C03563-B9C0-450C-99C0-0BC56C1103B3 - C3C03563-B9C0-450C-99C0-0BC56C1103B3</string>
+			<key>to</key>
+			<string>104EC456-816E-41B1-A2B7-436940FFEAD5 - 104EC456-816E-41B1-A2B7-436940FFEAD5</string>
+		</dict>
+		<key>5927BAB1-B3E3-4B25-B7B7-EC883937CA52</key>
+		<dict>
+			<key>from</key>
+			<string>9B8FCDCC-A559-4E4E-B3B6-FCF50A2B7617 - 9B8FCDCC-A559-4E4E-B3B6-FCF50A2B7617</string>
+			<key>to</key>
+			<string>87DA273B-1617-48A8-97FF-510DDAC15BB5 - 87DA273B-1617-48A8-97FF-510DDAC15BB5</string>
+		</dict>
+		<key>5CB71C76-04DA-4690-9BBD-814739F88089</key>
+		<dict>
+			<key>from</key>
+			<string>83A2BE94-F7A6-44BC-A545-9B9457D0BFB3 - 83A2BE94-F7A6-44BC-A545-9B9457D0BFB3</string>
+			<key>to</key>
+			<string>B577E849-A456-4534-AC7D-479C4A3C9AD3 - B577E849-A456-4534-AC7D-479C4A3C9AD3</string>
+		</dict>
+		<key>87D3CBCB-2D12-42F6-AF84-01D7EB4CC13D</key>
+		<dict>
+			<key>from</key>
+			<string>EA39FD4A-A2AF-4F97-9DA1-637E1F726968 - EA39FD4A-A2AF-4F97-9DA1-637E1F726968</string>
+			<key>to</key>
+			<string>C7F2A1D1-726C-47C2-92F0-64D1F48D1542 - C7F2A1D1-726C-47C2-92F0-64D1F48D1542</string>
+		</dict>
+		<key>8F7FF728-3B13-422F-B071-70772D47F0CA</key>
+		<dict>
+			<key>from</key>
+			<string>B577E849-A456-4534-AC7D-479C4A3C9AD3 - B577E849-A456-4534-AC7D-479C4A3C9AD3</string>
+			<key>to</key>
+			<string>047B70F8-B6E0-4DD9-BDDE-91D342689AAF - 047B70F8-B6E0-4DD9-BDDE-91D342689AAF</string>
+		</dict>
+		<key>C83D6E82-5649-4E73-9CB8-F74F1FA88D73</key>
+		<dict>
+			<key>from</key>
+			<string>C871CEC9-B5B6-4E01-AD92-26B70E6EE0B5 - C871CEC9-B5B6-4E01-AD92-26B70E6EE0B5</string>
+			<key>to</key>
+			<string>837D5B7B-AF2F-4ADA-9894-A01852A46DC2 - 837D5B7B-AF2F-4ADA-9894-A01852A46DC2</string>
+		</dict>
+		<key>F712CCFB-1EB1-4538-84FF-E44700E504CE</key>
+		<dict>
+			<key>from</key>
+			<string>837D5B7B-AF2F-4ADA-9894-A01852A46DC2 - 837D5B7B-AF2F-4ADA-9894-A01852A46DC2</string>
+		</dict>
+	</dict>
+	<key>variables</key>
+	<array>
+		<dict>
+			<key>UUID</key>
+			<string>C6C566C4-3C9D-44D5-AB54-96DFB711F350</string>
+			<key>identifier</key>
+			<string>com.apple.Automator.Variable.Storage</string>
+			<key>name</key>
+			<string>input</string>
+		</dict>
+		<dict>
+			<key>UUID</key>
+			<string>48685661-8B80-47DF-AF17-39D9F87C2619</string>
+			<key>identifier</key>
+			<string>com.apple.Automator.Variable.Storage</string>
+			<key>name</key>
+			<string>clipboard</string>
+		</dict>
+		<dict>
+			<key>UUID</key>
+			<string>53ED852E-4D86-4B74-BE08-6EE7B17D7F53</string>
+			<key>identifier</key>
+			<string>com.apple.Automator.Variable.Storage</string>
+			<key>name</key>
+			<string>arguments</string>
+		</dict>
+	</array>
+	<key>workflowMetaData</key>
+	<dict>
+		<key>serviceInputTypeIdentifier</key>
+		<string>com.apple.Automator.text</string>
+		<key>serviceOutputTypeIdentifier</key>
+		<string>com.apple.Automator.nothing</string>
+		<key>serviceProcessesInput</key>
+		<integer>0</integer>
+		<key>workflowTypeIdentifier</key>
+		<string>com.apple.Automator.servicesMenu</string>
+	</dict>
+</dict>
+</plist>

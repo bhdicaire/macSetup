@@ -1,0 +1,72 @@
+---
+# ============================================================
+# nas/vars/main.yml — UniFi NAS configuration
+#
+# All paths and share names are non-sensitive (topology only).
+# Credentials are in 1Password and resolved at runtime.
+# ============================================================
+
+# ── NAS identity ──────────────────────────────────────────────
+nas_hostname:  "nas.local"          # Bonjour / mDNS hostname
+nas_ip:        "192.168.1.x"        # override in host_vars if mDNS unreliable
+nas_user:      "bhdicaire"          # SMB username — password from 1Password
+
+# ── Mount points ──────────────────────────────────────────────
+nas_mount_root: "/Volumes/NAS"
+
+nas_shares:
+  # Public (anonymous read — fonts, non-sensitive assets)
+  - name:      "public"
+    mount:     "{{ nas_mount_root }}/public"
+    protocol:  "smb"                # smb or nfs
+    anonymous: true
+    required:  false                # playbook continues if unreachable
+
+  # Private (authenticated SMB — capture archives, KM macros, app prefs)
+  - name:      "private"
+    mount:     "{{ nas_mount_root }}/private"
+    protocol:  "smb"
+    anonymous: false
+    required:  false
+
+# ── Asset map: NAS path → local destination ───────────────────
+# Format: { src: "share/path", dest: "local/path", share: "share_name" }
+#
+# These are copied from NAS to local during provisioning.
+# The NAS is the authoritative source for licensed/private files.
+
+nas_public_assets:
+  # Licensed fonts not distributable via Homebrew
+  - src:   "fonts/operator-mono-nerd-font/"
+    dest:  "{{ home }}/Library/Fonts/"
+    share: "public"
+  - src:   "fonts/averta/"
+    dest:  "{{ home }}/Library/Fonts/"
+    share: "public"
+  - src:   "fonts/circular-std/"
+    dest:  "{{ home }}/Library/Fonts/"
+    share: "public"
+  - src:   "fonts/other/"
+    dest:  "{{ home }}/Library/Fonts/"
+    share: "public"
+
+nas_private_assets:
+  # Keyboard Maestro macro library
+  - src:   "keyboard-maestro/Keyboard Maestro Macros.kmsync"
+    dest:  "{{ home }}/Library/Application Support/Keyboard Maestro/"
+    share: "private"
+
+  # Karabiner backups (reference only — active config comes from chezmoi)
+  - src:   "karabiner/"
+    dest:  "{{ home }}/Library/Application Support/Karabiner/backups/"
+    share: "private"
+
+  # App preferences worth restoring
+  - src:   "prefs/DEVONthink/"
+    dest:  "{{ home }}/Library/Preferences/"
+    share: "private"
+
+  # macSetup capture archives (for reference)
+  - src:   "captures/"
+    dest:  "{{ home }}/Developer/macSetup/captures/"
+    share: "private"

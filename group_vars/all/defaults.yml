@@ -1,0 +1,28 @@
+---
+# ------------------------------------------------------------
+# Defaults — machine-agnostic
+# Override in host_vars/localhost/main.yml for per-machine values
+# ------------------------------------------------------------
+
+# ── Paths ────────────────────────────────────────────────────
+home:         "{{ lookup('env', 'HOME') }}"
+local_user:   "{{ lookup('env', 'USER') }}"
+playbook_path: "{{ playbook_dir }}"
+
+brew_prefixes:
+  x86_64: /usr/local
+  arm64:  /opt/homebrew
+
+brew_prefix: "{{ brew_prefixes[ansible_machine] }}"
+brew_bin:    "{{ brew_prefix }}/bin"
+brew_sbin:   "{{ brew_prefix }}/sbin"
+
+# ── Chezmoi / dotFiles ───────────────────────────────────────
+dotfiles_repo: "https://github.com/bhdicaire/dotFiles.git"
+
+# ── macOS Tahoe specifics ────────────────────────────────────
+# macOS Tahoe is expected on Apple Silicon only
+require_apple_silicon: true
+
+# ── Debug ────────────────────────────────────────────────────
+debug_ansible: false

@@ -1,0 +1,42 @@
+# ============================================================
+# ~/.ssh/config — managed by chezmoi (dot_ssh/config.tmpl)
+# ============================================================
+
+# ── Private hosts (not committed to git) ─────────────────────
+Include ~/.ssh/config.local
+
+# ── GitHub ───────────────────────────────────────────────────
+Host github.com
+    User git
+    IdentityFile ~/.ssh/github_bhd
+    AddKeysToAgent no
+    UseKeychain no
+
+# ── Global hardening ─────────────────────────────────────────
+Host *
+    # Post-quantum + strong classical key exchange
+    KexAlgorithms sntrup761x25519-sha512@openssh.com,curve25519-sha256,curve25519-sha256@libssh.org
+
+    # Strong symmetric ciphers only
+    Ciphers chacha20-poly1305@openssh.com,aes256-gcm@openssh.com,aes128-gcm@openssh.com
+
+    # ETM MACs only
+    MACs hmac-sha2-512-etm@openssh.com,hmac-sha2-256-etm@openssh.com
+
+    # SSHFP DNS fingerprint validation
+    VerifyHostKeyDNS yes
+
+    StrictHostKeyChecking accept-new
+    ServerAliveInterval 60
+    HashKnownHosts no
+    SendEnv LANG LC_*
+
+    # 1Password SSH agent — handles all key operations
+    UseKeychain no
+    AddKeysToAgent no
+    IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+    # Multiplexing — uncomment once sockets dir confirmed
+    # ControlMaster auto
+    # ControlPath ~/.ssh/sockets/%r@%h:%p
+    # ControlPersist 10m

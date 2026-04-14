@@ -1,0 +1,95 @@
+---
+# ============================================================
+# dotfiles — bootstrap chezmoi and apply dotFiles
+#
+# This role:
+#   1. Ensures chezmoi is installed (bootstrap did this too)
+#   2. Initialises the dotFiles repo if not already done
+#   3. Applies dotfiles (idempotent — safe to re-run)
+#   4. Verifies 1Password CLI integration works for templates
+# ============================================================
+
+- name: Check if chezmoi is installed
+  ansible.builtin.stat:
+    path: "{{ brew_bin }}/chezmoi"
+  register: chezmoi_bin
+  tags: [chezmoi]
+
+- name: Fail if chezmoi missing (should have been installed in packages)
+  ansible.builtin.fail:
+    msg: "chezmoi not found at {{ brew_bin }}/chezmoi. Run the packages role first."
+  when: not chezmoi_bin.stat.exists
+  tags: [chezmoi]
+
+- name: Check chezmoi source directory
+  ansible.builtin.stat:
+    path: "{{ home }}/.local/share/chezmoi/.git"
+  register: chezmoi_source
+  tags: [chezmoi]
+
+- name: Initialise chezmoi with dotFiles repository
+  ansible.builtin.command:
+    cmd: "{{ brew_bin }}/chezmoi init {{ dotfiles_repo }}"
+  when: not chezmoi_source.stat.exists
+  tags: [chezmoi]
+
+- name: Apply chezmoi dotfiles
+  ansible.builtin.command:
+    cmd: "{{ brew_bin }}/chezmoi apply --verbose"
+  changed_when: true          # chezmoi tracks its own idempotency internally
+  tags: [chezmoi]
+
+- name: Show chezmoi diff (informational)
+  ansible.builtin.command:
+    cmd: "{{ brew_bin }}/chezmoi diff"
+  changed_when: false
+  register: chezmoi_diff
+  failed_when: false
+  tags: [chezmoi]
+
+- name: Display diff summary
+  ansible.builtin.debug:
+    msg: "{{ chezmoi_diff.stdout_lines }}"
+  when:
+    - chezmoi_diff.stdout_lines | length > 0
+    - debug_ansible | default(false)
+  tags: [chezmoi]
+
+# ── Shell ─────────────────────────────────────────────────────
+- name: Ensure Homebrew zsh is in /etc/shells
+  ansible.builtin.lineinfile:
+    path: /etc/shells
+    line: "{{ brew_bin }}/zsh"
+    state: present
+  become: true
+  tags: [chezmoi, shell]
+
+- name: Set zsh as login shell for current user
+  ansible.builtin.command:
+    cmd: chsh -s {{ brew_bin }}/zsh {{ local_user }}
+  changed_when: false
+  become: true
+  tags: [chezmoi, shell]
+
+# ── Ghostty terminfo ──────────────────────────────────────────
+# Ghostty ships its own terminfo entry — needed for remote SSH hosts
+- name: Install Ghostty terminfo on local machine
+  ansible.builtin.command:
+    cmd: "{{ brew_bin }}/tic -x -o {{ home }}/.terminfo {{ brew_prefix }}/opt/ghostty/share/terminfo/ghostty.terminfo"
+    creates: "{{ home }}/.terminfo/g/ghostty"
+  failed_when: false
+  tags: [chezmoi, ghostty]
+
+# ── Add macOS-specific dotFiles to chezmoi ───────────────────
+# The dot_config/ and dot_ssh/ directories in the macSetup repo
+# are staging areas — run chezmoi add on them to merge into dotFiles
+- name: Note: add macOS dotFiles to chezmoi
+  ansible.builtin.debug:
+    msg: >
+      After chezmoi apply completes, add the macOS-specific configs
+      to your dotFiles repo:
+        chezmoi add ~/.config/ghostty/config
+        chezmoi add ~/.config/karabiner/karabiner.json
+        chezmoi add ~/.config/zsh/macos.zsh
+      See doc/chezmoi-macos.md for the full guide.
+  tags: [chezmoi]

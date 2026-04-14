@@ -1,0 +1,107 @@
+---
+# ============================================================
+# private-dotfiles — age encryption bootstrap for chezmoi
+#
+# Flow:
+#   1. Ensure `age` and `age-keygen` are installed
+#   2. Pull age private key from 1Password → ~/.config/chezmoi/key.txt
+#   3. Verify key matches the public recipient in chezmoi.toml
+#   4. Run chezmoi apply (decrypts Tier 3 files transparently)
+#   5. Verify encrypted files were decrypted correctly
+#
+# The age *public key* is stored in chezmoi.toml (committed).
+# The age *private key* lives only in 1Password and ~/.config/chezmoi/key.txt
+# (which is gitignored and never leaves the machine).
+# ============================================================
+
+# ── Prerequisites ────────────────────────────────────────────
+- name: Install age (encryption tool)
+  community.general.homebrew:
+    name: age
+    state: present
+  tags: [private-dotfiles, age]
+
+- name: Ensure chezmoi config directory exists
+  ansible.builtin.file:
+    path: "{{ home }}/.config/chezmoi"
+    state: directory
+    mode: "0700"
+  tags: [private-dotfiles, age]
+
+# ── Age key from 1Password ────────────────────────────────────
+- name: Check if age key already exists
+  ansible.builtin.stat:
+    path: "{{ home }}/.config/chezmoi/key.txt"
+  register: age_key_file
+  tags: [private-dotfiles, age]
+
+- name: Pull age private key from 1Password
+  ansible.builtin.shell: >
+    op document get "chezmoi age key" --vault Private >
+    {{ home }}/.config/chezmoi/key.txt
+  when: not age_key_file.stat.exists
+  no_log: true
+  register: age_key_pull
+  failed_when: age_key_pull.rc != 0
+  tags: [private-dotfiles, age]
+
+- name: Lock down age key permissions
+  ansible.builtin.file:
+    path: "{{ home }}/.config/chezmoi/key.txt"
+    mode: "0600"
+    owner: "{{ local_user }}"
+  tags: [private-dotfiles, age]
+
+- name: Extract public key from age key file
+  ansible.builtin.command:
+    cmd: >
+      grep '^# public key:' {{ home }}/.config/chezmoi/key.txt
+  register: age_public_key_line
+  changed_when: false
+  failed_when: false
+  tags: [private-dotfiles, age]
+
+- name: Display age public key (for chezmoi.toml recipient verification)
+  ansible.builtin.debug:
+    msg: "Age public key: {{ age_public_key_line.stdout | replace('# public key: ', '') }}"
+  when: age_public_key_line.rc == 0
+  tags: [private-dotfiles, age]
+
+# ── chezmoi.toml bootstrap ────────────────────────────────────
+# This writes ~/.config/chezmoi/chezmoi.toml on first run.
+# On subsequent runs it is a no-op (creates: path).
+- name: Write chezmoi.toml with age and 1Password config
+  ansible.builtin.template:
+    src:   "chezmoi.toml.j2"
+    dest:  "{{ home }}/.config/chezmoi/chezmoi.toml"
+    mode:  "0600"
+    force: false                 # never overwrite if it already exists
+  tags: [private-dotfiles, chezmoi-config]
+
+# ── Apply dotfiles (decrypts Tier 3 files) ───────────────────
+- name: Apply chezmoi (includes encrypted files)
+  ansible.builtin.command:
+    cmd: "{{ brew_bin }}/chezmoi apply --verbose"
+  changed_when: true
+  tags: [private-dotfiles, chezmoi]
+
+# ── Verify Tier 3 files decrypted correctly ───────────────────
+- name: Verify SSH config.local was decrypted
+  ansible.builtin.stat:
+    path: "{{ home }}/.ssh/config.local"
+  register: ssh_config_local
+  tags: [private-dotfiles, verify]
+
+- name: Verify AWS credentials were decrypted
+  ansible.builtin.stat:
+    path: "{{ home }}/.aws/credentials"
+  register: aws_credentials
+  tags: [private-dotfiles, verify]
+
+- name: Private dotfiles verification summary
+  ansible.builtin.debug:
+    msg: |
+      Tier 3 private dotfiles:
+        ~/.ssh/config.local  : {{ '✓ present' if ssh_config_local.stat.exists else '✗ missing — add to dotFiles with: chezmoi add --encrypt ~/.ssh/config.local' }}
+        ~/.aws/credentials   : {{ '✓ present' if aws_credentials.stat.exists else '✗ missing (expected if not using AWS)' }}
+  tags: [private-dotfiles, verify]

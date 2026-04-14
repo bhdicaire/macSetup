@@ -1,0 +1,85 @@
+---
+# ============================================================
+# host_vars/localhost/main.yml
+# Machine: Dogbert — Apple M3 Max, 96 GB, macOS Tahoe
+# Migrating from: Hal9000 (Sonoma 14.7.7)
+# ============================================================
+
+# ── Identity ─────────────────────────────────────────────────
+computer_name:      "Dogbert"
+local_hostname:     "dogbert"
+local_user_comment: "Benoît H. Dicaire"
+local_shell:        "/opt/homebrew/bin/zsh"
+
+# ── Directory structure ───────────────────────────────────────
+user_directories:
+  - "~/Developer"
+  - "~/Developer/A6Z"
+  - "~/Developer/personal"
+  - "~/Developer/macSetup"
+  - "~/Documents/A6Z"
+  - "~/Documents/Clients"
+  - "~/Documents/Design"
+  - "~/Documents/Education"
+  - "~/Documents/Finance"
+  - "~/.ssh/sockets"
+
+# ── Dock ─────────────────────────────────────────────────────
+dock_position:      "left"
+dock_autohide:      true
+dock_tile_size:     48
+dock_magnification: false
+dock_show_recents:  false
+
+dock_apps:
+  - "/Applications/1Password.app"
+  - "/Applications/Ghostty.app"
+  - "/Applications/BBEdit.app"
+  - "/Applications/Fantastical.app"
+  - "/Applications/Things3.app"
+  - "/Applications/Bear.app"
+  - "/Applications/GoodLinks.app"
+  - "/Applications/DEVONthink 3.app"
+  - "/Applications/Mimestream.app"
+  - "/Applications/Safari.app"
+  - "/Applications/Firefox.app"
+  - "/Applications/Google Chrome.app"
+  - "/Applications/Slack.app"
+  - "/Applications/Signal.app"
+  - "/Applications/Zoom.app"
+  - "/Applications/Reeder.app"
+  - "/Applications/Affinity Designer 2.app"
+  - "/System/Applications/Music.app"
+  - "/Applications/Roon.app"
+  - "/System/Applications/Utilities/Activity Monitor.app"
+
+# ── Login items ───────────────────────────────────────────────
+login_items:
+  - "/Applications/1Password.app"
+  - "/Applications/Little Snitch.app"
+  - "/Applications/Micro Snitch.app"
+  - "/Applications/Bartender 5.app"
+  - "/Applications/iStat Menus.app"
+  - "/Applications/Keyboard Maestro.app"
+  - "/Applications/PopClip.app"
+
+# ── File-type associations ────────────────────────────────────
+file_type_associations:
+  - bundle_id: "com.barebones.bbedit"
+    uti:       "public.plain-text"
+    handler:   "all"
+  - bundle_id: "com.barebones.bbedit"
+    uti:       "public.data"
+    handler:   "all"
+  - bundle_id: "com.barebones.bbedit"
+    uti:       "net.daringfireball.markdown"
+    handler:   "all"
+  - bundle_id: "com.barebones.bbedit"
+    uti:       "public.shell-script"
+    handler:   "all"
+  - bundle_id: "com.barebones.bbedit"
+    uti:       "public.source-code"
+    handler:   "all"
+  - bundle_id: "com.colliderli.iina"
+    uti:       "public.movie"
+    handler:   "all"

@@ -1,0 +1,22 @@
+---
+# ============================================================
+# handlers — triggered by notify: in macos tasks
+# ============================================================
+
+- name: Restart Finder
+  ansible.builtin.command:
+    cmd: killall Finder
+  changed_when: false
+  failed_when: false
+
+- name: Restart Dock
+  ansible.builtin.command:
+    cmd: killall Dock
+  changed_when: false
+  failed_when: false
+
+- name: Restart SystemUIServer
+  ansible.builtin.command:
+    cmd: killall SystemUIServer
+  changed_when: false
+  failed_when: false

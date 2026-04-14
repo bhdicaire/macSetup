@@ -1,0 +1,43 @@
+# Secrets — never commit these
+group_vars/secrets.yml
+group_vars/secrets.yml.age
+host_vars/*/secrets.yml
+*.vault
+
+# age private key — stays on disk and in 1Password only
+roles/private-dotfiles/templates/.chezmoi.toml.local
+
+# Licensed fonts — not distributable
+roles/fonts/files/fonts/private/
+
+# Ansible
+*.retry
+/collections/
+
+# Logs and ephemeral files
+*.log
+/tmp/
+
+# macOS
+.DS_Store
+**/.DS_Store
+.Spotlight-V100
+.Trashes
+
+# Editors
+.vscode/
+*.swp
+*.swo
+*~
+.idea/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Homebrew
+Brewfile.lock.json
+
+# NAS credentials (if stored locally)
+.nas-credentials

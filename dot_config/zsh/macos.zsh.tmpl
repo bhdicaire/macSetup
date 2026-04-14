@@ -1,0 +1,73 @@
+{{- if eq .chezmoi.os "darwin" -}}
+# ============================================================
+# ~/.config/zsh/macos.zsh
+# macOS-specific Zsh configuration — managed by chezmoi
+# Loaded from ~/.config/zsh/.zshrc
+# ============================================================
+
+# ── Homebrew ─────────────────────────────────────────────────
+eval "$(/opt/homebrew/bin/brew shellenv)"
+export HOMEBREW_NO_ANALYTICS=1
+export HOMEBREW_NO_ENV_HINTS=1
+export HOMEBREW_CLEANUP_MAX_AGE_DAYS=30
+
+# Homebrew completions
+if type brew &>/dev/null; then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
+# ── 1Password SSH agent ───────────────────────────────────────
+export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+# ── Editor ───────────────────────────────────────────────────
+export EDITOR="bbedit --wait"
+export VISUAL="$EDITOR"
+
+# ── PATH additions ────────────────────────────────────────────
+export PATH="$HOME/bin:/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+
+# ── Ghostty shell integration ─────────────────────────────────
+# (handled by Ghostty's shell-integration = zsh setting)
+
+# ── macOS aliases ─────────────────────────────────────────────
+alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
+alias showfiles="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
+alias hidefiles="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+alias ldd="otool -L"           # macOS equivalent of ldd
+
+# Homebrew update everything
+alias buu="brew update && brew upgrade && brew cleanup --prune=7"
+alias bdoc="brew doctor"
+alias blist="brew list --formula | column"
+alias bclist="brew list --cask | column"
+
+# Quick app launchers
+alias preview="open -a Preview"
+alias finder="open -a Finder ."
+
+# ── Utility functions ─────────────────────────────────────────
+# Show/hide Desktop icons
+function desktop-show() { defaults write com.apple.finder CreateDesktop true; killall Finder; }
+function desktop-hide() { defaults write com.apple.finder CreateDesktop false; killall Finder; }
+
+# Quick look from terminal
+function ql() { qlmanage -p "$@" &>/dev/null; }
+
+# Open man page in Preview (PDF)
+function manpdf() { man -t "$1" | open -f -a Preview; }
+
+# Flush DNS + show result
+function dns-flush() {
+  sudo dscacheutil -flushcache
+  sudo killall -HUP mDNSResponder
+  echo "DNS cache flushed"
+  scutil --dns | grep nameserver
+}
+
+# Get external IP
+function myip() {
+  echo "External: $(curl -s https://api.ipify.org)"
+  echo "Local:    $(ipconfig getifaddr en0 2>/dev/null || ipconfig getifaddr en1)"
+}
+{{- end }}

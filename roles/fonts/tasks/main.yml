@@ -1,0 +1,31 @@
+---
+# ============================================================
+# fonts — install private / bundled fonts not in Homebrew
+#
+# Homebrew cask fonts (DM Mono, DM Sans, Roboto, etc.) are
+# already handled in the packages role. This role handles:
+#   - Balsamiq Sans (bundled in the repo under files/fonts/)
+#   - Any other private fonts you've licensed
+# ============================================================
+
+- name: Ensure user Fonts directory exists
+  ansible.builtin.file:
+    path: "{{ home }}/Library/Fonts"
+    state: directory
+    mode: "0755"
+  tags: [fonts]
+
+- name: Install bundled private fonts
+  ansible.builtin.copy:
+    src:  "fonts/"
+    dest: "{{ home }}/Library/Fonts/"
+    mode: "0644"
+  tags: [fonts]
+
+- name: Flush font cache
+  ansible.builtin.command:
+    cmd: atsutil databases -remove
+  become: true
+  changed_when: false
+  failed_when: false
+  tags: [fonts]

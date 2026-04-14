@@ -1,0 +1,20 @@
+---
+# ============================================================
+# VSCode extensions — applied after the cask installs VSCode
+# ============================================================
+
+- name: Check VSCode is installed
+  ansible.builtin.stat:
+    path: /Applications/Visual Studio Code.app/Contents/Resources/app/bin/code
+  register: vscode_bin
+  tags: [vscode]
+
+- name: Install VSCode extensions
+  ansible.builtin.command:
+    cmd: >
+      /Applications/Visual\ Studio\ Code.app/Contents/Resources/app/bin/code
+      --install-extension {{ item }} --force
+  loop: "{{ vscode_extensions }}"
+  when: vscode_bin.stat.exists
+  changed_when: true
+  tags: [vscode]

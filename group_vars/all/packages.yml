@@ -1,0 +1,358 @@
+---
+# ============================================================
+# packages.yml — software installation manifest
+# Reconciled from mac-capture-20260410 on Hal9000 (Sonoma 14.7.7)
+# Target: Dogbert (macOS Tahoe, Apple M3 Max, 96 GB)
+#
+# Annotations:
+#   ← confirmed in real Brewfile
+#   ← NEW additions for Tahoe / clean install
+#   # SKIP — intentionally not carrying forward (reason noted)
+# ============================================================
+
+
+# ── Homebrew taps ────────────────────────────────────────────
+brew_taps:
+  - jeffreywildman/virt-manager   # ← virt-viewer for remote VMs
+  - oktadeveloper/tap             # ← Okta CLI
+
+
+# ── CLI tools (formulae) ─────────────────────────────────────
+brew:
+  # ── Bootstrap core (also installed by scripts/bootstrap.sh)
+  - git
+  - chezmoi
+  - mas
+  - ansible
+  - ansible-lint
+
+  # ── Shell & prompt
+  - zsh
+  - bash                         # Homebrew bash 5 (scripts default to /bin/bash 3)
+  - starship
+  - eza                          # modern ls
+  - bat                          # modern cat
+  - glow                         # markdown renderer in terminal
+  - fastfetch                    # system info (neofetch successor)
+
+  # ── Search & filesystem
+  - ack
+  - ripgrep
+  - tree
+  - fd                           # modern find
+  - fzf                          # fuzzy finder
+  - zoxide                       # smarter cd
+  - findutils
+  - moreutils
+
+  # ── Text processing
+  - coreutils
+  - gawk
+  - grep
+  - gnu-tar
+  - rename
+  - jq
+  - xq                           # XML/HTML jq
+  - yq
+  - pandoc
+  - mdless
+
+  # ── Network & security
+  - curl
+  - wget
+  - nmap
+  - ssh-copy-id
+  - sshpass
+  - gnupg
+  - pinentry-mac                 # 1Password SSH agent integration
+  - 1password-cli
+  - unbound                      # DNS resolver / validation
+  - dnscontrol
+
+  # ── Cloud & infrastructure
+  - awscli
+  - azure-cli
+  - rclone
+  - minio-mc
+  - monolith                     # save full web pages as single HTML
+
+  # ── Developer tools
+  - gh                           # GitHub CLI
+  - go
+  - node
+  - yarn
+  - pipx                         # Python CLI tool installer (isolated envs)
+  - shellcheck
+  - markdownlint-cli
+  - yamllint
+  - editorconfig-checker
+
+  # ── Media
+  - ffmpeg
+  - exiftool
+  - weasyprint                   # HTML/CSS to PDF
+
+  # ── Productivity CLI
+  - hugo
+  - gickup                       # Git repos backup
+  - rsync
+  - tmux
+  - cowsay
+  - bcrypt
+
+  # ── Hardware / Yubikey
+  - ykman                        # YubiKey CLI
+  - yubico-piv-tool
+
+  # ── macOS-specific helpers
+  - dockutil
+  - duti                         # file type associations
+  - m-cli                        # macOS CLI utility
+
+  # ── virt-manager tap
+  - jeffreywildman/virt-manager/virt-viewer
+
+  # SKIP: mackup — superseded by chezmoi
+  # SKIP: python3 directly — use pipx for CLI tools
+
+
+# ── GUI applications (casks) ─────────────────────────────────
+brew_cask:
+  # ── Security — install first
+  - 1password
+  - 1password-cli
+  - little-snitch
+  - micro-snitch
+  - yubico-yubikey-manager
+  - yubico-authenticator
+  - suspicious-package
+  - cloudflare-warp
+
+  # ── Terminal — Ghostty replaces Terminal.app
+  - ghostty
+
+  # ── Browsers
+  - firefox
+  - google-chrome
+  - microsoft-edge
+  - orion                        # WebKit + Firefox extensions
+  - ungoogled-chromium           # privacy-focused Chromium
+
+  # ── Communication
+  - slack
+  - signal
+  - zoom
+  - webex
+  - discord
+  - microsoft-teams
+
+  # ── Email
+  - mimestream                   # native Gmail client
+
+  # ── Productivity / writing
+  - bbedit
+  - fantastical
+  - keyboard-maestro
+  - setapp
+  - devonthink
+  - raindropio
+  - deepl
+  - popclip
+  - mindjet-mindmanager
+
+  # ── File management
+  - hazel
+  - keka
+  - superduper
+  - chronosync
+  - google-drive
+  - backuploupe                  # Time Machine analysis
+  - cyberduck                    # FTP/SFTP/S3 browser
+  - neofinder                    # file manager with cataloguing
+
+  # ── Development
+  - visual-studio-code
+  - github                       # GitHub Desktop
+  - kaleidoscope                 # diff tool
+  - drawio
+  - balsamiq-wireframes
+
+  # ── Fonts (cask delivery — public families)
+  - font-dm-mono
+  - font-dm-sans
+  - font-dm-serif-display
+  - font-roboto-mono
+  - font-roboto-serif
+  - font-roboto-slab
+  - font-source-code-pro
+  - font-libre-franklin
+  # Private fonts: Operator Mono NF, Averta, Circular, etc.
+  # → installed by roles/fonts/tasks/main.yml from bundled files
+
+  # ── Media & creative
+  - vlc
+  - handbrake-app                # cask name is handbrake-app (not handbrake)
+  - obs
+  - affinity-designer
+  - affinity-photo
+  - affinity-publisher
+  - rightfont
+  - audacity
+  - xld                          # X Lossless Decoder
+  - makemkv
+  - calibre
+
+  # ── Hardware / peripherals
+  - elgato-camera-hub
+  - elgato-control-center
+  - elgato-stream-deck
+  - elgato-wave-link
+  - fujitsu-scansnap-home
+  - philips-hue-sync
+  - karabiner-elements
+  - sonos
+  - coconutbattery               # battery health
+
+  # ── Microsoft Office ecosystem
+  - microsoft-office
+  - microsoft-auto-update
+  - microsoft-remote-desktop
+  - microsoft-azure-storage-explorer
+  - mactex                       # LaTeX distribution
+
+  # ── Utilities
+  - balenaetcher
+  - kextviewr
+  - pocket-casts
+  - roon
+  - banktivity
+  - bookmacster
+  - force-paste
+  - omnigraffle                  # use cask — MAS id:0 is broken
+  - macfuse
+  # nitro-pdf-pro → installed via SetApp (see scripts/setapp-install.sh)
+  - keybase
+  - parallels-toolbox
+  - wireshark-app                # cask name on Tahoe
+
+  # SKIP: mega — install manually if needed (LaunchAgent-based)
+  # SKIP: terabox — not carrying forward
+  # SKIP: docker — use Parallels/colima if needed
+
+
+# ── Mac App Store ─────────────────────────────────────────────
+# Exact IDs reconciled from mas/installed.txt on Hal9000
+mas_apps:
+  - id: "1569813296"
+    name: "1Password for Safari"
+  - id: "1598429775"
+    name: "Antidote for Safari"
+  - id: "1044484672"
+    name: "ApolloOne"
+  - id: "1091189122"
+    name: "Bear"
+  - id: "1453365242"
+    name: "Brother P-touch Editor"
+  - id: "1627217996"
+    name: "Brother Transfer Express"
+  - id: "571213070"
+    name: "DaVinci Resolve"
+  - id: "617440773"
+    name: "DFind"
+  - id: "402569179"
+    name: "Find Any File"
+  - id: "6636520519"
+    name: "Framous"
+  - id: "768053424"
+    name: "Gapplin"
+  - id: "1474335294"
+    name: "GoodLinks"
+  - id: "408981434"
+    name: "iMovie"
+  - id: "1482630322"
+    name: "Internet Access Policy Viewer"
+  - id: "404167677"
+    name: "IP Scanner Ultra"
+  - id: "409183694"
+    name: "Keynote"
+  - id: "302584613"
+    name: "Kindle"
+  - id: "411897373"
+    name: "Letter Opener"
+  - id: "510620098"
+    name: "MediaInfo"
+  - id: "603637384"
+    name: "Name Mangler 3"
+  - id: "409203825"
+    name: "Numbers"
+  - id: "490179405"
+    name: "Okta Verify"
+  - id: "823766827"
+    name: "OneDrive"
+  - id: "409201541"
+    name: "Pages"
+  - id: "1236567663"
+    name: "Panels"
+  - id: "639968404"
+    name: "Parcel Classic"
+  - id: "457503727"
+    name: "PST Bridge"
+  - id: "1529448980"
+    name: "Reeder"
+  - id: "409907375"
+    name: "Remote Desktop"
+  - id: "442168834"
+    name: "SiteSucker"
+  - id: "1577082754"
+    name: "Subscriptions"
+  - id: "899247664"
+    name: "TestFlight"
+  - id: "904280696"
+    name: "Things"
+  # SKIP: TeraBox (1509453185) — not carrying forward
+  # NOTE: OmniGraffle MAS id is 0 (broken) — installed via cask above
+
+
+# ── VSCode extensions ─────────────────────────────────────────
+# Applied by roles/packages/tasks/vscode.yml after VSCode cask install
+vscode_extensions:
+  - davidanson.vscode-markdownlint
+  - druideinformatique.antidote
+  - ecmel.vscode-html-css
+  - esbenp.prettier-vscode
+  - ikbengeenrobot.ansible-variable-lookup
+  - ms-python.debugpy
+  - ms-python.python
+  - ms-python.vscode-pylance
+  - ms-python.vscode-python-envs
+  - parallelsdesktop.parallels-desktop
+  - redhat.ansible
+  - redhat.vscode-yaml
+  - yzhang.markdown-all-in-one
+
+
+# ── SetApp applications ───────────────────────────────────────
+# Installed via scripts/setapp-install.sh (guided, uses setapp:// URL scheme)
+# SetApp has no public install API — the script opens each app page
+# in SetApp so you can click Install with one keypress.
+setapp_apps:
+  - Bartender
+  - Bear                # also available in MAS — prefer SetApp for subscription sync
+  - Bike
+  - BusyContacts
+  - CleanMyMac X
+  - CleanShot X
+  - ForkLift
+  - Gemini
+  - Hookmark
+  - HoudahSpot
+  - iStat Menus
+  - Lungo
+  - Marked
+  - Merlin Project Express
+  - Nitro PDF Pro       # removed from cask list — SetApp version preferred
+  - OpenIN
+  - PDF Squeezer
+  - Permute
+  - PullTube
+  - Soulver

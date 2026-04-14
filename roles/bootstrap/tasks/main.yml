@@ -1,0 +1,65 @@
+---
+# ============================================================
+# bootstrap — prerequisites before any package installs
+# ============================================================
+
+- name: Ensure Xcode Command Line Tools are installed
+  ansible.builtin.command:
+    cmd: xcode-select --print-path
+  register: xcode_check
+  changed_when: false
+  failed_when: false
+
+- name: Install Xcode Command Line Tools
+  ansible.builtin.command:
+    cmd: xcode-select --install
+  when: xcode_check.rc != 0
+  register: xcode_install
+  failed_when: false  # user interaction may be needed; tolerate
+
+- name: Accept Xcode licence
+  ansible.builtin.command:
+    cmd: xcodebuild -license accept
+  become: true
+  changed_when: false
+  when: xcode_check.rc == 0
+
+- name: Install Rosetta 2 on Apple Silicon
+  ansible.builtin.command:
+    cmd: softwareupdate --install-rosetta --agree-to-license
+    creates: /Library/Apple/System/Library/Receipts/com.apple.pkg.RosettaUpdateAuto.plist
+  become: true
+  when: ansible_machine == "arm64"
+
+- name: Check Homebrew is installed
+  ansible.builtin.stat:
+    path: "{{ brew_bin }}/brew"
+  register: brew_installed
+
+- name: Install Homebrew
+  ansible.builtin.shell: >
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  environment:
+    NONINTERACTIVE: "1"
+  when: not brew_installed.stat.exists
+
+- name: Ensure Homebrew is up to date
+  ansible.builtin.command:
+    cmd: "{{ brew_bin }}/brew update --quiet"
+  changed_when: false
+
+- name: Ensure Homebrew ownership allows staff group updates
+  ansible.builtin.file:
+    path: "{{ brew_prefix }}"
+    group: staff
+    state: directory
+    recurse: true
+    mode: "0775"
+  become: true
+
+- name: Set HOMEBREW_NO_ANALYTICS
+  community.general.osx_defaults:
+    domain: com.github.Homebrew
+    key: analyticsdisabled
+    type: bool
+    value: true

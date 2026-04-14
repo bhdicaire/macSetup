@@ -1,0 +1,441 @@
+---
+# ============================================================
+# macos.yml — osx_defaults configuration
+#
+# Organized by domain. Each entry maps to one `defaults write`
+# call via community.general.osx_defaults.
+#
+# Types: bool, int, float, string, array, dict, date
+# run `defaults read <domain> <key>` on Sonoma to capture
+# current values with scripts/capture.sh
+# ============================================================
+
+
+# ── Activity Monitor ─────────────────────────────────────────
+macos_activity_monitor:
+  - domain: com.apple.ActivityMonitor
+    key: OpenMainWindow
+    type: bool
+    value: true
+  - domain: com.apple.ActivityMonitor
+    key: IconType
+    type: int
+    value: 5                    # CPU usage in Dock icon
+  - domain: com.apple.ActivityMonitor
+    key: ShowCategory
+    type: int
+    value: 0                    # show all processes
+  - domain: com.apple.ActivityMonitor
+    key: SortColumn
+    type: string
+    value: CPUUsage
+  - domain: com.apple.ActivityMonitor
+    key: SortDirection
+    type: int
+    value: 0
+
+
+# ── Finder ───────────────────────────────────────────────────
+macos_finder:
+  # View options
+  - domain: com.apple.finder
+    key: FXPreferredViewStyle
+    type: string
+    value: "Nlsv"               # list view
+  - domain: com.apple.finder
+    key: FXDefaultSearchScope
+    type: string
+    value: "SCcf"               # search current folder
+  - domain: com.apple.finder
+    key: FXEnableExtensionChangeWarning
+    type: bool
+    value: false
+  - domain: com.apple.finder
+    key: ShowStatusBar
+    type: bool
+    value: true
+  - domain: com.apple.finder
+    key: ShowPathbar
+    type: bool
+    value: true
+  - domain: com.apple.finder
+    key: ShowTabView
+    type: bool
+    value: true
+  - domain: com.apple.finder
+    key: _FXShowPosixPathInTitle
+    type: bool
+    value: false
+  - domain: com.apple.finder
+    key: _FXSortFoldersFirst
+    type: bool
+    value: true
+  # Show hidden files
+  - domain: com.apple.finder
+    key: AppleShowAllFiles
+    type: bool
+    value: false                # toggle with ⌘⇧. when needed
+  # Show extensions
+  - domain: NSGlobalDomain
+    key: AppleShowAllExtensions
+    type: bool
+    value: true
+  # Sidebar icon size (1=small, 2=medium, 3=large)
+  - domain: NSGlobalDomain
+    key: NSTableViewDefaultSizeMode
+    type: int
+    value: 2
+  # New window opens home folder (PfHm)
+  - domain: com.apple.finder
+    key: NewWindowTarget
+    type: string
+    value: "PfHm"
+  - domain: com.apple.finder
+    key: NewWindowTargetPath
+    type: string
+    value: "file://{{ home }}/"
+  # External drive / network / removable media on Desktop
+  - domain: com.apple.finder
+    key: ShowExternalHardDrivesOnDesktop
+    type: bool
+    value: true
+  - domain: com.apple.finder
+    key: ShowHardDrivesOnDesktop
+    type: bool
+    value: false
+  - domain: com.apple.finder
+    key: ShowMountedServersOnDesktop
+    type: bool
+    value: true
+  - domain: com.apple.finder
+    key: ShowRemovableMediaOnDesktop
+    type: bool
+    value: true
+  # Avoid creating .DS_Store on network/USB volumes
+  - domain: com.apple.desktopservices
+    key: DSDontWriteNetworkStores
+    type: bool
+    value: true
+  - domain: com.apple.desktopservices
+    key: DSDontWriteUSBStores
+    type: bool
+    value: true
+  # Disable iCloud Desktop/Documents sync
+  - domain: com.apple.finder
+    key: FXICloudDriveEnabled
+    type: bool
+    value: false
+
+
+# ── Dock ─────────────────────────────────────────────────────
+# The dock apps list and position are in host_vars; see roles/macos/tasks/dock.yml
+macos_dock:
+  - domain: com.apple.dock
+    key: autohide
+    type: bool
+    value: "{{ dock_autohide | default(true) }}"
+  - domain: com.apple.dock
+    key: tilesize
+    type: int
+    value: "{{ dock_tile_size | default(48) }}"
+  - domain: com.apple.dock
+    key: magnification
+    type: bool
+    value: "{{ dock_magnification | default(false) }}"
+  - domain: com.apple.dock
+    key: show-recents
+    type: bool
+    value: "{{ dock_show_recents | default(false) }}"
+  - domain: com.apple.dock
+    key: mru-spaces
+    type: bool
+    value: false                # don't auto-rearrange Spaces
+  - domain: com.apple.dock
+    key: expose-animation-duration
+    type: float
+    value: 0.1
+  - domain: com.apple.dock
+    key: launchanim
+    type: bool
+    value: false                # disable bounce animation
+
+
+# ── UX / Global ──────────────────────────────────────────────
+macos_ux:
+  # Appearance
+  - domain: NSGlobalDomain
+    key: AppleInterfaceStyle
+    type: string
+    value: "Dark"
+  - domain: NSGlobalDomain
+    key: AppleAccentColor
+    type: int
+    value: -1                   # graphite
+  # Scrollbar
+  - domain: NSGlobalDomain
+    key: AppleShowScrollBars
+    type: string
+    value: "WhenScrolling"
+  # Animations
+  - domain: NSGlobalDomain
+    key: NSAutomaticWindowAnimationsEnabled
+    type: bool
+    value: false
+  - domain: NSGlobalDomain
+    key: NSWindowResizeTime
+    type: float
+    value: 0.001
+  # Keyboard
+  - domain: NSGlobalDomain
+    key: KeyRepeat
+    type: int
+    value: 2
+  - domain: NSGlobalDomain
+    key: InitialKeyRepeat
+    type: int
+    value: 15
+  - domain: NSGlobalDomain
+    key: ApplePressAndHoldEnabled
+    type: bool
+    value: false                # allow key repeat (not accent popup)
+  # Spelling / autocorrect — disable for developer sanity
+  - domain: NSGlobalDomain
+    key: NSAutomaticSpellingCorrectionEnabled
+    type: bool
+    value: false
+  - domain: NSGlobalDomain
+    key: NSAutomaticCapitalizationEnabled
+    type: bool
+    value: false
+  - domain: NSGlobalDomain
+    key: NSAutomaticDashSubstitutionEnabled
+    type: bool
+    value: false
+  - domain: NSGlobalDomain
+    key: NSAutomaticQuoteSubstitutionEnabled
+    type: bool
+    value: false
+  - domain: NSGlobalDomain
+    key: NSAutomaticPeriodSubstitutionEnabled
+    type: bool
+    value: false
+  # Screenshots
+  - domain: com.apple.screencapture
+    key: location
+    type: string
+    value: "{{ home }}/Desktop"
+  - domain: com.apple.screencapture
+    key: type
+    type: string
+    value: "png"
+  - domain: com.apple.screencapture
+    key: disable-shadow
+    type: bool
+    value: true
+  # Trackpad: tap to click
+  - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+    key: Clicking
+    type: bool
+    value: true
+  - domain: NSGlobalDomain
+    key: com.apple.mouse.tapBehavior
+    type: int
+    value: 1
+  # Hot corners — disabled (use Keyboard Maestro instead)
+  - domain: com.apple.dock
+    key: wvous-tl-corner
+    type: int
+    value: 0
+  - domain: com.apple.dock
+    key: wvous-tr-corner
+    type: int
+    value: 0
+  - domain: com.apple.dock
+    key: wvous-bl-corner
+    type: int
+    value: 0
+  - domain: com.apple.dock
+    key: wvous-br-corner
+    type: int
+    value: 0
+  # Crash reporter: log only
+  - domain: com.apple.CrashReporter
+    key: DialogType
+    type: string
+    value: "none"
+  # Disable Notification Center gestures
+  - domain: com.apple.driver.AppleBluetoothMultitouch.trackpad
+    key: TrackpadTwoFingerFromRightEdgeSwipeGesture
+    type: int
+    value: 0
+
+
+# ── Security ─────────────────────────────────────────────────
+macos_security:
+  # Require password immediately after sleep / screensaver
+  - domain: com.apple.screensaver
+    key: askForPassword
+    type: int
+    value: 1
+  - domain: com.apple.screensaver
+    key: askForPasswordDelay
+    type: int
+    value: 0
+  # Gatekeeper: keep enabled (value 1 = on)
+  # Do NOT set via defaults — use spctl; managed separately
+
+
+# ── Safari ────────────────────────────────────────────────────
+macos_safari:
+  - domain: com.apple.Safari
+    key: HomePage
+    type: string
+    value: "about:blank"
+  - domain: com.apple.Safari
+    key: AutoOpenSafeDownloads
+    type: bool
+    value: false
+  - domain: com.apple.Safari
+    key: ShowFullURLInSmartSearchField
+    type: bool
+    value: true
+  - domain: com.apple.Safari
+    key: SuppressSearchSuggestions
+    type: bool
+    value: true
+  - domain: com.apple.Safari
+    key: UniversalSearchEnabled
+    type: bool
+    value: false
+  - domain: com.apple.Safari
+    key: SendDoNotTrackHTTPHeader
+    type: bool
+    value: true
+  - domain: com.apple.Safari
+    key: WebKitJavaEnabled
+    type: bool
+    value: false
+  - domain: com.apple.Safari
+    key: com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaEnabled
+    type: bool
+    value: false
+
+
+# ── Mail ─────────────────────────────────────────────────────
+macos_mail:
+  - domain: com.apple.mail
+    key: DisableInlineAttachmentViewing
+    type: bool
+    value: true
+  - domain: com.apple.mail
+    key: DisableSendAnimations
+    type: bool
+    value: true
+  - domain: com.apple.mail
+    key: DisableReplyAnimations
+    type: bool
+    value: true
+  - domain: com.apple.mail
+    key: AddressesIncludeNameOnPasteboard
+    type: bool
+    value: false
+
+
+# ── Siri ─────────────────────────────────────────────────────
+macos_siri:
+  - domain: com.apple.Siri
+    key: SiriPrefStashedStatusMenuVisible
+    type: bool
+    value: false
+  - domain: com.apple.assistant.backedup
+    key: Session Siri Started For Keyboards
+    type: bool
+    value: false
+
+
+# ── Time Machine ─────────────────────────────────────────────
+macos_time_machine:
+  - domain: com.apple.TimeMachine
+    key: DoNotOfferNewDisksForBackup
+    type: bool
+    value: true              # don't prompt for new drives as TM backup
+
+# ── App Store ────────────────────────────────────────────────
+macos_app_store:
+  - domain: com.apple.SoftwareUpdate
+    key: AutomaticCheckEnabled
+    type: bool
+    value: true
+  - domain: com.apple.SoftwareUpdate
+    key: ScheduleFrequency
+    type: int
+    value: 1
+  - domain: com.apple.SoftwareUpdate
+    key: AutomaticDownload
+    type: bool
+    value: false             # download but don't auto-install OS updates
+  - domain: com.apple.SoftwareUpdate
+    key: CriticalUpdateInstall
+    type: bool
+    value: true
+  - domain: com.apple.commerce
+    key: AutoUpdate
+    type: bool
+    value: true              # auto-update App Store apps
+
+
+# ── BBEdit ───────────────────────────────────────────────────
+macos_bbedit:
+  - domain: com.barebones.bbedit
+    key: EditingWindowShowLineNumbers
+    type: bool
+    value: true
+  - domain: com.barebones.bbedit
+    key: SoftWrapText
+    type: bool
+    value: false
+  - domain: com.barebones.bbedit
+    key: DefaultLineEndings
+    type: string
+    value: "Unix"
+  - domain: com.barebones.bbedit
+    key: DefaultEncoding
+    type: int
+    value: 65001               # UTF-8
+  - domain: com.barebones.bbedit
+    key: EditorSoftWrapLength
+    type: int
+    value: 120
+  - domain: com.barebones.bbedit
+    key: IndentWithTabs
+    type: bool
+    value: false
+
+
+# ── Microsoft Office ─────────────────────────────────────────
+macos_ms_office:
+  - domain: com.microsoft.autoupdate2
+    key: HowToCheck
+    type: string
+    value: "AutomaticCheck"
+  - domain: com.microsoft.autoupdate2
+    key: EnableCheckForUpdatesButton
+    type: bool
+    value: true
+  - domain: com.microsoft.Word
+    key: CustomUndoRedoBufferSize
+    type: int
+    value: 100
+  - domain: com.microsoft.Word
+    key: NSUserKeyEquivalents
+    type: dict
+    value:
+      "Styles...": "@$s"
+
+
+# ── Photos ───────────────────────────────────────────────────
+macos_photos:
+  - domain: com.apple.ImageCapture
+    key: disableHotPlug
+    type: bool
+    value: true              # don't open Photos when iPhone/camera connected

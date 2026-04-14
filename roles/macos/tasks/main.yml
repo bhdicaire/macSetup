@@ -1,0 +1,202 @@
+---
+# ============================================================
+# macos — orchestrates all macOS system defaults sub-tasks
+# ============================================================
+
+- name: Apply Activity Monitor defaults
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key:    "{{ item.key }}"
+    type:   "{{ item.type }}"
+    value:  "{{ item.value }}"
+  loop: "{{ macos_activity_monitor }}"
+  tags: [defaults, activity-monitor]
+
+- name: Apply Finder defaults
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key:    "{{ item.key }}"
+    type:   "{{ item.type }}"
+    value:  "{{ item.value }}"
+  loop: "{{ macos_finder }}"
+  tags: [defaults, finder]
+  notify: Restart Finder
+
+- name: Expand Finder info panes
+  ansible.builtin.shell: >
+    defaults write com.apple.finder FXInfoPanesExpanded -dict
+    MetaData -bool true
+    General -bool true
+    OpenWith -bool true
+    Privileges -bool true
+  changed_when: false
+  tags: [defaults, finder]
+  notify: Restart Finder
+
+- name: Apply UX / global defaults
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key:    "{{ item.key }}"
+    type:   "{{ item.type }}"
+    value:  "{{ item.value }}"
+  loop: "{{ macos_ux }}"
+  tags: [defaults, ux]
+
+- name: Apply security defaults (user-space)
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key:    "{{ item.key }}"
+    type:   "{{ item.type }}"
+    value:  "{{ item.value }}"
+  loop: "{{ macos_security }}"
+  tags: [defaults, security]
+
+- name: Apply security defaults (system-space)
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key:    "{{ item.key }}"
+    type:   "{{ item.type }}"
+    value:  "{{ item.value }}"
+  loop: "{{ macos_security }}"
+  become: true
+  tags: [defaults, security]
+  when: false   # placeholder — add system-scope keys here
+
+- name: Enable Firewall
+  ansible.builtin.command:
+    cmd: /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on
+  become: true
+  changed_when: false
+  tags: [defaults, security]
+
+- name: Enable Stealth Mode
+  ansible.builtin.command:
+    cmd: /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on
+  become: true
+  changed_when: false
+  tags: [defaults, security]
+
+- name: Apply Safari defaults
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key:    "{{ item.key }}"
+    type:   "{{ item.type }}"
+    value:  "{{ item.value }}"
+  loop: "{{ macos_safari }}"
+  tags: [defaults, safari]
+
+- name: Apply Mail defaults
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key:    "{{ item.key }}"
+    type:   "{{ item.type }}"
+    value:  "{{ item.value }}"
+  loop: "{{ macos_mail }}"
+  tags: [defaults, mail]
+
+- name: Apply Siri defaults
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key:    "{{ item.key }}"
+    type:   "{{ item.type }}"
+    value:  "{{ item.value }}"
+  loop: "{{ macos_siri }}"
+  tags: [defaults, siri]
+
+- name: Apply Time Machine defaults
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key:    "{{ item.key }}"
+    type:   "{{ item.type }}"
+    value:  "{{ item.value }}"
+  loop: "{{ macos_time_machine }}"
+  tags: [defaults, time-machine]
+
+- name: Apply App Store / SoftwareUpdate defaults
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key:    "{{ item.key }}"
+    type:   "{{ item.type }}"
+    value:  "{{ item.value }}"
+  loop: "{{ macos_app_store }}"
+  tags: [defaults, appstore]
+
+- name: Apply BBEdit defaults
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key:    "{{ item.key }}"
+    type:   "{{ item.type }}"
+    value:  "{{ item.value }}"
+  loop: "{{ macos_bbedit }}"
+  tags: [defaults, bbedit]
+
+- name: Apply Microsoft Office defaults
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key:    "{{ item.key }}"
+    type:   "{{ item.type }}"
+    value:  "{{ item.value }}"
+  loop: "{{ macos_ms_office }}"
+  tags: [defaults, office]
+
+- name: Apply Photos / ImageCapture defaults
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key:    "{{ item.key }}"
+    type:   "{{ item.type }}"
+    value:  "{{ item.value }}"
+  loop: "{{ macos_photos }}"
+  tags: [defaults, photos]
+
+- name: Set file-type associations with duti
+  ansible.builtin.command:
+    cmd: "{{ brew_bin }}/duti -s {{ item.bundle_id }} {{ item.uti }} {{ item.handler }}"
+  loop: "{{ file_type_associations | default([]) }}"
+  changed_when: false
+  tags: [defaults, duti, file-types]
+
+- name: Create user directories
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop: "{{ user_directories | default([]) }}"
+  tags: [defaults, directories]
+
+- name: Configure Dock defaults
+  community.general.osx_defaults:
+    domain: "{{ item.domain }}"
+    key:    "{{ item.key }}"
+    type:   "{{ item.type }}"
+    value:  "{{ item.value }}"
+  loop: "{{ macos_dock }}"
+  tags: [defaults, dock]
+  notify: Restart Dock
+
+- name: Set Dock position
+  ansible.builtin.command:
+    cmd: "{{ brew_bin }}/m dock position {{ dock_position | default('left') | upper }}"
+  changed_when: false
+  tags: [defaults, dock]
+  notify: Restart Dock
+
+- name: Clear and rebuild Dock apps
+  ansible.builtin.command:
+    cmd: "{{ brew_bin }}/dockutil --remove all --no-restart"
+  changed_when: false
+  tags: [defaults, dock]
+
+- name: Add apps to Dock
+  ansible.builtin.command:
+    cmd: "{{ brew_bin }}/dockutil --add '{{ item }}' --no-restart"
+  loop: "{{ dock_apps | default([]) }}"
+  changed_when: false
+  tags: [defaults, dock]
+  notify: Restart Dock
+
+- name: Install Terminal themes
+  ansible.builtin.copy:
+    src:  "terminal/"
+    dest: "{{ home }}/Library/Application Support/Apple/Terminal/"
+    mode: "0644"
+  tags: [defaults, terminal]

@@ -1,0 +1,104 @@
+---
+# ============================================================
+# services — login items, Automator workflows, shell config
+# ============================================================
+
+# ── Login items ───────────────────────────────────────────────
+# macOS 13+ requires SMAppService or GUI; loginitems CLI tool works
+# for older paths. On Tahoe we use the open-source loginitems script.
+
+- name: Check loginitems script
+  ansible.builtin.stat:
+    path: "{{ home }}/bin/loginitems"
+  register: loginitems_script
+  tags: [services, login-items]
+
+- name: Install loginitems helper
+  ansible.builtin.copy:
+    src:  "loginItems/loginitems"
+    dest: "{{ home }}/bin/loginitems"
+    mode: "0755"
+  tags: [services, login-items]
+
+- name: Add login items
+  ansible.builtin.command:
+    cmd: "{{ home }}/bin/loginitems -a '{{ item }}'"
+  loop: "{{ login_items | default([]) }}"
+  changed_when: false
+  failed_when: false        # tolerate if app not yet installed
+  tags: [services, login-items]
+
+# ── Automator services (~/Library/Services) ───────────────────
+- name: Ensure Services directory exists
+  ansible.builtin.file:
+    path: "{{ home }}/Library/Services"
+    state: directory
+    mode: "0755"
+  tags: [services, automator]
+
+- name: Install Automator workflows
+  ansible.builtin.copy:
+    src:  "services/"
+    dest: "{{ home }}/Library/Services/"
+    mode: preserve
+  tags: [services, automator]
+
+# ── ~/bin directory ───────────────────────────────────────────
+- name: Ensure ~/bin exists and is in PATH
+  ansible.builtin.file:
+    path: "{{ home }}/bin"
+    state: directory
+    mode: "0755"
+  tags: [services]
+
+# ── GPG agent configuration ───────────────────────────────────
+- name: Configure GPG agent for macOS (pinentry-mac)
+  ansible.builtin.copy:
+    content: |
+      default-cache-ttl 600
+      max-cache-ttl 7200
+      pinentry-program {{ brew_bin }}/pinentry-mac
+    dest: "{{ home }}/.gnupg/gpg-agent.conf"
+    mode: "0600"
+  tags: [services, gpg]
+
+# ── Karabiner-Elements configuration ─────────────────────────
+- name: Ensure Karabiner config directory exists
+  ansible.builtin.file:
+    path: "{{ home }}/.config/karabiner"
+    state: directory
+    mode: "0755"
+  tags: [services, karabiner]
+
+- name: Install Karabiner configuration
+  ansible.builtin.copy:
+    src:  "karabiner/karabiner.json"
+    dest: "{{ home }}/.config/karabiner/karabiner.json"
+    mode: "0644"
+    backup: true
+  tags: [services, karabiner]
+
+- name: Note about Karabiner device IDs
+  ansible.builtin.debug:
+    msg: >
+      Karabiner config deployed. If external keyboard remapping
+      does not work, check vendor_id/product_id in
+      ~/.config/karabiner/karabiner.json against Karabiner
+      EventViewer → Devices tab. See doc/karabiner.md.
+  tags: [services, karabiner]
+
+# ── SetApp guided install ─────────────────────────────────────
+- name: Check if SetApp is installed
+  ansible.builtin.stat:
+    path: /Applications/Setapp.app
+  register: setapp_app
+  tags: [services, setapp]
+
+- name: Remind to run SetApp installer script
+  ansible.builtin.debug:
+    msg: >
+      SetApp is installed. Run: bash scripts/setapp-install.sh
+      to install your {{ setapp_apps | length }} SetApp applications
+      interactively. SetApp has no automated install API.
+  when: setapp_app.stat.exists
+  tags: [services, setapp]

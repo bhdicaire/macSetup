@@ -1,0 +1,7 @@
+---
+# Ansible Galaxy requirements
+# Install with: make galaxy
+
+collections:
+  - name: community.general
+    version: ">=9.0.0"

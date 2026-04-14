@@ -1,0 +1,144 @@
+---
+# ============================================================
+# nas — mount UniFi NAS shares, pull private assets, unmount
+#
+# Designed to be graceful: if the NAS is unreachable (e.g.
+# running the playbook from a café), all tasks are skipped
+# and a clear warning is shown. Run `make nas` later on LAN.
+# ============================================================
+
+- name: Load NAS variables
+  ansible.builtin.include_vars: "{{ playbook_dir }}/roles/nas/vars/main.yml"
+  tags: [nas, always]
+
+# ── Reachability check ────────────────────────────────────────
+- name: Check NAS is reachable
+  ansible.builtin.command:
+    cmd: "ping -c 1 -W 2 {{ nas_hostname }}"
+  register: nas_ping
+  changed_when: false
+  failed_when: false
+  tags: [nas]
+
+- name: Set NAS reachable fact
+  ansible.builtin.set_fact:
+    nas_reachable: "{{ nas_ping.rc == 0 }}"
+  tags: [nas]
+
+- name: Warn and skip if NAS is unreachable
+  ansible.builtin.debug:
+    msg: |
+      NAS ({{ nas_hostname }}) is not reachable — skipping all NAS tasks.
+      Run `make nas` when connected to your local network.
+  when: not nas_reachable
+  tags: [nas]
+
+# ── Mount public share ────────────────────────────────────────
+- name: Ensure public mount point exists
+  ansible.builtin.file:
+    path: "{{ item.mount }}"
+    state: directory
+    mode: "0755"
+  loop: "{{ nas_shares }}"
+  when: nas_reachable
+  become: true
+  tags: [nas, mount]
+
+- name: Mount public NAS share (anonymous SMB)
+  ansible.builtin.command:
+    cmd: >
+      mount_smbfs
+      //guest:@{{ nas_hostname }}/{{ nas_shares | selectattr('anonymous', 'equalto', true) | map(attribute='name') | first }}
+      {{ nas_shares | selectattr('anonymous', 'equalto', true) | map(attribute='mount') | first }}
+  register: public_mount
+  failed_when: false
+  changed_when: public_mount.rc == 0
+  when: nas_reachable
+  become: true
+  tags: [nas, mount]
+
+- name: Mount private NAS share (authenticated SMB)
+  ansible.builtin.command:
+    cmd: >
+      mount_smbfs
+      //{{ nas_user }}:{{ lookup('community.general.onepassword', 'NAS', field='password', vault='Private') }}@{{ nas_hostname }}/{{ nas_shares | selectattr('anonymous', 'equalto', false) | map(attribute='name') | first }}
+      {{ nas_shares | selectattr('anonymous', 'equalto', false) | map(attribute='mount') | first }}
+  register: private_mount
+  failed_when: false
+  changed_when: private_mount.rc == 0
+  no_log: true                   # never log the password
+  when: nas_reachable
+  become: true
+  tags: [nas, mount]
+
+# ── Copy public assets ────────────────────────────────────────
+- name: Copy public assets from NAS
+  ansible.builtin.copy:
+    src:  "{{ nas_mount_root }}/{{ item.share }}/{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "0644"
+    remote_src: true
+  loop: "{{ nas_public_assets }}"
+  when:
+    - nas_reachable
+    - public_mount.rc | default(1) == 0
+  failed_when: false             # missing NAS paths are non-fatal
+  tags: [nas, fonts, assets]
+
+# ── Copy private assets ───────────────────────────────────────
+- name: Ensure private asset destinations exist
+  ansible.builtin.file:
+    path: "{{ item.dest }}"
+    state: directory
+    mode: "0755"
+  loop: "{{ nas_private_assets }}"
+  when:
+    - nas_reachable
+    - private_mount.rc | default(1) == 0
+  tags: [nas, assets]
+
+- name: Copy private assets from NAS
+  ansible.builtin.copy:
+    src:  "{{ nas_mount_root }}/{{ item.share }}/{{ item.src }}"
+    dest: "{{ item.dest }}"
+    mode: "0644"
+    remote_src: true
+  loop: "{{ nas_private_assets }}"
+  when:
+    - nas_reachable
+    - private_mount.rc | default(1) == 0
+  failed_when: false
+  tags: [nas, assets]
+
+# ── Flush font cache after installing fonts ───────────────────
+- name: Flush font cache
+  ansible.builtin.command:
+    cmd: atsutil databases -remove
+  become: true
+  changed_when: false
+  failed_when: false
+  when:
+    - nas_reachable
+    - public_mount.rc | default(1) == 0
+  tags: [nas, fonts]
+
+# ── Unmount ───────────────────────────────────────────────────
+- name: Unmount NAS shares
+  ansible.builtin.command:
+    cmd: "diskutil unmount force {{ item.mount }}"
+  loop: "{{ nas_shares }}"
+  when: nas_reachable
+  become: true
+  changed_when: false
+  failed_when: false
+  tags: [nas, mount]
+
+- name: NAS provisioning summary
+  ansible.builtin.debug:
+    msg: |
+      NAS provisioning complete.
+        Public share:  {{ 'OK' if public_mount.rc | default(1) == 0 else 'SKIPPED (mount failed)' }}
+        Private share: {{ 'OK' if private_mount.rc | default(1) == 0 else 'SKIPPED (mount failed)' }}
+      Run `make nas` to re-run NAS tasks only.
+  when: nas_reachable
+  tags: [nas]

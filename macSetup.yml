@@ -1,0 +1,102 @@
+---
+# ============================================================
+# macSetup — opinionated macOS Tahoe provisioning
+# Benoît H. Dicaire · https://github.com/bhdicaire/macSetup
+#
+# Usage:
+#   make build                  — full run
+#   make build TAGS=brew        — only Homebrew packages
+#   make build TAGS=nas         — only NAS assets
+#   make build TAGS=defaults,dock
+# ============================================================
+
+- hosts: localhost
+  connection: local
+  gather_facts: true
+
+  pre_tasks:
+    - name: Verify target OS is macOS
+      ansible.builtin.fail:
+        msg: "This playbook targets macOS only. Detected: {{ ansible_system }}"
+      when: ansible_system != "Darwin"
+      tags: always
+
+    - name: Verify macOS Tahoe (26+)
+      ansible.builtin.fail:
+        msg: >
+          Requires macOS Tahoe (26+). Detected: {{ ansible_distribution_version }}.
+          Run scripts/bootstrap.sh first.
+      when: ansible_distribution_version is version('26.0', '<')
+      tags: always
+
+    - name: Confirm 1Password CLI is authenticated
+      ansible.builtin.command: op account list --format=json
+      register: op_check
+      changed_when: false
+      failed_when: op_check.rc != 0
+      tags: always
+
+    - name: Generate secrets file from 1Password
+      ansible.builtin.shell: >
+        op inject -i {{ playbook_dir }}/group_vars/secrets.yml.tmpl
+        -o {{ playbook_dir }}/group_vars/secrets.yml
+      changed_when: false
+      tags: always
+
+    - name: Load secrets
+      ansible.builtin.include_vars: "{{ playbook_dir }}/group_vars/secrets.yml"
+      tags: always
+
+  roles:
+    # ── Phase 1: Foundation ───────────────────────────────────
+    - role: bootstrap
+      tags: [bootstrap]
+
+    # ── Phase 2: Software ─────────────────────────────────────
+    - role: packages
+      tags: [packages, brew, mas, cask, vscode]
+
+    - role: fonts
+      tags: [fonts]
+
+    # ── Phase 3: Private assets (NAS — skipped if offline) ────
+    - role: nas
+      tags: [nas]
+
+    # ── Phase 4: System configuration ─────────────────────────
+    - role: macos
+      tags: [macos, defaults, dock, finder, security, ux]
+
+    # ── Phase 5: Dotfiles ─────────────────────────────────────
+    - role: dotfiles
+      tags: [dotfiles, chezmoi, shell]
+
+    - role: private-dotfiles
+      tags: [private-dotfiles, age, chezmoi]
+
+    # ── Phase 6: Services ─────────────────────────────────────
+    - role: services
+      tags: [services, login-items, karabiner, setapp]
+
+  post_tasks:
+    - name: Clean up generated secrets file
+      ansible.builtin.file:
+        path: "{{ playbook_dir }}/group_vars/secrets.yml"
+        state: absent
+      tags: always
+
+    - name: Setup complete
+      ansible.builtin.debug:
+        msg: |
+          ╔══════════════════════════════════════════════════════╗
+          ║  Setup complete.                                    ║
+          ║                                                      ║
+          ║  Next:                                              ║
+          ║    make setapp     — install SetApp apps            ║
+          ║    make nas        — pull NAS assets (if skipped)  ║
+          ║    make info       — verify machine state          ║
+          ║                                                      ║
+          ║  Log out and back in for all defaults to apply.    ║
+          ║  See doc/manual-tasks.md for the full checklist.   ║
+          ╚══════════════════════════════════════════════════════╝
+      tags: always
