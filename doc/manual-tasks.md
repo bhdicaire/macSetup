@@ -1,5 +1,72 @@
 # Manual Tasks
 
+## Complete setup sequence
+
+This is the authoritative order of operations from bootstrap to working machine.
+Each step depends on the previous one.
+
+```
+bootstrap.sh          → installs tools, sets zsh as login shell
+↓
+NEW TERMINAL WINDOW   ← required: shell change only takes effect in new session
+↓
+op signin             → authenticates 1Password CLI
+↓
+age key + chezmoi     → pulls encryption key, applies dotfiles
+↓
+NEW TERMINAL WINDOW   ← recommended: load full zsh config from dotfiles
+↓
+make build            → full Ansible provisioning
+↓
+LOGOUT / LOGIN        ← required: Dock, Finder, LaunchAgents take effect
+↓
+make setapp           → guided SetApp install (20 apps)
+↓
+REBOOT                ← required for Little Snitch + macFUSE kernel extensions
+↓
+Manual tasks below
+```
+
+### Why the new terminal windows
+
+`chsh` updates the login shell in Open Directory but cannot affect the current
+terminal session — that process is already running under a different shell. A new
+terminal window starts a fresh login session that reads the updated shell from
+the system, loads `/opt/homebrew/bin/zsh`, and sources `.zprofile` so Homebrew
+is in `PATH`.
+
+chezmoi templates reference `{{ .chezmoi.os }}`, `HOMEBREW_PREFIX`, and other
+values that are only set correctly inside a proper Homebrew zsh login session.
+Running `chezmoi apply` from the bootstrap bash session would work for most
+files, but template rendering that shells out to Homebrew tools would fail.
+
+### Why logout/login (not reboot) after `make build`
+
+Most macOS `defaults write` changes are read by processes at launch. The Dock
+and Finder need to be restarted (the playbook does this via handlers), but the
+login session itself needs to cycle for:
+
+- LaunchAgents (loaded by `launchd` at login)
+- Login items (activated by the system on session start)
+- Environment variables written to shell config
+
+A full reboot is NOT needed for any of this — logout and back in is sufficient.
+
+### When a full reboot IS required
+
+Little Snitch and macFUSE install kernel extensions (system extensions on
+Tahoe). macOS requires a reboot to activate them and will show a prompt in
+System Settings → Privacy & Security to approve the extension first. Approve
+the extension, then reboot. You can batch both approvals into a single reboot.
+
+Karabiner-Elements does NOT require a reboot — it only needs Input Monitoring
+permission granted in Privacy & Security.
+
+FileVault requires a reboot to begin encryption (enable it, reboot, then it
+encrypts in the background while you work).
+
+---
+
 Post-playbook steps in the order you should tackle them.
 
 ## Immediately after first boot
