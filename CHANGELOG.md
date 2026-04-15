@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.5](https://github.com/bhdicaire/macSetup/compare/v1.0.4...v1.0.5) (2026-04-15)
+
+
+### Bug Fixes
+
+* 1Password load variables section ([98167d1](https://github.com/bhdicaire/macSetup/commit/98167d16005c54bcb4e99b555ce409ef4fbb6523))
+* add privilege_escalation section ([c1b1e7b](https://github.com/bhdicaire/macSetup/commit/c1b1e7b062d746389e03222178b2f301b90f6cf8))
+* migrate to ansible_facts required by  ansible-core 2.24 ([e9d5c1b](https://github.com/bhdicaire/macSetup/commit/e9d5c1b45ff5b0d5b6c3f811f8553f7d52453784))
+
 ## [1.0.4](https://github.com/bhdicaire/macSetup/compare/v1.0.3...v1.0.4) (2026-04-15)
 
 
