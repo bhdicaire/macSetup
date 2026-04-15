@@ -83,7 +83,7 @@
 # ── Add macOS-specific dotFiles to chezmoi ───────────────────
 # The dot_config/ and dot_ssh/ directories in the macSetup repo
 # are staging areas — run chezmoi add on them to merge into dotFiles
-- name: Note: add macOS dotFiles to chezmoi
+- name: "Note: add macOS dotFiles to chezmoi"
   ansible.builtin.debug:
     msg: >
       After chezmoi apply completes, add the macOS-specific configs
