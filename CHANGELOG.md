@@ -1,5 +1,14 @@
 # Changelog
 
+## [1.0.4](https://github.com/bhdicaire/macSetup/compare/v1.0.3...v1.0.4) (2026-04-15)
+
+
+### Bug Fixes
+
+* 1Password tokens ([b2155b1](https://github.com/bhdicaire/macSetup/commit/b2155b128c8607af4edfa9b9ad18922d21f5f008))
+* missing  on a label ([f1ea39d](https://github.com/bhdicaire/macSetup/commit/f1ea39d717b0ecc8cbb8a844ebc78a06f78a9cc2))
+* old community.general.yaml plugin removed ([ca691f1](https://github.com/bhdicaire/macSetup/commit/ca691f19493a1d7393bc87343734ba09511d7e3c))
+
 ## [1.0.3](https://github.com/bhdicaire/macSetup/compare/v1.0.2...v1.0.3) (2026-04-15)
 
 
