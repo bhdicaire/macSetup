@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/bhdicaire/macSetup/compare/v1.0.2...v1.0.3) (2026-04-15)
+
+
+### Bug Fixes
+
+* manual actitivies in bootstrap.sh add manual-tasks.md ([086f5d7](https://github.com/bhdicaire/macSetup/commit/086f5d779c46ea160230ab00e25b4dc5d50f26bf))
+
 ## [1.0.2](https://github.com/bhdicaire/macSetup/compare/v1.0.1...v1.0.2) (2026-04-15)
 
 
