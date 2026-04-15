@@ -3,33 +3,12 @@
 # bootstrap — prerequisites before any package installs
 # ============================================================
 
-- name: Ensure Xcode Command Line Tools are installed
-  ansible.builtin.command:
-    cmd: xcode-select --print-path
-  register: xcode_check
-  changed_when: false
-  failed_when: false
-
-- name: Install Xcode Command Line Tools
-  ansible.builtin.command:
-    cmd: xcode-select --install
-  when: xcode_check.rc != 0
-  register: xcode_install
-  failed_when: false  # user interaction may be needed; tolerate
-
-- name: Accept Xcode licence
-  ansible.builtin.command:
-    cmd: xcodebuild -license accept
-  become: true
-  changed_when: false
-  when: xcode_check.rc == 0
-
 - name: Install Rosetta 2 on Apple Silicon
   ansible.builtin.command:
     cmd: softwareupdate --install-rosetta --agree-to-license
     creates: /Library/Apple/System/Library/Receipts/com.apple.pkg.RosettaUpdateAuto.plist
   become: true
-  when: ansible_machine == "arm64"
+  when: ansible_facts['machine'] == 'arm64'
 
 - name: Check Homebrew is installed
   ansible.builtin.stat:
@@ -45,7 +24,8 @@
 
 - name: Ensure Homebrew is up to date
   ansible.builtin.command:
-    cmd: "{{ brew_bin }}/brew update --quiet"
+    cmd: "{{ brew_bin }}/brew update"
+  become: false
   changed_when: false
 
 - name: Ensure Homebrew ownership allows staff group updates

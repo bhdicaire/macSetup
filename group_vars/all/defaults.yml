@@ -13,7 +13,7 @@ brew_prefixes:
   x86_64: /usr/local
   arm64:  /opt/homebrew
 
-brew_prefix: "{{ brew_prefixes[ansible_machine] }}"
+brew_prefix: "{{ brew_prefixes[ansible_facts['machine']] }}"
 brew_bin:    "{{ brew_prefix }}/bin"
 brew_sbin:   "{{ brew_prefix }}/sbin"
 

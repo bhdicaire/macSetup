@@ -17,16 +17,16 @@
   pre_tasks:
     - name: Verify target OS is macOS
       ansible.builtin.fail:
-        msg: "This playbook targets macOS only. Detected: {{ ansible_system }}"
-      when: ansible_system != "Darwin"
+        msg: "This playbook targets macOS only. Detected: {{ ansible_facts['system'] }}"
+      when: ansible_facts['system'] != 'Darwin'
       tags: always
 
     - name: Verify macOS Tahoe (26+)
       ansible.builtin.fail:
         msg: >
-          Requires macOS Tahoe (26+). Detected: {{ ansible_distribution_version }}.
+          Requires macOS Tahoe (26+). Detected: {{ ansible_facts['distribution_version'] }}.
           Run scripts/bootstrap.sh first.
-      when: ansible_distribution_version is version('26.0', '<')
+      when: ansible_facts['distribution_version'] is version('26.0', '<')
       tags: always
 
     - name: Confirm 1Password CLI is authenticated
