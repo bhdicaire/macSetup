@@ -22,6 +22,30 @@ An opinionated Ansible playbook to provision a fresh macOS Tahoe installation on
 | **dotFiles** | chezmoi init + apply from [bhdicaire/dotFiles](https://github.com/bhdicaire/dotFiles) with macOS extensions |
 | **Services** | Login items, Automator workflows, GPG agent, file-type associations |
 
+On Hal9000 (before wiping):
+  1. make capture              # snapshot everything
+  2. make age-setup            # generate age key → 1Password
+  3. chezmoi add --encrypt     # encrypt private dotfiles
+  4. git push                  # push encrypted dotFiles
+  5. make nas-setup            # fonts + prefs → NAS
+
+On Dogbert (fresh Tahoe install):
+  1. scripts/bootstrap.sh      # Xcode CLT, Homebrew, op
+  2. eval $(op signin)         # authenticate 1Password CLI
+  3. make build                # full playbook
+     ├── bootstrap             # tools
+     ├── packages              # brew, cask, mas
+     ├── fonts                 # bundled fonts
+     ├── nas                   # pull from NAS
+     ├── macos                 # defaults, Dock
+     ├── dotfiles              # chezmoi public
+     ├── private-dotfiles      # age key from 1P → decrypt Tier 3
+     └── services              # login items, Karabiner, SetApp
+  4. make setapp               # guided SetApp install
+  5. doc/manual-tasks.md       # remaining manual steps
+```
+
+
 ## Before you wipe your current Mac
 
 Run the capture script on your **Sonoma machine**:
