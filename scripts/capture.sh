@@ -33,21 +33,31 @@
 
 set -euo pipefail
 
+# ── NAS configuration ─────────────────────────────────────────
+# Edit these three values to match your setup.
+# Password is pulled from 1Password at runtime (item name "NAS", field "password").
+# If op is not available the script will prompt.
+NAS_HOST="nas.local"          # hostname or IP of your UniFi NAS
+NAS_USER="bhdicaire"          # SMB username
+NAS_SHARE="setupAsCode"       # share name (also used as mount point basename)
+NAS_MOUNT="/Volumes/${NAS_SHARE}"
+NAS_CAPTURES="${NAS_MOUNT}/captures"
+
 TIMESTAMP=$(date +%Y%m%d_%H%M%S)
 DEST="$HOME/Desktop/mac-capture-${TIMESTAMP}"
 LOG="${DEST}/capture.log"
 
 # ── Colour helpers ────────────────────────────────────────────
-RED='\033[0;31m'
-GREEN='\033[0;32m'
-YELLOW='\033[1;33m'
-BLUE='\033[0;34m'
-RESET='\033[0m'
+RED=$'\033[0;31m'
+GREEN=$'\033[0;32m'
+YELLOW=$'\033[1;33m'
+BLUE=$'\033[0;34m'
+RESET=$'\033[0m'
 
-info()    { echo "${BLUE}→${RESET} $*" | tee -a "$LOG" }
-success() { echo "${GREEN}✓${RESET} $*" | tee -a "$LOG" }
-warn()    { echo "${YELLOW}⚠${RESET} $*" | tee -a "$LOG" }
-error()   { echo "${RED}✗${RESET} $*" | tee -a "$LOG" }
+info()    { echo "${BLUE}→${RESET} $*" | tee -a "$LOG"; }
+success() { echo "${GREEN}✓${RESET} $*" | tee -a "$LOG"; }
+warn()    { echo "${YELLOW}⚠${RESET} $*" | tee -a "$LOG"; }
+error()   { echo "${RED}✗${RESET} $*" | tee -a "$LOG"; }
 
 # ── Preflight ─────────────────────────────────────────────────
 echo ""
@@ -154,41 +164,59 @@ fi
 # ── Application preferences ───────────────────────────────────
 info "Capturing application preferences..."
 
+# Format: "AppName:plist_name_without_extension:base_dir"
+# base_dir is relative to $HOME
 PREFS_MAP=(
-  "Little Snitch:at.obdev.LittleSnitchNetworkMonitor.plist"
-  "Keyboard Maestro:com.stairways.keyboardmaestro.engine.plist"
-  "BBEdit:com.barebones.bbedit.plist"
-  "Fantastical:com.flexibits.fantastical2.mac.plist"
-  "Things:com.culturedcode.ThingsMac.plist"
-  "DEVONthink:com.devon-technologies.think3.plist"
-  "1Password:com.1password.1password.plist"
-  "Hazel:com.noodlesoft.Hazel.plist"
-  "ChronoSync:com.econtechnologies.chronosync.plist"
+  # Little Snitch 5+ removed the NetworkMonitor plist; rules live in Application Support
+  # (handled separately below — skip from plist loop)
+  "Keyboard Maestro:com.stairways.keyboardmaestro.engine:Library/Preferences"
+  "BBEdit:com.barebones.bbedit:Library/Preferences"
+  "Fantastical:com.flexibits.fantastical2.mac:Library/Preferences"
+  # Things 3 is sandboxed — prefs live inside its container
+  "Things:com.culturedcode.ThingsMac:Library/Containers/com.culturedcode.ThingsMac/Data/Library/Preferences"
+  "DEVONthink:com.devon-technologies.think3:Library/Preferences"
+  "1Password:com.1password.1password:Library/Preferences"
+  "Hazel:com.noodlesoft.Hazel:Library/Preferences"
+  "ChronoSync:com.econtechnologies.chronosync:Library/Preferences"
 )
 
-PREFS_DIR="$HOME/Library/Preferences"
 for entry in "${PREFS_MAP[@]}"; do
   app_name="${entry%%:*}"
-  plist_name="${entry##*:}"
-  src="${PREFS_DIR}/${plist_name}"
+  rest="${entry#*:}"
+  plist_stem="${rest%%:*}"
+  base_dir="${rest##*:}"
+  # Try .plist extension first, then without
+  src="$HOME/${base_dir}/${plist_stem}.plist"
+  [[ -f "$src" ]] || src="$HOME/${base_dir}/${plist_stem}"
   if [[ -f "$src" ]]; then
     dest_dir="${DEST}/prefs/${app_name// /_}"
     mkdir -p "$dest_dir"
     cp "$src" "$dest_dir/" 2>>"$LOG"
-    # Also export as JSON for readability
-    plutil -convert json -o "${dest_dir}/${plist_name%.plist}.json" "$src" 2>>"$LOG" || true
+    plutil -convert json -o "${dest_dir}/${plist_stem}.json" "$src" 2>>"$LOG" || true
     success "${app_name} prefs captured"
   else
-    warn "${app_name} pref file not found: $src"
+    warn "${app_name} pref not found: $src"
   fi
 done
 
-# Little Snitch rules (separate location on newer versions)
-LS_RULES="$HOME/Library/Application Support/Little Snitch"
-if [[ -d "$LS_RULES" ]]; then
+# Little Snitch 5+ — rules and config in Application Support
+LS_SUPPORT="$HOME/Library/Application Support/Little Snitch"
+LS_PREF_NEW="$HOME/Library/Preferences/at.obdev.LittleSnitch.plist"
+LS_PREF_OLD="$HOME/Library/Preferences/at.obdev.LittleSnitchNetworkMonitor.plist"
+if [[ -d "$LS_SUPPORT" ]]; then
   mkdir -p "${DEST}/prefs/LittleSnitch"
-  cp -r "$LS_RULES" "${DEST}/prefs/LittleSnitch/" 2>>"$LOG" && \
-    success "Little Snitch rules captured" || warn "Little Snitch rules copy failed"
+  cp -r "$LS_SUPPORT" "${DEST}/prefs/LittleSnitch/" 2>>"$LOG" && \
+    success "Little Snitch rules captured (Application Support)"
+elif [[ -f "$LS_PREF_NEW" ]]; then
+  mkdir -p "${DEST}/prefs/LittleSnitch"
+  cp "$LS_PREF_NEW" "${DEST}/prefs/LittleSnitch/" 2>>"$LOG" && \
+    success "Little Snitch pref captured"
+elif [[ -f "$LS_PREF_OLD" ]]; then
+  mkdir -p "${DEST}/prefs/LittleSnitch"
+  cp "$LS_PREF_OLD" "${DEST}/prefs/LittleSnitch/" 2>>"$LOG" && \
+    success "Little Snitch pref captured (legacy path)"
+else
+  warn "Little Snitch: no pref or rules directory found"
 fi
 
 # Karabiner-Elements
@@ -259,18 +287,63 @@ if command -v chezmoi &>/dev/null; then
   success "chezmoi state captured"
 fi
 
-# ── Summary ───────────────────────────────────────────────────
+# ── Compress archive ──────────────────────────────────────────
 ARCHIVE="${HOME}/Desktop/mac-capture-${TIMESTAMP}.tar.gz"
 info "Creating compressed archive..."
 tar -czf "$ARCHIVE" -C "${HOME}/Desktop" "mac-capture-${TIMESTAMP}" 2>>"$LOG" && \
   success "Archive created: $ARCHIVE"
 
+# ── Copy to NAS ───────────────────────────────────────────────
+nas_mounted=false
+
+if [[ -d "$NAS_MOUNT" ]]; then
+  # Already mounted — use as-is
+  nas_mounted=true
+  info "NAS already mounted at ${NAS_MOUNT}"
+elif ping -c 1 -W 2 "$NAS_HOST" &>/dev/null; then
+  info "NAS reachable — attempting authenticated SMB mount..."
+  mkdir -p "$NAS_MOUNT"
+
+  # Get password: 1Password CLI preferred, prompt as fallback
+  if command -v op &>/dev/null && op account list &>/dev/null 2>&1; then
+    NAS_PASS=$(op item get "NAS" --vault Private --field password 2>/dev/null) || NAS_PASS=""
+  else
+    NAS_PASS=""
+  fi
+  if [[ -z "$NAS_PASS" ]]; then
+    echo -n "  NAS password for ${NAS_USER}@${NAS_HOST}: "
+    read -rs NAS_PASS; echo ""
+  fi
+
+  if mount_smbfs "//${NAS_USER}:${NAS_PASS}@${NAS_HOST}/${NAS_SHARE}" "$NAS_MOUNT" 2>>"$LOG"; then
+    nas_mounted=true
+    success "NAS mounted at ${NAS_MOUNT}"
+  else
+    warn "NAS mount failed — archive is safe on Desktop"
+    warn "Manual: mount_smbfs //${NAS_USER}@${NAS_HOST}/${NAS_SHARE} ${NAS_MOUNT}"
+  fi
+  unset NAS_PASS
+else
+  warn "NAS (${NAS_HOST}) not reachable — skipping NAS copy"
+fi
+
+if [[ "$nas_mounted" == true ]]; then
+  mkdir -p "$NAS_CAPTURES"
+  cp "$ARCHIVE" "${NAS_CAPTURES}/" 2>>"$LOG" && \
+    success "Archive copied to ${NAS_CAPTURES}/$(basename "$ARCHIVE")" || \
+    warn "NAS copy failed — archive is safe on Desktop"
+  # Unmount cleanly
+  diskutil unmount "$NAS_MOUNT" 2>/dev/null || true
+fi
+
+# ── Summary ───────────────────────────────────────────────────
 echo ""
 echo "╔══════════════════════════════════════════════════════╗"
 echo "║                  Capture Complete                   ║"
 echo "╚══════════════════════════════════════════════════════╝"
 echo ""
 echo "📦 Archive: $ARCHIVE"
+[[ "$nas_mounted" == true ]] && echo "📦 NAS:     ${NAS_CAPTURES}/$(basename "$ARCHIVE")"
 echo "📁 Folder:  $DEST"
 echo ""
 echo "${YELLOW}Before wiping, ensure:${RESET}"

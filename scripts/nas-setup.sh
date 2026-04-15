@@ -35,10 +35,10 @@ NAS_PRIVATE_SHARE="private"
 MOUNT_ROOT="/Volumes/NAS"
 VERIFY_ONLY="${1:-}"
 
-info()    { echo "${BLUE}→${RESET} $*" }
-ok()      { echo "${GREEN}✓${RESET} $*" }
-warn()    { echo "${YELLOW}⚠${RESET}  $*" }
-die()     { echo "${RED}✗${RESET} $*"; exit 1 }
+info()    { echo "${BLUE}→${RESET} $*"; }
+ok()      { echo "${GREEN}✓${RESET} $*"; }
+warn()    { echo "${YELLOW}⚠${RESET}  $*"; }
+die()     { echo "${RED}✗${RESET} $*"; exit 1; }
 
 # ── Preflight ─────────────────────────────────────────────────
 ping -c 1 -W 2 "$NAS_HOST" &>/dev/null || die "NAS ($NAS_HOST) not reachable"
