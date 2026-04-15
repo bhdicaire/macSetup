@@ -36,13 +36,6 @@
       failed_when: op_check.rc != 0
       tags: always
 
-    - name: Generate secrets file from 1Password
-      ansible.builtin.shell: >
-        op inject -i {{ playbook_dir }}/group_vars/secrets.yml.tmpl
-        -o {{ playbook_dir }}/group_vars/secrets.yml
-      changed_when: false
-      tags: always
-
     - name: Load secrets
       ansible.builtin.include_vars: "{{ playbook_dir }}/group_vars/secrets.yml"
       tags: always
