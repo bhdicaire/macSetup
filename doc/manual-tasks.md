@@ -10,9 +10,11 @@ bootstrap.sh          → installs tools, sets zsh as login shell
 ↓
 NEW TERMINAL WINDOW   ← required: shell change only takes effect in new session
 ↓
-op signin             → authenticates 1Password CLI
+chezmoi init --apply bhdicaire ← required:to get 
 ↓
-age key + chezmoi     → pulls encryption key, applies dotfiles
+launch 1password GUI application and signin
+
+op signin             → authenticates 1Password CLI
 ↓
 NEW TERMINAL WINDOW   ← recommended: load full zsh config from dotfiles
 ↓
@@ -26,6 +28,10 @@ REBOOT                ← required for Little Snitch + macFUSE kernel extensions
 ↓
 Manual tasks below
 ```
+
+
+Not used for now:
+age key + chezmoi     → pulls encryption key, applies dotfiles
 
 ### Why the new terminal windows
 
