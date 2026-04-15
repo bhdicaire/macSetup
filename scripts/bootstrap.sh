@@ -29,8 +29,12 @@ set -euo pipefail
 BREW="/opt/homebrew/bin/brew"
 
 # ── Colours ───────────────────────────────────────────────────
-RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'
-BLUE='\033[0;34m'; BOLD='\033[1m'; RESET='\033[0m'
+RED=$(printf '\033[0;31m')
+GREEN=$(printf '\033[0;32m')
+YELLOW=$(printf '\033[1;33m')
+BLUE=$(printf '\033[0;34m')
+BOLD=$(printf '\033[1m')
+RESET=$(printf '\033[0m')
 
 step()    { echo ""; echo "${BOLD}${BLUE}▶ $*${RESET}"; }
 ok()      { echo "${GREEN}  ✓ $*${RESET}"; }
@@ -94,7 +98,7 @@ fi
 step "Homebrew"
 if [[ -x "$BREW" ]]; then
   ok "Homebrew already at $BREW"
-  "$BREW" update --quiet
+  "$BREW" update
 else
   echo "  Installing Homebrew..."
   NONINTERACTIVE=1 /bin/bash -c \
@@ -116,16 +120,17 @@ FORMULAE=(
   git           # version control
   ansible       # the provisioner
   chezmoi       # dotfile manager
-  1password     # password manager GUI
-  1password-cli # password manager CLI
+  1password     # Password Manager GUI
+  1password-cli # Password Manager CLI
   mas           # Mac App Store CLI
   dockutil      # Dock management
   duti          # file type associations
   m-cli         # macOS CLI utility
   starship      # shell prompt
   eza           # modern ls
-  age           # secure file encryption CLI
-  vim           # Vi 'workalike', useful for debugging
+  age           # encryption for chezmoi private dotfiles
+  vim           # Vi 'workalike', useful for debugging  
+  zsh           # Homebrew zsh — required before chezmoi apply
 )
 
 for formula in "${FORMULAE[@]}"; do
@@ -133,15 +138,40 @@ for formula in "${FORMULAE[@]}"; do
     ok "$formula (already installed)"
   else
     echo "  Installing $formula..."
-    "$BREW" install --quiet "$formula"
+    "$BREW" install "$formula"
     ok "$formula"
   fi
 done
 
 # Ansible collections
 step "Ansible Galaxy collections"
-ansible-galaxy collection install community.general --upgrade --quiet
+ansible-galaxy collection install community.general --upgrade
 ok "community.general installed"
+
+
+# ── Zsh shell switch ───────────────────────────────────────────
+step "Homebrew zsh"
+ZSH_PATH="/opt/homebrew/bin/zsh"
+
+# Add to /etc/shells if not already there
+if grep -qxF "$ZSH_PATH" /etc/shells; then
+  ok "$ZSH_PATH already in /etc/shells"
+else
+  echo "  Adding $ZSH_PATH to /etc/shells..."
+  echo "$ZSH_PATH" | sudo tee -a /etc/shells > /dev/null
+  ok "Added $ZSH_PATH to /etc/shells"
+fi
+
+# Change login shell for current user
+CURRENT_SHELL=$(dscl . -read "/Users/$USER" UserShell | awk '{print $2}')
+if [[ "$CURRENT_SHELL" == "$ZSH_PATH" ]]; then
+  ok "Login shell already set to $ZSH_PATH"
+else
+  echo "  Changing login shell from $CURRENT_SHELL to $ZSH_PATH..."
+  sudo chsh -s "$ZSH_PATH" "$USER"
+  ok "Login shell changed to $ZSH_PATH"
+  warn "Shell change takes effect on next login — current session still uses $CURRENT_SHELL"
+fi
 
 # ── 1Password CLI authentication ──────────────────────────────
 step "1Password CLI"
