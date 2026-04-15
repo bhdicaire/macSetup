@@ -116,13 +116,16 @@ FORMULAE=(
   git           # version control
   ansible       # the provisioner
   chezmoi       # dotfile manager
-  1password-cli # secrets from 1Password
+  1password     # password manager GUI
+  1password-cli # password manager CLI
   mas           # Mac App Store CLI
   dockutil      # Dock management
   duti          # file type associations
   m-cli         # macOS CLI utility
   starship      # shell prompt
   eza           # modern ls
+  age           # secure file encryption CLI
+  vim           # Vi 'workalike', useful for debugging
 )
 
 for formula in "${FORMULAE[@]}"; do
@@ -161,14 +164,14 @@ fi
 
 # ── Clone macSetup ─────────────────────────────────────────────
 step "macSetup repository"
-MACSETUP_DIR="${HOME}/Developer/macSetup"
+MACSETUP_DIR="${HOME}/code/macSetup"
 
 if [[ -d "$MACSETUP_DIR/.git" ]]; then
   ok "Already cloned at $MACSETUP_DIR"
   git -C "$MACSETUP_DIR" pull --quiet
 else
   echo "  Cloning macSetup..."
-  mkdir -p "${HOME}/Developer"
+  mkdir -p "${HOME}/code"
   git clone https://github.com/bhdicaire/macSetup.git "$MACSETUP_DIR"
   ok "Cloned to $MACSETUP_DIR"
 fi
