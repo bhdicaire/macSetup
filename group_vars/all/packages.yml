@@ -265,8 +265,6 @@ mas_apps:
     name: "Framous"
   - id: "768053424"
     name: "Gapplin"
-  - id: "1474335294"
-    name: "GoodLinks"
   - id: "408981434"
     name: "iMovie"
   - id: "1482630322"
@@ -285,8 +283,6 @@ mas_apps:
     name: "Name Mangler 3"
   - id: "409203825"
     name: "Numbers"
-  - id: "490179405"
-    name: "Okta Verify"
   - id: "823766827"
     name: "OneDrive"
   - id: "409201541"
@@ -297,8 +293,6 @@ mas_apps:
     name: "Parcel Classic"
   - id: "457503727"
     name: "PST Bridge"
-  - id: "1529448980"
-    name: "Reeder"
   - id: "409907375"
     name: "Remote Desktop"
   - id: "442168834"
@@ -337,13 +331,12 @@ vscode_extensions:
 # in SetApp so you can click Install with one keypress.
 setapp_apps:
   - Bartender
-  - Bear                # also available in MAS — prefer SetApp for subscription sync
   - Bike
   - BusyContacts
   - CleanMyMac X
   - CleanShot X
   - ForkLift
-  - Gemini
+  - Gemini  # Find and remove duplicates NOT the Google AI
   - Hookmark
   - HoudahSpot
   - iStat Menus
@@ -351,7 +344,6 @@ setapp_apps:
   - Marked
   - Merlin Project Express
   - Nitro PDF Pro       # removed from cask list — SetApp version preferred
-  - OpenIN
   - PDF Squeezer
   - Permute
   - PullTube
