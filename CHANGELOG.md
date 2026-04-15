@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2](https://github.com/bhdicaire/macSetup/compare/v1.0.1...v1.0.2) (2026-04-15)
+
+
+### Bug Fixes
+
+* bootstrap.sh add shell switch section ([9a23b92](https://github.com/bhdicaire/macSetup/commit/9a23b92414e7dae06f64501315792b515a7aef7f))
+
 ## [1.0.1](https://github.com/bhdicaire/macSetup/compare/v1.0.0...v1.0.1) (2026-04-15)
 
 
