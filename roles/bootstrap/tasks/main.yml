@@ -29,13 +29,13 @@
   changed_when: false
 
 - name: Ensure Homebrew ownership allows staff group updates
-  ansible.builtin.file:
-    path: "{{ brew_prefix }}"
-    group: staff
-    state: directory
-    recurse: true
-    mode: "0775"
+  ansible.builtin.command:
+    # BSD chgrp -R does not follow symlinks during traversal,
+    # so it will not attempt to chgrp app bundles in /Applications
+    cmd: "chgrp -R staff {{ brew_prefix }}"
   become: true
+  changed_when: false
+  failed_when: false
 
 - name: Set HOMEBREW_NO_ANALYTICS
   community.general.osx_defaults:

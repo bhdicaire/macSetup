@@ -28,6 +28,7 @@
     state: present
     install_options: "appdir=/Applications"
     accept_external_apps: true
+    sudo_password: "{{ ansible_become_pass }}"
   loop: "{{ brew_cask }}"
   tags: [brew, cask]
 
@@ -35,7 +36,7 @@
   community.general.homebrew_cask:
     name: wireshark
     state: present
-    sudo_password: "{{ lookup('community.general.onepassword', 'macOS sudo', field='password') }}"
+    sudo_password: "{{ ansible_become_pass }}"
   tags: [brew, cask]
 
 # ── Mac App Store ─────────────────────────────────────────────

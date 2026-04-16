@@ -14,6 +14,11 @@
   connection: local
   gather_facts: true
 
+  vars_prompt:
+    - name: ansible_become_pass
+      prompt: "Sudo password"
+      private: true
+
   pre_tasks:
     - name: Verify target OS is macOS
       ansible.builtin.fail:
@@ -39,6 +44,25 @@
     - name: Load secrets
       ansible.builtin.include_vars: "{{ playbook_dir }}/group_vars/secrets.yml"
       tags: always
+
+- name: App Management permission reminder
+      ansible.builtin.pause:
+        prompt: |
+
+          ┌─────────────────────────────────────────────────────────────┐
+          │  PREREQUISITE CHECK                                         │
+          │                                                             │
+          │  Terminal needs App Management permission for cask installs │
+          │  that use .pkg files (Cloudflare WARP, Zoom, Teams, etc.)  │
+          │                                                             │
+          │  If not already done:                                       │
+          │    System Settings → Privacy & Security → App Management    │
+          │    Toggle Terminal ON → quit and reopen terminal            │
+          │                                                             │
+          │  Press Enter if ready, Ctrl-C to abort and fix it first    │
+          └─────────────────────────────────────────────────────────────┘
+      tags: [preflight]
+
 
   roles:
     # ── Phase 1: Foundation ───────────────────────────────────
@@ -72,12 +96,6 @@
       tags: [services, login-items, karabiner, setapp]
 
   post_tasks:
-    - name: Clean up generated secrets file
-      ansible.builtin.file:
-        path: "{{ playbook_dir }}/group_vars/secrets.yml"
-        state: absent
-      tags: always
-
     - name: Setup complete
       ansible.builtin.debug:
         msg: |

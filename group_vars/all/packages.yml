@@ -123,7 +123,6 @@ brew_cask:
   - 1password-cli
   - little-snitch
   - micro-snitch
-  - yubico-yubikey-manager
   - yubico-authenticator
   - suspicious-package
   - cloudflare-warp
@@ -135,7 +134,6 @@ brew_cask:
   - firefox
   - google-chrome
   - microsoft-edge
-  - orion                        # WebKit + Firefox extensions
   - ungoogled-chromium           # privacy-focused Chromium
 
   # ── Communication
@@ -211,7 +209,7 @@ brew_cask:
   - philips-hue-sync
   - karabiner-elements
   - sonos
-  - coconutbattery               # battery health
+#   - coconutbattery               # battery health
 
   # ── Microsoft Office ecosystem
   - microsoft-office
@@ -228,7 +226,7 @@ brew_cask:
   - banktivity
   - bookmacster
   - force-paste
-  - omnigraffle                  # use cask — MAS id:0 is broken
+  - omnigraffle
   - macfuse
   # nitro-pdf-pro → installed via SetApp (see scripts/setapp-install.sh)
   - keybase
