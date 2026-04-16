@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.6](https://github.com/bhdicaire/macSetup/compare/v1.0.5...v1.0.6) (2026-04-16)
+
+
+### Bug Fixes
+
+* permission ([510b9fb](https://github.com/bhdicaire/macSetup/commit/510b9fb206357d04b94c8ac8b6f7b4fe3cb1aa4a))
+
 ## [1.0.5](https://github.com/bhdicaire/macSetup/compare/v1.0.4...v1.0.5) (2026-04-15)
 
 
