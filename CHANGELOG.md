@@ -1,5 +1,16 @@
 # Changelog
 
+## [2.0.0](https://github.com/bhdicaire/macSetup/compare/v1.0.6...v2.0.0) (2026-10-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* bootstrap.sh is the pinned mac-fleet bootstrap; playbook retired
+
+### Features
+
+* bootstrap.sh is the pinned mac-fleet bootstrap; playbook retired ([d8d481d](https://github.com/bhdicaire/macSetup/commit/d8d481ddc198b3e34d0e52c69c41b8ccf59c8943))
+
 ## [1.0.6](https://github.com/bhdicaire/macSetup/compare/v1.0.5...v1.0.6) (2026-04-16)
 
 
