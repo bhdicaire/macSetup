@@ -1,5 +1,14 @@
 # macSetup
 
+> **Retired (2026-10-18).** This playbook is superseded by `mac-fleet`, kept
+> in a private repository. Only `scripts/bootstrap.sh` is maintained here: a
+> pinned copy of the private one, fetched at a fixed commit and checked by
+> sha256 on a fresh Mac (never piped from a branch URL). It installs the
+> command line tools, Homebrew from its notarized package, and the tools that
+> bring up 1Password, chezmoi and Ansible. Run it with `--control-node` (the
+> laptop) or `--managed-target` (a Mac managed over SSH).
+
+
 [![Lint](https://github.com/bhdicaire/macSetup/actions/workflows/lint.yml/badge.svg)](https://github.com/bhdicaire/macSetup/actions)
 [![macOS Tahoe](https://img.shields.io/badge/macOS-Tahoe-000000?logo=apple)](https://www.apple.com/macos/)
 [![Ansible](https://img.shields.io/badge/ansible-%3E%3D2.16-EE0000?logo=ansible)](https://www.ansible.com/)
